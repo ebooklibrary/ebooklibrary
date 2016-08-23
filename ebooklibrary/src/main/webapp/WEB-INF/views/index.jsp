@@ -8,10 +8,16 @@
 </head>
 <body>
 
+<<<<<<< HEAD
 	<div>
 		<a>내 서재</a>
 		<a>도서관</a>
 	</div>
+=======
+	<h1>규혁 반성 요망</h1>
+	<h2>반성문 3,500자 내외</h2>
+	<h3>이걸 바꿔보자</h3>
+>>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
 
 </body>
 </html>
