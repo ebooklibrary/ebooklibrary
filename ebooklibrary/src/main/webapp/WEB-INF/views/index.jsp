@@ -1,23 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인화면임ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/index.css" />
+<script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 </head>
 <body>
-
-<<<<<<< HEAD
-	<div>
-		<a>내 서재</a>
-		<a>도서관</a>
+<%-- 
+	<video autoplay loop poster="${pageContext.request.contextPath }/video/ocean.jpg">
+		<source src="${pageContext.request.contextPath }/video/ocean.mp4" type="video / mp4">
+	</video>
+ --%>
+ 
+	<video id="bg_video" autoplay muted loop>
+		<img src="${pageContext.request.contextPath }/video/ocean.jpg" alt="동영상 커버">
+		<source src="${pageContext.request.contextPath }/video/ocean.mp4" type="video/mp4">
+	</video>
+	
+ 
+	<div id="wrapper">
+	
+		<a id="mybook" href="<c:url value='/library/mybookmain.do'/>">내 서재</a>
+		<a id="library" href="<c:url value='/mybooks/librarymain.do'/>">도서관</a>
+		
 	</div>
-=======
-	<h1>규혁 반성 요망</h1>
-	<h2>반성문 3,500자 내외</h2>
-	<h3>이걸 바꿔보자</h3>
->>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
 
 </body>
 </html>
