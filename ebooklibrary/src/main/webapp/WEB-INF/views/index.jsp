@@ -25,8 +25,8 @@
  
 	<div id="wrapper">
 	
-		<a id="mybook" href="<c:url value='/library/mybookmain.do'/>">내 서재</a>
-		<a id="library" href="<c:url value='/mybooks/librarymain.do'/>">도서관</a>
+		<a id="mybook" href="<c:url value='/mybooks/mybookmain.do'/>">내 서재</a>
+		<a id="library" href="<c:url value='/library/librarymain.do'/>">도서관</a>
 		
 	</div>
 
