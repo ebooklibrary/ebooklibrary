@@ -10,16 +10,16 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/index.css" />
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 <%-- 
 	<video autoplay loop poster="${pageContext.request.contextPath }/video/ocean.jpg">
 		<source src="${pageContext.request.contextPath }/video/ocean.mp4" type="video / mp4">
 	</video>
  --%>
  
-	<video id="bg_video" autoplay muted loop>
+	<video id="bg_video" autoplay muted loop embed>
 		<img src="${pageContext.request.contextPath }/video/ocean.jpg" alt="동영상 커버">
-		<source src="${pageContext.request.contextPath }/video/ocean.mp4" type="video/mp4">
+		<source src="${pageContext.request.contextPath }/video/testvideo7.mp4" type="video/mp4">
 	</video>
 	
  
