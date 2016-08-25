@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>QnA게시판 글쓰기</title>
+<script type="text/javascript" 
+	src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
+<script type="text/javascript">	
+</script>
 </head>
 <body>
-	<h1>질답게시판</h1>
+<div>
+	<form name="frmWrite" id=></form>
+</div>
 </body>
 </html>
