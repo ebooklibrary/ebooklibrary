@@ -4,9 +4,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>여기가 내 서재</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/mybook/mybookmain.css" />
 </head>
 <body>
+
+	<div id="wrapper">
+	
+		<div id="recentBook">
+			<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/bookshelve1.jpg">
+
+		</div>
+		
+		<div id="myBooks">내 책들</div>
+	
+	
+	</div>
+	
 
 </body>
 </html>

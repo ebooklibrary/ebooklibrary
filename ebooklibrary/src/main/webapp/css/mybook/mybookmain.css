@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+body{
+	background-image: url(../../images/mybook/back1.jpg);
+	background-repeat: none;
+	background-attachment: fixed;
+	background-size: cover;
+	
+}
+
+/* 
+#wrapper{
+	background-image: url(../../images/mybook/back1.jpg);
+	background-repeat: none;
+	
+	background-attachment: fixed;
+	background-size: cover;
+	
+	width: 100%;
+	height:100%;
+}
+ */
