@@ -17,7 +17,7 @@
 	<a href="<c:url value='/index.do'/>">메인화면</a>
 	<a href="<c:url value='/library/librarymain.do'/>">홈</a>
 	<a href="<c:url value='/member/register.do'/>">회원가입</a>
-	<a>로그인</a>
+	<a href="<c:url value='/member/login.do'/>">로그인</a>
 	<a href="<c:url value='/mybooks/mybookmain.do'/>">내서재</a>
 	<a >공지사항</a>
 	<a>책 검색</a>
