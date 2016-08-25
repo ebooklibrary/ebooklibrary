@@ -1,11 +1,16 @@
 package com.ebooklibrary.app.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
@@ -41,8 +46,36 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.GET)
-	public String login(){
+	public String login_get(){
 		
-		return "";
+		return "member/login";
+	}
+	
+	@RequestMapping(value="/login.do",method=RequestMethod.POST)
+	public String login_post(@RequestParam String userName 
+			, @RequestParam String pwd,
+			HttpServletRequest request,HttpServletResponse response
+			,Model model){
+		
+		int result=memberService.logincheck(userName, pwd);
+		String msg="",url="/member/login.do";
+		if(result==MemberService.LOGIN_OK){
+			MemberVO memberVo=memberService.selectByUserName(userName);
+			HttpSession session=request.getSession();
+			session.setAttribute("userName", memberVo.getUsername());
+			session.setAttribute("auchCode", memberVo.getAuthCode());			
+			msg=userName+"님 로그인하였습니다";
+			url="/index.do";
+			
+		}else if(result==memberService.PWD_DISAGREE){
+			msg="비밀번호가 다릅니다";
+		}else if(result==memberService.ID_NONE){
+			msg="아이디가 없습니다";
+		}else{
+			msg="로그인 실패";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "common/message";
 	}
 }

@@ -12,6 +12,16 @@
 		values(#{memberNo},#{username},#{pwd},#{email1},#{email2}
 			,#{tel1},#{tel2},#{tel3},#{birth},#{gender})
 	</insert>
+	
+	<select id="selectMemberByMemberVo" 
+	parameterType="string" resultType="string">
+		select pwd from member where USERNAME=#{userName} and LEAVEDATE is null
+	</select>
+	
+	<select id="selectMemberByUserName" 
+	parameterType="string" resultType="MemberVO">
+		select * from member where USERNAME=#{userName} and LEAVEDATE is null
+	</select>
 </mapper>
 
 
