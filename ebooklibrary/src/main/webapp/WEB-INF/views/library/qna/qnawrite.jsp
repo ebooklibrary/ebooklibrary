@@ -27,12 +27,15 @@
 					<input type="text" id="writer" name="writer">
 				</div>
 		        <div>
-		            <label for="upfile">첨부파일</label>
-		            <input type="file" id="upfile" name="upfile" />
-		            (최대 100M)
+		        	<label for="content">내용</label>
 		        </div>
 		        <div>
-		        	<label for="content">내용</label>
+		        	<textarea rows="12" cols="40"></textarea>
+		        </div>
+		        
+		        <div>
+		        	<input type="submit" value="작성완료"/>
+		        	<input type="Button" value="글 목록"/>
 		        </div>
 		</fieldset>
 	</form>
