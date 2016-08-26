@@ -10,6 +10,7 @@ public class QnaBoardVO {
 	private String content;
 	private int readCount;
 	private int memberNo;
+	
 	public int getQnaNo() {
 		return qnaNo;
 	}

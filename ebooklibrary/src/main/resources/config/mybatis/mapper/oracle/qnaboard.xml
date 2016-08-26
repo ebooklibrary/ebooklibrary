@@ -6,4 +6,15 @@
 	<select id="selectQnaAll" resultType="QnaBoardVO">
 		select * from QNA_BOARD
 	</select>
+	
+	<insert id="insertQnaBoard" parameterType="QnaBoardVO">
+		<selectKey keyProperty="no"
+			order="BEFORE" resultType="int">
+			select QNA_seq.nextval from dual
+		</selectKey>
+		insert into QNA_BOARD(QNA_NO ,title,writer,REG_DATE ,content)
+		values=(#{qnaNo},#{title},#{writer},#{regDate},#{content})
+			
+	
+	</insert>
 </mapper>
