@@ -19,27 +19,51 @@ body{
 }
 
 #wrapper{
-	position: absolute;
-	
-	left: 20%;
-	/* border: 1px solid white; */
-	padding: 20%;
-	padding-left: 18%;
-	padding-top: 26%;
-	
+	text-align: center;
+}
+
+#wrapper p{
+	text-align:center;
+	margin-top: 450px;
+	color: white;
+	font-size: 3em;
 }
 
 #mybook, #library{
-	text-align: center;
+	
+	display: inline-block;
+	margin-top: 100px;
+	
 	font-size: 2em;
-	/* color: white; */
+	color: white;
 	/* border: 1px solid #b1dce9; */
-	background: rgba(180,220,160,0.6);
+	border: 1px solid white;
+	/* background: rgba(181,225,225,0.8); */
+	/* background: rgba(210,166,150,0.8); */
 	border-radius: 5px;
 	box-shadow: 2px 2px 5px #A9A9A9;
 	padding: 20px;
 	padding-left: 40px;
 	padding-right: 40px;
-	margin-left: 35px;
-	margin-right: 45px;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-family:'Asap',Verdana,sans-serif;
 }
+
+#typing{
+	color: white;
+	margin:0;
+	padding:0;
+	line-height:1;
+	word-spacing:0px;
+	text-align:center;
+	letter-spacing:0px;
+	font-family:'Asap',Verdana,sans-serif;
+}
+
+
+
+
+
+
+

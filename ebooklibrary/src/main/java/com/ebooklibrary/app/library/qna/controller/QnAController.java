@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ebooklibrary.app.library.qna.model.QnaBoardService;
 import com.ebooklibrary.app.library.qna.model.QnaBoardVO;
@@ -34,11 +36,18 @@ public class QnAController {
 		return "library/qna/list";
 	}
 	
-	@RequestMapping(value="/write.do")
-	public int insertQnaBoard(){
-		logger.info("Qna 글작성페이지");
+	@RequestMapping(value="/write.do", method=RequestMethod.GET)
+	public String QnaBoardWrite_get(){
 		
-		return 0;
+		logger.info("Qna 글작성페이지");
+		return	"library/qna/write";
+	}
+	
+	@RequestMapping(value="/write.do", method=RequestMethod.POST)
+	public String QnaBoardWrite_post(@ModelAttribute QnaBoardVO qnaBoardVo){
+		logger.info("Qna 글작성 처리페이지, ");
+		
 		
 	}
+	
 }
