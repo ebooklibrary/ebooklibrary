@@ -13,12 +13,53 @@
 	<div id="wrapper">
 	
 		<div id="recentBook">
-			<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/bookshelve1.jpg">
-
+		
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			<div id="imgtest">
+				<img title="QQ규" alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
+			</div>
+			
+			
+			
+		
 		</div>
 		
+		
+		
+		
+		<div id="BookList">
+			<img alt="책목록" src="${pageContext.request.contextPath }/images/mybook/bookshelve2.PNG">
+		</div>
+		
+		<!-- 
 		<div id="myBooks">내 책들1</div>
-	
+		 -->
 	
 	</div>
 	
