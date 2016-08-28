@@ -16,6 +16,20 @@
 		select * from notice_board order by #{notice_no} desc
 	</select> -->
 	
+	<select id="seletctByNoNotice" parameterType="int" resultType="NoticeVO">
+			select * from notice_board where notice_no =#{notice_no}
+	</select>
+	
+	<update id="editNotice" parameterType="NoticeVO">
+		update notice_board
+		set title=#{title} ,content=#{content}
+		where notice_no =#{notice_no}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="NoticeVO">
+		delete from notice_board
+		where notice_no =${notice_no}
+	</delete>
 </mapper>
 
 

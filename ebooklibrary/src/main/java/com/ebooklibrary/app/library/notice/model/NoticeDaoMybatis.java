@@ -22,4 +22,22 @@ public class NoticeDaoMybatis extends SqlSessionDaoSupport implements NoticeDAO{
 /*	public List<NoticeVO> selectAllNotice(NoticeVO noticeVo){
 		//공지사항 전체 보기
 	}*/
+
+
+	@Override
+	public NoticeVO selectByNoNotice(int notice_No) {
+		return getSqlSession().selectOne(NAMESPACE+".seletctByNoNotice", notice_No);
+	}
+
+
+	@Override
+	public int editNotice(NoticeVO noticeVo) {
+		return getSqlSession().update(NAMESPACE+".editNotice",noticeVo);
+	}
+
+
+	@Override
+	public int deleteNotice(NoticeVO noticeVo) {
+		return getSqlSession().delete(NAMESPACE+".deleteNotice",noticeVo);
+	}
 }

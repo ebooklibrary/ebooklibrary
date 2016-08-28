@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>공지사항</h1>
+	<!-- 공지사항 상세보기 화면 -->
 </body>
 </html>
