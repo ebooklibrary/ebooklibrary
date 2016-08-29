@@ -16,6 +16,19 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		
 		return qnaBoardDao.selectQnaAll();
 	}
+
+	@Override
+	public int insertQnaBoard(QnaBoardVO qnaBoardVo) {
+		
+		return qnaBoardDao.insertQnaBoard(qnaBoardVo);
+	}
+
+	@Override
+	public QnaBoardVO selectByNo(int QnaNo) {
+		return qnaBoardDao.selectByNo(QnaNo);
+	}
+
+	
 	
 	
 }

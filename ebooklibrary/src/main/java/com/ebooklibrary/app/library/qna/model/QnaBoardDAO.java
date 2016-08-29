@@ -5,4 +5,6 @@ import java.util.List;
 public interface QnaBoardDAO {
 	public List<QnaBoardVO> selectQnaAll();
 	public int insertQnaBoard(QnaBoardVO qnaBoardVo);
+	
+	public QnaBoardVO selectByNo(int QnaNo);
 }

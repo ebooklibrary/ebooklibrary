@@ -3,8 +3,6 @@ package com.ebooklibrary.app.library.qna.model;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,7 +17,12 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 
 	@Override
 	public int insertQnaBoard(QnaBoardVO qnaBoardVo) {
-		return getSqlSession().insert(namespace+".", qnaBoardVo);
+		return getSqlSession().insert(namespace+".insertQnaBoard", qnaBoardVo);
+	}
+
+	@Override
+	public QnaBoardVO selectByNo(int QnaNo) {
+		return getSqlSession().selectOne(namespace+".selectByNo",QnaNo);
 	}
 	
 	
