@@ -5,13 +5,22 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ include file="libraryTop.jsp" %>
 
+<!-- 이달의 책 -->
+<div id="month_book">
 
-<!--main_visual-->
-<!-- <div id="main_visual_text">
-<img src="/images/bandal/gmi/main/main_visual_text.jpg" alt="반달어린이도서관 - 반달어린이도서관에 오신 것을 환영합니다."  />
-환영문구
-</div> -->
-<!--main_visual-->
+</div>
+<!-- 이달의 책 -->
+
+<!--도서검색-->
+<div id="m_search">
+<form name="seek" id="seek"  method="get" action="/A-LibM/search1.asp" 
+target="_self" title="도서검색 폼입니다." onsubmit="return middle_search();">
+	 <fieldset>
+		<legend>도서검색</legend>
+	 </fieldset>
+</form>
+</div>
+<!--도서검색-->
 
 
 <!--공지사항-->
@@ -42,40 +51,13 @@
 <!--알립니다-->
 
 
-<!--도서검색-->
-<form name="seek"  method="get" action="/A-LibM/search1.asp" target="_self" title="도서검색 폼입니다." onsubmit="return middle_search();">
-<div id="m_search">
- <fieldset>
- <h2><img src="/images/gmi/main/search_title.gif" alt="도서검색"  /></h2>
- <legend>도서검색</legend>
- <label for="search_word" class="skip">검색어입력</label>
- <input type="text" class="inputText" name="a_q" id="search_word" title="검색어를 입력하세요."  />
- <input type="image" src="/images/gmi/main/search_btn.gif" alt="검색" class="search_btn" />
- </fieldset>
-</div>
-</form>
-<!--도서검색-->
 
- 
- 
- 
- 
- 
+
 <!--main_con--> 
 <div id="main_con">
- 
- 
- 
- 
- 
 
-  
 <!--팝업존-->
-  <!--Popupzone Start-->  
-
-
-
-
+  <!--Popupzone Start-->
 <div id="popupZone">
  <div id="picpr" >
   <div id="tit"><h2><img src="/images/gmi/main/popupzpne.gif" alt="팝업존" /></h2></div>
@@ -95,16 +77,8 @@
   </div>
   
  </div>
-    
-    
-    
  
-
-     
-    
- 
- 
- <script type="text/javascript"> 
+<script type="text/javascript"> 
 <!--
 /* 이미지홍보(팝업존) **/
 //author : myshin
@@ -245,110 +219,6 @@ initPicpr();
 
 <!--팝업존-->
   
-  
-
-
-
-
- 
-
- 
-
-
-
-
-  
-<!--도서관 소통공간-->
-<div id="sns">
-<h2><img src="/images/gmi/main/twitter_title.gif" alt="도서관 소통공간" /></h2>
-<!--iframe src="/cni/twitter.asp" width="254" height="128" scrolling="yes" frameborder="0" title="도서관 소통공간"></iframe-->
-
-   <!--트위터 Start-->
-	<div id="twitter"> <img src="/images/gmi/main/twitter_img.gif" alt="" border="0" usemap="#Map" />
-  <map name="Map" id="Map">
-    <area shape="rect" coords="14,8,101,26" href="https://twitter.com/suwonlibrary" target="_blank" alt="도서관정책과" title="새창열림" />
-    <area shape="rect" coords="128,7,224,37" href="https://twitter.com/sklib2015" target="_blank" alt="선경/중앙/창룡/버드내" title="새창열림" />
-    <area shape="rect" coords="14,29,116,48" href="https://twitter.com/seosuwonlib" target="_blank" alt="호매실/서수원/한림" title="새창열림" />
-    <area shape="rect" coords="14,52,114,70" href="https://twitter.com/buk_lib" target="_blank" alt="북수원/대추골/일월" title="새창열림" />
-    <area shape="rect" coords="128,41,224,71" href="https://twitter.com/suwonytlib" target="_blank" alt="광교홍재/영통/태장마루" title="새창열림" />
-  </map>
-</div>
-   <!--트위터 End-->
-
-</div>  
-<!--도서관 소통공간-->
-
-  
-  
-
-<!--모바일서비스-->
-    <div id="reserve">
-        <ul>
-        	<li><a href="/html/01_search/?a_v=f"><img src="/images/gmi/main/c_banner01.gif" alt="책나루" /></a></li>
-        	<li><a href="/member/lendings.asp"><img src="/images/gmi/main/c_banner02.gif" alt="대출내역조회" /></a></li>
-        	<li class="last"><a href="http://sk.suwonlib.go.kr/webzine/index.htm" onclick="window.open(this.href, 'webzine', 'width=780, height=650'); return false" title="새창열림" target="_blank"><img src="/images/gmi/main/c_banner03.gif" alt="정보그루터기" /></a></li>
-        </ul>
-    
-    </div>
-<!--모바일서비스-->
-
-  
-  
-  
-
-
 </div>
 <!--main_con--> 
-
-
-
-
-
-
-
-
-
-
-
-  
-  <!--#floating-->
-  <!--#quick_menu-->
-  
-<div id="quick_menu">
- 
- <div id="quick">
- <h2 class="skip">퀵메뉴</h2>
- <ul>
-    <li><a href="http://www.ytsw.or.kr" title="새창열림" target="_blank"><img src="/images/bandal/gmi/main/m_banner01.gif" alt="영통종합사회복지관"  /></a></li>
-    <li><a href="http://cafe.naver.com/bandalbook" title="새창열림" target="_blank"><img src="/images/bandal/gmi/main/m_banner02.gif" alt="반달과 책"  /></a></li>
-   
-	<li class="first"><a href="javascript:alert('회원로그인 후 이용하실 수 있습니다.');"><img src="/images/gmi/main/r_banner03.gif" alt="전자도서관"  /></a></li>
-		
-    <li><a href="/html/08_guide/guide02.asp"><img src="/images/gmi/main/r_banner01.gif" alt="모바일이용안내"  /></a></li>
-	<!--li><a href="http://59.18.255.134:8000/" target="_blank" onclick="window.open(this.href, 'pop', 'width=1005, height=802, scrollbars=no'); return false" onkeypress="" title="새창으로 이동"><img src="/images/gmi/main/r_banner02.gif" alt="회원증발급"  /></a></li-->
- </ul>
- </div> 
- 
- 
- 
- 
- 
- 
-
- 
- 
-</div>
-
- 
- 
- 
-  <!--//#quick_menu-->
-
-   
-   
- 
-  <!--//#floating-->
-  
-
-  
 <%@ include file="libraryBottom.jsp" %>

@@ -5,7 +5,8 @@
 /*메인헤더,서브헤더부분*/
 
 /* header (global_menu,top_menu) **********/
-#header { position:relative; margin:0; padding:0; width:954px; height:118px; overflow:hidden;}
+#header {margin:0 0 0 180px; width:1300px; height:100px;
+border: 1px solid black;}
  
  
  /* logo */ 

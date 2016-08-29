@@ -38,7 +38,7 @@
 
 
 	<!--container-->
-	<div id="container">
+	<!-- <div id="container"> -->
 		<!--skipnavigation Start-->
 		<!-- <dl id="skipnavigation">
 		 <dt><strong class="skip">바로가기 메뉴</strong></dt>
@@ -50,8 +50,7 @@
   <div id="header">  
   <!--logo Start--> 
 	 <h2 class="skip">로고</h2>
-	 	 <div id="logo"><a href="/index.asp">
-	 	 <!-- <img src="#" alt="사람이 반갑습니다 휴먼시티수원 - 반달어린이도서관" /> -->
+	 	 <div id="logo"><a href="<c:url value='/library/librarymain.do'/>">
 	 	 로고
 	 	 </a></div>
   <!--//#logo End-->
@@ -60,18 +59,18 @@
 	<div id="gnb">      
 		<ul id="global">
             <li class="first">
-            <a href="/index.asp">
+            <a href="<c:url value='/index.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
             첫화면
             </a></li>
 			
 			<li>
-			<a href="/member/member_login.gpin.asp">
+			<a href="<c:url value='/member/login.do'/>">
 			<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 			로그인
 			</a></li>
             <li>
-            <a href="http://sk.suwonlib.go.kr/newmember/join.asp?lib_code=bandal">
+            <a href="<c:url value='/member/register.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
             회원가입
             </a></li>

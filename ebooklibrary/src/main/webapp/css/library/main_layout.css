@@ -17,15 +17,21 @@ body {margin:0px; padding:0px;  }
 /*main_visual_text*/
 #main_visual_text { margin:0; padding:0; position:absolute; top:204px; left:81px; clear: both;}
 
-
+/* month_book */
+	#month_book{
+		margin:45px 0 0 180px; 
+		width:1300px; 
+		height:300px;
+		border: 1px solid black;
+	}
   
 /* search */
-  #m_search { margin:0; width:387px; height:34px; overflow:hidden; position:absolute; top:366px; left:70px; float:left; padding:0; display:inline; background:url(/images/gmi/main/search_bg.gif) no-repeat;}
-  #m_search h2 {margin:0px; padding:5px 0 0 14px; width:83px; background:none; float:left;}
-  #m_search fieldset { border:0; margin:0; padding:0; clear:both; }
-  #m_search legend { width:0; height:0; overflow:hidden; visibility:hidden;}
-  #m_search input.search_btn { margin:5px 14px 0 0;  vertical-align:top; float:right; } 
-  #m_search input.inputText { margin:5px 0 0 5px; padding:5px 0 0 0; vertical-align:middle; width:219px; height:17px; background:#ffffff; border:1px solid #fdfaeb; float:left; }
+	#m_search #seek{
+	  	 margin:45px 0 0 180px; 
+	  	 width:1300px; 
+	  	 height:150px;
+		 border: 1px solid black;
+  }
 
 
 /* rightmenu */
@@ -89,8 +95,8 @@ body {margin:0px; padding:0px;  }
 
 
 
-  /* 알립니다 */
-  #tab1 { margin:40px 0 0 30px;  width:299px; padding:0px; height:184px; overflow:hidden; position:relative; float:left; }
+  /* 공지사항 */
+  #tab1 { margin:40px 0 0 30px;  width:299px; padding:0px; height:184px; overflow:hidden; position:relative; float:left; border: 1px solid black; }
   #tab1 .tabmenu { width:100%; height:25px; margin:0px; padding:0px; position:relative;}
   #tab1 .tabmenu ul { list-style: none; float: left; width:100%; margin: 0; padding: 0; }
   #tab1 .tabmenu ul li { display: inline; float: left; margin: 0; padding:0;  }
