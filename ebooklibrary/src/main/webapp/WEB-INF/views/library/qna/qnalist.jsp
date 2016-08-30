@@ -49,7 +49,7 @@
 			
 				<tr>
 					<td>${qnaNo }</td>
-					<td>${title }</td>
+					<td><a href="<c:url value='/library/qna/qnalist.do?qnaNo=${qnaNo }'/>">'${title }</a></td>
 					<td>${writer }</td>
 					<td>${regDate }</td>
 					<td>${readCount }</td>
@@ -64,5 +64,5 @@
 
 </div>
 <div class="divSearch">
-	<a href="<c:url value='/library/qna/qnaWrite.do'/>">글쓰실?</a>
+	<a href="<c:url value='library/qna/qnaWrite.do'/>">글쓰실?</a>
 </div>

@@ -16,12 +16,22 @@
 		insert into QNA_BOARD(qna_no ,title,writer ,content)
 		values(QNA_SEQ.nextval,#{title},#{writer},#{content})
 	</insert>
+
+	<select id="selectBoardNoByUsername" parameterType="string" resultType="int">
+		select max(qna_no)  from QNA_BOARD where writer=#{writer}
+	</select> 
 	
 	<select id="selectByNo" parameterType="int"
       resultType="QnaBoardVO">
-      select * from QNA_BOARD where no= #{qna_no}
+      select * from QNA_BOARD where QNA_NO= #{qnaNo}
 	</select>
 	
+	<update id="update_no" parameterType="QnaBoardVO">
+		update QNA_BOARD
+		set title=#{title}, content=#{content}
+		
+		where QNA_NO=#{qnaNo}
+	</update>
 	
    
 </mapper>

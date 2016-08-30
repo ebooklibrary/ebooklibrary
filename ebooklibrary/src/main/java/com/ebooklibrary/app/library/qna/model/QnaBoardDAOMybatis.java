@@ -21,8 +21,19 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 	}
 
 	@Override
-	public QnaBoardVO selectByNo(int QnaNo) {
-		return getSqlSession().selectOne(namespace+".selectByNo",QnaNo);
+	public int selectQnaBoardByUsername(String writer) {
+		return getSqlSession().selectOne(namespace+".selectBoardNoByUsername",writer);
+		
+	}
+	@Override
+	public QnaBoardVO selectByNo(int qnaNo) {
+		return getSqlSession().selectOne(namespace+".selectByNo",qnaNo);
+	}
+
+
+	@Override
+	public int qnaBoardEdit(QnaBoardVO qnaBoardVo) {
+		return getSqlSession().update(namespace+".update_no",qnaBoardVo);
 	}
 	
 	

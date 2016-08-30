@@ -51,12 +51,14 @@ public class QnAController {
 		
 		int cnt = qnaBoardService.insertQnaBoard(qnaBoardVo);
 		
-		
 		String msg="",url="/library/qna/qnaWrite.do";
 		
 		if(cnt>0){
 			msg="글작성 성공";
-			url="/library/qna/qnaDetail.do";
+			int qnaBoardNo=qnaBoardService.selectQnaBoardByUsername(qnaBoardVo.getWriter());
+			logger.info("마지막 글번호 추출  qnaBoardNo={}",qnaBoardNo);
+			
+			url="/library/qna/qnaDetail.do?qnaNo="+qnaBoardNo;
 		}else{
 			msg="글 작성 실패";
 			
@@ -70,10 +72,10 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/qnaDetail.do") 
-	public String QnaBoardDetail(@RequestParam int QnaNo,Model model){
-		logger.info("디테일 페이지 접속 입력값  QnaNo={}", QnaNo);
+	public String QnaBoardDetail(@RequestParam(defaultValue="0") int qnaNo,Model model){
+		logger.info("디테일 페이지 접속 입력값  QnaNo={}", qnaNo);
 		
-		QnaBoardVO qnaBoardVo = qnaBoardService.selectByNo(QnaNo);
+		QnaBoardVO qnaBoardVo = qnaBoardService.selectByNo(qnaNo);
 		
 		logger.info("결과값은 qnaBoardVo={}",qnaBoardVo);
 		
@@ -83,10 +85,49 @@ public class QnAController {
 		
 	}
 	
-	/*@RequestMapping(value="/qnaEdit.do",method=RequestMethod.GET)
-	public String QnaBaordEdit(@RequestParam int QnaNo){
-		logger.info("수정 페이지 접속 파라미터 입력값 Qna");
-	}*/
+	@RequestMapping(value="/qnaEdit.do",method=RequestMethod.GET)
+	public String QnaBoardEdit(@RequestParam(defaultValue="0") int qnaNo,Model model){
+		logger.info("수정 페이지 접속 파라미터 입력값 qnaNo={}",qnaNo);
+		
+		QnaBoardVO qnaBoardVo = qnaBoardService.selectByNo(qnaNo);
+		
+		logger.info("수정페이지 입력 파라미터값 qnaBoardVo={}",qnaBoardVo);
+		
+		model.addAttribute("qnaBoardVo",qnaBoardVo);
+		
+		
+		return "library/qna/qnaEdit";
+	}
+	
+	@RequestMapping(value="/qnaEdit.do",method=RequestMethod.POST)
+	public String QnaBoardEdit(
+			@ModelAttribute QnaBoardVO qnaBoardVo,
+			Model model){
+		
+		//1.
+		logger.info("수정 페이지 수정처리 파라미터 qnaBoardVo={}",qnaBoardVo);
+		
+		//2.
+		int cnt = qnaBoardService.qnaBoardEdit(qnaBoardVo);
+		logger.info("결과값 cnt={}",cnt);
+		
+		String msg="",url="/library/qna/qnaEdit.do?qnaNo="+qnaBoardVo.getQnaNo();
+		if(cnt>0){
+			msg="글 수정 성공";
+			url="/library/qna/qnaDetail.do?qnaNo="+qnaBoardVo.getQnaNo();
+		}else{
+			msg="글 수정 실패";
+		}
+		
+		
+		//3.
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	}
+	
+	
 	
 	
 	

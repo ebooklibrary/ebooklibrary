@@ -28,6 +28,16 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		return qnaBoardDao.selectByNo(QnaNo);
 	}
 
+	@Override
+	public int selectQnaBoardByUsername(String username) {
+		return qnaBoardDao.selectQnaBoardByUsername(username);
+	}
+
+	@Override
+	public int qnaBoardEdit(QnaBoardVO qnaBoardVo) {
+		return qnaBoardDao.qnaBoardEdit(qnaBoardVo);
+	}
+
 	
 	
 	
