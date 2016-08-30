@@ -9,8 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>포도서관</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/main_all.css" />
-<script type="text/javascript" src="<c:url value='/jquery/js_scroll.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/jquery/js.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript">
 
@@ -23,7 +21,7 @@
 <!-- 옆에붙을 메뉴 -->
 <div id="rightmenu">
 	<div class="menuform">
-	
+		<a href="<c:url value='/library/qna/list.do'/>">QNA</a>
 	</div>
 	<div class="menuform">
 	
@@ -35,18 +33,6 @@
 	
 	</div>
 </div>
-
-
-	<!--container-->
-	<!-- <div id="container"> -->
-		<!--skipnavigation Start-->
-		<!-- <dl id="skipnavigation">
-		 <dt><strong class="skip">바로가기 메뉴</strong></dt>
-		 <dd><a href="#topmenu" class="skip_navi">메인메뉴 바로가기</a></dd>
-		</dl>
-	<noscript>*  본 브라우저는 스크립트를 지원하지 않습니다. 홈페이지가 정상적으로 보이지 않을때는 최신 브라우저를 설치하여 사용하시길 권장합니다.</noscript> -->
-	<!--//#skipnavigation End--> 
-<!--header Start--> 
   <div id="header">  
   <!--logo Start--> 
 	 <h2 class="skip">로고</h2>
@@ -86,4 +72,5 @@
 	
 </div>
 <!--header end-->
+<div id="container">
 <!-- include top -->

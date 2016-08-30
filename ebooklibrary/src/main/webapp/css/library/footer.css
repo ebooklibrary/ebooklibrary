@@ -1,13 +1,19 @@
 @CHARSET "UTF-8";
 
-
-
-		
 /* footer El **********/
- #footer {width:1290px; height:50px; margin:0 auto; padding:0; overflow:hidden; clear:both; position:relative; background:url(/images/gmi/inc/foot_bar_top.gif) repeat-x top; position: absolute; bottom: 20px;left: 180px}/* 전체내용을담는것 */	
+#footer {
+	width: 1290px;
+	height: 50px;
+	margin: 30px 0 0 180px;
+	padding: 0;
+	overflow: hidden;
+	clear: both;
+	background: url(/images/gmi/inc/foot_bar_top.gif) repeat-x top;
+	border: 1px solid black;
+} /* 전체내용을담는것 */
 
- /*개인정보등*/
- #foot_link  { margin:33px 0 0 0; padding:0; list-style:none; width:500px;  height:12px; float:left;} 
+/*개인정보등*/
+#foot_link  { margin:33px 0 0 0; padding:0; list-style:none; width:500px;  height:12px; float:left;} 
  #foot_link li.first {margin:0px; padding:0px 12px 0px 0; display:inline; float:left; background:none;}
  #foot_link li {margin:0px; padding:0px 12px 0px 12px; display:inline; float:left; background:url(/images/gmi/inc/f_link_bar.gif) no-repeat left;}
  #foot_link li img {vertical-align:top; font-size:0; line-height:0; margin:0px; padding:0px;}

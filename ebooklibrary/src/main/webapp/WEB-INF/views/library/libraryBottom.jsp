@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- include bottom -->
-<!-- </div> -->
+</div>
 <!--container-->
 
-  
-</div>
-<!--container_out-->  
+
 
     <!--//footer-->
 <div id="footer"> 
@@ -45,5 +43,7 @@
 
 
     <!--#//footer--> 
+</div>
+<!--container_out-->  
 </body>
 </html>
