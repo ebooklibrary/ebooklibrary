@@ -10,14 +10,22 @@
 	src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript">	
 </script>
+<style type="text/css">
+	legend{
+		border:1px solid eee;
+	}
+</style>
 </head>
 <body>
 <div>
 	<form name="frmWrite" id="frmWrite" method="post" 
-		enctype="multipart/form-data"
-		action="<c:url value='/library/qna/write.do'/>" >
+		
+		action="<c:url value='/library/qna/qnaWrite.do'/>" >
 		<fieldset>
 			<legend>QnA 글쓰기</legend>
+				<div class="">
+					<label>아이디</label><label>레벨체크</label>
+				</div>
 				<div class="">
 					<label for="title">제목</label>
 					<input type="text" id="title" name="title" />
@@ -30,12 +38,13 @@
 		        	<label for="content">내용</label>
 		        </div>
 		        <div>
-		        	<textarea rows="12" cols="40"></textarea>
+		        	<textarea name="content" id="content" rows="12" cols="40"></textarea>
 		        </div>
 		        
 		        <div>
 		        	<input type="submit" value="작성완료"/>
-		        	<input type="Button" value="글 목록"/>
+		        	<input type="Button" value="글 목록"
+		        	onclick="location.href='<c:url value="/library/qna/qnalist.do"/>';" />
 		        </div>
 		</fieldset>
 	</form>
