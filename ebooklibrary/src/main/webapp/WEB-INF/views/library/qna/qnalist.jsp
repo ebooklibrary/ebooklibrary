@@ -53,6 +53,7 @@
 					<td>${writer }</td>
 					<td>${regDate }</td>
 					<td>${readCount }</td>
+					<h1>dd,d</h1>
 				</tr>
 				
 			</c:forEach>
