@@ -8,9 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +28,7 @@ public class MybooksController {
 	
 	@RequestMapping("/mybook.do")
 	public String bookletTest(Model model){
-		
-		Map<Integer, String> bookmap= new HashMap<Integer, String>();
-		
-		//List<Map<Integer, String>> alist=new ArrayList<Map<Integer, String>>();
-		List<String> alist=new ArrayList<String>();
-		
+		ArrayList<String> alist=new ArrayList<String>();
 		File file=new File("D:\\group5_finalproject\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\testText.txt");
 		BufferedReader reader = null;
 			try
@@ -45,36 +37,29 @@ public class MybooksController {
 				
 				reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));
 				
-				int key=0;
 				
-				while(true)
-			   {
-				   String str = reader.readLine();   //<-- í•œí–‰ì˜ í…ìŠ¤íŠ¸ ë°ì´í„°ë¥¼ ì½ëŠ”ë‹¤.
-				   
-				   if(str==null)
-					   break;
-				   logger.info("í…ìŠ¤íŠ¸ í…ŒìŠ¤íŠ¸ str={}",str+"</br>");    //<--- ì½ì€ ë°ì´í„°ë¥¼ ëª¨ë‹ˆí„°ë¡œ ì¶œë ¥ í•œë‹¤.
-				   /*bookmap.put(key++, str);*/
-				   alist.add(str);
-				   
-			   }
-				//alist.add(map);
+		   while(true)
+		   {
+			   String str = reader.readLine();   //<-- ÇÑÇàÀÇ ÅØ½ºÆ® µ¥ÀÌÅÍ¸¦ ÀÐ´Â´Ù.
+			   if(str==null)
+				   break;
+			   logger.info("ÅØ½ºÆ® Å×½ºÆ® str={}",str+"</br>");    //<--- ÀÐÀº µ¥ÀÌÅÍ¸¦ ¸ð´ÏÅÍ·Î Ãâ·Â ÇÑ´Ù.
+			   alist.add(str);
+		   }
 			}catch(FileNotFoundException fnfe){
-				logger.info("íŒŒì¼ì´ ì¡´ìž¬ í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+				logger.info("ÆÄÀÏÀÌ Á¸Àç ÇÏÁö ¾Ê½À´Ï´Ù.");
 			}catch(IOException ioe){
-			 logger.info("íŒŒì¼ì„ ì½ì„ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+			 logger.info("ÆÄÀÏÀ» ÀÐÀ»¼ö ¾ø½À´Ï´Ù.");
 			}finally{
 				try 
 				{
-					reader.close();     //<---- íŒŒì¼ì„ ë‹«ëŠ”ë‹¤.
+					reader.close();     //<---- ÆÄÀÏÀ» ´Ý´Â´Ù.
 				}catch(Exception e){
 					
 				}
 		 }
-		logger.info("ë§µ ì‚¬ì´ì¦ˆ bookmapsize={}", alist.size());
-			//model.addAttribute("alist", bookmap);
-			model.addAttribute("alist", alist);
-			model.addAttribute("size", alist.size());
+		
+			model.addAttribute("alist", alist); 
 		
 		return "mybooks/mybook";
 	}
