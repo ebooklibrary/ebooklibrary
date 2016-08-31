@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+#wrapper{
+	border: 1px solid black;
+	width: 1450px;
+	height: 820px;
+	padding: 30px 20px 20px 20px;
+	margin: 0 auto;
+	background:
+		url(../../images/mybook/testbookback10.jpg)
+		no-repeat;
+	background-size: cover;
+	border-radius: 20px;
+}

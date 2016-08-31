@@ -7,8 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mybooks")
 public class MybooksController {
 	
+	
+	
 	@RequestMapping("/mybookmain.do")
 	public String mybooksMain(){
 		return "mybooks/mybookmain";
 	}
+	
+	@RequestMapping("/bookletTest.do")
+	public String bookletTest(){
+		return "mybooks/NewFile";
+	}
+	
 }
