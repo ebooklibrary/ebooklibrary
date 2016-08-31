@@ -3,7 +3,7 @@ package com.ebooklibrary.app.library.notice.model;
 import java.sql.Timestamp;
 
 public class NoticeVO {
-	private int notice_No; //공지사항 번호 
+	private int noticeNo; //공지사항 번호 
 	private String title;  // 공지사항 제목
 	private String writer;  // 공지사항 작성자
 	private Timestamp regdate; // 공지사항 작성일
@@ -15,18 +15,18 @@ public class NoticeVO {
 	}
 	public NoticeVO(int notice_No, String title, String writer, Timestamp regdate, String content, int read_Count) {
 		super();
-		this.notice_No = notice_No;
+		this.noticeNo = notice_No;
 		this.title = title;
 		this.writer = writer;
 		this.regdate = regdate;
 		this.content = content;
 		this.read_Count = read_Count;
 	}
-	public int getNotice_No() {
-		return notice_No;
+	public int getNoticeNo() {
+		return noticeNo;
 	}
-	public void setNotice_No(int notice_No) {
-		this.notice_No = notice_No;
+	public void setNoticeNo(int noticeNo) {
+		this.noticeNo = noticeNo;
 	}
 	public String getTitle() {
 		return title;
@@ -60,7 +60,7 @@ public class NoticeVO {
 	}
 	@Override
 	public String toString() {
-		return "NoticeVO [notice_No=" + notice_No + ", title=" + title + ", writer=" + writer + ", regdate=" + regdate
+		return "NoticeVO [notice_No=" + noticeNo + ", title=" + title + ", writer=" + writer + ", regdate=" + regdate
 				+ ", content=" + content + ", read_Count=" + read_Count + "]";
 	}
 

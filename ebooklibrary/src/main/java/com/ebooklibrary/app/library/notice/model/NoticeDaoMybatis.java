@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.ebooklibrary.app.common.SearchVO;
+
 @Repository
 public class NoticeDaoMybatis extends SqlSessionDaoSupport implements NoticeDAO{
 	private static final Logger logger = LoggerFactory.getLogger(NoticeDaoMybatis.class);
@@ -19,9 +21,7 @@ public class NoticeDaoMybatis extends SqlSessionDaoSupport implements NoticeDAO{
 		int cnt = getSqlSession().insert(NAMESPACE+".insertNotice",noticeVo);
 		return cnt;
 	}
-/*	public List<NoticeVO> selectAllNotice(NoticeVO noticeVo){
-		//공지사항 전체 보기
-	}*/
+	
 
 
 	@Override
@@ -39,5 +39,20 @@ public class NoticeDaoMybatis extends SqlSessionDaoSupport implements NoticeDAO{
 	@Override
 	public int deleteNotice(NoticeVO noticeVo) {
 		return getSqlSession().delete(NAMESPACE+".deleteNotice",noticeVo);
+	}
+
+
+
+	@Override
+	public List<NoticeVO> selectAllNotice(SearchVO searchVo) {
+		//공지사항 전체보기
+		return getSqlSession().selectList(NAMESPACE+".selectAllNotice",searchVo);
+	}
+
+
+
+	@Override
+	public int noticeCount(SearchVO searchVo) {
+		return getSqlSession().selectOne(NAMESPACE+".selectCount",searchVo);
 	}
 }

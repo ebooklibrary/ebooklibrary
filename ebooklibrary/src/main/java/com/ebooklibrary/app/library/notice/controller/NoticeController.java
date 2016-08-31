@@ -1,5 +1,7 @@
 package com.ebooklibrary.app.library.notice.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ebooklibrary.app.common.PaginationInfo;
+import com.ebooklibrary.app.common.SearchVO;
+import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.library.notice.model.NoticeService;
 import com.ebooklibrary.app.library.notice.model.NoticeVO;
 
@@ -21,13 +26,6 @@ public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
 	
-	@RequestMapping(value = "/noticelist.do", method = RequestMethod.GET)
-	public String list(){
-		logger.info("공지사항 리스트 보여주기");
-		
-		
-		return "library/notice/noticelist";
-	}
 	
 	@RequestMapping(value ="/noticewrite.do", method = RequestMethod.GET)
 	public String noticeWrite_get(){
@@ -53,7 +51,7 @@ public class NoticeController {
 		return "common/message";
 	}
 	
-	@RequestMapping("noticedetail.do")
+	@RequestMapping("/noticedetail.do")
 	public String selectByNoNotice(@RequestParam (defaultValue="0")int notice_No,Model model){
 		logger.info("공지사항 상세보기");
 		
@@ -65,15 +63,15 @@ public class NoticeController {
 		NoticeVO noticeVo = noticeService.selectByNoNotice(notice_No);
 		model.addAttribute("noticeVo", noticeVo);
 		
-		return "/notice/noticelist";
+		return "/notice/noticedetail";
 		
 	}
 	
-	@RequestMapping(value ="noticeEdit.do" , method=RequestMethod.GET)
+	@RequestMapping(value ="/noticeEdit.do" , method=RequestMethod.GET)
 	public String editNoitce_get(@ModelAttribute NoticeVO noticeVo , Model model){
 		/*공지사항 수정 화면보여주기*/
 		/*공지사항 번호 가져오기*/
-		int notice_No = noticeVo.getNotice_No();
+		int notice_No = noticeVo.getNoticeNo();
 		logger.info("관리자용 공지사항 수정 화면 보여주기");
 		
 		noticeVo = noticeService.selectByNoNotice(notice_No);
@@ -84,7 +82,7 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping(value ="noticeEdit.do" , method=RequestMethod.POST)
+	@RequestMapping(value ="/noticeEdit.do" , method=RequestMethod.POST)
 	public String editNotice_post(@ModelAttribute NoticeVO noticeVo, Model model){ 
 		logger.info("관리자용 공지사항 수정처리");
 		
@@ -106,14 +104,40 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping(value="noticeDelete.do", method=RequestMethod.GET)
+	@RequestMapping(value="/noticeDelete.do", method=RequestMethod.GET)
 	public String deleteNotice_get(@ModelAttribute NoticeVO noticeVo,Model model){
 		logger.info("관리자용 삭제 화면 보여주기");
 		
-		int notice_No = noticeVo.getNotice_No();
+		int notice_No = noticeVo.getNoticeNo();
 		
 		logger.info("삭제할 공지사항 번호 notice_No={}"+notice_No);
 		
 		return "";
 	}
+	
+	@RequestMapping("/noticelist.do")
+	public String AllNotice(@ModelAttribute SearchVO searchVo,@RequestParam String searchKeyword, Model model){
+		logger.info("공지사항 전체보기");
+		logger.info("파라미터 조회 결과 SearchVo ={}",searchVo);
+		logger.info("searchKeyword ={}",searchKeyword);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.NOTICE_BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.NOTICE_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(Utility.NOTICE_COUNT_PER_PAGE);
+		
+		List<NoticeVO> alist = noticeService.selectAllNotice(searchVo);
+		//토탈 레코드
+		int result = noticeService.noticeCount(searchVo);
+		pagingInfo.setTotalRecord(result);
+		
+		model.addAttribute("alist", alist);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		return "library/notice/noticelist";
+	}
+	
 }
