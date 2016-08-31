@@ -177,26 +177,35 @@ ${pageContext.request.contextPath}
 			2005년 7월 4일 05:52 (UTC)에 충돌기는 성공적으로 혜성의 핵에 충돌했다. 충돌기는 충돌하면서 혜성의 핵에 충돌구를 만들고, 핵의 구성 물질을 밖으로 날려 보냈다. 
 			</p>
 		</div>
+		
+		
+		<div class="test1">
+			<p> 
+			${str }
+			</p>
+		</div>
+		
 	    
-	    
+	    <%-- 
 	    <c:forEach begin="0" end="${size/5 }">
 	    
 	    <div class="test1">
-	    <c:set var="n" value="0"></c:set>
+	    
+	    <c:set var="n" value="5"></c:set>
 	    <c:set var="i" value="0"></c:set>
-	    	<%-- <c:forEach var="al" items="${alist }"> --%>
+	    	<c:forEach var="al" items="${alist }">
 	    	
-	    		<c:forEach begin="${n }" end="${i+5 }" var="m" items="${alist}" >
+	    		<c:forEach begin="${i }" end="${n }" var="m" items="${alist}" >
 	    			${m }
-	    			<c:set var="i" value="${n+1 }"></c:set>
-	    			<c:set var="n" value="${n+5 }"></c:set>
 	    		</c:forEach>
+	    			<c:set var="n" value="${i+5 }"></c:set>
 	    		
-	    	<%-- </c:forEach> --%>
+	    			<c:set var="i" value="${n+5 }"></c:set>
+	    	</c:forEach>
 	    </div>
 	    
 	    </c:forEach>
-	    
+	     --%>
 	    
 	    <div class="test1">
 	        <h3>Yay, Page 3!</h3>
