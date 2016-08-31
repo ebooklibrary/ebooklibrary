@@ -5,10 +5,18 @@
 body {margin:0px; padding:0px;  }
 
 /* container_out */
-#container_out{ width:1665px;height:1180px; margin:0 auto; padding:0; position:relative; overflow:hidden; background:url(../../images/library/main/mainBookSR.png) no-repeat center;}
+#container_out {
+	width: 1665px;
+	height: 1180px;
+	margin: 0 auto;
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+	background: url(../../images/library/main/test2.JPG) no-repeat center;
+}
 
 /* rightmenu 옆에 붙는 메뉴 */
-   #rightmenu{
+#rightmenu{
       position:absolute;
       right:1px;
       width: 170px;

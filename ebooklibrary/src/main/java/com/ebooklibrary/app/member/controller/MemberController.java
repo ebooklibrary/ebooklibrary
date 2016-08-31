@@ -78,4 +78,12 @@ public class MemberController {
 		model.addAttribute("url", url);
 		return "common/message";
 	}
+	
+	@RequestMapping("/logout.do")
+	public String memberLogout(HttpSession session,Model model){
+		session.invalidate();
+		model.addAttribute("msg", "로그아웃 되었습니다");
+		model.addAttribute("url", "/member/login.do");
+		return "common/message";
+	}
 }

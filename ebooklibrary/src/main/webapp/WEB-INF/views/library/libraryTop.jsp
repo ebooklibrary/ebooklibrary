@@ -21,7 +21,7 @@
 <!-- 옆에붙을 메뉴 -->
 <div id="rightmenu">
 	<div class="menuform">
-		<a href="<c:url value='/library/qna/list.do'/>">QNA</a>
+		<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
 	</div>
 	<div class="menuform">
 	
@@ -44,22 +44,40 @@
 	<h2 class="skip">글로벌메뉴</h2>
 	<div id="gnb">      
 		<ul id="global">
+			<c:if test="${sessionScope.auchCode=='ADMIN' }">
+				<jsp:forward page="/library/admin/adminMain.do" /></jsp:forward>
+			</c:if>
+			
             <li class="first">
             <a href="<c:url value='/index.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
             첫화면
             </a></li>
+			<c:if test="${empty sessionScope.userName }">
+				<li>
+				<a href="<c:url value='/member/login.do'/>">
+				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
+				로그인
+				</a></li>
+	            <li>
+	            <a href="<c:url value='/member/register.do'/>">
+	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
+	            회원가입
+	            </a></li>
+			</c:if>
+			<c:if test="${!empty sessionScope.userName }">
+				<li>
+				<a href="<c:url value='/member/logout.do'/>">
+				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
+				로그아웃
+				</a></li>
+	            <li>
+	            <a href="<c:url value='/member/register.do'/>">
+	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
+	            장바구니
+	            </a></li>
+			</c:if>
 			
-			<li>
-			<a href="<c:url value='/member/login.do'/>">
-			<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
-			로그인
-			</a></li>
-            <li>
-            <a href="<c:url value='/member/register.do'/>">
-            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
-            회원가입
-            </a></li>
 			 
             <li class="last">
             <a href="/html/06_sitemap/sitemap.asp">
