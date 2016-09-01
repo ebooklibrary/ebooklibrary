@@ -19,12 +19,29 @@
 <div id="container_out">
 
 <!-- 옆에붙을 메뉴 -->
-<div id="rightmenu">
+<c:if test="${sessionScope.auchCode=='ADMIN' }">
+	<div id="rightmenu">
+		<div class="menuform">
+			<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
+		</div>
+		<div class="menuform">
+			
+		</div>
+		<div class="menuform">
+		
+		</div>
+		<div class="menuform">
+		
+		</div>
+	</div>
+</c:if>
+<c:if test="${sessionScope.auchCode!='ADMIN' }">
+	<div id="rightmenu">
 	<div class="menuform">
 		<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
 	</div>
 	<div class="menuform">
-	
+		
 	</div>
 	<div class="menuform">
 	
@@ -33,8 +50,9 @@
 	
 	</div>
 </div>
+</c:if>
   <div id="header">  
-  <!--logo Start--> 
+  <!--logo Start-->   
 	 <h2 class="skip">로고</h2>
 	 	 <div id="logo"><a href="<c:url value='/library/librarymain.do'/>">
 	 	 로고
@@ -44,10 +62,6 @@
 	<h2 class="skip">글로벌메뉴</h2>
 	<div id="gnb">      
 		<ul id="global">
-			<c:if test="${sessionScope.auchCode=='ADMIN' }">
-				<jsp:forward page="/library/admin/adminMain.do" /></jsp:forward>
-			</c:if>
-			
             <li class="first">
             <a href="<c:url value='/index.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
@@ -71,14 +85,22 @@
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 				로그아웃
 				</a></li>
-	            <li>
+				<c:if test="${sessionScope.auchCode!='ADMIN' }">
+				<li>
 	            <a href="<c:url value='/member/register.do'/>">
 	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
 	            장바구니
 	            </a></li>
-			</c:if>
-			
-			 
+	            </c:if>
+	            <c:if test="${sessionScope.auchCode=='ADMIN' }">
+	            <li>
+	            <a href="<c:url value='/admin/adminMain.do'/>">
+	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
+	            관리자 페이지가기
+	            </a>
+	            </li>
+	            </c:if>         
+			</c:if>			 
             <li class="last">
             <a href="/html/06_sitemap/sitemap.asp">
             <!-- <img src="/images/gmi/inc/gnb_sitemap.gif" alt="사이트맵" /> -->

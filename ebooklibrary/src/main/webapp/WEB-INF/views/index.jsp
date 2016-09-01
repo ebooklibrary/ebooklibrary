@@ -30,6 +30,9 @@
 </script>
 </head>
 <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+<c:if test="${sessionScope.auchCode=='ADMIN' }">
+	<jsp:forward page="/admin/adminMain.do" ></jsp:forward>
+</c:if>
  
 	<video id="bg_video" autoplay muted loop>
 		<img src="${pageContext.request.contextPath }/video/ocean.jpg" alt="동영상 커버">
