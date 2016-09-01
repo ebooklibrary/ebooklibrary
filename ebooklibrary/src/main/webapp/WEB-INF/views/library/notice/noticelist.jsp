@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../libraryTop.jsp"%>
+<script type="text/javascript">
+function pageProc(curPage){		
+	document.frmPage.currentPage.value=curPage;
+	document.frmPage.submit();
+}
+</script>
 
 <!-- 공지사항 리스트 화면 -->
 <h2>
@@ -11,13 +17,15 @@
 	<div id="body_contents">
 		<div class="list">
 			<div class="searchbox">
-				<form id="frm1" action="<c:url value='/library/notice/noticelist.do'/>">
+				<form name="frmPage" id="frmPage" 
+				action="<c:url value='/library/notice/noticelist.do'/>">
 					<select name="searchCondition">
 						<option value="title">제목</option>
 						<option value="writer">글쓴이</option>
 						<option value="content">내용</option>
-					</select> <input type="text" name="searchKeyword"> 
-								<input type="submit" value="검색">
+					</select> 
+					<input type="text" name="searchKeyword"> 
+					<input type="submit" value="검색">
 				</form>
 			</div>
 			<div id="notice_table">

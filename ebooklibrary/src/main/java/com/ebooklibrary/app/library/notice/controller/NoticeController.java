@@ -31,7 +31,7 @@ public class NoticeController {
 	public String noticeWrite_get(){
 		logger.info("공지사항 입력 보여주기");
 		
-		return "notice/noticewrite";
+		return "library/notice/noticewrite";
 	}
 	
 	@RequestMapping(value ="/noticewrite.do", method = RequestMethod.POST)
@@ -116,10 +116,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticelist.do")
-	public String AllNotice(@ModelAttribute SearchVO searchVo,@RequestParam String searchKeyword, Model model){
+	public String AllNotice(@ModelAttribute SearchVO searchVo,Model model){
 		logger.info("공지사항 전체보기");
 		logger.info("파라미터 조회 결과 SearchVo ={}",searchVo);
-		logger.info("searchKeyword ={}",searchKeyword);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.NOTICE_BLOCK_SIZE);
