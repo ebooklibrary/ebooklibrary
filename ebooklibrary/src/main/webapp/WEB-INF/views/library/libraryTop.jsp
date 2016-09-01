@@ -62,13 +62,6 @@
 	<h2 class="skip">글로벌메뉴</h2>
 	<div id="gnb">      
 		<ul id="global">
-<<<<<<< HEAD
-=======
-			<%-- <c:if test="${sessionScope.auchCode=='ADMIN' }">
-				<jsp:forward page="/library/admin/adminMain.do" /></jsp:forward>
-			</c:if> --%>
-			
->>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
             <li class="first">
             <a href="<c:url value='/index.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
