@@ -38,96 +38,97 @@ ${pageContext.request.contextPath}
 		</script>
  -->
 <script type="text/javascript">
-$(function() {
-	
-	
-	
-    //single book
-    $('#mybook').booklet();
-
-    
-    $("#mybook").booklet( "option", "width", 1400 );
-	$("#mybook").booklet( "option", "height", 800 );
-
-	
-	$("#mybook").css({"color":"black", "font-weight":"bold"});
-	/* 
-	$("#mybook").css({"border":"1px solid black"});
-	 */
-	$(".test1").css({"padding":"20px","line-height":"40px", "font-size":"1.2em"});
-
-	/* 
-	$(".test1").css({ "border":"1px solid black" });
-	 */ 
-	
-/* 
-	$('#mybook').booklet({menu: '#custom-menu',	pageSelector: true});
-	 */
-	
-	
-	//$("#mybook").booklet({ menu: "#customMenu" });
-	//getter
-	//var menu = $("#mybook").booklet( "option", "menu" );
-	//setter
-	//$("#mybook").booklet( "option", "menu", "#customMenu" );
-	
-	
-	//$("#mybook").booklet({ pageSelector: true });
-	
-	//getter
-	//var pageSelector = $("#mybook").booklet( "option", "pageSelector" );
-	
-	
-	//지정 페이지로 이동
-	$('#mybook').booklet("gotopage", 3);
-	
-	/* 
-	var pageSelector = $("#mybook").booklet("option", "currentIndex");
-	 */
-	 
-	$("#mybook").click(function() {
-		//현재 페이지 구하기
-		var pageSelector = $("#mybook").booklet("option", "currentIndex");
-		console.log(pageSelector);
+	$(function() {
 		
+		
+		
+	    //single book
+	    $('#mybook').booklet();
+	
+	    
+	    $("#mybook").booklet( "option", "width", 1400 );
+		$("#mybook").booklet( "option", "height", 800 );
+	
+		
+		$("#mybook").css({"color":"black", "font-weight":"bold"});
+		/* 
+		$("#mybook").css({"border":"1px solid black"});
+		 */
+		$(".test1").css({"padding":"20px","line-height":"40px", "font-size":"1.2em"});
+	
+		/* 
+		$(".test1").css({ "border":"1px solid black" });
+		 */ 
+		
+	/* 
+		$('#mybook').booklet({menu: '#custom-menu',	pageSelector: true});
+		 */
+		
+		
+		//$("#mybook").booklet({ menu: "#customMenu" });
+		//getter
+		//var menu = $("#mybook").booklet( "option", "menu" );
+		//setter
+		//$("#mybook").booklet( "option", "menu", "#customMenu" );
+		
+		
+		//$("#mybook").booklet({ pageSelector: true });
+		
+		//getter
+		//var pageSelector = $("#mybook").booklet( "option", "pageSelector" );
+		
+		
+		//지정 페이지로 이동
+		$('#mybook').booklet("gotopage", 3);
+		
+		/* 
+		var pageSelector = $("#mybook").booklet("option", "currentIndex");
+		 */
+		 
+		$("#mybook").click(function() {
+			//현재 페이지 구하기
+			var pageSelector = $("#mybook").booklet("option", "currentIndex");
+			console.log(pageSelector);
+			
+		});
+		
+		
+		
+		//setter
+		//$("#mybook").booklet( "option", "pageSelector", 3 );
+		
+		//var chapterSelector = $("#mybook").booklet( "option", "chapterSelector" );
+		
+		//$("#mybook").booklet( "option", "chapterSelector", 3 );
+		
+		//console.log(menu);
+		//console.log(pageSelector);
+		
+		//console.log(chapterSelector);
+	    
+	/*     
+	    //multiple books with ID's
+	    $('#mybook1, #mybook2').booklet();
+	
+	    
+	    
+	    //multiple books with a class
+	    $('.mycustombooks').booklet();
+	     */
+	   /*   
+		var mybook = $('#mybook').booklet();
+	
+	    var newPageHtml = "<div>I'm a new page!</div>";
+	    var display = $("#display");
+	 */
+	        
+	/* 
+	    $('#custom-goto').click(function(e){
+	        e.preventDefault();
+	    });
+	     */
 	});
-	
-	
-	
-	//setter
-	//$("#mybook").booklet( "option", "pageSelector", 3 );
-	
-	//var chapterSelector = $("#mybook").booklet( "option", "chapterSelector" );
-	
-	//$("#mybook").booklet( "option", "chapterSelector", 3 );
-	
-	//console.log(menu);
-	//console.log(pageSelector);
-	
-	//console.log(chapterSelector);
-    
-/*     
-    //multiple books with ID's
-    $('#mybook1, #mybook2').booklet();
 
-    
-    
-    //multiple books with a class
-    $('.mycustombooks').booklet();
-     */
-   /*   
-	var mybook = $('#mybook').booklet();
-
-    var newPageHtml = "<div>I'm a new page!</div>";
-    var display = $("#display");
- */
-        
-/* 
-    $('#custom-goto').click(function(e){
-        e.preventDefault();
-    });
-     */
-});
 </script>
 
 
@@ -176,12 +177,35 @@ $(function() {
 			2005년 7월 4일 05:52 (UTC)에 충돌기는 성공적으로 혜성의 핵에 충돌했다. 충돌기는 충돌하면서 혜성의 핵에 충돌구를 만들고, 핵의 구성 물질을 밖으로 날려 보냈다. 
 			</p>
 		</div>
+		
+		
+		<div class="test1">
+			<p> 
+			${str }
+			</p>
+		</div>
+		
+	    
+	    <%-- 
+	    <c:forEach begin="0" end="${size/5 }">
 	    
 	    <div class="test1">
-	    	
-	    	<h3>123451234 51234 512345123451 234512345123451 23451234 512345123451234 512345123 45123451234512 3451234512345</h3>
 	    
+	    <c:set var="n" value="5"></c:set>
+	    <c:set var="i" value="0"></c:set>
+	    	<c:forEach var="al" items="${alist }">
+	    	
+	    		<c:forEach begin="${i }" end="${n }" var="m" items="${alist}" >
+	    			${m }
+	    		</c:forEach>
+	    			<c:set var="n" value="${i+5 }"></c:set>
+	    		
+	    			<c:set var="i" value="${n+5 }"></c:set>
+	    	</c:forEach>
 	    </div>
+	    
+	    </c:forEach>
+	     --%>
 	    
 	    <div class="test1">
 	        <h3>Yay, Page 3!</h3>

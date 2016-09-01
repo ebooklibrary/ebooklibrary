@@ -27,10 +27,12 @@
 							"background-size": "cover"
 		});
 		
-		
-		
-	
 	});
+	
+	
+	
+	
+	
 </script>
 </head>
 <body>

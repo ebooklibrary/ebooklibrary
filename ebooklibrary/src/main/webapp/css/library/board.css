@@ -1,5 +1,22 @@
 @CHARSET "UTF-8";
 
+#notice_body{
+	width:100%;
+	height:100%;
+}
+#notice_table{
+	width:100%;
+	height:380px;
+}
+
+#notice_table a {
+
+}
+
+#frm1{
+	margin-left: 390px;
+}
+
 .list, .write, .view { width: 100%; }
 .list .searchbox {
 	border: solid 1px #E1E1E1;
