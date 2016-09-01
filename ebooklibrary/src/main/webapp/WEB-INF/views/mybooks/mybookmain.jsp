@@ -42,6 +42,7 @@
 		<!-- 배경화면 바꾸기 -->
 		<div id="changeBack">
 			<span>배경화면 바꾸러 가자</span>
+			<a href="<c:url value='/mybooks/mybook.do'/>">내 책 테스트</a>
 		</div>
 	
 		<!-- 최근 책 책장 -->

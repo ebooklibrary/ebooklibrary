@@ -179,33 +179,53 @@ ${pageContext.request.contextPath}
 		</div>
 		
 		
+		
+		
+		<%-- 
 		<div class="test1">
 			<p> 
 			${str }
 			</p>
 		</div>
-		
+	     --%>
+	    
+	    
+	    
+	    
+	    
 	    
 	    <%-- 
 	    <c:forEach begin="0" end="${size/5 }">
 	    
 	    <div class="test1">
 	    
-	    <c:set var="n" value="5"></c:set>
 	    <c:set var="i" value="0"></c:set>
+	    <c:set var="n" value="500"></c:set>
 	    	<c:forEach var="al" items="${alist }">
 	    	
 	    		<c:forEach begin="${i }" end="${n }" var="m" items="${alist}" >
 	    			${m }
 	    		</c:forEach>
-	    			<c:set var="n" value="${i+5 }"></c:set>
+	    			<c:set var="n" value="${i+500 }"></c:set>
 	    		
-	    			<c:set var="i" value="${n+5 }"></c:set>
+	    			<c:set var="i" value="${n+500 }"></c:set>
 	    	</c:forEach>
 	    </div>
 	    
 	    </c:forEach>
 	     --%>
+	    
+	    
+	    	<c:forEach var="al" items="${alist }">
+			    <div class="test1">
+					<p>${al }</p>
+			    </div>
+	    	</c:forEach>
+	    
+	    
+	    
+	    
+	    
 	    
 	    <div class="test1">
 	        <h3>Yay, Page 3!</h3>

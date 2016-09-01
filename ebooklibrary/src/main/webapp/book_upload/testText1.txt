@@ -1,67 +1,35 @@
-package com.ebooklibrary.app.mybooks.controller;
+North Korean vice premier Kim Yong-Jim incurred the wrath of leader Kim Jong-Un (pictured) after he dozed off during a meeting, the mass-selling JoongAng Ilbo reported (AFP Photo/KNS)
+More
+Seoul (AFP) - North Korea has executed a vice premier for showing disrespect during a meeting presided over by leader Kim Jong-Un, South Korea said Wednesday, after reports that he fell asleep.
+The regime also banished two other senior officials, Seoul said, the latest in a slew of punishments Kim is believed to have ordered in what analysts say is an attempt to tighten his grip on power.
+"Vice premier for education Kim Yong-Jin was executed," Seoul's Unification Ministry spokesman Jeong Joon-Hee said at a regular briefing.
+Kim was killed by a firing squad in July as "an anti-party, anti-revolutionary agitator," added an official at the ministry, who declined to be named.
+"Kim Yong-Jin was denounced for his bad sitting posture when he was sitting below the rostrum" during a session of North Korea's parliament, and then underwent an interrogation that revealed other "crimes", the official told reporters.
+The mass-selling JoongAng Ilbo reported on Tuesday that top regime figures had been punished, but identified the education official by a different name.
+"He incurred the wrath of Kim after he dozed off during a meeting presided over by Kim," it quoted a source as saying.
+"He was arrested on site and intensively questioned by the state security ministry".
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+- Fall of spymaster -
+The unification ministry said two other senior figures were forced to undergo re-education sessions.
+One of them was Kim Yong-Chol, a top official in charge of inter-Korean affairs and espionage activities against the South.
+The 71-year-old Kim is a career military intelligence official who is believed to be the mastermind behind the North's frequent cyberattacks on Seoul.
+Kim is also blamed by the South for the sinking of a South Korean warship in 2010 near the disputed sea border with the North in the Yellow Sea.
+Kim was banished to a farm in July for a month for his "arrogance" and "abuse of power," the ministry official said.
+The spymaster, who was reinstated this month, is likely to be tempted to prove his loyalty by committing provocative acts against the South, the official said.
+"Therefore, we are keeping close tabs on the North", he said.
+Professor Yang Moo-Jin at the University of North Korean Studies said the vice premier's execution could be indirectly verified when Pyongyang's state media reveals the names of attendees at the government's anniversary ceremony on September 9.
+That confirmation will be important; Seoul in February said North Korean military chief of staff Ri Yong-Gil had been executed -- only for Ri to turn up at a party rally in May.
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+- Uncle -
+South Korea's Yonhap news agency put the number of party officials executed during Kim Jong-Un's rule at over 100.
 
-@Controller
-@RequestMapping("/mybooks")
-public class MybooksController {
-	
-	private static final Logger logger=LoggerFactory.getLogger(MybooksController.class);
-	
-	@RequestMapping("/mybookmain.do")
-	public String mybooksMain(){
-		return "mybooks/mybookmain";
-	}
-	
-	@RequestMapping("/mybook.do")
-	public String bookletTest(Model model){
-		ArrayList<String> alist=new ArrayList<String>();
-		File file=new File("D:\\group5_finalproject\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\testText.txt");
-		BufferedReader reader = null;
-			try
-			{
-				reader = new BufferedReader(new FileReader(file));
-				
-				reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));
-				
-				
-		   while(true)
-		   {
-			   String str = reader.readLine();   //<-- 한행의 텍스트 데이터를 읽는다.
-			   if(str==null)
-				   break;
-			   logger.info("텍스트 테스트 str={}",str+"</br>");    //<--- 읽은 데이터를 모니터로 출력 한다.
-			   alist.add(str);
-		   }
-			}catch(FileNotFoundException fnfe){
-				logger.info("파일이 존재 하지 않습니다.");
-			}catch(IOException ioe){
-			 logger.info("파일을 읽을수 없습니다.");
-			}finally{
-				try 
-				{
-					reader.close();     //<---- 파일을 닫는다.
-				}catch(Exception e){
-					
-				}
-		 }
-		
-			model.addAttribute("alist", alist); 
-		
-		return "mybooks/mybook";
-	}
-	
-}
+The most notorious case was that of Kim's uncle and onetime No. 2 Jang Song-Thaek, who was executed for charges including treason and corruption in December 2013.
+
+In April 2015, it was reported that Kim had his defence minister Hyon Yong-Chol summarily executed with an anti-aircraft gun.
+Cheong Seong-Chang, a senior researcher at the private Sejong Institute, said the "reign of terror" that is characteristic of a Stalinist state showed no sign of abating under Kim.
+"But the intensity of the reign of terror depends on changes to the internal and external political environment", Cheong said.
+Reports of the latest execution coincide with a series of high-profile defections from the North.
+North Korea's deputy ambassador to Britain sought refuge in the South with his family, the unification ministry said earlier this month.
+Thae Yong-Ho was driven by "disgust for the North Korean regime" and concerns for his family's future, it said.
+Twelve waitresses and their manager who had been working at a North Korea-themed restaurant in China also made headlines when they arrived in the South in April as the largest group defection for years.
+About 10 North Korean diplomats made it to the South in the first half of this year alone, Yonhap said, quoting informed sources.
