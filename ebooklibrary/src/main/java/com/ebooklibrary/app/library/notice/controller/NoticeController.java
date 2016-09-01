@@ -63,7 +63,7 @@ public class NoticeController {
 		NoticeVO noticeVo = noticeService.selectByNoNotice(notice_No);
 		model.addAttribute("noticeVo", noticeVo);
 		
-		return "/notice/noticedetail";
+		return "library/notice/noticedetail";
 		
 	}
 	

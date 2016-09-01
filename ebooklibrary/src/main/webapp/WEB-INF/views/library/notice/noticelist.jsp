@@ -6,18 +6,31 @@ function pageProc(curPage){
 	document.frmPage.currentPage.value=curPage;
 	document.frmPage.submit();
 }
+
+$(document).ready(function(){
+	$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
+});
 </script>
+<form name="frmPage" method="post"	action="<c:url value='/library/notice/noticelist.do'/>">
+<input type="hidden" name="currentPage">
+<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+</form>
 
 <!-- 공지사항 리스트 화면 -->
-<h2>
-	<img alt="공지사항"
-		src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
-</h2>
+<div id = "notice_head">
+	<h2>
+		<img alt="공지사항"
+			src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
+	</h2>
+</div>
+<div class = "notice_Ad">
+
+</div>
 <div id="notice_body">
-	<div id="body_contents">
 		<div class="list">
 			<div class="searchbox">
-				<form name="frmPage" id="frmPage" 
+				<form name="search" id="search" 
 				action="<c:url value='/library/notice/noticelist.do'/>">
 					<select name="searchCondition">
 						<option value="title">제목</option>
@@ -31,11 +44,11 @@ function pageProc(curPage){
 			<div id="notice_table">
 				<table>
 					<colgroup>
-						<col width="70">
+						<col width="60">
 						<col>
-						<col width="103">
-						<col width="132">
-						<col width="91">
+						<col width="93">
+						<col width="122">
+						<col width="81">
 					</colgroup>
 					<thead>
 						<tr>
@@ -56,15 +69,18 @@ function pageProc(curPage){
 							<c:forEach var="vo" items="${alist }">
 								<tr>
 									<td>${vo.noticeNo }</td>
-									<td><a href="#"> ${vo.title }</a></td>
+									<td><a href="<c:url value ='/library/notice/noticedetail.do'/>"> ${vo.title }</a></td>
 									<td>${vo.writer }</td>
 									<td><fmt:formatDate value="${vo.regdate }"
 											pattern="yyyy-MM-dd" /></td>
 									<td>${vo.read_Count }</td>
 								</tr>
 							</c:forEach>
-							<div class="divPage">
-
+						</c:if>
+					</tbody>
+				</table>
+			</div>
+				<div class="divPage">
 								<!-- 이전 블럭으로 이동 -->
 								<c:if test="${pagingInfo.firstPage>1 }">
 									<a href="#" onclick="pageProc(${pagingInfo.firstPage-1}"> <img
@@ -91,13 +107,11 @@ function pageProc(curPage){
 									</a>
 								</c:if>
 							</div>
-						</c:if>
-					</tbody>
-				</table>
+			<div id="noticeWrite">
+				<a href="<c:url value ='/library/notice/noticewrite.do'/>">글쓰기</a>
 			</div>
 		</div>
-	</div>
-	<a href="<c:url value ='/library/notice/noticewrite.do'/>">글쓰기</a>
+	
 </div>
 
 
