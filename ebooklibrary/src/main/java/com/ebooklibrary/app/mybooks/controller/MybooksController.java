@@ -228,6 +228,7 @@ public class MybooksController {
 							}else if (data==13) {
 								str+="<br>";
 							}
+							str=str.replaceAll("<br><br>", "<br>");
 						}//if
 						
 						if (count==scount) {
