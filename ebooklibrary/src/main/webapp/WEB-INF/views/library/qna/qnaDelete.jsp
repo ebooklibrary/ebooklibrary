@@ -1,12 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+    
+<%@include file="../libraryTop.jsp" %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#prePage").click(function(){
+			$(location).attr('href', "<c:url value='/library/qna/qnaDetail.do?qnaNo=${param.qnaNo}'/>");
+		});
+	});
+</script>
+	
+	<form name="frmDelete" id="frmDelete" method="post" 
+		action="<c:url value='/library/qna/qnaDelete.do'/>">
+		<input type="hidden" name="qnaNo" value="${param.qnaNo }"/>
+       <div align=center style="line-height:160%;padding:5px;"><b>글을 삭제하시겠습니까?</b>
+       </div>
+       <br>
+    <div height=30>
+        <input type=submit class=submit value=" 확  인 " >
+        <input type=button id="prePage" value="이전화면" >
+	</div>
+	</form>
+<%@include file="../libraryBottom.jsp" %>

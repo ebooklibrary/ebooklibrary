@@ -5,17 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebooklibrary.app.common.SearchVO;
+
 @Service
 public class QnaBoardServiceImpl implements QnaBoardService {
 	 
 	@Autowired
 	private QnaBoardDAO qnaBoardDao;
 
-	@Override
-	public List<QnaBoardVO> selectQnaAll() {
-		
-		return qnaBoardDao.selectQnaAll();
-	}
+	
 
 	@Override
 	public int insertQnaBoard(QnaBoardVO qnaBoardVo) {
@@ -36,6 +34,53 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	@Override
 	public int qnaBoardEdit(QnaBoardVO qnaBoardVo) {
 		return qnaBoardDao.qnaBoardEdit(qnaBoardVo);
+	}
+
+	@Override
+	public int qnaBoardDelete(int qnaNo) {
+		return qnaBoardDao.qnaBoardDelete(qnaNo);
+	}
+
+	@Override
+	public int selectListCount(SearchVO searchVo) {
+		return qnaBoardDao.selectListCount(searchVo);
+	}
+
+	@Override
+	public List<QnaBoardVO> selectQnaAll(SearchVO searchVo) {
+		
+		return qnaBoardDao.selectQnaAll(searchVo);
+	}
+
+	@Override
+	public int readCountAdd(int qnaNo) {
+		return qnaBoardDao.readCountAdd(qnaNo);
+	}
+
+	@Override
+	public int prePageMove(int qnaNo) {
+		return qnaBoardDao.prePageMove(qnaNo);
+	}
+
+	@Override
+	public int nextPageMove(int qnaNo) {
+		return qnaBoardDao.nextPageMove(qnaNo);
+	}
+
+	@Override
+	public int maxQnaNo() {
+		
+		return qnaBoardDao.maxQnaNo();
+	}
+
+	@Override
+	public int minQnaNo() {
+		return qnaBoardDao.minQnaNo();
+	}
+
+	@Override
+	public List<QnaBoardVO> selectByMemberNo(String writer) {
+		return qnaBoardDao.selectByMemberNo(writer);
 	}
 
 	

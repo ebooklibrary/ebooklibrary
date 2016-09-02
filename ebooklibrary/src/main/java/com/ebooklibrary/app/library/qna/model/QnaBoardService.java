@@ -2,12 +2,34 @@ package com.ebooklibrary.app.library.qna.model;
 
 import java.util.List;
 
+import com.ebooklibrary.app.common.SearchVO;
+
 public interface QnaBoardService {
-	public List<QnaBoardVO> selectQnaAll();
+	//list
+	public List<QnaBoardVO> selectQnaAll(SearchVO searchVo);
+	public int selectListCount(SearchVO searchVo);
+	//insert
 	public int insertQnaBoard(QnaBoardVO qnaBoardVo);
-	public QnaBoardVO selectByNo(int QnaNo) ;
-	
+	//insert->detail
 	public int selectQnaBoardByUsername(String username);
-	
+	//detail
+	public QnaBoardVO selectByNo(int QnaNo) ;
+	//edit
 	public int qnaBoardEdit(QnaBoardVO qnaBoardVo);
+	//delete
+	public int qnaBoardDelete(int qnaNo);
+	//readCount
+	public int readCountAdd(int qnaNo);
+	
+	//prePage
+	public int prePageMove(int qnaNo);
+	//nextPage
+	public int nextPageMove(int qnaNo);
+	//MaxqnaNo
+	public int maxQnaNo();
+	//MinqnaNo
+	public int minQnaNo();
+	//user'sWriting//멤버번호로 조회할예정 일단 유저네임으로.
+	public List<QnaBoardVO> selectByMemberNo(String writer);
+	
 }

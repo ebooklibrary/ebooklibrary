@@ -3,8 +3,38 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.qnaboard">
-	<select id="selectQnaAll" resultType="QnaBoardVO">
-		select * from QNA_BOARD
+	<sql id="searchWhere">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				${searchCondition} 
+				like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectQnaAll" resultType="QnaBoardVO" 
+		parameterType="SearchVO">
+		select *
+		from
+		(
+		    select rownum as RNUM, QnaLIST_ALL.*
+		    from
+		        (select QNA_NO, TITLE, WRITER, REGDATE,
+					CONTENT,READ_COUNT
+		        from QNA_BOARD 
+		        <include refid="searchWhere"></include>
+		        ORDER BY qna_no desc) QnaLIST_ALL    
+		) 
+		<![CDATA[
+		where  RNUM> #{firstRecordIndex} 
+			and RNUM<= #{firstRecordIndex}
+			+ #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectTotalCount" parameterType="SearchVO" resultType="int">
+		select count(*) from QNA_BOARD
+		<include refid="searchWhere"></include>
 	</select>
 	
 	<insert id="insertQnaBoard" parameterType="QnaBoardVO">
@@ -16,7 +46,7 @@
 		insert into QNA_BOARD(qna_no ,title,writer ,content)
 		values(QNA_SEQ.nextval,#{title},#{writer},#{content})
 	</insert>
-
+	
 	<select id="selectBoardNoByUsername" parameterType="string" resultType="int">
 		select max(qna_no)  from QNA_BOARD where writer=#{writer}
 	</select> 
@@ -33,5 +63,45 @@
 		where QNA_NO=#{qnaNo}
 	</update>
 	
-   
+	<delete id="deletebyQnaNo" parameterType="int"> 
+		delete from QNA_BOARD where QNA_NO=#{qnaNo}
+	</delete>
+	
+	
+	<update id="readCountAdd" parameterType="int">
+		update QNA_BOARD
+		set READ_COUNT=READ_COUNT+1
+		where QNA_NO=#{qnaNo}
+	</update>
+	
+	<select id="prePage" parameterType="int" resultType="int">		
+		select MAX(QNA_NO) from QNA_BOARD
+		<![CDATA[
+		 where QNA_NO < #{qnaNo}
+		 ]]>
+	</select>
+
+   	<select id="nextPage" parameterType="int" resultType="int">
+   		select MIN(QNA_NO) from QNA_BOARD
+   		<![CDATA[
+   		 where QNA_NO > #{qnaNo}
+   		 ]]>
+   	</select>
+   	
+	<select id="maxPage" parameterType="int" resultType="int">		
+		select MAX(QNA_NO) from QNA_BOARD
+		
+	</select>
+
+   	<select id="minPage" parameterType="int" resultType="int">
+   		select MIN(QNA_NO) from QNA_BOARD
+   		
+   	</select>
+   	
+   	<select id="selectByWriter" parameterType="string" resultType="QnaBoardVO">
+   		select * from QNA_BOARD where writer=#{writer}
+   		
+   	</select>
+   	
+   	
 </mapper>

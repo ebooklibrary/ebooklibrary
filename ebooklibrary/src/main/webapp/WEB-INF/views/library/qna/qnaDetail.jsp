@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@include file="../libraryTop.jsp" %>
+<script type="text/javascript">
+$().ready(function(){
+	$("#preWriting").click(function(){
+		$(location).attr('href',"<c:url value='/library/qna/prePage.do?qnaNo=${param.qnaNo}'/>");
+	});
+	
+	$("#nextWriting").click(function(){
+		$(location).attr('href',"<c:url value='/library/qna/nextPage.do?qnaNo=${param.qnaNo}'/>");
+	});
+});
+
+
+</script>
 	<h2>글 상세보기</h2>
 	<div class="divForm">
 		<div class="firstDiv">
@@ -25,11 +32,15 @@
 		<div class="lastDiv">			
 			<p class="content">${qnaBoardVo.content }</p>
 		</div>
+		<div>
+		<input type="button" id="preWriting" value="이전글"/>
+		<input type="button" id="nextWriting" value="다음글"/>
+		
+		</div>
 		<div class="center">
 			<a href="<c:url value='/library/qna/qnaEdit.do?qnaNo=${param.qnaNo }'/>">수정</a> |
         	<a href="<c:url value='/library/qna/qnaDelete.do?qnaNo=${param.qnaNo }'/>">삭제</a> |
-        	<a href="<c:url value='/library/qna/qnalist.do'/>">목록</a>			
+        	<a href="<c:url value='/library/qna/qnaList.do'/>">목록</a>			
 		</div>
 	</div>
-</body>
-</html>
+<%@include file="../libraryBottom.jsp" %>
