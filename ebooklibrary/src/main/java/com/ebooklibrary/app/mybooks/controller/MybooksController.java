@@ -34,7 +34,7 @@ public class MybooksController {
 	
 	@RequestMapping("/mybook.do")
 	public String bookletTest(Model model){
-		
+		//책 txt에서 읽어오기
 		/*
 		fis = new FileInputStream("text/poetry3.txt");
         bis = new BufferedInputStream(fis);
