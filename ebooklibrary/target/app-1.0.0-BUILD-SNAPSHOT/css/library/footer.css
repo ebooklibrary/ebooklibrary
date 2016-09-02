@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+
+/* footer El **********/
+#footer {
+	width: 1290px;
+	height: 50px;
+	margin: 30px 0 0 180px;
+	padding: 0;
+	overflow: hidden;
+	clear: both;
+	background: url(/images/gmi/inc/foot_bar_top.gif) repeat-x top;
+	border: 1px solid black;
+} /* 전체내용을담는것 */
+
+/*개인정보등*/
+#foot_link  { margin:33px 0 0 0; padding:0; list-style:none; width:500px;  height:12px; float:left;} 
+ #foot_link li.first {margin:0px; padding:0px 12px 0px 0; display:inline; float:left; background:none;}
+ #foot_link li {margin:0px; padding:0px 12px 0px 12px; display:inline; float:left; background:url(/images/gmi/inc/f_link_bar.gif) no-repeat left;}
+ #foot_link li img {vertical-align:top; font-size:0; line-height:0; margin:0px; padding:0px;}
+ #foot_link .foot_link_last {padding:0px; background:none;}
+ 
+ 
+ /* 주소,연락처등 */  
+ #foot_add { margin:0 0 0 350px; padding:0; float:left; width:400px; font-size:12px; color:#333;}
+ #foot_add img {vertical-align:top; font-size:0px; line-height:0px; }
+ #foot_add address {margin:0 0 5px 0; padding:0; font-style:normal;  }
+ #foot_add p {margin:0; padding:0; color:#999; }
+ 
+ /* 하단메뉴 */
+ #foot_menu{
+ 	float: right;
+ 	width:20%;
+ 	height:48px;
+ 	margin:0;
+ 	border:1px solid black;
+ }
+
+
+
+ /*팔달구관련링크*/ 
+ #select_box {margin:0; padding:0px; width:191px; overflow:hidden; float:right; position:absolute; top:0px; right:0px;}	
+ #select_box input.select_btn {float:left;  margin:0 0 0 5px; padding:3px 0 0 0; font-size:0; width:28px; vertical-align:middle; } 
+ #select_box select.selectText { width:150px; float:left; margin-left:8px; height:21px; padding:2px;}
+ 
+
+
+
+ /* 방문자 */ 
+ #visitor {margin:0 0 0 0; float:left; padding:0px; height:41px; text-align:left; width:100px;}
+ #visitor dl {margin:0; padding:0; width:100px; height:36px; float:left; }
+ #visitor dt {margin:0; padding:0; float:left; width:34px; font-size:11px; height:15px; color:#ff6600; font-weight:bold;}
+ #visitor dd {float:right; padding:0px; margin:0; font-size:11px; height:15px; width:66px; color:#444444; text-align:right; vertical-align:middle;}
+ 
+
+/**배너광장**/
+ #banner {width:990px;  margin:0 auto; padding:0 0px 21px 0; overflow:hidden; height:32px; position:relative;   }/* 전체내용을담는것 */		
+ #banner h2 {margin:0px; padding:0px; background:none; width:90px; height:14px; overflow:hidden; position:absolute; top:11px; left:0px;}
+
+ #banner .banner_more { margin:0px; padding:0px; width:74px; height:14px; position:absolute; top:11px; left:90px; }
+ #banner .banner_more img {margin:0px; padding:0px; font-size:0; line-height:0;}		
+
+ #banner .banner_slide { float:left; margin:0 0 0 174px; padding:0px; width:816px; height:32px; overflow:hidden;  }
+ #banner .banner_in { margin:0px; padding:0px; height:34px; overflow:hidden; }
+ #banner .banner_in img { vertical-align:top; margin:0 0 0 10px; padding:0px; float:left; }
+	
+ #banner #control { width:20px; height:26px; text-align:center; top:12px; left:102px; position:absolute;  list-style:none; }
+ #banner #control input {margin:1px 0px; padding:0px; vertical-align:top; font-size:0; float:left;}
+
+ 
+

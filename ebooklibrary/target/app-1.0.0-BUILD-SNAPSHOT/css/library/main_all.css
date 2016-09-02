@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+/* Page Base */
+@import url(template.css);
+/* Page Layout */
+@import url(main_layout.css);
+/* Template Design */
+@import url(header.css);
+@import url(footer.css);
+@import url(board.css);
+
+/* 본문프린터용  */
+@media print {
+#head, #visual, #sidebar, #body_foot, #foot, #wing, #fontsize { display: none; }
+#container { background: #fff; }
+#body { margin: 0; padding: 0; background: #fff; }
+}
+
+
+
+
+
+

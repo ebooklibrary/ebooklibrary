@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+
+/* Layout ***********************************************************************/
+
+/*메인헤더,서브헤더부분*/
+
+/* header (global_menu,top_menu) **********/
+#header {margin:0 0 0 180px; width:1300px; height:100px;
+border: 1px solid black;}
+ 
+ 
+ /* logo */ 
+ #logo { width:149px; height:58px; margin:28px 0 0 10px; padding:0; float:left;  }
+ 
+ 
+ 
+ /* gnb_menu */
+ #gnb {width:35%; float:right; margin:21px 0 0 0; padding:0; height:100%; }
+ #gnb #global {margin:0; padding:4px 0 0 0; float:left; width:90%; }
+ #gnb #global li.first {margin:0; display:inline; float:left; padding:0 10px 0 0; background:none; }
+ #gnb #global li {margin:0; display:inline; float:left; padding:0 10px 0 10px;  background:url(/images/gmi/inc/gnb_bar.gif) no-repeat left;}
+ #gnb #global li.last {margin:0; display:inline; float:left; padding:0 0 0 10px;  background:url(/images/gmi/inc/gnb_bar.gif) no-repeat left;}
+ #gnb #global img { vertical-align:middle;}
+
+ #gnb #intro_btn  { padding:0; height:26px; float:left; width:98px;}
+ 
+ 
+ 
+ 
+ /* navigation */
+ #topmenu { position: absolute; left:384px;/*left:274px;*/ top: 59px; width: 907px; height: 81px; float:left;} 
+ #topmenu ul { position:absolute; display: inline-block; left:0px; top:0; list-style:none;	margin:0px; }
+ #topmenu ul li { float:left; display:inline; margin:0; padding:0 0 0 2px; background:url(/images/gmi/inc/top_menu_bar.gif) no-repeat left;}
+ #topmenu ul li.first { float:left; display:inline; margin:0; padding:0; background:none;}
+ /*#topmenu ul li { float:left; display:inline; margin:0; padding:0 35px 0 35px; background:url(/images/gmi/inc/menu_bar.gif) no-repeat right;}
+ #topmenu ul li.last { float:left; display:inline; margin:0; padding:0 35px 0 35px; background:none;}*/
+	
+	
+ #topmenu li ul { display:none; list-style:none; position:absolute; left:0; top:26px; padding:0; margin:0; height:21px;}
+ #topmenu li ul li { white-space:nowrap; background:none; margin:0; padding:3px 8px 0 8px; font-weight:bold; vertical-align:middle;}
+ #topmenu li ul li a { display:block; padding:0;  text-decoration:none;  color:#d8d1c6; margin:0; vertical-align:middle; letter-spacing:-1px;}	
+ #topmenu li ul li a.active, #topmenu li ul li a:hover, #topmenu li ul li a:focus{  padding:0; margin:0; font-weight:bold;  color:#ffffff; vertical-align:middle; letter-spacing:-1px;}
+
+
+ #topmenu li ul#top2m1 { padding-left:20px; margin-left:0; width:380px;  background:url(/images/gmi/inc/sub_bar01.gif) no-repeat left;}
+ #topmenu li ul#top2m2 { padding-left:20px; margin-left:40px; width:412px;  background:url(/images/gmi/inc/sub_bar02.gif) no-repeat left;}
+ #topmenu li ul#top2m3 { padding-left:20px; margin-left:100px; width:478px; background:url(/images/gmi/inc/sub_bar03.gif) no-repeat left;}
+ #topmenu li ul#top2m4 { padding-left:20px; margin-left:150px; width:497px; background:url(/images/gmi/inc/sub_bar04.gif) no-repeat left;}
+ #topmenu li ul#top2m5 { padding-left:20px; margin-left:450px; width:180px; background:url(/images/gmi/inc/sub_bar05.gif) no-repeat left;}
+ #topmenu li ul#top2m6 { padding-left:20px; margin-left:150px; width:572px;  background:url(/images/gmi/inc/sub_bar06.gif) no-repeat left;}
+ 
+
+
+
+
