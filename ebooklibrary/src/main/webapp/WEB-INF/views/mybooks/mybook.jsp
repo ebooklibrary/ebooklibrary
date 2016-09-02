@@ -54,7 +54,7 @@ ${pageContext.request.contextPath}
 		/* 
 		$("#mybook").css({"border":"1px solid black"});
 		 */
-		$(".test1").css({"padding":"20px","line-height":"40px", "font-size":"1.2em"});
+		$(".test1").css({"padding":"20px","line-height":"35px", "font-size":"1.2em"});
 	
 		/* 
 		$(".test1").css({ "border":"1px solid black" });
@@ -80,6 +80,13 @@ ${pageContext.request.contextPath}
 		
 		//지정 페이지로 이동
 		$('#mybook').booklet("gotopage", 3);
+		
+		$("#pageSelBt").click(function() {
+			var page=$("#pageSel").val();
+			$('#mybook').booklet("gotopage", page);
+			
+		});
+		
 		
 		/* 
 		var pageSelector = $("#mybook").booklet("option", "currentIndex");
@@ -147,9 +154,16 @@ ${pageContext.request.contextPath}
 	<div id="custom-goto"></div>
 	<div id="display"></div>
 	
+	
+	
 	<!-- 
 	<div id="custom-menu"></div>
 	 -->
+	 
+	 갈 페이지 입력 : <input type="text" name="pageSel" id="pageSel">
+	 <input type="button" name="pageSelBt" id="pageSelBt" value="페이지 가기">
+	 
+	 
 	<div id="wrapper">
 	<div id="mybook">
 	    <div class="test1">

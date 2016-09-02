@@ -66,7 +66,8 @@ public class MybooksController {
 		String str = "";
 		
 		BufferedReader reader = null;
-		File file=new File("D:\\group5_finalproject\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\testText.txt");
+		//File file=new File("D:\\group5_finalproject\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\이드.txt");
+		File file=new File("C:\\Users\\User\\git\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\이드.txt");
 		FileInputStream fis=null;
 		BufferedInputStream bis=null;
 		InputStreamReader isr=null;
@@ -114,7 +115,7 @@ public class MybooksController {
 			while((data1=reader.read())!=-1){
 				totalCount++;
 			}
-			logger.info("텍스트 테스트 totalCount={}",totalCount);
+			//logger.info("텍스트 테스트 totalCount={}",totalCount);
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		} catch (FileNotFoundException e1) {
@@ -153,7 +154,7 @@ public class MybooksController {
 			double scount=550;
 			double a=Math.round(totalCount/scount);
 			//totalCount%=scount;
-			logger.info("a 테스트={}",a);
+			//logger.info("a 테스트={}",a);
 			int ab=(int)a;
 			/*
 			for (int i = 0; i < a; i++) {
@@ -200,7 +201,7 @@ public class MybooksController {
 					}
 					alist.add(str);
 					*/
-			logger.info("텍스트 테스트2 totalCount={}",totalCount);
+			//logger.info("텍스트 테스트2 totalCount={}",totalCount);
 			int key=1;
 					while((data=reader.read())!=-1){
 						
@@ -256,7 +257,7 @@ public class MybooksController {
 				
 				
 				//logger.info("alist.size()={}", alist.size());
-				logger.info("bookmap.size()={}", bookmap.size());
+				//logger.info("bookmap.size()={}", bookmap.size());
 				
 								
 			//logger.info("텍스트 테스트 count={}",count);
@@ -277,7 +278,8 @@ public class MybooksController {
 		 }
 		
 		
-        logger.info("str={}", str);
+		logger.info("alist.size()={}", alist.size());
+        //logger.info("str={}", str);
         //logger.info("alist={}", alist);
 		//logger.info("맵 사이즈 bookmapsize={}", alist.size());
 			//model.addAttribute("alist", bookmap);
