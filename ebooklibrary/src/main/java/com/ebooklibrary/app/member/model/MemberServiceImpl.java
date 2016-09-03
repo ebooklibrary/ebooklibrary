@@ -1,7 +1,11 @@
 package com.ebooklibrary.app.member.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ebooklibrary.app.common.SearchVO;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -27,5 +31,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 	public MemberVO selectByUserName(String userName){
 		return memberDao.selectByUserName(userName);
+	}
+	public List<MemberVO> selectMemberAll(SearchVO vo){
+		return memberDao.selectMemberAll(vo);
+	}
+	public int selectMemberCount(SearchVO vo){
+		return memberDao.selectMemberCount(vo);
 	}
 }

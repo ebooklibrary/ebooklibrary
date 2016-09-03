@@ -4,68 +4,56 @@ import java.sql.Timestamp;
 
 public class MemberVO {
 	private int memberNo;  /* 회원번호 */
-	private String username;  /* 아이디 */
+	private String userId;	/* 아이디 */
+	private String userName;  /* 이름 */
 	private String pwd;  /* 비밀번호 */
-	private String email1;  /* 이메일 */
-	private String email2;  /* 이메일 */
-	private String tel1;  /* 전화번호 */
-	private String tel2;  /* 전화번호 */
-	private String tel3;  /* 전화번호 */
+	private String hp1;  /* 전화번호 */
+	private String hp2;  /* 전화번호 */
+	private String hp3;  /* 전화번호 */
 	private String birth;  /* 생년월일 */
 	private String gender;  /* 성별 */
-	private Timestamp regdate;  /* 가입일 */
-	private Timestamp leavedate;  /* 탈퇴일 */
+	private Timestamp regDate;  /* 가입일 */
+	private Timestamp outDate;  /* 탈퇴일 */
 	private String authCode;  /* 권한코드 */
 	private int cash; /* 북코인 */
-	
-	
+	private String bgImage; /* 회원전용 배경 */
+	private String confrimEmail; /* 이메일인증 */
 	public int getMemberNo() {
 		return memberNo;
 	}
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+	
 	public String getPwd() {
 		return pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getEmail1() {
-		return email1;
+	public String getHp1() {
+		return hp1;
 	}
-	public void setEmail1(String email1) {
-		this.email1 = email1;
+	public void setHp1(String hp1) {
+		this.hp1 = hp1;
 	}
-	public String getEmail2() {
-		return email2;
+	public String getHp2() {
+		return hp2;
 	}
-	public void setEmail2(String email2) {
-		this.email2 = email2;
+	public void setHp2(String hp2) {
+		this.hp2 = hp2;
 	}
-	public String getTel1() {
-		return tel1;
+	public String getHp3() {
+		return hp3;
 	}
-	public void setTel1(String tel1) {
-		this.tel1 = tel1;
-	}
-	public String getTel2() {
-		return tel2;
-	}
-	public void setTel2(String tel2) {
-		this.tel2 = tel2;
-	}
-	public String getTel3() {
-		return tel3;
-	}
-	public void setTel3(String tel3) {
-		this.tel3 = tel3;
+	public void setHp3(String hp3) {
+		this.hp3 = hp3;
 	}
 	public String getBirth() {
 		return birth;
@@ -79,17 +67,17 @@ public class MemberVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public Timestamp getRegdate() {
-		return regdate;
+	public Timestamp getRegDate() {
+		return regDate;
 	}
-	public void setRegdate(Timestamp regdate) {
-		this.regdate = regdate;
+	public void setRegDate(Timestamp regDate) {
+		this.regDate = regDate;
 	}
-	public Timestamp getLeavedate() {
-		return leavedate;
+	public Timestamp getOutDate() {
+		return outDate;
 	}
-	public void setLeavedate(Timestamp leavedate) {
-		this.leavedate = leavedate;
+	public void setOutDate(Timestamp outDate) {
+		this.outDate = outDate;
 	}
 	public String getAuthCode() {
 		return authCode;
@@ -102,6 +90,31 @@ public class MemberVO {
 	}
 	public void setCash(int cash) {
 		this.cash = cash;
+	}
+	public String getBgImage() {
+		return bgImage;
+	}
+	public void setBgImage(String bgImage) {
+		this.bgImage = bgImage;
+	}
+	public String getConfrimEmail() {
+		return confrimEmail;
+	}
+	public void setConfrimEmail(String confrimEmail) {
+		this.confrimEmail = confrimEmail;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	@Override
+	public String toString() {
+		return "MemberVO [memberNo=" + memberNo + ", userId=" + userId + ", userName=" + userName + ", pwd=" + pwd
+				+ ", hp1=" + hp1 + ", hp2=" + hp2 + ", hp3=" + hp3 + ", birth=" + birth + ", gender=" + gender
+				+ ", regDate=" + regDate + ", outDate=" + outDate + ", authCode=" + authCode + ", cash=" + cash
+				+ ", bgImage=" + bgImage + ", confrimEmail=" + confrimEmail + "]";
 	}
 	
 	
