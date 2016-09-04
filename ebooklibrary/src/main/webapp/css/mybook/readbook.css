@@ -1,14 +1,38 @@
 @CHARSET "UTF-8";
 
 #wrapper{
+	margin: 0 auto;
 	border: 1px solid black;
 	width: 1450px;
 	height: 820px;
-	padding: 30px 20px 20px 20px;
+	padding: 10px 20px 50px 20px;
 	margin: 0 auto;
 	background:
 		url(../../images/mybook/testbookback10.jpg)
 		no-repeat;
 	background-size: cover;
 	border-radius: 20px;
+}
+
+#pageSelDiv{
+	margin: 0 5px 10px 0;
+	text-align: right;
+	vertical-align: middle;
+}
+#pageSelDiv span{
+	color: white;
+	font-size: 1.2em;
+}
+#pageSelDiv input[type=text]{
+	font-size: 1.2em;
+	border:1px #999999 solid;
+    padding:3px 3px 1px 3px;
+    color:#4D4D4D;
+	width: 40px;
+	height: 20px;
+	border-radius: 3px;
+}
+#pageSelDiv img{
+	margin: 0 auto;
+	margin-left: 5px;
 }

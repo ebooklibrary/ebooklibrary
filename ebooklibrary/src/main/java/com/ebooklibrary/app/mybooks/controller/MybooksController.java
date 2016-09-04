@@ -67,7 +67,7 @@ public class MybooksController {
 		
 		BufferedReader reader = null;
 		//File file=new File("D:\\group5_finalproject\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\이드.txt");
-		File file=new File("C:\\Users\\User\\git\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\이드.txt");
+		File file=new File("C:\\ebook\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\이드.txt");
 		FileInputStream fis=null;
 		BufferedInputStream bis=null;
 		InputStreamReader isr=null;
@@ -291,5 +291,12 @@ public class MybooksController {
 		
 		return "mybooks/mybook";
 	}
+	
+	@RequestMapping("/changeBackImg.do")
+	public String changeBackImg(){
+		
+		return "mybooks/mybook";
+	}
+	
 	
 }

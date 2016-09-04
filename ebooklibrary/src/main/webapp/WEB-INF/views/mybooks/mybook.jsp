@@ -83,7 +83,7 @@ ${pageContext.request.contextPath}
 		
 		$("#pageSelBt").click(function() {
 			var page=$("#pageSel").val();
-			$('#mybook').booklet("gotopage", page);
+			$('#mybook').booklet("gotopage", page-1);
 			
 		});
 		
@@ -160,11 +160,15 @@ ${pageContext.request.contextPath}
 	<div id="custom-menu"></div>
 	 -->
 	 
-	 갈 페이지 입력 : <input type="text" name="pageSel" id="pageSel">
-	 <input type="button" name="pageSelBt" id="pageSelBt" value="페이지 가기">
 	 
 	 
 	<div id="wrapper">
+		<div id="pageSelDiv">
+			 <span>페이지 입력 : </span><input type="text" name="pageSel" id="pageSel">
+			 <!-- <input type="button" name="pageSelBt" id="pageSelBt" value="페이지 가기"> -->
+			 <img alt="페이지선택" name="pageSelBt" id="pageSelBt" src="<c:url value='/images/mybook/icon/openbook32.png'/>">
+		 </div>
+		 
 	<div id="mybook">
 	    <div class="test1">
 			<p>

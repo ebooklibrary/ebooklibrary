@@ -22,7 +22,78 @@ html {
 	width: 1800px;
 	/* position: relative; */
 	border: 1px solid red;
+	position: relative;
 }
+
+
+/* 책 관련 메뉴 */
+#menuDiv{
+	/* border: 1px solid black; */
+	
+	width: 600px;
+	height: 300px;
+	position: absolute;
+	right: 20px;
+	
+	padding: 10px 10px 10px 10px;
+	
+	clear: both;
+}
+/* 기타 */ 
+#etc{
+	/* border: 1px solid red; */
+	
+	width: 600px;
+	height:200px;
+	
+}
+/* 배경 바꾸기 */
+#changeBackground{
+	
+	/* border: 1px solid black; */
+	float: right;
+	width: 350px;
+	cursor:default;
+}
+#changeBackground img{
+	vertical-align: middle;
+	margin: 0 auto;
+}
+#upFileBox {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    background-color: rgba(200,255,200, 0.2);
+    border-radius: 5px;
+    /* border: 1px solid black; */
+    display: none;
+    clear: both;
+}
+
+#upFileBox:hover {
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2);
+}
+
+/* 책 검색 */
+#menuDiv input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url(../../images/mybook/icon/booksearchg.png);
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    
+}
+#menuDiv input[type=text]:focus {
+    width: 100%;
+}
+
 
 /* 최근 책장 div */
 #recentBook{
@@ -58,6 +129,7 @@ html {
 	width: 120px;
 	height: 100px;
 }
+
 
 /* 책 목록 책장 */
 #BookList{
@@ -147,6 +219,7 @@ html {
 	border-radius: 5px;
 	box-shadow: 5px 2px 5px black;
 	background-color: white;
+	cursor:default;
 	 
 	/* white-space: normal; */
 	overflow:hidden;
@@ -176,14 +249,14 @@ html {
     letter-spacing: 0.5em;
     
 }
-
+/* 
 .mybook a{
 	width:1px;
     word-wrap: break-word;
     font-family: monospace;
     letter-spacing: 0.5em;
 }
-
+ */
 
 /* 책 라벨 */
 #mybookColor{
@@ -206,8 +279,73 @@ html {
 }
 
 
+/* 구매 및 대여별 책 검색을 위한 미니창 띄우기 */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 
+/* 띄운 미니창 안의 책목록 */
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 50%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
 
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
 
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
 
