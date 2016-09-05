@@ -5,6 +5,9 @@ import java.util.List;
 import com.ebooklibrary.app.common.SearchVO;
 
 public interface MemberService {
+	//회원가입 처리
+	public static final int ID_OK=0;
+	public static final int ID_NO=1;
 	//로그인 처리
 	public static final int LOGIN_OK=1;
 	public static final int PWD_DISAGREE=2;
@@ -17,4 +20,5 @@ public interface MemberService {
 	public MemberVO selectByUserName(String userName);
 	public List<MemberVO> selectMemberAll(SearchVO vo);
 	public int selectMemberCount(SearchVO vo);
+	public int selectMemberCheckId(String userId);
 }

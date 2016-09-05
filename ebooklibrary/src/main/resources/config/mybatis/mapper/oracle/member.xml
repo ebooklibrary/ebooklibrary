@@ -54,6 +54,10 @@
 		<include refid="searchWhere"></include>
 		order by MEMBER_NO desc
 	</select>
+	
+	<select id="selectCountUserid" parameterType="string" resultType="int">
+		select count(*) from member where user_id=#{userid}	
+	</select>
 </mapper>
 
 
