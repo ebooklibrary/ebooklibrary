@@ -63,7 +63,8 @@ public class MemberController {
 			MemberVO memberVo=memberService.selectByUserName(userId);
 			HttpSession session=request.getSession();
 			session.setAttribute("userId", memberVo.getUserName());
-			session.setAttribute("auchCode", memberVo.getAuthCode());			
+			session.setAttribute("auchCode", memberVo.getAuthCode());
+			session.setAttribute("memberNo", memberVo.getMemberNo());
 			msg=memberVo.getUserName()+"님 로그인하였습니다";
 			url="/index.do";
 			

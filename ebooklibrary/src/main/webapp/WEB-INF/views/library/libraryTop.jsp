@@ -23,13 +23,13 @@
 		<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
 	</div>
 	<div class="menuform">
-		
+		공지사항
 	</div>
 	<div class="menuform">
-	
+		책검색
 	</div>
 	<div class="menuform">
-	
+		<a href="<c:url value='/library/request/requestList.do'/>">요청게시판</a>
 	</div>
 </div>
   <div id="header">  

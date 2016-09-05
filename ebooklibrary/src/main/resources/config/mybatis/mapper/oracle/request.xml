@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.oracle.request">
+
+	<sql id="searchWhere">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				${searchCondition} like '%' ||#{searchKeyword}|| '%'
+			</if>
+		</where>
+	</sql>
+
+	<insert id="insertRequest" parameterType="RequestVO">
+		<selectKey order="BEFORE" keyProperty="requestNo" resultType="int">
+			select request_seq.nextval from dual
+		</selectKey>
+		insert into request_board(request_no, title,user_name ,publisher,member_no)
+		values (#{requestNo},#{title},#{userName},#{publisher},#{memberNo})
+	</insert>
+
+	<select id="seletctByNoRequest" parameterType="int" resultType="RequestVO">
+		select * from request_board where request_no =#{requestNo}
+	</select>
+
+	<update id="editRequest" parameterType="RequestVO">
+		update request_board
+		set
+		title=#{title} ,user_name=#{userName}
+		where request_no =#{requestNo}
+	</update>
+
+	<delete id="deleteRequest" parameterType="int">
+		delete from request_board
+		where request_no =#{requestNo}
+	</delete>
+
+	<select id="selectAllRequest" parameterType="SearchVO" resultType="RequestVO"> 
+		select *from
+		(
+		select rownum as RNUM, LIST_ALL.*
+		from
+		(
+			select * from request_board
+			<include refid="searchWhere"></include>
+			order by request_no desc
+		) LIST_ALL
+		)
+	<![CDATA[
+	where  RNUM> #{firstRecordIndex} 
+	and RNUM<= #{firstRecordIndex}
+	+ #{recordCountPerPage}
+	]]>
+	</select>
+	
+	<select id="selectRequestCount" resultType="int" parameterType="SearchVO">
+		select count(*) from request_board
+		<include refid="searchWhere"></include>
+		order by request_no desc
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
