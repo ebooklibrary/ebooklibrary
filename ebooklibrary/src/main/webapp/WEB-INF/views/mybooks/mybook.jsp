@@ -87,6 +87,13 @@ ${pageContext.request.contextPath}
 			
 		});
 		
+		$("#pageSel").keyup(function() {
+			var page=$("#pageSel").val();
+			$('#mybook').booklet("gotopage", page-1);
+			
+		});
+		
+		
 		
 		/* 
 		var pageSelector = $("#mybook").booklet("option", "currentIndex");
@@ -96,7 +103,6 @@ ${pageContext.request.contextPath}
 			//현재 페이지 구하기
 			var pageSelector = $("#mybook").booklet("option", "currentIndex");
 			console.log(pageSelector);
-			
 		});
 		
 		
