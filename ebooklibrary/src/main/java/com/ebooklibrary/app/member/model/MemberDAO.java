@@ -10,4 +10,5 @@ public interface MemberDAO {
 	public MemberVO selectByUserName(String userName);
 	public List<MemberVO> selectMemberAll(SearchVO vo);
 	public int selectMemberCount(SearchVO vo);
+	public int selectMemberCheckId(String userId);
 }

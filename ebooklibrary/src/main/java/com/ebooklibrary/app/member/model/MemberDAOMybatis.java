@@ -29,4 +29,7 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO 
 		return getSqlSession().selectOne(namespace+".selectMemberCount", vo);
 	}
 	
+	public int selectMemberCheckId(String userId){
+		return getSqlSession().selectOne(namespace+".selectCountUserid", userId);
+	}
 }

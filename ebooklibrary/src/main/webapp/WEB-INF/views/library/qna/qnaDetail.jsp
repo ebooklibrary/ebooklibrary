@@ -21,7 +21,7 @@ $().ready(function(){
 			<span class="sp1">제목</span> <span>${qnaBoardVo.title}</span>
 		</div>
 		<div>
-			<span class="sp1">작성자</span> <span>${qnaBoardVo.writer }</span>
+			<span class="sp1">작성자</span> <span>${qnaBoardVo.userName }</span>
 		</div>
 		<div>
 			<span class="sp1">등록일</span> <span>${qnaBoardVo.regDate }</span>

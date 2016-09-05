@@ -2,6 +2,7 @@ package com.ebooklibrary.app.library.qna.model;
 
 import java.util.List;
 
+import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.SearchVO;
 
 public interface QnaBoardDAO {
@@ -11,7 +12,7 @@ public interface QnaBoardDAO {
 	//insert
 	public int insertQnaBoard(QnaBoardVO qnaBoardVo);
 	//insert->detail
-	public int selectQnaBoardByUsername(String writer);
+	public int selectQnaBoardByUsername(String userName);
 	//detail
 	public QnaBoardVO selectByNo(int qnaNo);
 	//edit
@@ -29,5 +30,6 @@ public interface QnaBoardDAO {
 	//MinqnaNo
 	public int minQnaNo();
 	//user'sWriting//멤버번호로 조회할예정 일단 유저네임으로.
-	public List<QnaBoardVO> selectByMemberNo(String writer);
+	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memVo);
+	public int selectCountByMemNo(MemberSearchVO memVo);
 }

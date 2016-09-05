@@ -38,4 +38,7 @@ public class MemberServiceImpl implements MemberService{
 	public int selectMemberCount(SearchVO vo){
 		return memberDao.selectMemberCount(vo);
 	}
+	public int selectMemberCheckId(String userId){
+		return memberDao.selectMemberCheckId(userId);
+	}
 }

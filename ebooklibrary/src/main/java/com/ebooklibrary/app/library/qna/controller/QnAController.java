@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
@@ -81,7 +82,7 @@ public class QnAController {
 		
 		if(cnt>0){
 			msg="글작성 성공";
-			int qnaBoardNo=qnaBoardService.selectQnaBoardByUsername(qnaBoardVo.getWriter());
+			int qnaBoardNo=qnaBoardService.selectQnaBoardByUsername(qnaBoardVo.getUserName());
 			logger.info("마지막 글번호 추출  qnaBoardNo={}",qnaBoardNo);
 			
 			url="/library/qna/qnaDetail.do?qnaNo="+qnaBoardNo;
@@ -206,7 +207,7 @@ public class QnAController {
 		return "redirect:/library/qna/qnaDetail.do?qnaNo="+qnaNo;
 	}
 	
-	@RequestMapping("/prePage.do")
+	@RequestMapping("/qnaPrePage.do")
 	public String prePage(@RequestParam(defaultValue="0") int qnaNo,Model model){
 		//1.
 		logger.info("이전페이지 이동 처리, 파라미터값 qnaNo={}",qnaNo);
@@ -232,7 +233,7 @@ public class QnAController {
 		return "redirect:/library/qna/qnaDetail.do?qnaNo="+preQnaNo;
 	}
 	
-	@RequestMapping("/nextPage.do")
+	@RequestMapping("/qnaNextPage.do")
 	public String nextPage(@RequestParam(defaultValue="0") int qnaNo,Model model){
 		//1.
 		logger.info("다음페이지 이동 처리, 파라미터값 qnaNo={}",qnaNo);
@@ -259,17 +260,36 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/selectByMem.do")
-	public String selectByMemberNo(){
+	public String selectByMemberNo(@ModelAttribute MemberSearchVO msVo, Model model){
 		//1.
+		logger.info("내글보기 처리페이지");
+		
+		//paging
+		PaginationInfo pagingInfo= new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.QNA_BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(msVo.getCurrentPage());
+		
+		//searchVo
+		msVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		msVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		//2.
+		logger.info("키워드 전 키워드값 ");
+		int totalRecord=qnaBoardService.selectCountByMemNo(msVo);
+		logger.info("키워드 후 totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
 		
-		//3.
+		List<QnaBoardVO> alist=qnaBoardService.selectQnaAll(msVo);
+		logger.info("결과처리값 alist.size()={}",alist.size());
 		
-		return "common/message";
+		model.addAttribute("qnaList",alist);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		
+		return "library/qna/qnalist";
 	}
-	
-	
+
 	
 	
 	

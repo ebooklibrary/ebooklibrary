@@ -12,6 +12,7 @@
 		</where>
 	</sql>
 	
+		
 	<select id="selectQnaAll" resultType="QnaBoardVO" 
 		parameterType="SearchVO">
 		select *
@@ -19,7 +20,7 @@
 		(
 		    select rownum as RNUM, QnaLIST_ALL.*
 		    from
-		        (select QNA_NO, TITLE, WRITER, REGDATE,
+		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,
 					CONTENT,READ_COUNT
 		        from QNA_BOARD 
 		        <include refid="searchWhere"></include>
@@ -43,12 +44,12 @@
         select QNA_SEQ.nextval from dual
       </selectKey>
 
-		insert into QNA_BOARD(qna_no ,title,writer ,content)
-		values(QNA_SEQ.nextval,#{title},#{writer},#{content})
+		insert into QNA_BOARD(qna_no ,title,USER_NAME ,content)
+		values(QNA_SEQ.nextval,#{title},#{userName},#{content})
 	</insert>
 	
-	<select id="selectBoardNoByUsername" parameterType="string" resultType="int">
-		select max(qna_no)  from QNA_BOARD where writer=#{writer}
+	<select id="selectBoardNoByUSER_NAME" parameterType="string" resultType="int">
+		select max(qna_no)  from QNA_BOARD where USER_NAME=#{userName}
 	</select> 
 	
 	<select id="selectByNo" parameterType="int"
@@ -83,9 +84,11 @@
 
    	<select id="nextPage" parameterType="int" resultType="int">
    		select MIN(QNA_NO) from QNA_BOARD
+   		<if test="no!=null">
    		<![CDATA[
    		 where QNA_NO > #{qnaNo}
    		 ]]>
+   		 </if>
    	</select>
    	
 	<select id="maxPage" parameterType="int" resultType="int">		
@@ -99,9 +102,32 @@
    	</select>
    	
    	<select id="selectByWriter" parameterType="string" resultType="QnaBoardVO">
-   		select * from QNA_BOARD where writer=#{writer}
+   		select * from QNA_BOARD where USER_NAME=#{userName}
    		
    	</select>
    	
-   	
+  	<select id="selectQnaBY" resultType="QnaBoardVO" 
+		parameterType="MemberSearchVO">
+		select *
+		from
+		(
+		    select rownum as RNUM, QnaLIST_ALL.*
+		    from
+		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,
+					CONTENT,READ_COUNT
+		        from QNA_BOARD 
+		        where MEMBER_NO=#{memberNo}
+		        ORDER BY qna_no desc) QnaLIST_ALL    
+		) 
+		<![CDATA[
+		where  RNUM> #{firstRecordIndex} 
+			and RNUM<= #{firstRecordIndex}
+			+ #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectCountByMemNo" parameterType="MemberSearchVO" resultType="int">
+		select count(*) from QNA_BOARD where  MEMBER_NO=#{memberNo}
+		<include refid="searchWhere"></include>
+	</select>
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.SearchVO;
 
 @Repository
@@ -25,8 +26,8 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 	}
 
 	@Override
-	public int selectQnaBoardByUsername(String writer) {
-		return getSqlSession().selectOne(namespace+".selectBoardNoByUsername",writer);
+	public int selectQnaBoardByUsername(String userName) {
+		return getSqlSession().selectOne(namespace+".selectBoardNoByUsername",userName);
 		
 	}
 	@Override
@@ -79,8 +80,13 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 	}
 
 	@Override
-	public List<QnaBoardVO> selectByMemberNo(String writer) {
-		return getSqlSession().selectList(namespace+".selectByWriter",writer);
+	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memVo) {
+		return getSqlSession().selectList(namespace+".selectQnaBY", memVo);
+	}
+
+	@Override
+	public int selectCountByMemNo(MemberSearchVO memVo) {
+		return getSqlSession().selectOne(namespace+".selectCountByMemNo",memVo);
 	}
 
 	
