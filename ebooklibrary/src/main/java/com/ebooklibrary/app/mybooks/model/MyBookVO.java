@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class MyBookVO {
 	
-	private int book_no;
+	private int bookNo;
 	private String title;
 	private String publisher;
 	private String writer;
@@ -22,11 +22,11 @@ public class MyBookVO {
 		super();
 	}
 
-	public MyBookVO(int book_no, String title, String publisher, String writer, Timestamp publication,
+	public MyBookVO(int bookNo, String title, String publisher, String writer, Timestamp publication,
 			Timestamp reg_date, String genre, int price, String summary, int sales, String bookFileName,
 			String coverFileName, int bookFileSize) {
 		super();
-		this.book_no = book_no;
+		this.bookNo = bookNo;
 		this.title = title;
 		this.publisher = publisher;
 		this.writer = writer;
@@ -41,12 +41,12 @@ public class MyBookVO {
 		this.bookFileSize = bookFileSize;
 	}
 
-	public int getBook_no() {
-		return book_no;
+	public int getBookNo() {
+		return bookNo;
 	}
 
-	public void setBook_no(int book_no) {
-		this.book_no = book_no;
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
 	}
 
 	public String getTitle() {
@@ -147,10 +147,10 @@ public class MyBookVO {
 
 	@Override
 	public String toString() {
-		return "MyBookVO [book_no=" + book_no + ", title=" + title + ", publisher=" + publisher + ", writer=" + writer
+		return "MyBookVO [bookNo=" + bookNo + ", title=" + title + ", publisher=" + publisher + ", writer=" + writer
 				+ ", publication=" + publication + ", reg_date=" + reg_date + ", genre=" + genre + ", price=" + price
 				+ ", summary=" + summary + ", sales=" + sales + ", bookFileName=" + bookFileName + ", coverFileName="
 				+ coverFileName + ", bookFileSize=" + bookFileSize + "]";
 	}
-
+	
 }

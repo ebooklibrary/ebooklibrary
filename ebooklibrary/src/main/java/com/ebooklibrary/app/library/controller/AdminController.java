@@ -1,6 +1,9 @@
 package com.ebooklibrary.app.library.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,17 +13,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ebooklibrary.app.common.FileUploadWebUtil;
 import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.MyBookVO;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	private static final Logger logger=
-			LoggerFactory.getLogger(AdminController.class);
+	private static final Logger logger=LoggerFactory.getLogger(AdminController.class);
+	
+	@Autowired
+	FileUploadWebUtil fileUtil;
 	
 	@Autowired
 	private MemberService memberService;
@@ -58,15 +65,29 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/book/registerBook.do")
-	public void registerBook(){
-		
-	}
+	public void registerBook(){}
 	
-	@RequestMapping("/admin/book/uploadBook.do")
-	public String uploadBook(){
+	@RequestMapping("/book/uploadBook.do")
+	public String uploadBook(HttpServletRequest request,@ModelAttribute MyBookVO myBookVo, Model model){
 		
+		logger.info("에이젝스 이미지 등록 들어왔니 myBookVo={}",myBookVo);
 		
+		//파일 업로드 처리
+		int uploadType=FileUploadWebUtil.PDS_UPLOAD;
+		//=>상품 등록시 이미지 업로드
+		List<Map<String, Object>> fileList=fileUtil.fileUpload(request, uploadType);
+		logger.info("업로드 파일 List.size={}", fileList.size());
 		
+		String fileName="";
+		String upPath="";
+		long fileSize=0;
+		for (Map<String, Object> mymap : fileList) {
+			fileName=(String)mymap.get("fileName");
+			upPath=(String)mymap.get("upPath");
+			fileSize=(Long)mymap.get("fileSize");
+		}
+		
+		logger.info("업로드 파일 fileName={},upPath={}", fileName,upPath);
 		
 		return "redirect:/book/registerBook.do";
 	}
