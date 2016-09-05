@@ -24,7 +24,7 @@
 			<a href="<c:url value='/library/qna/qnaList.do'/>">공지사항 등록/수정</a>
 		</div>
 		<div class="menuform">
-			책 등록
+			<a href="<c:url value='/admin/book/registerBook.do'/>">책 등록</a>
 		</div>
 		<div class="menuform">
 			<a href="<c:url value='/admin/member/memberList.do'/>">회원 관리</a>			

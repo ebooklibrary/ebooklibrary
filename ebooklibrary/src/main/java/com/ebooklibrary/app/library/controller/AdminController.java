@@ -54,6 +54,22 @@ public class AdminController {
 		model.addAttribute("alist", alist);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
-		return "admin/member/memberList";		
+		return "admin/member/memberList";
 	}
+	
+	@RequestMapping("/book/registerBook.do")
+	public void registerBook(){
+		
+	}
+	
+	@RequestMapping("/admin/book/uploadBook.do")
+	public String uploadBook(){
+		
+		
+		
+		
+		return "redirect:/book/registerBook.do";
+	}
+	
+	
 }

@@ -20,7 +20,8 @@
 				$(this).css("cursor","");
 		});
 		 */
-		$("html").css({"background":"url(<%=request.getContextPath() %>/images/mybook/back22.jpg)  no-repeat center center fixed",
+		 
+		$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/${bgImage})  no-repeat center center fixed",
 							"-webkit-background-size": "cover",
 							"-moz-background-size": "cover",
 							"-o-background-size": "cover",
@@ -71,6 +72,34 @@
 		$("#booktestatag").click(function() {
 			window.open("<c:url value='/mybooks/mybook.do'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0")
 		});
+		
+		$("#bookfrm").submit(function() {
+			var formData = new FormData($('#bookfrm')[0]);
+			$.ajax({
+				url:"<c:url value='/mybooks/changeBackImg.do'/>",
+					type:"POST",
+					processData: false,
+					contentType: false,
+					data: formData,
+					success:function(bimg){
+						$("html").css({"background":"url(${pageContext.request.contextPath }/images/mybook/${bimg})  no-repeat center center fixed",
+							"-webkit-background-size": "cover",
+							"-moz-background-size": "cover",
+							"-o-background-size": "cover",
+							"background-size": "cover"
+						});
+						location.reload();
+					},
+					error: function(xhr,status, error){
+						alert("에러발생"+status+":"+error);
+					}
+			});
+			
+			event.preventDefault();
+		});
+		
+		
+		
 		
 		
 		
@@ -129,8 +158,10 @@
 
 	<div id="wrapper">
 	
-		<div>
-			<a href="<c:url value='/mybooks/mybook.do'/>" id="booktestatag">내 책 테스트</a>
+		<div id="tempMenu">
+			<a href="<c:url value='/mybooks/mybook.do'/>" id="booktestatag">내 책 테스트</a> | 
+			<a href="<c:url value='/index.do'/>">첫페이지</a> | 
+			<a href="<c:url value='/library/librarymain.do'/>">도서관</a>
 		</div>
 	
 		<!-- 최근 책 책장 -->
@@ -161,9 +192,11 @@
 						여기를 눌러 배경화면을 바꿔 보세요!!
 				</div>
 				<div id="upFileBox">
-					<form action="<c:url value='/mybooks/changeBackImg.do'/>" id="bookfrm" name="bookfrm">
-						원하시는 배경이미지를 올려보세요!<br>
-						<input type="file" id="backImgUp" name="backImgUp">
+					<form id="bookfrm" name="bookfrm" enctype="multipart/form-data" method="post">
+						원하시는 배경이미지를 올려보세요!<br><br>
+						<input type="file" id="bgImage" name="bgImage">
+						<input type="hidden" id="oldImage" name="oldImage" value="${sessionScope.fileName }">
+						<input type="submit" id="btImg" name="btImg" value="확인">
 					</form>
 				</div>
 			
@@ -176,7 +209,7 @@
 			
 			
 			<input type="text" name="search" placeholder="Search..">
-			<span>찾고 싶은 책이 있으시다면 여기에서!</span>
+			<span id="searchInfo">찾고 싶은 책이 있으시다면 여기에서!</span>
 		</div>
 		
 		<!-- 보관 책장 -->

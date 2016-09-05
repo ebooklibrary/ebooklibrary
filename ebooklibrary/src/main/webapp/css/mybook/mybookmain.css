@@ -8,6 +8,9 @@ body{
 	
 }
  */
+#tempMenu{
+	background-color: white;
+}
 
 html {
 	background: url(../../images/mybook/back22.jpg) no-repeat center center fixed;
@@ -54,6 +57,9 @@ html {
 	float: right;
 	width: 350px;
 	cursor:default;
+	
+	background-color: rgba(200,255,200, 0.7);
+	
 }
 #changeBackground img{
 	vertical-align: middle;
@@ -63,8 +69,8 @@ html {
     width: 100%;
     padding: 20px 0;
     text-align: center;
-    background-color: rgba(200,255,200, 0.2);
-    border-radius: 5px;
+    background-color: rgba(200,255,200, 0.7);
+    /* border-radius: 5px; */
     /* border: 1px solid black; */
     display: none;
     clear: both;
@@ -92,6 +98,11 @@ html {
 }
 #menuDiv input[type=text]:focus {
     width: 100%;
+}
+#searchInfo{
+	background-color: rgba(200,255,200, 0.7);
+	border-radius: 5px;
+	padding: 2px 4px 2px 4px;
 }
 
 
