@@ -9,15 +9,15 @@
 		<fieldset>
 			<legend>QnA 수정하기</legend>
 				<div class="">
-					<label>${qnaBoardVo.writer}</label><label>레벨체크</label>
+					<label>${qnaBoardVo.userName}</label><label>레벨체크</label>
 				</div>
 				<div class="">
 					<label for="title">제목</label>
 					<input type="text" id="title" name="title" value="${qnaBoardVo.title }"/>
 				</div>
 				<div >
-					<label for="writer">작성자</label>
-					<input type="text" id="writer" name="writer" value="${qnaBoardVo.writer }">
+					<label for="userName">작성자</label>
+					<input type="text" id="userName" name="userName" value="${qnaBoardVo.userName }">
 				</div>
 		        <div>
 		        	<label for="content">내용</label>

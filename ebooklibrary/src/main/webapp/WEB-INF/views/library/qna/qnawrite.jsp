@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../libraryTop.jsp" %>
-
+<script type="text/javascript">
+	$().ready()
+</script>
 <div>
 	<form name="frmWrite" id="frmWrite" method="post" 
 		
@@ -17,8 +19,8 @@
 					<input type="text" id="title" name="title" />
 				</div>
 				<div >
-					<label for="writer">작성자</label>
-					<input type="text" id="writer" name="writer">
+					<label for="userName">작성자</label>
+					<input type="text" id="userName" name="userName">
 				</div>
 		        <div>
 		        	<label for="content">내용</label>
