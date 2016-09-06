@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+#formWrapper1{
+	width: 400px;
+	margin: 150px 37px 0 0;
+	float: left;
+	padding: 2px;
+}
+
+#formWrapper2{
+	float: right;
+	width: 600px;
+	margin: 150px 37px 0 0;
+}
+
+#container{
+	position: relative;
+}
+#btBookUp{
+	position: absolute;
+	left: 50px;
+	bottom: 50px;
+}

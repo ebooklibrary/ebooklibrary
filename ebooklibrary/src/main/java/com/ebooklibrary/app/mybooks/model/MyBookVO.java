@@ -8,7 +8,7 @@ public class MyBookVO {
 	private String title;
 	private String publisher;
 	private String writer;
-	private Timestamp publication;
+	private String publication;
 	private Timestamp reg_date;
 	private String genre;
 	private int price;
@@ -16,15 +16,15 @@ public class MyBookVO {
 	private int sales;
 	private String bookFileName;
 	private String coverFileName;
-	private int bookFileSize;
+	private long bookFileSize;
 	
 	public MyBookVO() {
 		super();
 	}
 
-	public MyBookVO(int bookNo, String title, String publisher, String writer, Timestamp publication,
-			Timestamp reg_date, String genre, int price, String summary, int sales, String bookFileName,
-			String coverFileName, int bookFileSize) {
+	public MyBookVO(int bookNo, String title, String publisher, String writer, String publication, Timestamp reg_date,
+			String genre, int price, String summary, int sales, String bookFileName, String coverFileName,
+			long bookFileSize) {
 		super();
 		this.bookNo = bookNo;
 		this.title = title;
@@ -73,11 +73,11 @@ public class MyBookVO {
 		this.writer = writer;
 	}
 
-	public Timestamp getPublication() {
+	public String getPublication() {
 		return publication;
 	}
 
-	public void setPublication(Timestamp publication) {
+	public void setPublication(String publication) {
 		this.publication = publication;
 	}
 
@@ -137,11 +137,11 @@ public class MyBookVO {
 		this.coverFileName = coverFileName;
 	}
 
-	public int getBookFileSize() {
+	public long getBookFileSize() {
 		return bookFileSize;
 	}
 
-	public void setBookFileSize(int bookFileSize) {
+	public void setBookFileSize(long bookFileSize) {
 		this.bookFileSize = bookFileSize;
 	}
 
@@ -152,5 +152,5 @@ public class MyBookVO {
 				+ ", summary=" + summary + ", sales=" + sales + ", bookFileName=" + bookFileName + ", coverFileName="
 				+ coverFileName + ", bookFileSize=" + bookFileSize + "]";
 	}
-	
+
 }

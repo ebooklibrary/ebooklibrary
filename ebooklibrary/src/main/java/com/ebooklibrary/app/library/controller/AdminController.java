@@ -70,7 +70,7 @@ public class AdminController {
 	@RequestMapping("/book/uploadBook.do")
 	public String uploadBook(HttpServletRequest request,@ModelAttribute MyBookVO myBookVo, Model model){
 		
-		logger.info("에이젝스 이미지 등록 들어왔니 myBookVo={}",myBookVo);
+		
 		
 		//파일 업로드 처리
 		int uploadType=FileUploadWebUtil.PDS_UPLOAD;
@@ -85,7 +85,19 @@ public class AdminController {
 			fileName=(String)mymap.get("fileName");
 			upPath=(String)mymap.get("upPath");
 			fileSize=(Long)mymap.get("fileSize");
+			logger.info("업로드 파일 fileName={},upPath={}", fileName,upPath);
+			int idx=fileName.indexOf(".");
+			String sub=fileName.substring(idx+1);
+			
+			if (sub.equals("txt")) {
+				myBookVo.setBookFileName(fileName);
+				myBookVo.setBookFileSize(fileSize);
+			}else{
+				myBookVo.setCoverFileName(fileName);
+			}
 		}
+		
+		logger.info("에이젝스 이미지 등록 들어왔니 myBookVo={}",myBookVo);
 		
 		logger.info("업로드 파일 fileName={},upPath={}", fileName,upPath);
 		
