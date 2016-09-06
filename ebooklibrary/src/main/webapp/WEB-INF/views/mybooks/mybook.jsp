@@ -12,6 +12,7 @@
 <%-- 
 ${pageContext.request.contextPath}
  --%>
+<script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
 <%--  
@@ -39,7 +40,6 @@ ${pageContext.request.contextPath}
  -->
 <script type="text/javascript">
 	$(function() {
-		
 		
 		
 	    //single book
@@ -88,6 +88,11 @@ ${pageContext.request.contextPath}
 		});
 		
 		$("#pageSel").keyup(function() {
+			if (!validate_num($("#pageSel").val())) {
+				alert("숫자만 입력해주세요");
+				$("#pageSel").val("");
+				$("#pageSel").focus();
+			}
 			var page=$("#pageSel").val();
 			$('#mybook').booklet("gotopage", page-1);
 			

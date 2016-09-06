@@ -19,6 +19,7 @@ import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.MyBookService;
 import com.ebooklibrary.app.mybooks.model.MyBookVO;
 
 @Controller
@@ -31,6 +32,9 @@ public class AdminController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MyBookService myBookService;
 	
 	@RequestMapping("/adminMain.do")
 	public String adminMain(){
@@ -89,7 +93,7 @@ public class AdminController {
 			int idx=fileName.indexOf(".");
 			String sub=fileName.substring(idx+1);
 			
-			if (sub.equals("txt")) {
+			if (sub.equalsIgnoreCase("txt")) {
 				myBookVo.setBookFileName(fileName);
 				myBookVo.setBookFileSize(fileSize);
 			}else{
@@ -97,9 +101,12 @@ public class AdminController {
 			}
 		}
 		
+		
 		logger.info("에이젝스 이미지 등록 들어왔니 myBookVo={}",myBookVo);
 		
 		logger.info("업로드 파일 fileName={},upPath={}", fileName,upPath);
+		
+		int cnt=myBookService.insertBook(myBookVo);
 		
 		return "redirect:/book/registerBook.do";
 	}
