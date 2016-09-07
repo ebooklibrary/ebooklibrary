@@ -5,12 +5,12 @@ import java.sql.Timestamp;
 public class QnaBoardVO {
 	private int qnaNo;
 	private String title;
-	private String writer;
+	private String userName;
 	private Timestamp regDate;
 	private String content;
 	private int readCount;
 	private int memberNo;
-	
+	private String complete;
 	public int getQnaNo() {
 		return qnaNo;
 	}
@@ -23,11 +23,11 @@ public class QnaBoardVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriter() {
-		return writer;
+	public String getUserName() {
+		return userName;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public Timestamp getRegDate() {
 		return regDate;
@@ -53,11 +53,19 @@ public class QnaBoardVO {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+	public String getComplete() {
+		return complete;
+	}
+	public void setComplete(String complete) {
+		this.complete = complete;
+	}
 	@Override
 	public String toString() {
-		return "QnaBoardVO [qnaNo=" + qnaNo + ", title=" + title + ", writer=" + writer + ", regDate=" + regDate
-				+ ", content=" + content + ", readCount=" + readCount + ", memberNo=" + memberNo + "]";
+		return "QnaBoardVO [qnaNo=" + qnaNo + ", title=" + title + ", userName=" + userName + ", regDate=" + regDate
+				+ ", content=" + content + ", readCount=" + readCount + ", memberNo=" + memberNo + ", complete="
+				+ complete + "]";
 	}
+	
 	
 	
 	

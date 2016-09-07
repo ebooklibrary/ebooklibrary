@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
@@ -52,19 +53,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
-	public String login_post(@RequestParam String userName 
+	public String login_post(@RequestParam String userId 
 			, @RequestParam String pwd,
 			HttpServletRequest request,HttpServletResponse response
 			,Model model){
 		
-		int result=memberService.logincheck(userName, pwd);
+		int result=memberService.logincheck(userId, pwd);
 		String msg="",url="/member/login.do";
 		if(result==MemberService.LOGIN_OK){
-			MemberVO memberVo=memberService.selectByUserName(userName);
+			MemberVO memberVo=memberService.selectByUserName(userId);
 			HttpSession session=request.getSession();
-			session.setAttribute("userName", memberVo.getUsername());
-			session.setAttribute("auchCode", memberVo.getAuthCode());			
-			msg=userName+"님 로그인하였습니다";
+			session.setAttribute("userId", memberVo.getUserName());
+			session.setAttribute("auchCode", memberVo.getAuthCode());
+			session.setAttribute("memberNo", memberVo.getMemberNo());
+			session.setAttribute("userName", memberVo.getUserName());
+			msg=memberVo.getUserName()+"님 로그인하였습니다";
 			url="/index.do";
 			
 		}else if(result==memberService.PWD_DISAGREE){
@@ -85,5 +88,10 @@ public class MemberController {
 		model.addAttribute("msg", "로그아웃 되었습니다");
 		model.addAttribute("url", "/member/login.do");
 		return "common/message";
+	}
+	@RequestMapping("/chkId.do")
+	@ResponseBody
+	public int chkId(@RequestParam String userId){
+		return memberService.selectMemberCheckId(userId);
 	}
 }

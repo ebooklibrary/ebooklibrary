@@ -6,6 +6,8 @@
 <%@include file="../libraryTop.jsp" %>
 <script type="text/javascript">
 	$().ready(function(){
+		
+		
 		$("#writeGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/qna/qnaWrite.do'/>");
 		});
@@ -13,7 +15,7 @@
 			$(location).attr('href',"<c:url value='/library/qna/qnaList.do'/>");
 		});
 	});
-
+	
 	function pageFunc(curPage){
 		document.frmPage.currentPage.value=curPage;
 		frmPage.submit();
@@ -60,7 +62,7 @@
 				<tr>
 					<td>${vo.qnaNo }</td>
 					<td><a href="<c:url value='/library/qna/readCountAdd.do?qnaNo=${vo.qnaNo }'/>">${vo.title }</a></td>
-					<td>${vo.writer }</td>
+					<td>${vo.userName }</td>
 					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="MM/dd 
 						 HH:mm:ss"/> </td>
 					<td>${vo.readCount }</td>
@@ -74,7 +76,10 @@
 <div class="divPage">
 	<input type="button" id="listGo" value="전체목록"/>
 	<input type="button" id="writeGo" value="글쓰실?"/>
-	<input type="button" id="myWriting" value="내글 보기"/>
+	<form id="frmMyWriting" method="post" action="<c:url value='/library/qna/qnaList.do' />" >
+		<input type="button" id="myWriting" value="내글 보기"/>
+		<input type="hidden" name="memberNo" value="${sessionScope.memberNo}"/>
+	</form>
 </div>
 <!-- 페이징 처리를 위한 div -->
 <div class="divPage">
@@ -127,8 +132,8 @@
             		selected
                </c:if>
             >내용</option>
-            <option value="writer" 
-            	<c:if test="${param.searchCondition=='writer'}">
+            <option value="userName" 
+            	<c:if test="${param.searchCondition=='userName'}">
             		selected
                </c:if>
             >작성자</option>
@@ -138,5 +143,5 @@
 		<input type="submit" value="검색">
     </form>
 </div>
-</div>
+
 <%@include file="../libraryBottom.jsp" %>

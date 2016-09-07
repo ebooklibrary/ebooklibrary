@@ -18,40 +18,21 @@
 <body>
 <!--container_out-->
 <div id="container_out">
-
 <!-- 옆에붙을 메뉴 -->
-<c:if test="${sessionScope.auchCode=='ADMIN' }">
-	<div id="rightmenu">
-		<div class="menuform">
-			<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
-		</div>
-		<div class="menuform">
-			
-		</div>
-		<div class="menuform">
-		
-		</div>
-		<div class="menuform">
-		
-		</div>
-	</div>
-</c:if>
-<c:if test="${sessionScope.auchCode!='ADMIN' }">
 	<div id="rightmenu">
 	<div class="menuform">
 		<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
 	</div>
 	<div class="menuform">
-		
+		공지사항
 	</div>
 	<div class="menuform">
-	
+		책검색
 	</div>
 	<div class="menuform">
-	
+		<a href="<c:url value='/library/request/requestList.do'/>">요청게시판</a>
 	</div>
 </div>
-</c:if>
   <div id="header">  
   <!--logo Start-->   
 	 <h2 class="skip">로고</h2>
@@ -68,7 +49,7 @@
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
             첫화면
             </a></li>
-			<c:if test="${empty sessionScope.userName }">
+			<c:if test="${empty sessionScope.userId }">
 				<li>
 				<a href="<c:url value='/member/login.do'/>">
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
@@ -80,27 +61,17 @@
 	            회원가입
 	            </a></li>
 			</c:if>
-			<c:if test="${!empty sessionScope.userName }">
+			<c:if test="${!empty sessionScope.userId }">
 				<li>
 				<a href="<c:url value='/member/logout.do'/>">
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 				로그아웃
-				</a></li>
-				<c:if test="${sessionScope.auchCode!='ADMIN' }">
+				</a></li>				
 				<li>
 	            <a href="<c:url value='/member/register.do'/>">
 	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
 	            장바구니
-	            </a></li>
-	            </c:if>
-	            <c:if test="${sessionScope.auchCode=='ADMIN' }">
-	            <li>
-	            <a href="<c:url value='/admin/adminMain.do'/>">
-	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
-	            관리자 페이지가기
-	            </a>
-	            </li>
-	            </c:if>         
+	            </a></li>	                        
 			</c:if>			 
             <li class="last">
             <a href="/html/06_sitemap/sitemap.asp">

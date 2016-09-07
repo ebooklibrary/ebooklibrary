@@ -56,10 +56,12 @@ public class FileUploadWebUtil {
 				//파일크기 구하기
 				long fileSize=tempFile.getSize();
 				
+				String upPath="";
+				
 				//업로드 처리
 				try{
 					//업로드 경로 구하기
-					String upPath=getUploadPath(request, uploadType);
+					upPath=getUploadPath(request, uploadType);
 					
 					//파일 객체 만들기
 					File file=new File(upPath, fileName);
@@ -74,6 +76,7 @@ public class FileUploadWebUtil {
 				//파일명과 파일크기를 map에 저장한다
 				Map<String, Object> map=new HashMap<String, Object>();
 				map.put("fileName", fileName);
+				map.put("upPath", upPath);
 				map.put("fileSize", fileSize);
 				
 				//map을 List에 저장한다
@@ -132,12 +135,14 @@ public class FileUploadWebUtil {
 	    	 if (uploadType==PDS_UPLOAD) {
 				//자료실
 	    		 realPath=fileUploadProps.getProperty("file.upload.path");
+	    		 logger.info("PDS_UPLOAD={}", PDS_UPLOAD);
 			}else{
 				//상품 등록시 파일 이미지 업로드
 				realPath=fileUploadProps.getProperty("imageFile.upload.path");
+				logger.info("IMAGE_UPLOAD={}", IMAGE_UPLOAD);
 			}
 	    	  
-	         realPath=fileUploadProps.getProperty("file.upload.path");
+	         //realPath=fileUploadProps.getProperty("file.upload.path");
 	         logger.info("실제 배포시 경로={}", realPath);
 
 	         //물리적인 경로 구하기

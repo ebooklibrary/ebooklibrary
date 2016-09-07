@@ -1,22 +1,213 @@
 @CHARSET "UTF-8";
-
-body{
-	background-image: url(../../images/mybook/back1.jpg);
-	background-repeat: none;
-	background-attachment: fixed;
-	background-size: cover;
-	
-}
-
 /* 
-#wrapper{
-	background-image: url(../../images/mybook/back1.jpg);
+body{
+	background-image: url(../../images/mybook/maruya009.jpg);
 	background-repeat: none;
-	
 	background-attachment: fixed;
 	background-size: cover;
 	
-	width: 100%;
-	height:100%;
 }
  */
+
+html {
+	background: url(../../images/mybook/back22.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#wrapper{
+	
+	width: 1800px;
+	/* position: relative; */
+	border: 1px solid red;
+}
+
+/* 최근 책장 div */
+#recentBook{
+	
+	background: url(../../images/mybook/bookshelf11.png) no-repeat;
+	background-size: 100%;
+	
+	/* position: absolute; */
+	float: left;
+	
+	margin: 50px 50px 0 50px;
+	
+	position: absolute;
+	width: 830px;
+	height: 690px;
+	
+	padding: 10px 65px 10px 65px; 
+	/* border: 1px solid black; */
+	
+}
+
+/* 책 이미지 div */
+.imgtest{
+	float: left;
+	width: 80px;
+	height: 90px;
+	margin: 30px 40px 98px 40px;
+	/* border: 1px solid black; */
+}
+
+/* 책 이미지 img */
+.imgtest img{
+	width: 120px;
+	height: 100px;
+}
+
+/* 책 목록 책장 */
+#BookList{
+	text-align: center;
+	background: url(../../images/mybook/bookshelve2.PNG) no-repeat;
+	background-size: 100%;
+	
+	/* position: absolute; */
+	float: right;
+	
+	margin: 270px 20px 0 0;
+	/* 
+	position: absolute;
+	right: 20px;
+	bottom:20px;
+	 */
+	width: 600px;
+	height: 628px;
+	
+	padding: 10px 10px 10px 10px; 
+	border: 1px solid black;
+	
+	position: relative;
+}
+
+/* 누구누구의 책장 */
+#BookList p{
+	display: inline;
+	position: absolute;
+	left: 20px;
+}
+
+/* 구매 및 대여 책 더보기 */
+#rentBook{
+	position: absolute;
+	right: 20px;
+	color: green;
+}
+#boughtBook{
+	position: absolute;
+	right: 140px;
+	color: blue;
+}
+
+/* 책목록 책장안의 div */
+#myBooks{
+	border: 1px solid black;	
+	width: 560px;
+	height: 580px;
+	margin-top: 35px;
+	padding: 10px 20px 5px 20px;
+	clear: both;
+}
+
+/* 책목록 책장안의 책 */
+/* 
+.testa{
+	background: url(../../images/mybook/whiteBar.png);
+	width: 25px;
+	height: 124px;
+	float: left;
+	margin: 0 5px 27px 5px;
+	padding-top: 5px;
+	border-radius: 5px;
+	box-shadow: 5px 2px 5px black;
+	
+	position:relative;
+	
+	white-space: normal;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	
+	word-wrap: break-word;
+    font-family: monospace;
+    letter-spacing: 0.5em;
+    line-height: 14px;
+}
+ */
+ 
+.mybook{
+	float: left;
+	border: 1px solid black;	
+	width: 25px;
+	height: 124px;
+	margin: 0 5px 27px 5px;
+	padding-top: 3px;
+	border-radius: 5px;
+	box-shadow: 5px 2px 5px black;
+	background-color: white;
+	 
+	/* white-space: normal; */
+	overflow:hidden;
+	text-overflow: ellipsis;
+	
+	position: relative;
+	
+	line-height: 14px;
+}
+
+ /* 
+.mybook a{
+	writing-mode:tb-rl;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform: rotate(90deg);
+    white-space:nowrap;
+}
+*/
+
+.mybook span{
+	width:1px;
+    word-wrap: break-word;
+    font-family: monospace;
+    letter-spacing: 0.5em;
+    
+}
+
+.mybook a{
+	width:1px;
+    word-wrap: break-word;
+    font-family: monospace;
+    letter-spacing: 0.5em;
+}
+
+
+/* 책 라벨 */
+#mybookColor{
+	width: 25px;
+	height: 10px;
+	position: absolute;
+	bottom: 5px;
+	background-color: blue;
+	margin: 0;
+	left: 0;
+}
+#mybookColor1{
+	width: 25px;
+	height: 10px;
+	position: absolute;
+	bottom: 5px;
+	background-color: green;
+	margin: 0;
+	left: 0;
+}
+
+
+
+
+
+
+

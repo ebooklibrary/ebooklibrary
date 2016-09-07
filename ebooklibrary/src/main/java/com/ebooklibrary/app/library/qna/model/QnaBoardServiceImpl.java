@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.SearchVO;
 
 @Service
@@ -27,8 +28,8 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 
 	@Override
-	public int selectQnaBoardByUsername(String username) {
-		return qnaBoardDao.selectQnaBoardByUsername(username);
+	public int selectQnaBoardByUsername(String userName) {
+		return qnaBoardDao.selectQnaBoardByUsername(userName);
 	}
 
 	@Override
@@ -79,8 +80,13 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 
 	@Override
-	public List<QnaBoardVO> selectByMemberNo(String writer) {
-		return qnaBoardDao.selectByMemberNo(writer);
+	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memVo) {
+		return qnaBoardDao.selectByMemberNo(memVo);
+	}
+
+	@Override
+	public int selectCountByMemNo(MemberSearchVO memVo) {
+		return qnaBoardDao.selectCountByMemNo(memVo);
 	}
 
 	

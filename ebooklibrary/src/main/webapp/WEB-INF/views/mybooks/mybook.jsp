@@ -12,6 +12,7 @@
 <%-- 
 ${pageContext.request.contextPath}
  --%>
+<script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
 <%--  
@@ -41,7 +42,6 @@ ${pageContext.request.contextPath}
 	$(function() {
 		
 		
-		
 	    //single book
 	    $('#mybook').booklet();
 	
@@ -54,7 +54,7 @@ ${pageContext.request.contextPath}
 		/* 
 		$("#mybook").css({"border":"1px solid black"});
 		 */
-		$(".test1").css({"padding":"20px","line-height":"40px", "font-size":"1.2em"});
+		$(".test1").css({"padding":"20px","line-height":"35px", "font-size":"1.2em"});
 	
 		/* 
 		$(".test1").css({ "border":"1px solid black" });
@@ -81,6 +81,25 @@ ${pageContext.request.contextPath}
 		//지정 페이지로 이동
 		$('#mybook').booklet("gotopage", 3);
 		
+		$("#pageSelBt").click(function() {
+			var page=$("#pageSel").val();
+			$('#mybook').booklet("gotopage", page-1);
+			
+		});
+		
+		$("#pageSel").keyup(function() {
+			if (!validate_num($("#pageSel").val())) {
+				alert("숫자만 입력해주세요");
+				$("#pageSel").val("");
+				$("#pageSel").focus();
+			}
+			var page=$("#pageSel").val();
+			$('#mybook').booklet("gotopage", page-1);
+			
+		});
+		
+		
+		
 		/* 
 		var pageSelector = $("#mybook").booklet("option", "currentIndex");
 		 */
@@ -89,7 +108,6 @@ ${pageContext.request.contextPath}
 			//현재 페이지 구하기
 			var pageSelector = $("#mybook").booklet("option", "currentIndex");
 			console.log(pageSelector);
-			
 		});
 		
 		
@@ -147,10 +165,21 @@ ${pageContext.request.contextPath}
 	<div id="custom-goto"></div>
 	<div id="display"></div>
 	
+	
+	
 	<!-- 
 	<div id="custom-menu"></div>
 	 -->
+	 
+	 
+	 
 	<div id="wrapper">
+		<div id="pageSelDiv">
+			 <span>페이지 입력 : </span><input type="text" name="pageSel" id="pageSel">
+			 <!-- <input type="button" name="pageSelBt" id="pageSelBt" value="페이지 가기"> -->
+			 <img alt="페이지선택" name="pageSelBt" id="pageSelBt" src="<c:url value='/images/mybook/icon/openbook32.png'/>">
+		 </div>
+		 
 	<div id="mybook">
 	    <div class="test1">
 			<p>
