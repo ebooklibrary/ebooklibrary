@@ -17,6 +17,18 @@
 <!-- 내부 css -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/bookpart.css" />
 
+<!-- alert -->
+<!-- ideally at the bottom of the page -->
+<!-- also works in the <head> -->
+<%-- <c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/> --%>
+<script src="<c:url value='/alertify.js-0.3.11/lib/alertify.min.js'/>"></script>
+<!-- include the core styles -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/>" />
+<%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
+<!-- include a theme, can be included into the core instead of 2 separate files -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -37,7 +49,8 @@
 		$("#btBookUp").click(function(event) {
 			
 			if($("#title").val().length < 1){
-				alert("책제목을 입력하세요");
+				/* alert("책제목을 입력하세요"); */
+				alertify.alert("책제목을 입력하세요");
 				$("#title").focus();
 				return false;
 			}
