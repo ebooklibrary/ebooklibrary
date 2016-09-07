@@ -13,7 +13,7 @@
 		});
 		$("#listGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/qna/qnaList.do'/>");
-		});
+		});		
 	});
 	
 	function pageFunc(curPage){
@@ -24,8 +24,12 @@
 </script>
 <form name="frmPage" method="post" 
 	action="<c:url value='/library/qna/qnaList.do'/>">
-	<input type="hidden" name="eventName" 	value="">
-	<input type="hidden" name="currentPage">	
+	<input type="hidden" name="currentPage">
+	<input type="text" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+	<input type="text" id="myWrite" name="myWrite" value="${param.myWrite }">
+	<input type="text" id="myWrite" name="searchCondition" value="${param.searchCondition }">
+	<input type="text" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
+	
 </form>
 	<h1>QnA게시판입니다</h1>
 	<div class=""></div>
@@ -76,10 +80,11 @@
 <div class="divPage">
 	<input type="button" id="listGo" value="전체목록"/>
 	<input type="button" id="writeGo" value="글쓰실?"/>
-	<form id="frmMyWriting" method="post" action="<c:url value='/library/qna/qnaList.do' />" >
-		<input type="button" id="myWriting" value="내글 보기"/>
-		<input type="hidden" name="memberNo" value="${sessionScope.memberNo}"/>
-	</form>
+	<form id="myWrite" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
+		<input type="submit" id="myWriting" value="내글 보기"/>
+		<input type="text" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+		<input type="text" id="myWrite" name="myWrite" value="Y">
+	</form>			
 </div>
 <!-- 페이징 처리를 위한 div -->
 <div class="divPage">
@@ -132,8 +137,8 @@
             		selected
                </c:if>
             >내용</option>
-            <option value="userName" 
-            	<c:if test="${param.searchCondition=='userName'}">
+            <option value="user_name" 
+            	<c:if test="${param.searchCondition=='user_name'}">
             		selected
                </c:if>
             >작성자</option>
@@ -143,5 +148,6 @@
 		<input type="submit" value="검색">
     </form>
 </div>
+<input type="text" value="${sessionScope.memberNo }"/>
 
 <%@include file="../libraryBottom.jsp" %>

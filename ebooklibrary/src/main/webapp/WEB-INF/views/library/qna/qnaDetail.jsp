@@ -5,11 +5,11 @@
 <script type="text/javascript">
 $().ready(function(){
 	$("#preWriting").click(function(){
-		$(location).attr('href',"<c:url value='/library/qna/prePage.do?qnaNo=${param.qnaNo}'/>");
+		$(location).attr('href',"<c:url value='/library/qna/qnaPrePage.do?qnaNo=${param.qnaNo}'/>");
 	});
 	
 	$("#nextWriting").click(function(){
-		$(location).attr('href',"<c:url value='/library/qna/nextPage.do?qnaNo=${param.qnaNo}'/>");
+		$(location).attr('href',"<c:url value='/library/qna/qnaNextPage.do?qnaNo=${param.qnaNo}'/>");
 	});
 });
 
@@ -43,4 +43,8 @@ $().ready(function(){
         	<a href="<c:url value='/library/qna/qnaList.do'/>">목록</a>			
 		</div>
 	</div>
-<%@include file="../libraryBottom.jsp" %>
+<%-- 	<c:import url="../comments/commentList.do?qnaNo=${QnaBoardVO.qnaNo }"></c:import>
+	
+
+	<c:import url="../comments/commentWrite.jsp?qnaNo=${QnaBoardVO.qnaNo }"></c:import>
+ --%><%@include file="../libraryBottom.jsp" %>
