@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ebooklibrary.app.common.BookUtility;
 import com.ebooklibrary.app.common.FileUploadWebUtil;
+import com.ebooklibrary.app.member.model.MemberService;
+import com.ebooklibrary.app.member.model.MemberVO;
 
 @Controller
 @RequestMapping("/mybooks")
@@ -25,6 +27,9 @@ public class MybooksController {
 	
 	@Autowired
 	FileUploadWebUtil fileUtil;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	private static final Logger logger=LoggerFactory.getLogger(MybooksController.class);
 	
@@ -58,7 +63,14 @@ public class MybooksController {
 	
 	@RequestMapping("/changeBackImg.do")
 	@ResponseBody
-	public String changeBackImg(HttpServletRequest request, @RequestParam String oldImage){
+	public String changeBackImg(HttpSession session, HttpServletRequest request, @RequestParam String oldImage){
+		
+		/*
+		"userId"
+		"auchCode"
+		"memberNo"
+		"userName"
+		*/
 		
 		logger.info("에이젝스 이미지 등록 들어왔니 oldImage={}",oldImage);
 		
@@ -77,15 +89,26 @@ public class MybooksController {
 			fileSize=(Long)mymap.get("fileSize");
 		}
 		
-		//기존 파일이 존재하면, 기존 파일 삭제
-		File oldFile=new File(upPath ,oldImage);
-		if (oldFile.exists()) {
-			boolean bool=oldFile.delete();
-			logger.info("기존 파일 삭제 여부={}", bool);
+		String userId=(String)session.getAttribute("userId");
+		
+		MemberVO memberVo=new MemberVO();
+		memberVo.setUserId(userId);
+		memberVo.setBgImage(fileName);
+		
+		//이미지 파일명 업데이트
+		int cnt=memberService.updateBackImg(memberVo);
+		
+		if (cnt>0) {
+			//기존 파일이 존재하면, 기존 파일 삭제
+			File oldFile=new File(upPath ,oldImage);
+			if (oldFile.exists()) {
+				boolean bool=oldFile.delete();
+				logger.info("기존 파일 삭제 여부={}", bool);
+			}
+		}else{
+			logger.info("처리 안됐어 다시 해봐");
 		}
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("fileName", fileName);
 		
 		return fileName;
 	}

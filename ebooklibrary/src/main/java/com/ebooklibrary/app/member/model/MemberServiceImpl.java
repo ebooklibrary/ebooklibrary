@@ -41,4 +41,9 @@ public class MemberServiceImpl implements MemberService{
 	public int selectMemberCheckId(String userId){
 		return memberDao.selectMemberCheckId(userId);
 	}
+
+	@Override
+	public int updateBackImg(MemberVO vo) {
+		return memberDao.updateBackImg(vo);
+	}
 }

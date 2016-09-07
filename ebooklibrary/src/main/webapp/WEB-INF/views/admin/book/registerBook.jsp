@@ -5,17 +5,19 @@
 <!-- 외부스크립트 정규식 등등 -->
 <script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
 
-<!-- 달력 -->
+<!-- 달력 from jquery ui -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/jqueryui.css" /> --%>
 <!-- 폼태그 -->
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <!-- 스마트에디터 -->
 <script type="text/javascript" src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>" charset="utf-8"></script>
 <!-- 내부 css -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/bookpart.css" />
+
 
 <!-- alert -->
 <!-- ideally at the bottom of the page -->
@@ -100,8 +102,28 @@
 			}
 			 */
 		}); //click
+		/* 
+		var ge=["n","FANTASY","SCIENCEFICTION","HORROR","DRAMA","ACTIONANDADVENTURE","ROMANCE","MYSTERY","SERIES","TRILOGY","COMICS","SATIRE","BIOGRAPHIES","AUTOBIOGRAPHIES","CHILDREN","DIARIES","SELFHELP","GUIDE","TRAVEL","RELIGION","PRAYERBOOKS","HISTORY","MATH","ANTHOLOGY","POETRY","JOURNALS","ENCYCLOPEDIAS","DICTIONARIES","SCIENCE","ART","COOKBOOKS","HEALTH"];
+		 */
+		var gn=["n","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215"];
+		var gh=["-Select-","판타지","공상과학소설","호러","드라마","액션및어드벤처","로맨스","미스터리","시리즈","트릴로지(3부작책)","만화","풍자","전기","자서전","아동도서","일기형식책","자기계발서","가이드","여행","종교책","기도하는책","역사책","수학책","시(선집),문집","시집","저널,학술지","백과사전","사전","과학책","예술책","요리책","헬스"];
 		
+		/* 책 장르 */
+		var l="";
+		for (var i = 0; i < gn.length; i++) {
+			l+="<option value='"+gn[i]+"'>"+gh[i]+"</option>";
+		}
+		$("#genre").html(l);
 		
+		/////////////////////////////
+	    $( "#genre" )
+	      .selectmenu()
+	      .selectmenu( "menuWidget" )
+	        .addClass( "overflow" );
+		
+		/* 
+	    $( "#genre" ).selectmenu();
+		 */
 		
 	});
 
@@ -134,7 +156,6 @@
 				<label>작가명</label>
 				<input type="text" class="w3-input" id="writer" name="writer">
 			</p>
-			
 			<p>
 				<label>출판사</label>
 				<input type="text" class="w3-input" id="publisher" name="publisher">
@@ -144,12 +165,13 @@
 				<input type="text" class="w3-input" id="publication" name="publication" readonly>
 			</p>
 			<p>
-				<label>장르</label>
-				<input type="text" class="w3-input" id="genre" name="genre">
-			</p>
-			<p>
 				<label>가격</label>
 				<input type="text" class="w3-input" id="price" name="price">
+			</p>
+			<p>
+				<label>장르</label>
+				<!-- <input type="text" class="w3-input" id="genre" name="genre"> -->
+				<select name="genre" id="genre"></select>
 			</p>
 		</div>
 		
