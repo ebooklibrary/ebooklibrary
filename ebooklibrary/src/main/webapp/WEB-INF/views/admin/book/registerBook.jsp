@@ -50,7 +50,7 @@
 			
 			if($("#title").val().length < 1){
 				/* alert("책제목을 입력하세요"); */
-				alertify.alert("책제목을 입력하세요");
+				alertify.alert("책제목을 입력하세요"); 
 				$("#title").focus();
 				return false;
 			}
