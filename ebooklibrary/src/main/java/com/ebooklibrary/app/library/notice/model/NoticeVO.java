@@ -5,23 +5,10 @@ import java.sql.Timestamp;
 public class NoticeVO {
 	private int noticeNo; //공지사항 번호 
 	private String title;  // 공지사항 제목
-	private String writer;  // 공지사항 작성자
+	private String userName;  // 공지사항 작성자
 	private Timestamp regdate; // 공지사항 작성일
 	private String content; //공지사항 내용
-	private int read_Count; //조회수
-	public NoticeVO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public NoticeVO(int notice_No, String title, String writer, Timestamp regdate, String content, int read_Count) {
-		super();
-		this.noticeNo = notice_No;
-		this.title = title;
-		this.writer = writer;
-		this.regdate = regdate;
-		this.content = content;
-		this.read_Count = read_Count;
-	}
+	private int readCount; //조회수
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -34,11 +21,11 @@ public class NoticeVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriter() {
-		return writer;
+	public String getUserName() {
+		return userName;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public Timestamp getRegdate() {
 		return regdate;
@@ -52,17 +39,18 @@ public class NoticeVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getRead_Count() {
-		return read_Count;
+	public int getReadCount() {
+		return readCount;
 	}
-	public void setRead_Count(int read_Count) {
-		this.read_Count = read_Count;
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
 	}
 	@Override
 	public String toString() {
-		return "NoticeVO [notice_No=" + noticeNo + ", title=" + title + ", writer=" + writer + ", regdate=" + regdate
-				+ ", content=" + content + ", read_Count=" + read_Count + "]";
+		return "NoticeVO [noticeNo=" + noticeNo + ", title=" + title + ", userName=" + userName + ", regdate=" + regdate
+				+ ", content=" + content + ", readCount=" + readCount + "]";
 	}
+
 
 	
 }	

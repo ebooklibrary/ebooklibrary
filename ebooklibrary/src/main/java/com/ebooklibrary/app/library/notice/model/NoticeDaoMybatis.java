@@ -55,4 +55,47 @@ public class NoticeDaoMybatis extends SqlSessionDaoSupport implements NoticeDAO{
 	public int noticeCount(SearchVO searchVo) {
 		return getSqlSession().selectOne(NAMESPACE+".selectCount",searchVo);
 	}
+
+
+
+	@Override
+	public int readCountAdd(int notice_No) {
+		return getSqlSession().update(NAMESPACE+".readCountAdd",notice_No);
+	}
+
+
+
+	@Override
+	public int prePageNotice(int notice_No) {
+		Integer result= getSqlSession().selectOne(NAMESPACE+".prePage",notice_No);
+		if(result==null){
+			result=0;
+		}
+		return result;
+	}
+
+
+
+	@Override
+	public int minPage() {
+		return getSqlSession().selectOne(NAMESPACE+".minPage");
+	}
+
+
+
+	@Override
+	public int nextPageNotice(int notice_No) {
+		Integer  result = getSqlSession().selectOne(NAMESPACE+".nextPage",notice_No);
+		if(result==null){
+			result=0;
+		}
+		return result;
+	}
+
+
+
+	@Override
+	public int nextPage() {
+		return getSqlSession().selectOne(NAMESPACE+".maxPage");
+	}
 }

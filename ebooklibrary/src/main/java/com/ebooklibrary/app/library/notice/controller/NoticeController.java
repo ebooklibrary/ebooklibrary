@@ -53,15 +53,26 @@ public class NoticeController {
 	
 	@RequestMapping("/noticedetail.do")
 	public String selectByNoNotice(@RequestParam (defaultValue="0")int notice_No,Model model){
-		logger.info("공지사항 상세보기");
+		logger.info("공지사항 상세보기 파라미터 notice_No={}",notice_No);
 		
 		if(notice_No==0){
 			model.addAttribute("msg", "잘못된 url입니다");
 			model.addAttribute("url", "/notice/noticelist.do");
+			return "common/message";
 		}
 		
 		NoticeVO noticeVo = noticeService.selectByNoNotice(notice_No);
+		int prePage=noticeService.prePageNotice(notice_No);
+
+		int nextPage=noticeService.nextPageNotice(notice_No);
+		NoticeVO preVo=noticeService.selectByNoNotice(prePage);
+		logger.info("preVo={}",preVo);
+		NoticeVO nextVo=noticeService.selectByNoNotice(nextPage);
+		logger.info("nextVo={}",nextVo);
+		logger.info("개별조회 noticeVo={}",noticeVo);
 		model.addAttribute("noticeVo", noticeVo);
+		model.addAttribute("preVo", preVo);
+		model.addAttribute("nextVo", nextVo);
 		
 		return "library/notice/noticedetail";
 		
@@ -138,5 +149,57 @@ public class NoticeController {
 		
 		return "library/notice/noticelist";
 	}
+	
+	@RequestMapping("/readCountAdd.do")
+	public String readCountAdd(@RequestParam(defaultValue="0") int notice_No){
+		logger.info("조회수 증가");
+		
+		int result = noticeService.readCountAdd(notice_No);
+		
+		return "redirect:/library/notice/noticedetail.do?notice_No="+notice_No;
+	}
+	
+	@RequestMapping("/prePage.do")
+	public String prePage(@RequestParam(defaultValue="0")int notice_No , Model model){
+		logger.info("이전페이지 이동처리 , 파라미터값 notice_No={}",notice_No);
+		int minNotice_No =noticeService.minPage();
+		logger.info("최소값 minNotice_No = {}" , minNotice_No);
+		
+		if(notice_No==minNotice_No){
+			String msg= "첫번째 글입니다";
+			String url ="/library/notice/noticedetail.do?notice_No="+notice_No;
+			
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
+		}
+		
+		int preNotice_No=noticeService.prePageNotice(notice_No);
+		
+		return "redirect:/library/notice/noticedetail.do?notice_No="+preNotice_No;
+		
+	}
+	
+	@RequestMapping("/nextPage.do")
+	public String nextPage(@RequestParam(defaultValue="0") int notice_No,Model model){
+		
+		logger.info("다음페이지 이동처리 , 파라미터 값 notice_No={}",notice_No);
+		int maxNotice_No = noticeService.nextPage();
+		
+		if(notice_No==maxNotice_No){
+			String msg = "마지막 글입니다";
+			String url = "/library/notice/noticedetail.do?notice_No="+notice_No;
+			model.addAttribute("msg", msg);
+			model.addAttribute("url",url);
+				
+			return "common/message";
+		}
+		
+		int nextNotice_No = noticeService.nextPageNotice(notice_No);
+		
+		return "redirect:/library/notice/noticedetail.do?notice_No="+nextNotice_No;
+	}
+	
 	
 }

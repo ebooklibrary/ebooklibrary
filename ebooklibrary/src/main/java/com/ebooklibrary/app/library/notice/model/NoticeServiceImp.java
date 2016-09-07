@@ -45,5 +45,30 @@ public class NoticeServiceImp implements NoticeService{
 	public int noticeCount(SearchVO searchVo) {
 		return noticedao.noticeCount(searchVo);
 	}
+
+	@Override
+	public int readCountAdd(int notice_No) {
+		return noticedao.readCountAdd(notice_No);
+	}
+
+	@Override
+	public int prePageNotice(int notice_No) {
+		return noticedao.prePageNotice(notice_No);
+	}
+
+	@Override
+	public int minPage() {
+		return noticedao.minPage();
+	}
+
+	@Override
+	public int nextPageNotice(int notice_No) {
+		return noticedao.nextPageNotice(notice_No);
+	}
+
+	@Override
+	public int nextPage() {
+		return noticedao.nextPage();
+	}
 	
 }
