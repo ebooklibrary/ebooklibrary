@@ -100,7 +100,7 @@ public class FileUploadWebUtil {
 
 	      //순수파일명에 현재시간을 연결한 후 .확장자를 연결한다
 	      String fileName = fName+getCurrentTime()+ext;
-
+	      fileName=fileName.replaceAll(" ", "");
 	      return fileName;
 	   }
 

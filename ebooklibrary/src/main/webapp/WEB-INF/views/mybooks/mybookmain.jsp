@@ -20,8 +20,20 @@
 				$(this).css("cursor","");
 		});
 		 */
+		 /* 
+		 var Ca = /\+/g;
+			decodeURIComponent( bimg.replace(Ca, " ") );
+			
+			//var bimg=encodeURIComponent(bimg);
 		 
-		$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/${bgImage})  no-repeat center center fixed",
+		  */
+		var bgImage="${bgImage}";
+		var Ca = /\+/g;
+		var bgImage=decodeURIComponent(bgImage);
+		var bgImage=bgImage.replace(Ca, "");
+		alert(bgImage);
+		 
+		$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/"+bgImage+")  no-repeat center center fixed",
 							"-webkit-background-size": "cover",
 							"-moz-background-size": "cover",
 							"-o-background-size": "cover",
@@ -80,15 +92,24 @@
 					type:"POST",
 					processData: false,
 					contentType: false,
+					/* contentType: "application/x-www-form-urlencoded; charset=UTF-8", */
 					data: formData,
 					success:function(bimg){
-						$("html").css({"background":"url(${pageContext.request.contextPath }/images/mybook/${bimg})  no-repeat center center fixed",
+						
+						var Ca = /\+/g;
+						/* var bimg=encodeURIComponent(bimg); */
+						var bimg=decodeURIComponent(bimg);
+						var bimg=bimg.replace(Ca, "");
+						
+						alert("${pageContext.request.contextPath }/backimg/"+bimg);
+						
+						$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/"+bimg+")  no-repeat center center fixed",
 							"-webkit-background-size": "cover",
 							"-moz-background-size": "cover",
 							"-o-background-size": "cover",
 							"background-size": "cover"
 						});
-						location.reload();
+						/* location.reload(); */
 					},
 					error: function(xhr,status, error){
 						alert("에러발생"+status+":"+error);
@@ -150,6 +171,7 @@
 		    }
 		  }
 		}
+	 
 	
 	
 </script>
@@ -195,7 +217,7 @@
 					<form id="bookfrm" name="bookfrm" enctype="multipart/form-data" method="post">
 						원하시는 배경이미지를 올려보세요!<br><br>
 						<input type="file" id="bgImage" name="bgImage">
-						<input type="hidden" id="oldImage" name="oldImage" value="${sessionScope.fileName }">
+						<%-- <input type="hidden" id="oldImage" name="oldImage" value="${sessionScope.fileName }"> --%>
 						<input type="submit" id="btImg" name="btImg" value="확인">
 					</form>
 				</div>

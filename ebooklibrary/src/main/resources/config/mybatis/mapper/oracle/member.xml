@@ -68,8 +68,8 @@
 	<!-- 내서재 배경화면 -->
 	<update id="updateBackImg" parameterType="MemberVO">
 		update member
-		   set bgImage=#{bgImage}
-		 where userId=#{userId}
+		   set bg_image=#{bgImage}
+		 where user_id=#{userId}
 	</update>
 	
 	
