@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../libraryTop.jsp" %>
 <script type="text/javascript">
-	$().ready()
+	
 </script>
 <div>
 	<form name="frmWrite" id="frmWrite" method="post" 
@@ -11,16 +11,17 @@
 		action="<c:url value='/library/qna/qnaWrite.do'/>" >
 		<fieldset>
 			<legend>QnA 글쓰기</legend>
+				<input type="text" id="memberNo" name="memberNo" value="${sessionScope.memberNo }">
 				<div class="">
-					<label>아이디</label><label>레벨체크</label>
+					<label>${sessionScope.userName }</label><label>레벨체크</label>
 				</div>
 				<div class="">
 					<label for="title">제목</label>
 					<input type="text" id="title" name="title" />
 				</div>
 				<div >
-					<label for="userName">작성자</label>
-					<input type="text" id="userName" name="userName">
+					<label for="userName">${sessionScope.userName }</label>
+					
 				</div>
 		        <div>
 		        	<label for="content">내용</label>

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +35,11 @@ public class QnAController {
 	
 	@RequestMapping("/qnaList.do")
 	public String listQnaBoard(
-			@ModelAttribute SearchVO searchVo,
+			@ModelAttribute MemberSearchVO searchVo,
 			Model model){
 		//1.
 		logger.info("Qna 리스트 ");
+		logger.info("searchVO={}",searchVo);
 		
 		//paging
 		PaginationInfo pagingInfo= new PaginationInfo();
@@ -73,16 +75,21 @@ public class QnAController {
 	}
 	
 	@RequestMapping(value="/qnaWrite.do", method=RequestMethod.POST)
-	public String QnaBoardWrite_post(@ModelAttribute QnaBoardVO qnaBoardVo,Model model){
+	public String QnaBoardWrite_post(@ModelAttribute QnaBoardVO qnaBoardVo,HttpSession session,Model model){
+		//1.
 		logger.info("Qna 글쓰기 처리페이지, 입력값 qnaBoardVo={} ", qnaBoardVo);
+		String userName= (String)session.getAttribute("userName");
+		qnaBoardVo.setUserName(userName);
+		logger.info("세션에서 이름얻어오기 입력값 userName={}",userName);
 		
+		//2.
 		int cnt = qnaBoardService.insertQnaBoard(qnaBoardVo);
 		
 		String msg="",url="/library/qna/qnaWrite.do";
 		
 		if(cnt>0){
 			msg="글작성 성공";
-			int qnaBoardNo=qnaBoardService.selectQnaBoardByUsername(qnaBoardVo.getUserName());
+			int qnaBoardNo=qnaBoardService.selectQnaBoardByMemberNo(qnaBoardVo.getMemberNo());
 			logger.info("마지막 글번호 추출  qnaBoardNo={}",qnaBoardNo);
 			
 			url="/library/qna/qnaDetail.do?qnaNo="+qnaBoardNo;
@@ -260,7 +267,7 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/selectByMem.do")
-	public String selectByMemberNo(@ModelAttribute MemberSearchVO msVo, Model model){
+	public String selectByMemberNo(@ModelAttribute MemberSearchVO memberSVo, Model model){
 		//1.
 		logger.info("내글보기 처리페이지");
 		
@@ -268,19 +275,22 @@ public class QnAController {
 		PaginationInfo pagingInfo= new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.QNA_BLOCK_SIZE);
 		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		pagingInfo.setCurrentPage(msVo.getCurrentPage());
+		pagingInfo.setCurrentPage(memberSVo.getCurrentPage());
 		
 		//searchVo
-		msVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		msVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		memberSVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		memberSVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		logger.info("파라미터값 memberSVo.getMemberNo()={}",memberSVo.getMemberNo());
+		
 		
 		//2.
 		logger.info("키워드 전 키워드값 ");
-		int totalRecord=qnaBoardService.selectCountByMemNo(msVo);
+		int totalRecord=qnaBoardService.selectCountByMemNo(memberSVo);
 		logger.info("키워드 후 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		List<QnaBoardVO> alist=qnaBoardService.selectQnaAll(msVo);
+		List<QnaBoardVO> alist=qnaBoardService.selectByMemberNo(memberSVo);
 		logger.info("결과처리값 alist.size()={}",alist.size());
 		
 		model.addAttribute("qnaList",alist);

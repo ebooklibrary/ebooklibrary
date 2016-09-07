@@ -28,8 +28,8 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 
 	@Override
-	public int selectQnaBoardByUsername(String userName) {
-		return qnaBoardDao.selectQnaBoardByUsername(userName);
+	public int selectQnaBoardByMemberNo(int memberNo) {
+		return qnaBoardDao.selectQnaBoardByMemberNo(memberNo);
 	}
 
 	@Override
@@ -43,12 +43,12 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 
 	@Override
-	public int selectListCount(SearchVO searchVo) {
+	public int selectListCount(MemberSearchVO searchVo) {
 		return qnaBoardDao.selectListCount(searchVo);
 	}
 
 	@Override
-	public List<QnaBoardVO> selectQnaAll(SearchVO searchVo) {
+	public List<QnaBoardVO> selectQnaAll(MemberSearchVO searchVo) {
 		
 		return qnaBoardDao.selectQnaAll(searchVo);
 	}
@@ -80,13 +80,13 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 
 	@Override
-	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memVo) {
-		return qnaBoardDao.selectByMemberNo(memVo);
+	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memberSVo) {
+		return qnaBoardDao.selectByMemberNo(memberSVo);
 	}
 
 	@Override
-	public int selectCountByMemNo(MemberSearchVO memVo) {
-		return qnaBoardDao.selectCountByMemNo(memVo);
+	public int selectCountByMemNo(MemberSearchVO memberSVo) {
+		return qnaBoardDao.selectCountByMemNo(memberSVo);
 	}
 
 	
