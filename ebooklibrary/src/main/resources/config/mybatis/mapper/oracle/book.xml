@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.book">
+	
+	<insert id="insertBook" parameterType="MyBookVO">
+		<selectKey keyProperty="bookNo" order="BEFORE" resultType="int">
+			select BOOK_SEQ.nextval from dual
+	    </selectKey>
+		insert into book(BOOK_NO,title,publisher,writer,publication,genre,price,summary,BOOK_FILE_NAME,COVER_FILE_NAME,BOOK_FILE_SIZE)
+		values(#{bookNo},#{title},#{publisher},#{writer},#{publication},#{genre},#{price},#{summary},#{bookFileName},#{coverFileName},#{bookFileSize})
+	</insert>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
