@@ -13,6 +13,16 @@ public class QnaCommentVO {
 	private int stepNo;
 	private Timestamp regDate;
 	
+	
+	
+	public int getStepNo() {
+		return stepNo;
+	}
+
+	public void setStepNo(int stepNo) {
+		this.stepNo = stepNo;
+	}
+
 	public QnaCommentVO() {
 		super();
 	}

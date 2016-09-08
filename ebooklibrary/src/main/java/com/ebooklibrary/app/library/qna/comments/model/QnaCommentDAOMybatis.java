@@ -18,8 +18,19 @@ public class QnaCommentDAOMybatis extends SqlSessionDaoSupport implements QnaCom
 	}
 
 	@Override
-	public List<QnaCommentVO> selectAllQnaComment() {
-		return getSqlSession().selectList(namespace+".selectAllComment");
+	public List<QnaCommentVO> selectAllQnaComment(int qnaNo) {
+		return getSqlSession().selectList(namespace+".selectAllComment",qnaNo);
+	}
+
+	@Override
+	public int insertQnaReComment(QnaCommentVO qcVo) {
+		return getSqlSession().insert(namespace+".commentReply",qcVo);
+	}
+
+	@Override
+	public int updateSortNo(QnaCommentVO qcVo) {
+		
+		return  getSqlSession().update(namespace+".updateSortNo",qcVo);
 	}
 	
 }

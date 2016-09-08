@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface QnaCommentService {
 	public int insertQnaComment(QnaCommentVO qcVo);
-	public List<QnaCommentVO> selectAllQnaComment();
-	
+	public List<QnaCommentVO> selectAllQnaComment(int qnaNo);
+	public int insertQnaReComment(QnaCommentVO qcVo);
 }

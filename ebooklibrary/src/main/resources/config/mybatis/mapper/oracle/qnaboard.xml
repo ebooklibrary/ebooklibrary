@@ -45,13 +45,13 @@
 	</select>
 	
 	<insert id="insertQnaBoard" parameterType="QnaBoardVO">
-      <selectKey keyProperty="no" 
+      <selectKey keyProperty="qnaNo" 
       order="BEFORE" resultType="int">
         select QNA_SEQ.nextval from dual
       </selectKey>
 
 		insert into QNA_BOARD(qna_no ,title,USER_NAME ,content,member_no)
-		values(QNA_SEQ.nextval,#{title},#{userName},#{content},#{memberNo})
+		values(#{qnaNo},#{title},#{userName},#{content},#{memberNo})
 	</insert>
 	
 	<select id="selectBoardNoByMemberNo" parameterType="int" resultType="int">

@@ -4,7 +4,8 @@ import java.util.List;
 
 public interface QnaCommentDAO {
 	public int insertQnaComment(QnaCommentVO qcVo);
-	public List<QnaCommentVO> selectAllQnaComment();
-	
+	public List<QnaCommentVO> selectAllQnaComment(int qnaNo);
+	public int updateSortNo(QnaCommentVO qcVo);
+	public int insertQnaReComment(QnaCommentVO qcVo);
 	
 }

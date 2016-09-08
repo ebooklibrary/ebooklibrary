@@ -16,6 +16,7 @@ import com.ebooklibrary.app.library.qna.comments.model.QnaCommentService;
 import com.ebooklibrary.app.library.qna.comments.model.QnaCommentVO;
 
 @Controller
+@RequestMapping("/comments")
 public class QnaCommentController {
 	
 	private static final Logger logger
@@ -25,27 +26,44 @@ public class QnaCommentController {
 	private QnaCommentService qnaCommentsService;
 	
 	
-	@RequestMapping("/comments/commentList.do")
+	@RequestMapping("/commentList.do")
 	public String listQnaComment(@RequestParam int qnaNo,Model model){
 		logger.info("코멘트 list 페이지 파라미터값 qnaNo={}",qnaNo);
 
 		//1.
-		List<QnaCommentVO> alist = qnaCommentsService.selectAllQnaComment();
+		List<QnaCommentVO> alist = qnaCommentsService.selectAllQnaComment(qnaNo);
 		
 		
 		//2.
 		
-		
+		model.addAttribute("commentList",alist);
 		//3.
 		
 		
-		return "";
+		return "library/comments/commentList";
 	}
 	
 	
-	@RequestMapping("/comments/commentWrite.do")
+	@RequestMapping("/commentWrite.do")
 	public String writeQnaComment(@ModelAttribute QnaCommentVO qnaCommentVo){
+		//1.
+		logger.info("코멘트 처리페이지 파라미터 값 qnaCommentVo={}",qnaCommentVo);
 		
-		return "";
+		//2.
+		int cnt= 0;
+		if(qnaCommentVo.getStepNo()>0){
+			cnt= qnaCommentsService.insertQnaReComment(qnaCommentVo);
+			logger.info("코맨트 입력 처리 값 cnt={}",cnt);
+		}else{
+			
+			cnt =qnaCommentsService.insertQnaComment(qnaCommentVo);
+			logger.info("코맨트 입력 처리 값 cnt={}",cnt);
+		}
+		
+		
+		//3.
+		return "redirect:/library/qna/qnaDetail.do?qnaNo="+qnaCommentVo.getQnaNo();
 	}
+	
+	
 }

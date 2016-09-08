@@ -2,11 +2,16 @@ package com.ebooklibrary.app.library.qna.comments.model;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class QnaCommentServiceImpl implements QnaCommentService {
+	private static final Logger logger
+	=LoggerFactory.getLogger(QnaCommentService.class);
 	
 	@Autowired
 	private QnaCommentDAO qnaCommentDao;
@@ -17,8 +22,20 @@ public class QnaCommentServiceImpl implements QnaCommentService {
 	}
 
 	@Override
-	public List<QnaCommentVO> selectAllQnaComment() {
-		return qnaCommentDao.selectAllQnaComment();
+	public List<QnaCommentVO> selectAllQnaComment(int qnaNo) {
+		return qnaCommentDao.selectAllQnaComment(qnaNo);
+	}
+
+	@Override
+	@Transactional
+	public int insertQnaReComment(QnaCommentVO qcVo) {
+		int cnt=0;
+		cnt = qnaCommentDao.updateSortNo(qcVo);
+		System.out.println(qcVo);
+		logger.info("sortUpdate 처리 결과값 cnt={}",cnt);
+		cnt = qnaCommentDao.insertQnaReComment(qcVo);
+		logger.info("insertRecomment 처리 결과값 cnt={}",cnt);
+		return cnt;
 	}
 	
 	

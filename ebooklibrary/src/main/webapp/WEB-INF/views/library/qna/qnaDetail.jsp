@@ -43,8 +43,8 @@ $().ready(function(){
         	<a href="<c:url value='/library/qna/qnaList.do'/>">목록</a>			
 		</div>
 	</div>
-<%-- 	<c:import url="../comments/commentList.do?qnaNo=${QnaBoardVO.qnaNo }"></c:import>
+	<c:import url="/comments/commentList.do?qnaNo=${param.qnaNo }"></c:import>
 	
 
-	<c:import url="../comments/commentWrite.jsp?qnaNo=${QnaBoardVO.qnaNo }"></c:import>
- --%><%@include file="../libraryBottom.jsp" %>
+	<%-- <c:import url="../comments/commentWrite.jsp?qnaNo=${param.qnaNo }"></c:import> --%>
+<%@include file="../libraryBottom.jsp" %>
