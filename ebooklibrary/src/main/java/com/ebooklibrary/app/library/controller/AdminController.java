@@ -109,7 +109,7 @@ public class AdminController {
 		
 		int cnt=myBookService.insertBook(myBookVo);
 		
-		return "redirect:/book/registerBook.do";
+		return "redirect:/admin/book/registerBook.do";
 	}
 	
 	

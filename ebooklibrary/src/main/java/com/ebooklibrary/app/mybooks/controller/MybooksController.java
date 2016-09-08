@@ -16,12 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ebooklibrary.app.common.BookUtility;
 import com.ebooklibrary.app.common.FileUploadWebUtil;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.MyBookService;
+import com.ebooklibrary.app.mybooks.model.MyBookVO;
+import com.ebooklibrary.app.mybooks.model.MyBooksVO;
 
 @Controller
 @RequestMapping("/mybooks")
@@ -33,49 +37,76 @@ public class MybooksController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private MyBookService myBookService;
+	
 	private static final Logger logger=LoggerFactory.getLogger(MybooksController.class);
 	
 	@RequestMapping("/mybookmain.do")
 	public String mybooksMain(HttpSession session, Model model){
 		
+		BookUtility bu=new BookUtility();
 		String userId=(String)session.getAttribute("userId");
 		
-		//이미지 파일명 업데이트
-		MemberVO memVo=memberService.selectByUserName(userId);
-		String bgImage = toUtf(memVo.getBgImage());
+		if(userId!=null || !userId.isEmpty()){
+			
+			List<Map<String, Object>> alist=myBookService.selectBookByUserId(userId);
+			
+			logger.info("책 alist={}", alist);
+			
+			model.addAttribute("alist", alist);
+			
+			//이미지 파일명 업데이트
+			MemberVO memVo=memberService.selectByUserName(userId);
+			String bgImage = bu.toUtf(memVo.getBgImage());
+			
+			model.addAttribute("bgImage", bgImage);
+			
+			return "mybooks/mybookmain";
+		}
 		
-		model.addAttribute("bgImage", bgImage);
 		
-		return "mybooks/mybookmain";
+		return "index";
 	}
 	
 	@RequestMapping("/mybook.do")
-	public String bookletTest(Model model){
+	public void bookletTest(HttpServletRequest request, HttpSession session, Model model){
 		
 		BookUtility bu=new BookUtility();
+		String userId=(String)session.getAttribute("userId");
+		
+		
+		if(userId!=null || !userId.isEmpty()){
+			
+			MyBooksVO myBooksVo=myBookService.selectMyBooksByUserId(userId);
+			
+			//이미지 파일명 업데이트
+			MyBookVO myBookVo=myBookService.selectBookByBookNo(myBooksVo.getBookNo());
+			String bookFileName = bu.toUtf(myBookVo.getBookFileName());
+			String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
+			
+			
+		}
+		
 		
 		List<String> alist=bu.getBook();
         
         model.addAttribute("alist", alist);
 		//model.addAttribute("str", str);
 		
-		return "mybooks/mybook";
+		//return "mybooks/mybook";
 	}
-	
-	
 	
 	@RequestMapping("/changeBackImg.do")
 	@ResponseBody
 	public String changeBackImg(HttpSession session, HttpServletRequest request){
-		
-		
+		BookUtility bu=new BookUtility();
 		/*
 		"userId"
 		"auchCode"
 		"memberNo"
 		"userName"
 		*/
-		
 		
 		//파일 업로드 처리
 		int uploadType=FileUploadWebUtil.IMAGE_UPLOAD;
@@ -114,12 +145,12 @@ public class MybooksController {
 				boolean bool=oldFile.delete();
 				logger.info("기존 파일 삭제 여부={}", bool);
 			}
-			String newimg = toUtf(memberVo.getBgImage());
+			String newimg = bu.toUtf(memberVo.getBgImage());
 
 			return newimg;
 		}else{
 			logger.info("처리 안됐어 다시 해봐");
-			String oldimg = toUtf(memberVo.getBgImage());
+			String oldimg = bu.toUtf(memberVo.getBgImage());
 			return oldimg;
 		}
 		
@@ -131,20 +162,6 @@ public class MybooksController {
 		return alist;
 		*/
 	}
-	
-	public static String toUtf(String str) { 
-	
-		String utf = ""; 
-		
-			try {
-				utf = URLEncoder.encode(str , "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			
-		return utf; 
-	}
-	
 	
 	/*
 	@RequestMapping("/changeBackImg.do")

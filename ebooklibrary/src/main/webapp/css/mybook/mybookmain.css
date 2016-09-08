@@ -74,10 +74,28 @@ html {
     /* border: 1px solid black; */
     display: none;
     clear: both;
+    position: relative;
 }
-
 #upFileBox:hover {
     box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2);
+}
+/* 기본배경화면 */
+#defalutImage{
+	border: 1px solid #d7d7d7;
+	background-color: rgba(255,220,220, 0.7);
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	padding: 2px;
+	border-radius: 3px;
+	color: #535353;
+	/* margin: 0 10px 10px 0; */
+	
+	clear: both;
+}
+#defalutImage:hover{
+    box-shadow: 1px 1px 1px #aaaaaa;
+    cursor: pointer;
 }
 
 /* 책 검색 */
@@ -270,7 +288,7 @@ html {
  */
 
 /* 책 라벨 */
-#mybookColor{
+.mybookColor{
 	width: 25px;
 	height: 10px;
 	position: absolute;
@@ -279,7 +297,7 @@ html {
 	margin: 0;
 	left: 0;
 }
-#mybookColor1{
+.mybookColor1{
 	width: 25px;
 	height: 10px;
 	position: absolute;

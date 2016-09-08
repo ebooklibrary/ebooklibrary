@@ -13,6 +13,19 @@
 		$(".mybook").click(function() {
 			alert($(this).find(".mybook1").val());
 		});
+		
+		$(".mybook").click(function() {
+			var bookNo=$(this).find(".mybook1").val();
+			
+			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+			
+			
+		});
+		
+		
+		
+		
+		
 		/* 
 		$(".mybook").hover(function() {
 				$(this).css("cursor","pointer");
@@ -20,19 +33,21 @@
 				$(this).css("cursor","");
 		});
 		 */
+		 
 		 /* 
 		 var Ca = /\+/g;
 			decodeURIComponent( bimg.replace(Ca, " ") );
-			
 			//var bimg=encodeURIComponent(bimg);
-		 
-		  */
+		*/
+		  
+		/* 한글 깨짐 현상 해결을 위한 디코딩, 공백 존재시 생기는 '+' 제거 */
 		var bgImage="${bgImage}";
 		var Ca = /\+/g;
 		var bgImage=decodeURIComponent(bgImage);
 		var bgImage=bgImage.replace(Ca, "");
 		alert(bgImage);
-		 
+		
+		/* 배경화면 설정 */
 		$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/"+bgImage+")  no-repeat center center fixed",
 							"-webkit-background-size": "cover",
 							"-moz-background-size": "cover",
@@ -40,6 +55,7 @@
 							"background-size": "cover"
 		});
 		
+		/* 책 검색 */
 		$("#menuDiv input[type=text]").focus(function() {
 			$("#menuDiv span").hide();
 		});
@@ -52,11 +68,12 @@
 			});
 		});
 		
+		/* 배경화면 메뉴 */
 		$("#changeBackground").click(function() {
 			$("#upFileBox").toggle();
 		});
 		
-		
+		/* 책목록 */
 		$("#myBtn").click(function() {
 			$(".modal").css("display","block");
 		});
@@ -71,20 +88,12 @@
 			$(".modal").css("display","none");
 		});
 		
-		
-/* 
-		$('div:not("#div이름")').click(function(){                     
-			var color = $(this).css('color');
-			if (color !== 'rgb(255, 0, 0)'){
-			     $(this).css({color:'blue'});
-			}
-		});
-*/
-		
+		/* 책보기 새창 열림 */
 		$("#booktestatag").click(function() {
 			window.open("<c:url value='/mybooks/mybook.do'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0")
 		});
 		
+		/* 배경 바꾸는 ajax */
 		$("#bookfrm").submit(function() {
 			var formData = new FormData($('#bookfrm')[0]);
 			$.ajax({
@@ -119,12 +128,6 @@
 			event.preventDefault();
 		});
 		
-		
-		
-		
-		
-		
-		
 	}); //ready
 	
 	/* 
@@ -154,6 +157,8 @@
 	    }
 	}
 	 */
+	
+	/* 책목록 */
 	function myFunction() {
 		  var input, filter, table, tr, td, i;
 		  input = document.getElementById("myInput");
@@ -177,6 +182,13 @@
 </script>
 </head>
 <body>
+
+		<%-- 
+			<c:forEach var="map" items="${cartList }">
+				<c:set var="sum" value='${map["SELLPRICE"]*map["QUANTITY"] }'/>
+			</c:forEach>
+	 	--%>
+
 
 	<div id="wrapper">
 	
@@ -217,9 +229,10 @@
 					<form id="bookfrm" name="bookfrm" enctype="multipart/form-data" method="post">
 						원하시는 배경이미지를 올려보세요!<br><br>
 						<input type="file" id="bgImage" name="bgImage">
-						<%-- <input type="hidden" id="oldImage" name="oldImage" value="${sessionScope.fileName }"> --%>
+<!-- 						<input type="hidden" id="defalutImage" name="defalutImage" value="defalutImage.jpg"> -->
 						<input type="submit" id="btImg" name="btImg" value="확인">
 					</form>
+						<!-- <span id="defalutImage">기본 배경화면</span> -->
 				</div>
 			
 			
@@ -236,7 +249,7 @@
 		
 		<!-- 보관 책장 -->
 		<div id="BookList">
-			<p>누구누구 님의 책장</p>
+			<p>${sessionScope.userId } 님의 책장</p>
 			
 			<a id="rentBook" href="#">대여책 목록</a>
 			<a id="boughtBook" href="#">구매책 목록</a>
@@ -244,7 +257,16 @@
 					<!-- <a href="#"><FONT style="WRITING-MODE: tb-rl; HEIGHT: 50pt">12345</FONT></a> -->
 			<div id="myBooks">
 			
+			<!-- SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY -->
+			<c:forEach var="map" items="${alist }">
+				<div class="mybook">
+					<span>${map["TITLE"] }</span>
+					<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }">
+					<div class="mybookColor"></div>
+				</div>
+			</c:forEach>
 			
+			<!-- 
 				<div class="mybook" id="b01">
 					<span>Game<br><br>Of<br><br>Thrones</span>
 					<input class="mybook1" type="hidden" value="fileUrl">
@@ -256,19 +278,7 @@
 					<input class="mybook1" type="hidden" value="fileUrl1">
 					<div id="mybookColor1"></div>
 				</div>
-				
-				<div class="mybook" id="b01">
-					<span>Game<br><br>Of<br><br>Thrones</span>
-					<input class="mybook1" type="hidden" value="fileUrl">
-					<div id="mybookColor"></div>
-				</div>
-				
-				<div class="mybook" id="b02">
-					<span>국화꽃<br><br>향기</span>
-					<input class="mybook1" type="hidden" value="fileUrl1">
-					<div id="mybookColor1"></div>
-				</div>
-				
+				 -->
 				
 			 <!-- 
 				<a class="testa" href="#" id="b01">

@@ -13,6 +13,8 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDAO memberDao;
 	
+	public static final String DEFAULTIMAGE="defaultimage.jpg";
+	
 	public int register(MemberVO vo){
 		return memberDao.register(vo);
 	}

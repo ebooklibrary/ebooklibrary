@@ -50,6 +50,8 @@
 		
 		$("#btBookUp").click(function(event) {
 			
+			alert($("#summary").val());
+			
 			if($("#title").val().length < 1){
 				/* alert("책제목을 입력하세요"); */
 				alertify.alert("책제목을 입력하세요"); 
@@ -93,6 +95,13 @@
 				$("#coverFileName").focus();
 				return false;
 			}
+			if($("#summary").val()==''){
+				alert("내용");
+				$("#summary").focus();
+				return false;
+			}
+			
+			
 			
 			/* 
 			if(!validate_userid($("#userid").val())){

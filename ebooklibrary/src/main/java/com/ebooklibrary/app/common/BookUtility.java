@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -226,6 +227,16 @@ public class BookUtility {
 				
 		return alist;
 	}//getbook
+	
+	public String toUtf(String str) { 
+		String utf = ""; 
+			try {
+				utf = URLEncoder.encode(str , "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		return utf; 
+	}
 	
 	
 }//class

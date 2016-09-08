@@ -25,9 +25,9 @@ public class FileUploadWebUtil {
 	
 	private static final Logger logger=LoggerFactory.getLogger(FileUploadWebUtil.class);
 	
-	//자료실에서 업로드인지, 상품등록에서 이미지 업로드인지 구분해주는 상수
+	//책 업로드인지, 배경 이미지 업로드인지 구분해주는 상수
 	public static final int PDS_UPLOAD=1; //자료실 파일 업로드
-	public static final int IMAGE_UPLOAD=2; //상품이미지 업로드
+	public static final int IMAGE_UPLOAD=2; //배경이미지 업로드
 	
 	@Resource(name="fileUploadProperties")
 	private Properties fileUploadProps;
@@ -51,7 +51,7 @@ public class FileUploadWebUtil {
 			if (!tempFile.isEmpty()) {
 				String ofileName=tempFile.getOriginalFilename();
 				//파일명 변경하기
-				String fileName=getUniqueFileName(ofileName);
+				String fileName=getUniqueFileName(ofileName, uploadType);
 				
 				//파일크기 구하기
 				long fileSize=tempFile.getSize();
@@ -88,7 +88,7 @@ public class FileUploadWebUtil {
 	}
 	
 	
-	public String getUniqueFileName(String ofileName){
+	public String getUniqueFileName(String ofileName, int uploadType){
 	      //파일명에 현재시간을 추가해서 변경된 파일명 만들기
 	      //abc.txt => abc + 현재시간 + .txt
 	      //=> abc20160818111520123.txt
@@ -100,7 +100,10 @@ public class FileUploadWebUtil {
 
 	      //순수파일명에 현재시간을 연결한 후 .확장자를 연결한다
 	      String fileName = fName+getCurrentTime()+ext;
-	      fileName=fileName.replaceAll(" ", "");
+	      if (uploadType==IMAGE_UPLOAD) {
+	    	  fileName=fileName.replaceAll(" ", "");
+	      }
+	      
 	      return fileName;
 	   }
 
