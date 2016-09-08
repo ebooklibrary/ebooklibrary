@@ -34,7 +34,28 @@
 		type="annotation"/>
 		
 	</context:component-scan>
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/shop/*/*"/>
+			<mapping path="/shop/*"/>
+			<mapping path="/library/qna/qnaDelete.do"/>
+			<mapping path="/library/qna/qnaEdit.do"/>
+			<mapping path="/library/qna/qnaWrite.do"/>
+			<mapping path="/library/request/requestDelete.do"/>
+			<mapping path="/library/request/requestEdit.do"/>
+			<mapping path="/library/request/requestWrite.do"/>
+			<mapping path="/library/notice/noticeDelete.do"/>
+			<mapping path="/library/notice/noticewrite.do"/>
+			<mapping path="/library/notice/noticeEdit.do"/>
+			<mapping path="/mybooks/*"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path=""/>
+			<beans:ref bean="adminLoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	
 </beans:beans>

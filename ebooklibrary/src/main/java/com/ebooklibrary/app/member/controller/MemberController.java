@@ -63,7 +63,7 @@ public class MemberController {
 		if(result==MemberService.LOGIN_OK){
 			MemberVO memberVo=memberService.selectByUserName(userId);
 			HttpSession session=request.getSession();
-			session.setAttribute("userId", memberVo.getUserName());
+			session.setAttribute("userId", memberVo.getUserId());
 			session.setAttribute("auchCode", memberVo.getAuthCode());
 			session.setAttribute("memberNo", memberVo.getMemberNo());
 			session.setAttribute("userName", memberVo.getUserName());

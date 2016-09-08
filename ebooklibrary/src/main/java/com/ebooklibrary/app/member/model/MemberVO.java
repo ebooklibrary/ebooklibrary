@@ -10,7 +10,7 @@ public class MemberVO {
 	private String hp1;  /* 전화번호 */
 	private String hp2;  /* 전화번호 */
 	private String hp3;  /* 전화번호 */
-	private String birth;  /* 생년월일 */
+	private int birth;  /* 생년월일 */
 	private String gender;  /* 성별 */
 	private Timestamp regDate;  /* 가입일 */
 	private Timestamp outDate;  /* 탈퇴일 */
@@ -30,7 +30,12 @@ public class MemberVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getPwd() {
 		return pwd;
 	}
@@ -55,10 +60,10 @@ public class MemberVO {
 	public void setHp3(String hp3) {
 		this.hp3 = hp3;
 	}
-	public String getBirth() {
+	public int getBirth() {
 		return birth;
 	}
-	public void setBirth(String birth) {
+	public void setBirth(int birth) {
 		this.birth = birth;
 	}
 	public String getGender() {
@@ -103,12 +108,6 @@ public class MemberVO {
 	public void setConfrimEmail(String confrimEmail) {
 		this.confrimEmail = confrimEmail;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 	@Override
 	public String toString() {
 		return "MemberVO [memberNo=" + memberNo + ", userId=" + userId + ", userName=" + userName + ", pwd=" + pwd
@@ -116,8 +115,4 @@ public class MemberVO {
 				+ ", regDate=" + regDate + ", outDate=" + outDate + ", authCode=" + authCode + ", cash=" + cash
 				+ ", bgImage=" + bgImage + ", confrimEmail=" + confrimEmail + "]";
 	}
-	
-	
-	
-	
 }
