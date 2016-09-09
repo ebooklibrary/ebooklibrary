@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,15 @@
 		$(".mybook").click(function() {
 			alert($(this).find(".mybook1").val());
 		});
+		
+		$(".mybook").click(function() {
+			var bookNo=$(this).find(".mybook1").val();
+			
+			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+			
+			
+		});
+		
 		/* 
 		$(".mybook").hover(function() {
 				$(this).css("cursor","pointer");
@@ -21,13 +31,28 @@
 		});
 		 */
 		 
-		$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/${bgImage})  no-repeat center center fixed",
+		 /* 
+		 var Ca = /\+/g;
+			decodeURIComponent( bimg.replace(Ca, " ") );
+			//var bimg=encodeURIComponent(bimg);
+		*/
+		  
+		/* 한글 깨짐 현상 해결을 위한 디코딩, 공백 존재시 생기는 '+' 제거 */
+		var bgImage="${bgImage}";
+		var Ca = /\+/g;
+		var bgImage=decodeURIComponent(bgImage);
+		var bgImage=bgImage.replace(Ca, "");
+		//alert(bgImage);
+		
+		/* 배경화면 설정 */
+		$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/"+bgImage+")  no-repeat center center fixed",
 							"-webkit-background-size": "cover",
 							"-moz-background-size": "cover",
 							"-o-background-size": "cover",
 							"background-size": "cover"
 		});
 		
+		/* 책 검색 */
 		$("#menuDiv input[type=text]").focus(function() {
 			$("#menuDiv span").hide();
 		});
@@ -40,39 +65,45 @@
 			});
 		});
 		
+		/* 배경화면 메뉴 */
 		$("#changeBackground").click(function() {
 			$("#upFileBox").toggle();
 		});
+		var test;
 		
-		
-		$("#myBtn").click(function() {
-			$(".modal").css("display","block");
+		/* 책목록 */
+		$("#boughtBook").click(function() {
+			//$(".modal").css("display","block");
+			$("#boughtBookList").css("display","block");
+			$("#rentBookList").css("display","none");
+			$("#rentBook").find("input").attr("id",""); //myInput
+			$("#rentBook").find("table").attr("id",""); //myTable
 		});
 		$("#rentBook").click(function() {
-			$(".modal").css("display","block");
-		});
-		$("#boughtBook").click(function() {
-			$(".modal").css("display","block");
+			//$(".modal").css("display","block");
+			$("#rentBookList").css("display","block");
+			$("#boughtBookList").css("display","none");
+			$("#boughtBookList").find("input").attr("id",""); //myInput
+			$("#boughtBookList").find("table").attr("id",""); //myTable
 		});
 		
 		$(".close").click(function() {
 			$(".modal").css("display","none");
+			$(".modal-content").find("input").attr("id","myInput"); //myInput
+			$(".modal-content").find("table").attr("id","myTable"); //myTable
 		});
-		
-		
-/* 
-		$('div:not("#div이름")').click(function(){                     
-			var color = $(this).css('color');
-			if (color !== 'rgb(255, 0, 0)'){
-			     $(this).css({color:'blue'});
-			}
+		/* 
+		$("#myBtn").click(function() {
+			$(".modal").css("display","block");
 		});
-*/
+		 */
 		
+		/* 책보기 새창 열림 */
 		$("#booktestatag").click(function() {
 			window.open("<c:url value='/mybooks/mybook.do'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0")
 		});
 		
+		/* 배경 바꾸는 ajax */
 		$("#bookfrm").submit(function() {
 			var formData = new FormData($('#bookfrm')[0]);
 			$.ajax({
@@ -80,15 +111,24 @@
 					type:"POST",
 					processData: false,
 					contentType: false,
+					/* contentType: "application/x-www-form-urlencoded; charset=UTF-8", */
 					data: formData,
 					success:function(bimg){
-						$("html").css({"background":"url(${pageContext.request.contextPath }/images/mybook/${bimg})  no-repeat center center fixed",
+						
+						var Ca = /\+/g;
+						/* var bimg=encodeURIComponent(bimg); */
+						var bimg=decodeURIComponent(bimg);
+						var bimg=bimg.replace(Ca, "");
+						
+						alert("${pageContext.request.contextPath }/backimg/"+bimg);
+						
+						$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/"+bimg+")  no-repeat center center fixed",
 							"-webkit-background-size": "cover",
 							"-moz-background-size": "cover",
 							"-o-background-size": "cover",
 							"background-size": "cover"
 						});
-						location.reload();
+						/* location.reload(); */
 					},
 					error: function(xhr,status, error){
 						alert("에러발생"+status+":"+error);
@@ -97,12 +137,6 @@
 			
 			event.preventDefault();
 		});
-		
-		
-		
-		
-		
-		
 		
 	}); //ready
 	
@@ -133,6 +167,8 @@
 	    }
 	}
 	 */
+	
+	/* 책목록 */
 	function myFunction() {
 		  var input, filter, table, tr, td, i;
 		  input = document.getElementById("myInput");
@@ -150,11 +186,19 @@
 		    }
 		  }
 		}
+	 
 	
 	
 </script>
 </head>
 <body>
+
+		<%-- 
+			<c:forEach var="map" items="${cartList }">
+				<c:set var="sum" value='${map["SELLPRICE"]*map["QUANTITY"] }'/>
+			</c:forEach>
+	 	--%>
+
 
 	<div id="wrapper">
 	
@@ -195,15 +239,11 @@
 					<form id="bookfrm" name="bookfrm" enctype="multipart/form-data" method="post">
 						원하시는 배경이미지를 올려보세요!<br><br>
 						<input type="file" id="bgImage" name="bgImage">
-						<input type="hidden" id="oldImage" name="oldImage" value="${sessionScope.fileName }">
+<!-- 						<input type="hidden" id="defalutImage" name="defalutImage" value="defalutImage.jpg"> -->
 						<input type="submit" id="btImg" name="btImg" value="확인">
 					</form>
+						<!-- <span id="defalutImage">기본 배경화면</span> -->
 				</div>
-			
-			
-			
-				
-				
 			</div>
 			
 			
@@ -214,70 +254,30 @@
 		
 		<!-- 보관 책장 -->
 		<div id="BookList">
-			<p>누구누구 님의 책장</p>
-			
+			<p>${sessionScope.userId } 님의 책장</p>
 			<a id="rentBook" href="#">대여책 목록</a>
 			<a id="boughtBook" href="#">구매책 목록</a>
-			
 					<!-- <a href="#"><FONT style="WRITING-MODE: tb-rl; HEIGHT: 50pt">12345</FONT></a> -->
 			<div id="myBooks">
-			
-			
-				<div class="mybook" id="b01">
-					<span>Game<br><br>Of<br><br>Thrones</span>
-					<input class="mybook1" type="hidden" value="fileUrl">
-					<div id="mybookColor"></div>
+			<!-- SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY -->
+			<c:forEach var="map" items="${alist }">
+				<div class="mybook">
+					<span>${map["TITLE"] }</span>
+					<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }">
+					<div class="mybookColor"></div>
 				</div>
-				
-				<div class="mybook" id="b02">
-					<span>국화꽃<br><br>향기</span>
-					<input class="mybook1" type="hidden" value="fileUrl1">
-					<div id="mybookColor1"></div>
-				</div>
-				
-				<div class="mybook" id="b01">
-					<span>Game<br><br>Of<br><br>Thrones</span>
-					<input class="mybook1" type="hidden" value="fileUrl">
-					<div id="mybookColor"></div>
-				</div>
-				
-				<div class="mybook" id="b02">
-					<span>국화꽃<br><br>향기</span>
-					<input class="mybook1" type="hidden" value="fileUrl1">
-					<div id="mybookColor1"></div>
-				</div>
-				
-				
-			 <!-- 
-				<a class="testa" href="#" id="b01">
-					Game<br><br>Of<br><br>Thrones
-					<input type="hidden" value="fileUrl">
-					<span id="mybookColor1"></span>
-				</a>
-				
-				<a class="testa" href="#" id="b02">
-					국화꽃<br><br>향기
-					<input type="hidden" value="fileUrl1">
-					<span id="mybookColor"></span>
-				</a>
-			 -->
+			</c:forEach>
 			</div> <!-- mybooks -->
-			
 		</div> <!-- BookList -->
-		
 	</div> <!-- wrapper -->
 	
-	
-	<!-- 
-	<button id="myBtn">Open Modal</button>
-	 -->
-	<!-- 책목록 미니창 띄우기 -->
-	<div id="myModal" class="modal">
+	<!-- 구매책목록 미니창 띄우기 -->
+	<!-- myModal -->
+	<div id="boughtBookList" class="modal">
 	  <div class="modal-content">
-	    <p>나의 구매(대여)책 목록</p>
+	    <p>나의 구매책 목록</p>
 	    <br>
 	    <span class="close">닫기</span>
-	    
 	    <!-- 미니창 안의 책목록및검색 -->
 		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 		<table id="myTable">
@@ -286,56 +286,50 @@
 		    <th style="width:40%;">출판사</th>
 		    <th style="width:20%;">유효날짜</th>
 		  </tr>
-		  
-		  <tbody>
-			  <tr>
-			    <td>음악은 그런거니깐</td>
-			    <td>Germany</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Berglunds snabbkop</td>
-			    <td>Sweden</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Island Trading</td>
-			    <td>UK</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Koniglich Essen</td>
-			    <td>Germany</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Laughing Bacchus Winecellars</td>
-			    <td>Canada</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Magazzini Alimentari Riuniti</td>
-			    <td>Italy</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>North/South</td>
-			    <td>UK</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Paris specialites</td>
-			    <td>France</td>
-			    <td>오늘내일</td>
-			  </tr>
+		<tbody>
+			<c:forEach var="map" items="${alist }">
+				<c:if test="${empty map['RENT_END'] }">
+					<tr>
+						<td>${map["TITLE"] }</td>
+						<td>${map["PUBLISHER"] }</td>
+						<td><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				</c:if>
+			</c:forEach>
 		  </tbody>
-		  
 		</table>
-
 	  </div>
 	</div>
 			
-	
+	<!-- 대여책목록 미니창 띄우기 -->
+	<!-- myModal -->
+	<div id="rentBookList" class="modal">
+	  <div class="modal-content">
+	    <p>나의 대여책 목록</p>
+	    <br>
+	    <span class="close">닫기</span>
+	    <!-- 미니창 안의 책목록및검색 -->
+		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+		<table id="myTable">
+		  <tr class="header">
+		    <th style="width:40%;">책제목</th>
+		    <th style="width:40%;">출판사</th>
+		    <th style="width:20%;">유효날짜</th>
+		  </tr>
+		<tbody>
+			<c:forEach var="map" items="${alist }">
+				<c:if test="${!empty map['RENT_END'] }">
+					<tr>
+						<td>${map["TITLE"] }</td>
+						<td>${map["PUBLISHER"] }</td>
+						<td><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				</c:if>
+			</c:forEach>
+		  </tbody>
+		</table>
+	  </div>
+	</div>
 	
 	
 	

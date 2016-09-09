@@ -13,7 +13,7 @@
 		});
 		$("#listGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/qna/qnaList.do'/>");
-		});
+		});		
 	});
 	
 	function pageFunc(curPage){
@@ -24,8 +24,12 @@
 </script>
 <form name="frmPage" method="post" 
 	action="<c:url value='/library/qna/qnaList.do'/>">
-	<input type="hidden" name="eventName" 	value="">
-	<input type="hidden" name="currentPage">	
+	<input type="hidden" name="currentPage">
+	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+	<input type="hidden" id="myWrite" name="myWrite" value="${param.myWrite }">
+	<input type="hidden" id="myWrite" name="searchCondition" value="${param.searchCondition }">
+	<input type="hidden" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
+	
 </form>
 	<h1>QnA게시판입니다</h1>
 	<div class=""></div>
@@ -60,8 +64,16 @@
 			<c:forEach var="vo" items="${qnaList}">
 			
 				<tr>
-					<td>${vo.qnaNo }</td>
-					<td><a href="<c:url value='/library/qna/readCountAdd.do?qnaNo=${vo.qnaNo }'/>">${vo.title }</a></td>
+					<td>${vo.qnaNo}</td>
+					<td><a href="<c:url value='/library/qna/readCountAdd.do?qnaNo=${vo.qnaNo }'/>">
+						<c:if test="${vo.complete=='Y'}">
+						[답변완료]
+						</c:if>
+						${vo.title }
+						<c:if test="${vo.commentCount!=0 }">
+							[${vo.commentCount }]
+						</c:if>
+						</a></td>
 					<td>${vo.userName }</td>
 					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="MM/dd 
 						 HH:mm:ss"/> </td>
@@ -73,13 +85,14 @@
 		</c:if>
 	</tbody>
 	</table>	   
-<div class="divPage">
+<div class="align_left">
 	<input type="button" id="listGo" value="전체목록"/>
 	<input type="button" id="writeGo" value="글쓰실?"/>
-	<form id="frmMyWriting" method="post" action="<c:url value='/library/qna/qnaList.do' />" >
-		<input type="button" id="myWriting" value="내글 보기"/>
-		<input type="hidden" name="memberNo" value="${sessionScope.memberNo}"/>
-	</form>
+	<form id="myWrite" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
+		<input type="submit" id="myWriting" value="내글 보기"/>
+		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+		<input type="hidden" id="myWrite" name="myWrite" value="Y">
+	</form>			
 </div>
 <!-- 페이징 처리를 위한 div -->
 <div class="divPage">
@@ -118,7 +131,7 @@
 		</a>
 	</c:if>
 </div>
-<div class="divSearch">
+<div class="align_center">
    	<form name="frmSearch" method="post" 
    	action="<c:url value='/library/qna/qnaList.do' />" >
         <select name="searchCondition">
@@ -132,8 +145,8 @@
             		selected
                </c:if>
             >내용</option>
-            <option value="userName" 
-            	<c:if test="${param.searchCondition=='userName'}">
+            <option value="user_name" 
+            	<c:if test="${param.searchCondition=='user_name'}">
             		selected
                </c:if>
             >작성자</option>
@@ -143,5 +156,6 @@
 		<input type="submit" value="검색">
     </form>
 </div>
+<input type="hidden" value="${sessionScope.memberNo }"/>
 
 <%@include file="../libraryBottom.jsp" %>

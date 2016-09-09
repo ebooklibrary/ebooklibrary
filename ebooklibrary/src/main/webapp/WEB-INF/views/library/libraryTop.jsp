@@ -24,8 +24,22 @@
 
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/main_all.css" />
+<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/silde_Notice/slide.css" />
+=======
+<!-- alert -->
+<!-- ideally at the bottom of the page -->
+<!-- also works in the <head> -->
+<%-- <c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/> --%>
+<script src="<c:url value='/alertify.js-0.3.11/lib/alertify.min.js'/>"></script>
+<!-- include the core styles -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/>" />
+<%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
+<!-- include a theme, can be included into the core instead of 2 separate files -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
+>>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.1.js"></script>
 <script type="text/javascript">
 
 
@@ -40,7 +54,9 @@
 		<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
 	</div>
 	<div class="menuform">
+		<a href="<c:url value='/library/notice/noticelist.do'/>"> 
 		공지사항
+		</a>
 	</div>
 	<div class="menuform">
 		책검색
@@ -79,15 +95,20 @@
 			</c:if>
 			<c:if test="${!empty sessionScope.userId }">
 				<li>
+				<a href="<c:url value='/member/myPage.do'/>">
+				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
+				마이페이지
+				</a></li>
+				<li>
 				<a href="<c:url value='/member/logout.do'/>">
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 				로그아웃
 				</a></li>				
 				<li>
-	            <a href="<c:url value='/member/register.do'/>">
+	            <a href="<c:url value='/shop/cart/cartList.do'/>">
 	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
 	            장바구니
-	            </a></li>	                        
+	            </a></li>
 			</c:if>			 
             <li class="last">
             <a href="/html/06_sitemap/sitemap.asp">

@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ import com.ebooklibrary.app.member.model.MemberVO;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	private static final Logger logger=
+			LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	private MemberService memberService;
@@ -63,7 +67,7 @@ public class MemberController {
 		if(result==MemberService.LOGIN_OK){
 			MemberVO memberVo=memberService.selectByUserName(userId);
 			HttpSession session=request.getSession();
-			session.setAttribute("userId", memberVo.getUserName());
+			session.setAttribute("userId", memberVo.getUserId());
 			session.setAttribute("auchCode", memberVo.getAuthCode());
 			session.setAttribute("memberNo", memberVo.getMemberNo());
 			session.setAttribute("userName", memberVo.getUserName());
@@ -93,5 +97,36 @@ public class MemberController {
 	@ResponseBody
 	public int chkId(@RequestParam String userId){
 		return memberService.selectMemberCheckId(userId);
+	}
+	
+	@RequestMapping("/myInfoChk.do")
+	public String myInfoChk(HttpSession session,@RequestParam String pwd,
+			Model model){
+		String userId=(String)session.getAttribute("userId");
+		int result=memberService.logincheck(userId, pwd);
+		String msg="",url="/member/login.do";
+		if(result==MemberService.LOGIN_OK){
+			MemberVO memberVo=memberService.selectByUserName(userId);
+			model.addAttribute("memberVo", memberVo);
+			return "member/myInfo";
+		}else if(result==memberService.PWD_DISAGREE){
+			msg="비밀번호가 다릅니다";
+		}else if(result==memberService.ID_NONE){
+			msg="아이디가 없습니다";
+		}else{
+			msg="로그인 실패";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "common/message";
+	}
+	
+	@RequestMapping("/myPage.do")
+	public void myPageShow(HttpSession session,Model model){
+		logger.info("마이페이지 보여주기");
+		String userId=(String)session.getAttribute("userId");
+		MemberVO memberVo=memberService.selectByUserName(userId);
+		
+		model.addAttribute("memberVo", memberVo);
 	}
 }

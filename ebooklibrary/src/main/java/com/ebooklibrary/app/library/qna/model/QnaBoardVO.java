@@ -11,6 +11,14 @@ public class QnaBoardVO {
 	private int readCount;
 	private int memberNo;
 	private String complete;
+	private int commentCount;
+	
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 	public int getQnaNo() {
 		return qnaNo;
 	}
@@ -63,7 +71,7 @@ public class QnaBoardVO {
 	public String toString() {
 		return "QnaBoardVO [qnaNo=" + qnaNo + ", title=" + title + ", userName=" + userName + ", regDate=" + regDate
 				+ ", content=" + content + ", readCount=" + readCount + ", memberNo=" + memberNo + ", complete="
-				+ complete + "]";
+				+ complete + ", commentCount=" + commentCount + "]";
 	}
 	
 	

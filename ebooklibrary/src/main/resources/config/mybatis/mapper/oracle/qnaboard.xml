@@ -5,22 +5,28 @@
 <mapper namespace="config.mybatis.mapper.oracle.qnaboard">
 	<sql id="searchWhere">
 		<where>
-			<if test="searchKeyword!=null and searchKeyword!=''">
-				${searchCondition} 
-				like '%' || #{searchKeyword} || '%'
+			<if test="myWrite==null or myWrite==''">
+				<if test="searchKeyword!=null and searchKeyword!=''">
+					${searchCondition} 
+					like '%' || #{searchKeyword} || '%'
+				</if>
 			</if>
+			<if test="myWrite!=null and myWrite!=''">
+				MEMBER_NO=#{memberNo}
+			</if>
+			
 		</where>
 	</sql>
 	
 		
 	<select id="selectQnaAll" resultType="QnaBoardVO" 
-		parameterType="SearchVO">
+		parameterType="MemberSearchVO">
 		select *
 		from
 		(
 		    select rownum as RNUM, QnaLIST_ALL.*
 		    from
-		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,
+		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,COMPLETE,
 					CONTENT,READ_COUNT
 		        from QNA_BOARD 
 		        <include refid="searchWhere"></include>
@@ -33,23 +39,23 @@
 		]]>
 	</select>
 	
-	<select id="selectTotalCount" parameterType="SearchVO" resultType="int">
+	<select id="selectTotalCount" parameterType="MemberSearchVO" resultType="int">
 		select count(*) from QNA_BOARD
 		<include refid="searchWhere"></include>
 	</select>
 	
 	<insert id="insertQnaBoard" parameterType="QnaBoardVO">
-      <selectKey keyProperty="no" 
+      <selectKey keyProperty="qnaNo" 
       order="BEFORE" resultType="int">
         select QNA_SEQ.nextval from dual
       </selectKey>
 
-		insert into QNA_BOARD(qna_no ,title,USER_NAME ,content)
-		values(QNA_SEQ.nextval,#{title},#{userName},#{content})
+		insert into QNA_BOARD(qna_no ,title,USER_NAME ,content,member_no)
+		values(#{qnaNo},#{title},#{userName},#{content},#{memberNo})
 	</insert>
 	
-	<select id="selectBoardNoByUSER_NAME" parameterType="string" resultType="int">
-		select max(qna_no)  from QNA_BOARD where USER_NAME=#{userName}
+	<select id="selectBoardNoByMemberNo" parameterType="int" resultType="int">
+		select max(qna_no)  from QNA_BOARD where MEMBER_no=#{memberNo}
 	</select> 
 	
 	<select id="selectByNo" parameterType="int"
@@ -84,11 +90,11 @@
 
    	<select id="nextPage" parameterType="int" resultType="int">
    		select MIN(QNA_NO) from QNA_BOARD
-   		<if test="no!=null">
+   		
    		<![CDATA[
    		 where QNA_NO > #{qnaNo}
    		 ]]>
-   		 </if>
+   		 
    	</select>
    	
 	<select id="maxPage" parameterType="int" resultType="int">		
@@ -113,7 +119,7 @@
 		(
 		    select rownum as RNUM, QnaLIST_ALL.*
 		    from
-		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,
+		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,COMPLETE,
 					CONTENT,READ_COUNT
 		        from QNA_BOARD 
 		        where MEMBER_NO=#{memberNo}
@@ -128,6 +134,12 @@
 	
 	<select id="selectCountByMemNo" parameterType="MemberSearchVO" resultType="int">
 		select count(*) from QNA_BOARD where  MEMBER_NO=#{memberNo}
-		<include refid="searchWhere"></include>
+		
 	</select>
+	
+	<update id="updateComplete" parameterType="int">
+		update QNA_BOARD
+		set COMPLETE='Y'
+		where QNA_NO=#{qnaNo}
+	</update>
 </mapper>

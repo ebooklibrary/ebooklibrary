@@ -7,12 +7,12 @@ import com.ebooklibrary.app.common.SearchVO;
 
 public interface QnaBoardDAO {
 	//list
-	public List<QnaBoardVO> selectQnaAll(SearchVO searchVo);
-	public int selectListCount(SearchVO searchVo);
+	public List<QnaBoardVO> selectQnaAll(MemberSearchVO searchVo);
+	public int selectListCount(MemberSearchVO searchVo);
 	//insert
 	public int insertQnaBoard(QnaBoardVO qnaBoardVo);
 	//insert->detail
-	public int selectQnaBoardByUsername(String userName);
+	public int selectQnaBoardByMemberNo(int memberNo);
 	//detail
 	public QnaBoardVO selectByNo(int qnaNo);
 	//edit
@@ -30,6 +30,8 @@ public interface QnaBoardDAO {
 	//MinqnaNo
 	public int minQnaNo();
 	//user'sWriting//멤버번호로 조회할예정 일단 유저네임으로.
-	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memVo);
-	public int selectCountByMemNo(MemberSearchVO memVo);
+	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memberSVo);
+	public int selectCountByMemNo(MemberSearchVO memberSVo);
+	//completeQna
+	public int completeQna(int qnaNo);
 }

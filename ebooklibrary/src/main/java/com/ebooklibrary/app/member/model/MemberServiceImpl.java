@@ -13,6 +13,8 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDAO memberDao;
 	
+	public static final String DEFAULTIMAGE="defaultimage.jpg";
+	
 	public int register(MemberVO vo){
 		return memberDao.register(vo);
 	}
@@ -40,5 +42,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 	public int selectMemberCheckId(String userId){
 		return memberDao.selectMemberCheckId(userId);
+	}
+
+	@Override
+	public int updateBackImg(MemberVO vo) {
+		return memberDao.updateBackImg(vo);
 	}
 }

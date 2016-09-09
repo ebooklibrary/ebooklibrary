@@ -14,7 +14,7 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 	private String namespace="config.mybatis.mapper.oracle.qnaboard";
 	
 	@Override
-	public List<QnaBoardVO> selectQnaAll(SearchVO searchVo) {
+	public List<QnaBoardVO> selectQnaAll(MemberSearchVO searchVo) {
 		List<QnaBoardVO> alist=getSqlSession().selectList(namespace+".selectQnaAll",searchVo);
 		
 		return alist;
@@ -26,10 +26,10 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 	}
 
 	@Override
-	public int selectQnaBoardByUsername(String userName) {
-		return getSqlSession().selectOne(namespace+".selectBoardNoByUsername",userName);
-		
+	public int selectQnaBoardByMemberNo(int memberNo) {
+		return getSqlSession().selectOne(namespace+".selectBoardNoByMemberNo",memberNo);
 	}
+	
 	@Override
 	public QnaBoardVO selectByNo(int qnaNo) {
 		return getSqlSession().selectOne(namespace+".selectByNo",qnaNo);
@@ -48,7 +48,7 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 	}
 
 	@Override
-	public int selectListCount(SearchVO searchVo) {
+	public int selectListCount(MemberSearchVO searchVo) {
 		
 		return getSqlSession().selectOne(namespace+".selectTotalCount",searchVo);
 				
@@ -85,9 +85,16 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 	}
 
 	@Override
-	public int selectCountByMemNo(MemberSearchVO memVo) {
-		return getSqlSession().selectOne(namespace+".selectCountByMemNo",memVo);
+	public int selectCountByMemNo(MemberSearchVO memberSVo) {
+		System.out.println(memberSVo);
+		return getSqlSession().selectOne(namespace+".selectCountByMemNo",memberSVo);
 	}
+
+	@Override
+	public int completeQna(int qnaNo) {
+		return getSqlSession().update(namespace+".updateComplete",qnaNo);
+	}
+
 
 	
 	

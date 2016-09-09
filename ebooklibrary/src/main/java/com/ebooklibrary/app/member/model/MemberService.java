@@ -13,7 +13,8 @@ public interface MemberService {
 	public static final int PWD_DISAGREE=2;
 	public static final int ID_NONE=3;
 	
-	
+	//기본 배경 화면
+	public static final String DEFAULTIMAGE="defaultimage.jpg";
 	
 	public int register(MemberVO vo);
 	public int logincheck(String userName,String pwd);
@@ -21,4 +22,5 @@ public interface MemberService {
 	public List<MemberVO> selectMemberAll(SearchVO vo);
 	public int selectMemberCount(SearchVO vo);
 	public int selectMemberCheckId(String userId);
+	public int updateBackImg(MemberVO vo);
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../library/libraryTop.jsp" %>
 <script type="text/javascript">
-	$(function() {
+	$(function() {		
 		$("#regForm").submit(function() {
 			if($("#userName").val().length<1){
 				alert("이름을 입력하세요");				
@@ -23,6 +23,9 @@
 			}else if($("#chkId").val()!='Y'){
 				alert("아이디를 다시확인해주세요");				
 				$("#userId").focus();
+				return false;
+			}else if($("#emailStatus").val()!='Y'){
+				alert("이메일 인증을 해주세요");
 				return false;
 			}		
 		});//submit
@@ -54,6 +57,36 @@
 				$("#chkId").val('N');
 			}
 		});
+		
+		$("#btnEmail").click(function() {
+			if($("#chkId").val()=='Y'){
+				$.ajax({
+					url:"<c:url value='/emailConfirm.do'/>",
+					data:"receiver="+$("#userId").val(),
+					type:"POST",
+					success:function(res){
+						alert(res);
+						$("#btnEmailOk").click(function() {
+							if(res==$("#confirm").val()){
+								$("#emailconfirm").css("visibility","hidden");
+								$("#emailOk").css("visibility","visible");
+								$("#emailNo").css("visibility","hidden");
+								$("#emailStatus").val("Y")
+							}else{
+								$("#emailNo").css("visibility","visible");
+								$("#emailStatus").val("N")
+							}
+						})
+					},
+					error:function(xhr,status,error){
+						alert(status+":"+error);
+					}			
+				})
+			}else{
+				alert("아이디를 확인해 주세요");
+				$("#userId").focus();
+			}//if
+		})//btnEmail
 	});//document.ready
 	
 	function validate_userid(userid) {
@@ -66,12 +99,27 @@
 	}
 
 </script>
-
 	<h1>회원가입</h1>
 	<form action="<c:url value='/member/register.do'/>" method="post" id="regForm">
 		<label for="userId">아이디(이메일)</label>
 		<input type="text" name="userId" id="userId"><br>
 		<span id="message" style="color: red;">아이디는 이메일을 적어주세요</span><br>
+		
+		<span id="emailconfirm">
+		<span>이메일 인증하기</span>
+		<form>
+		<input type="hidden" name="userId">
+		<input type="button" value="인증번호 발송" id="btnEmail">
+		</form><br>
+		
+		<labal for="confirm">인증번호</labal>		
+		<input type="text" name="confirm" id="confirm" size="10">
+		<input type="button" value="확인" id="btnEmailOk">
+		</span>
+		<span id="emailOk" style="visibility: hidden;"> 인증되었습니다</span>
+		<input type="hidden" id="emailStatus" value="N">
+		<span id="emailNo" style="visibility: hidden;"> 인증번호를 다시 확인해주세요</span><br>
+		
 		<label for="userName">이름</label>
 		<input type="text" name="userName" id="userName"><br>
 		<label for="pwd">비밀번호</label>

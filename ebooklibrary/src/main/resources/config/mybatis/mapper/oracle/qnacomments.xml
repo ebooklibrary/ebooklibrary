@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.qnacomments">
+	
+	<select id="selectAllComment" parameterType="int" resultType="QnaCommentVO">
+		select * from  QNA_COMMENTS where QNA_NO=#{qnaNo} order by  group_No, sort_No asc
+	</select>
+	
+	<insert id="insertComment" parameterType="QnaCommentVO">
+		<selectKey keyProperty="commentNo" resultType="int"
+			order="BEFORE">
+			select comment_seq.nextval from dual
+		</selectKey>
+		insert into QNA_COMMENTS(COMMENT_NO,QNA_NO, user_name,content,group_no)
+		values(#{commentNo},#{qnaNo},#{userName},#{content},#{commentNo})
+	</insert>
+	
+	<update id="updateSortNo" parameterType="QnaCommentVO">
+		update QNA_COMMENTS
+		set sort_no = sort_no+1 
+		<![CDATA[where group_no=#{groupNo} and sort_no >= #{sortNo}]]>
+	</update>
+	
+	<insert id="commentReply" parameterType="QnaCommentVO" >
+		<selectKey keyProperty="commentNo" resultType="int"
+			order="BEFORE">
+			select comment_seq.nextval from dual
+		</selectKey>
+		insert into QNA_COMMENTS(COMMENT_NO,qna_no,content, user_name,
+			 group_no, step_no, sort_No )
+		values(#{commentNo}, #{qnaNo},#{content},#{userName},
+					#{groupNo}, #{stepNo}, #{sortNo})
+	</insert>
+	
+	<select id="CountCommentByQna" parameterType="int" resultType="int">
+		select COUNT(*) from  QNA_COMMENTS where QNA_NO=#{qnaNo} 
+	</select>
+	
+	<update id="selectedComment" parameterType="int">
+		update QNA_COMMENTS SET SELECT_CMT='Y' WHERE COMMENT_NO=#{commentNo}
+	</update>
+	
+</mapper>

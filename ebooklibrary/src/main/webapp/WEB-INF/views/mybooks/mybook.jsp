@@ -159,13 +159,13 @@ ${pageContext.request.contextPath}
 
 
 
+
+
 <title>Insert title here</title>
 </head>
 <body>
 	<div id="custom-goto"></div>
 	<div id="display"></div>
-	
-	
 	
 	<!-- 
 	<div id="custom-menu"></div>

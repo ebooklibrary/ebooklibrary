@@ -12,6 +12,19 @@
 		values(#{bookNo},#{title},#{publisher},#{writer},#{publication},#{genre},#{price},#{summary},#{bookFileName},#{coverFileName},#{bookFileSize})
 	</insert>
 	
+	<select id="selectBookByUserId" parameterType="string" resultType="map">
+		SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY
+		  FROM MY_BOOKS M, BOOK B
+		 WHERE M.BOOK_NO=B.BOOK_NO AND USER_ID=#{userId}
+	</select>
+	
+	<select id="selectMyBooksByUserId" parameterType="string" resultType="MyBooksVO">
+		select * from MY_BOOKS where USER_ID=#{userId}
+	</select>
+	
+	<select id="selectBookByBookNo" parameterType="int" resultType="MyBookVO">
+		select * from book where BOOK_NO=#{bookNo}
+	</select>
 	
 	
 </mapper>

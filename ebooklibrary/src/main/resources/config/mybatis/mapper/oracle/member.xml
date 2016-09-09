@@ -58,6 +58,22 @@
 	<select id="selectCountUserid" parameterType="string" resultType="int">
 		select count(*) from member where user_id=#{userid}	
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 내서재 배경화면 -->
+	<update id="updateBackImg" parameterType="MemberVO">
+		update member
+		   set bg_image=#{bgImage}
+		 where user_id=#{userId}
+	</update>
+	
+	
+	
 </mapper>
 
 

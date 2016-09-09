@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ebooklibrary.app.common.BookUtility;
 import com.ebooklibrary.app.common.FileUploadWebUtil;
+import com.ebooklibrary.app.member.model.MemberService;
+import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.MyBookService;
+import com.ebooklibrary.app.mybooks.model.MyBookVO;
 
 @Controller
 @RequestMapping("/mybooks")
@@ -26,42 +30,77 @@ public class MybooksController {
 	@Autowired
 	FileUploadWebUtil fileUtil;
 	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private MyBookService myBookService;
+	
 	private static final Logger logger=LoggerFactory.getLogger(MybooksController.class);
 	
 	@RequestMapping("/mybookmain.do")
-	public String mybooksMain(HttpServletRequest request, Model model){
+	public String mybooksMain(HttpSession session, Model model){
+		
+		BookUtility bu=new BookUtility();
+		String userId=(String)session.getAttribute("userId");
+		
+		if(userId!=null || !userId.isEmpty()){
+			
+			List<Map<String, Object>> alist=myBookService.selectBookByUserId(userId);
+			
+			logger.info("책 alist={}", alist);
+			
+			model.addAttribute("alist", alist);
+			
+			//이미지 파일명 업데이트
+			MemberVO memVo=memberService.selectByUserName(userId);
+			String bgImage = bu.toUtf(memVo.getBgImage());
+			
+			model.addAttribute("bgImage", bgImage);
+			
+			return "mybooks/mybookmain";
+		}
 		
 		
-		HttpSession session = request.getSession();
-		
-		String fileName=(String)session.getAttribute("fileName");
-		
-		model.addAttribute("bgImage", fileName);
-		
-		return "mybooks/mybookmain";
+		return "index";
 	}
 	
 	@RequestMapping("/mybook.do")
-	public String bookletTest(Model model){
+	public void bookletTest(HttpServletRequest request, HttpSession session,@RequestParam int bookNo , Model model){
 		
 		BookUtility bu=new BookUtility();
+		String userId=(String)session.getAttribute("userId");
 		
-		List<String> alist=bu.getBook();
+		String bookFileName="";
+		String upPath="";
+		if(userId!=null || !userId.isEmpty()){
+			
+			//List<MyBooksVO> alist=myBookService.selectMyBooksByUserId(userId);
+			
+			//이미지 파일명 업데이트
+			MyBookVO myBookVo=myBookService.selectBookByBookNo(bookNo);
+			bookFileName = myBookVo.getBookFileName();
+			upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
+			
+		}
+		List<String> alist=bu.getBook(bookFileName, upPath);
         
         model.addAttribute("alist", alist);
 		//model.addAttribute("str", str);
 		
-		return "mybooks/mybook";
+		//return "mybooks/mybook";
 	}
-	
-	
 	
 	@RequestMapping("/changeBackImg.do")
 	@ResponseBody
-	public String changeBackImg(HttpServletRequest request, @RequestParam String oldImage){
-		
-		logger.info("에이젝스 이미지 등록 들어왔니 oldImage={}",oldImage);
-		
+	public String changeBackImg(HttpSession session, HttpServletRequest request){
+		BookUtility bu=new BookUtility();
+		/*
+		"userId"
+		"auchCode"
+		"memberNo"
+		"userName"
+		*/
 		//파일 업로드 처리
 		int uploadType=FileUploadWebUtil.IMAGE_UPLOAD;
 		//=>상품 등록시 이미지 업로드
@@ -77,20 +116,45 @@ public class MybooksController {
 			fileSize=(Long)mymap.get("fileSize");
 		}
 		
-		//기존 파일이 존재하면, 기존 파일 삭제
-		File oldFile=new File(upPath ,oldImage);
-		if (oldFile.exists()) {
-			boolean bool=oldFile.delete();
-			logger.info("기존 파일 삭제 여부={}", bool);
+		String userId=(String)session.getAttribute("userId");
+		logger.info("배경 바꾸기 userId={}", userId);
+		
+		//fileName=fileName.replaceAll(" ", "");
+		
+		MemberVO memberVo=new MemberVO();
+		memberVo.setUserId(userId);
+		memberVo.setBgImage(fileName);
+		logger.info("fileName={}", fileName);
+		
+		//이미지 파일명 업데이트
+		MemberVO memVo=memberService.selectByUserName(userId);
+		String oldImage=memVo.getBgImage();
+		int cnt=memberService.updateBackImg(memberVo);
+		
+		if (cnt>0) {
+			//기존 파일이 존재하면, 기존 파일 삭제
+			File oldFile=new File(upPath ,oldImage);
+			if (oldFile.exists()) {
+				boolean bool=oldFile.delete();
+				logger.info("기존 파일 삭제 여부={}", bool);
+			}
+			String newimg = bu.toUtf(memberVo.getBgImage());
+
+			return newimg;
+		}else{
+			logger.info("처리 안됐어 다시 해봐");
+			String oldimg = bu.toUtf(memberVo.getBgImage());
+			return oldimg;
 		}
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("fileName", fileName);
+		/*
+		List<String> alist=new ArrayList<String>();
+		alist.add(upPath);
+		alist.add("\\"+fileName);
 		
-		return fileName;
+		return alist;
+		*/
 	}
-	
-	
 	
 	/*
 	@RequestMapping("/changeBackImg.do")

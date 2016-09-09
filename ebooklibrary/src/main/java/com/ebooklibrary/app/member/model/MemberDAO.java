@@ -11,4 +11,5 @@ public interface MemberDAO {
 	public List<MemberVO> selectMemberAll(SearchVO vo);
 	public int selectMemberCount(SearchVO vo);
 	public int selectMemberCheckId(String userId);
+	public int updateBackImg(MemberVO vo);
 }
