@@ -25,10 +25,10 @@
 <form name="frmPage" method="post" 
 	action="<c:url value='/library/qna/qnaList.do'/>">
 	<input type="hidden" name="currentPage">
-	<input type="text" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
-	<input type="text" id="myWrite" name="myWrite" value="${param.myWrite }">
-	<input type="text" id="myWrite" name="searchCondition" value="${param.searchCondition }">
-	<input type="text" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
+	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+	<input type="hidden" id="myWrite" name="myWrite" value="${param.myWrite }">
+	<input type="hidden" id="myWrite" name="searchCondition" value="${param.searchCondition }">
+	<input type="hidden" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
 	
 </form>
 	<h1>QnA게시판입니다</h1>
@@ -69,7 +69,11 @@
 						<c:if test="${vo.complete=='Y'}">
 						[답변완료]
 						</c:if>
-						${vo.title }</a></td>
+						${vo.title }
+						<c:if test="${vo.commentCount!=0 }">
+							[${vo.commentCount }]
+						</c:if>
+						</a></td>
 					<td>${vo.userName }</td>
 					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="MM/dd 
 						 HH:mm:ss"/> </td>
@@ -81,13 +85,13 @@
 		</c:if>
 	</tbody>
 	</table>	   
-<div class="divPage">
+<div class="align_left">
 	<input type="button" id="listGo" value="전체목록"/>
 	<input type="button" id="writeGo" value="글쓰실?"/>
 	<form id="myWrite" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
 		<input type="submit" id="myWriting" value="내글 보기"/>
-		<input type="text" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
-		<input type="text" id="myWrite" name="myWrite" value="Y">
+		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+		<input type="hidden" id="myWrite" name="myWrite" value="Y">
 	</form>			
 </div>
 <!-- 페이징 처리를 위한 div -->
@@ -127,7 +131,7 @@
 		</a>
 	</c:if>
 </div>
-<div class="divSearch">
+<div class="align_center">
    	<form name="frmSearch" method="post" 
    	action="<c:url value='/library/qna/qnaList.do' />" >
         <select name="searchCondition">
@@ -152,6 +156,6 @@
 		<input type="submit" value="검색">
     </form>
 </div>
-<input type="text" value="${sessionScope.memberNo }"/>
+<input type="hidden" value="${sessionScope.memberNo }"/>
 
 <%@include file="../libraryBottom.jsp" %>

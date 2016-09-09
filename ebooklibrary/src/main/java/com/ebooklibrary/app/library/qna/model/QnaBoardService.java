@@ -34,6 +34,6 @@ public interface QnaBoardService {
 	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memberSVo);
 	public int selectCountByMemNo(MemberSearchVO memberSVo);
 	//completeQna
-	public int completeQna(int qnaNo);
+	public int completeQna(int qnaNo,int commentNo);
 	
 }

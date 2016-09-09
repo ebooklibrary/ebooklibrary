@@ -300,13 +300,14 @@ public class QnAController {
 	}
 
 	@RequestMapping("/completeQna.do")
-	public String completeQna(@RequestParam int qnaNo){
+	public String completeQna(@RequestParam int qnaNo,@RequestParam int commentNo){
 		//1.
-		logger.info("답변완료 처리 페이지 , 파라미터 입력값 qnaNo={}",qnaNo);
+		logger.info("답변완료 처리 페이지 , 파라미터 입력값 qnaNo={},commentNo={}",qnaNo,commentNo);
 		
 		//2.
-		int cnt = qnaBoardService.completeQna(qnaNo);
-		logger.info("답변 완료 처리값 cnt={}",cnt);
+		int cnt = qnaBoardService.completeQna(qnaNo,commentNo);
+		logger.info("qna게사판 답변 완료 처리값 cnt={}",cnt);
+		
 		
 		//3.
 		

@@ -32,7 +32,10 @@ public class QnaCommentController {
 
 		//1.
 		List<QnaCommentVO> alist = qnaCommentsService.selectAllQnaComment(qnaNo);
-		
+		for(int i=0 ;i<alist.size();i++){
+			
+			logger.info(alist.get(i).getSelectCmt());
+		}
 		
 		//2.
 		

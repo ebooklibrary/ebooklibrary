@@ -2,18 +2,26 @@ package com.ebooklibrary.app.library.qna.model;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.SearchVO;
+import com.ebooklibrary.app.library.qna.comments.model.QnaCommentService;
 
 @Service
 public class QnaBoardServiceImpl implements QnaBoardService {
-	 
+	private static Logger logger
+	= LoggerFactory.getLogger(QnaBoardServiceImpl.class);
+	
 	@Autowired
 	private QnaBoardDAO qnaBoardDao;
-
+	
+	@Autowired
+	private QnaCommentService qnaCommentService;
 	
 
 	@Override
@@ -48,9 +56,18 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 
 	@Override
+	@Transactional
 	public List<QnaBoardVO> selectQnaAll(MemberSearchVO searchVo) {
+		List<QnaBoardVO> alist= qnaBoardDao.selectQnaAll(searchVo);
+		logger.info("selectQnaAll 처리값 alist.size()={}",alist.size());
 		
-		return qnaBoardDao.selectQnaAll(searchVo);
+		for(int i =0;i<alist.size() ;i++){
+			int qnaNo=alist.get(i).getQnaNo();
+			alist.get(i).setCommentCount(qnaCommentService.countQnaComment(qnaNo));
+			logger.info("selectQnaAll 입력값 qnaNo={}",qnaNo);
+		}
+		
+		return alist;
 	}
 
 	@Override
@@ -90,8 +107,15 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 
 	@Override
-	public int completeQna(int qnaNo) {
-		return qnaBoardDao.completeQna(qnaNo);
+	@Transactional
+	public int completeQna(int qnaNo,int commentNo) {
+		int cnt =qnaBoardDao.completeQna(qnaNo);
+		logger.info("답변완료 처리값 cnt={}",cnt);
+		
+		cnt= qnaCommentService.selectedComment(commentNo);
+		logger.info("답변완료 처리값 cnt={}",cnt);
+		
+		return cnt;
 	}
 
 	

@@ -33,13 +33,15 @@
 	}
 	
 	$().ready(function(){
-		$("#selectAnswer").click(function(event){
+	/* 	$("#selectAnswer").click(function(event){
 			if(confirm("채택하시겠습니까?")){
-				location.href="<c:url value='/library/qna/completeQna.do?qnaNo="+${param.qnaNo }+"'/>";
-			}else{
-				return false;
+				 location.href="<c:url value='/library/qna/completeQna.do?qnaNo="+${param.qnaNo }+"'/>"; 
 			}
-		});
+			if(!confirm("채택하시겠습니까?"){
+				event.preventDefault();
+			}
+			
+		}); */
 		
 		$("#replyCmt").click(function(){
 			if($("#content").val()==""){
@@ -59,9 +61,14 @@
 		
 	});
 	
-	/* function complete(){
-		location.href="<c:url value='/library/qna/completeQna.do?qnaNo="+qnaNo+"'/>";
-	} */
+	function complete(qnaNo,commentNo){
+		if(confirm("채택하시겠습니까?")){
+			 location.href="<c:url value='/library/qna/completeQna.do?qnaNo="+qnaNo+"&commentNo="+commentNo+"'/>"; 
+		}else{
+			return false;
+		}
+		
+	}
 </script>
 <table width="600">
 	<caption>댓글</caption>
@@ -76,10 +83,15 @@
 			<c:forEach var="clist" items="${ commentList}">			
 				<tr>
 					<td>
+					<c:if test="${param.complete!='Y' }">
 						<form>
 							
-							<input type="button" id="selectAnswer" onclick="complete(${param.qnaNo})" value="답변채택" >
+							<input type="button" id="selectAnswer" onclick="complete(${param.qnaNo},${clist.commentNo })" value="답변채택" >
 						</form>
+					</c:if>	
+					<c:if test="${clist.selectCmt=='Y' }">
+						<img src="<c:url value='/images/library/basic/tumb.png'/>" width="30">
+					</c:if>
 					</td>
 					<td>${clist.userName }</td>
 					<td>${clist.content }</td>

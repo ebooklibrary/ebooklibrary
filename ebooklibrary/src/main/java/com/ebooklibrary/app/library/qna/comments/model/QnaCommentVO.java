@@ -12,9 +12,22 @@ public class QnaCommentVO {
 	private int sortNo;
 	private int stepNo;
 	private Timestamp regDate;
+	private String selectCmt;
 	
 	
 	
+	
+	
+	
+
+	public String getSelectCmt() {
+		return selectCmt;
+	}
+
+	public void setSelectCmt(String selectCmt) {
+		this.selectCmt = selectCmt;
+	}
+
 	public int getStepNo() {
 		return stepNo;
 	}
@@ -94,8 +107,8 @@ public class QnaCommentVO {
 	@Override
 	public String toString() {
 		return "QnaCommentVO [commentNo=" + commentNo + ", qnaNo=" + qnaNo + ", memberNo=" + memberNo + ", userName="
-				+ userName + ", content=" + content + ", groupNo=" + groupNo + ", sortNo=" + sortNo + ", regDate="
-				+ regDate + "]";
+				+ userName + ", content=" + content + ", groupNo=" + groupNo + ", sortNo=" + sortNo + ", stepNo="
+				+ stepNo + ", regDate=" + regDate + ", selectCmt=" + selectCmt + "]";
 	}
 	
 	

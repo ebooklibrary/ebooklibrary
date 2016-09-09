@@ -5,6 +5,8 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.ebooklibrary.app.common.MemberSearchVO;
+
 @Repository
 public class QnaCommentDAOMybatis extends SqlSessionDaoSupport implements QnaCommentDAO {
 	
@@ -32,5 +34,17 @@ public class QnaCommentDAOMybatis extends SqlSessionDaoSupport implements QnaCom
 		
 		return  getSqlSession().update(namespace+".updateSortNo",qcVo);
 	}
+
+	@Override
+	public int countQnaComment(int qnaNo) {
+		return getSqlSession().selectOne(namespace+".CountCommentByQna",qnaNo);
+	}
+
+	@Override
+	public int selectedComment(int commentNo) {
+		return getSqlSession().update(namespace+".selectedComment",commentNo);
+				
+	}
+
 	
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ebooklibrary.app.common.MemberSearchVO;
+
 @Service
 public class QnaCommentServiceImpl implements QnaCommentService {
 	private static final Logger logger
@@ -36,6 +38,18 @@ public class QnaCommentServiceImpl implements QnaCommentService {
 		cnt = qnaCommentDao.insertQnaReComment(qcVo);
 		logger.info("insertRecomment 처리 결과값 cnt={}",cnt);
 		return cnt;
+	}
+
+	@Override
+	public int countQnaComment(int qnaNo) {
+		
+		
+		return qnaCommentDao.countQnaComment(qnaNo);
+	}
+
+	@Override
+	public int selectedComment(int commentNo) {
+		return qnaCommentDao.selectedComment(commentNo);
 	}
 	
 	

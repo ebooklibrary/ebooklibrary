@@ -34,6 +34,12 @@
 					#{groupNo}, #{stepNo}, #{sortNo})
 	</insert>
 	
+	<select id="CountCommentByQna" parameterType="int" resultType="int">
+		select COUNT(*) from  QNA_COMMENTS where QNA_NO=#{qnaNo} 
+	</select>
 	
+	<update id="selectedComment" parameterType="int">
+		update QNA_COMMENTS SET SELECT_CMT='Y' WHERE COMMENT_NO=#{commentNo}
+	</update>
 	
 </mapper>
