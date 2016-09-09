@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/silde_Notice/style.css" />
+	
 <script type="text/javascript"
 	src="<c:url value ='/jquery/silde_Notice/jquery.js'/>"></script>
 
@@ -31,9 +32,11 @@ $(document).ready(function(){
 <!-- 공지사항 리스트 화면 -->
 <div id="notice_head">
 	<h2>
-		<img alt="공지사항"
-			src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
+		<img alt="공지사항" src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
 	</h2>
+</div>
+<div id="notice_banner">
+	<a href = "<c:url value='/library/notice/noticelist.do'/>"><img alt ="공지사항 배너" src ="${pageContext.request.contextPath}/images/library/notice/banner.png" width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
 <div class="notice_Ad">
@@ -89,6 +92,9 @@ $(document).ready(function(){
 				</select> <input type="text" name="searchKeyword"> <input
 					type="submit" value="검색">
 			</form>
+		</div>
+		<div>
+			
 		</div>
 		<div id="notice_table">
 			<table>
@@ -158,7 +164,7 @@ $(document).ready(function(){
 				</a>
 			</c:if>
 		</div>
-		<c:if test="${sessionScope.authCode=='ADMIN' }">
+		<c:if test="${sessionScope.auchCode=='ADMIN' }">
 		<div id="noticeWrite">
 			<a href="<c:url value ='/library/notice/noticewrite.do'/>">글쓰기</a>
 		</div>

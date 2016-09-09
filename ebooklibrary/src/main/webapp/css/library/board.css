@@ -22,7 +22,7 @@
 	border : 1px solid HOTPINK;
 	width: 400px; 
 	height: 650px;
-	margin-top: 177px;
+	margin-top: 93px;
 	margin-left: 20px;
 	
 }
@@ -196,82 +196,6 @@
 	float:left;
 }
 
-/* gallery */
-.view tbody td p img { 
-	display:block;
-	margin:10px auto;
-	float:none;
-}
-.view tfoot td label { 
-	float:left;
-	padding:7px 5px 0px 0px;
-}
-/* gallery 목록*/
-.list .gallery_list { 
-	width:100%;
-	margin-bottom:-30px;
-	float:left;
-    padding:25px;
-
-}
-.list .gallery_list dl{
-	width:170px;
-	padding-right:35px;
-	float:left;
-}
-.list .gallery_list dl dd{
-	background:url('/images/etc/bul_Sgray.gif') no-repeat 3px 8px;
-	width:170px;
-	text-indent:11px;
-	color:#84726C;
-	float:left;
-	overflow:hidden;
-	white-space:nowrap;
-	line-height:1.8;
-}
-.list .gallery_list dl dd.photo{
-	background:none;
-	width:172px;
-	height:120px;
-	padding:3px;
-	border:solid 1px #DBDBE0;
-}
-.list .gallery_list dl dd.photo img{
-	width:172px;
-	height:120px;
-	float:left;
-}
-.list .gallery_list dl dt{
-	width:170px;
-	color:#84726C;
-	font-weight:bold;
-	float:left;
-	overflow:hidden;
-	white-space:nowrap;
-	padding:7px 0px 0px 3px;
-	line-height:1.8;
-}
-.list .gallery_list dl dt a{
-	color:#84726C;
-}
-.list .gallery_list .line1{
-	width:100%;
-	height:1px;
-	display:block;
-	border-bottom:dotted 1px #B3B4BD;
-	border-width:0px 0px 1px 0px;
-	margin:20px 0px 25px 0px;
-	float:left;
-}
-.list .gallery_list .line2{
-	width:100%;
-	height:1px;
-	display:block;
-	border-bottom:solid 1px #B3B4BD;
-	border-width:0px 0px 1px 0px;
-	margin:20px 0px 25px 0px;
-	float:left;
-}
 .td_1{
 	width:15%;
 	height:20px;
@@ -313,12 +237,6 @@
 	border: 1px solid #CCCCCC;
 	text-align: left;
 }
-.img1{
-	clear: both;
-	float:right;
-	margin-top: 20px;
-
-}
 .detail_table{
 	width:100%;
 }
@@ -337,6 +255,55 @@
 	font-size: 1.2em;
 	padding: 10px;
 }
+#notice_banner{
+	margin-top: 40px;
+	margin-left: 125px;
+}
 
+.notice_delete{
+	float: right;
+	margin-top: 20px;	
+}
+/* 공지사항 쓰기 CSS  */
+.notice_list{
+	float: right;
+}
+#frm1{
+	float: right;
+	margin-right: 130px;
+	margin-top: 50px;
+}
 
+.notice_Write{
+	text-align: center;
+	margin-bottom: 50px;
+	font-size: 1.3em;
+	margin-right: 15px;
+}
+
+.notice_Title{
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.notice_UserName{
+	padding-top: 3px;
+	padding-bottom: 3px;	
+}
+.notice_Content{
+	width: 573px;
+/* 	<textarea name="summary" id="summary" rows="10" cols="100" style="width:570px; height:230px;"></textarea> */
+}
+
+.notice_submit{
+	clear:both;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	float: right;
+}
+.notice_File{
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+/* 공지사항 수정  css */
 

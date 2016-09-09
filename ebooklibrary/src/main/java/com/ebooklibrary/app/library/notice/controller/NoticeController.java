@@ -35,7 +35,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value ="/noticewrite.do", method = RequestMethod.POST)
-	public String noticeWrite_post(@RequestParam NoticeVO noticeVo){
+	public String noticeWrite_post(@ModelAttribute NoticeVO noticeVo , Model model){
 		logger.info("공지사항 입력 처리");
 		
 		int cnt = noticeService.insertNotice(noticeVo);
@@ -48,6 +48,9 @@ public class NoticeController {
 			url="/library/notice/noticewrite.do";
 		}
 			
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
 		return "common/message";
 	}
 	
@@ -79,17 +82,23 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value ="/noticeEdit.do" , method=RequestMethod.GET)
-	public String editNoitce_get(@ModelAttribute NoticeVO noticeVo , Model model){
+	public String editNoitce_get(@RequestParam(defaultValue="0")int notice_No , Model model){
 		/*공지사항 수정 화면보여주기*/
 		/*공지사항 번호 가져오기*/
-		int notice_No = noticeVo.getNoticeNo();
-		logger.info("관리자용 공지사항 수정 화면 보여주기");
+		logger.info("공지사항 수정 화면 보여주기 , 파라미터 notice_No={}",notice_No);
 		
-		noticeVo = noticeService.selectByNoNotice(notice_No);
+		logger.info("관리자용 공지사항 수정 화면 보여주기");
+		if(notice_No==0){
+			model.addAttribute("msg", "잘못된 url입니다");
+			model.addAttribute("url", "/reBoard/list.do");
+			return "common/message";
+		}
+		
+		NoticeVO noticeVo = noticeService.selectByNoNotice(notice_No);
 		
 		model.addAttribute("noticeVo", noticeVo);
 		
-		return "/notice/noticeEdit";
+		return "library/notice/noticeEdit";
 		
 	}
 	
@@ -97,15 +106,16 @@ public class NoticeController {
 	public String editNotice_post(@ModelAttribute NoticeVO noticeVo, Model model){ 
 		logger.info("관리자용 공지사항 수정처리");
 		
+		logger.info("noticeVo={}",noticeVo);
 		int cnt = noticeService.editNotice(noticeVo);
 		
-		String msg ="" , url ="";
+		logger.info("수정 후 파라미터 cnt = {}",cnt);
+		String msg ="" , url ="/library/notice/noticeEdit.do?notice_No="+noticeVo.getNoticeNo();
 		if(cnt>0){
 			msg="공지사항 수정 성공";
-			url="noticelist.do";
+			url="/library/notice/noticedetail.do?notice_No="+noticeVo.getNoticeNo();
 		}else{
 			msg="공지사항 수정 실패";
-			url="noticeEdit.do";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -123,6 +133,7 @@ public class NoticeController {
 		
 		logger.info("삭제할 공지사항 번호 notice_No={}"+notice_No);
 		
+		int cnt = noticeService.deleteNotice(noticeVo);
 		return "";
 	}
 	

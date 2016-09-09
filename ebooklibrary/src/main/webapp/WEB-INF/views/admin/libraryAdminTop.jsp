@@ -21,7 +21,7 @@
 <!-- 옆에붙을 메뉴 -->
 	<div id="rightmenu">
 		<div class="menuform">
-			<a href="<c:url value='/library/qna/qnaList.do'/>">공지사항 등록/수정</a>
+			<a href="<c:url value='/library/notice/noticelist.do'/>">공지사항 등록/수정</a>
 		</div>
 		<div class="menuform">
 			<a href="<c:url value='/admin/book/registerBook.do'/>">책 등록</a>

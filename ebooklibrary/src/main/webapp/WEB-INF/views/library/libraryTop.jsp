@@ -8,10 +8,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>포도서관</title>
+<!-- 스마트에디터 -->
+<script type="text/javascript" src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>" charset="utf-8"></script>
+
+<!-- alert -->
+<!-- ideally at the bottom of the page -->
+<!-- also works in the <head> -->
+<%-- <c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/> --%>
+<script src="<c:url value='/alertify.js-0.3.11/lib/alertify.min.js'/>"></script>
+<!-- include the core styles -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/>" />
+<%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
+<!-- include a theme, can be included into the core instead of 2 separate files -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
+
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/main_all.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/silde_Notice/slide.css" />
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript">
+
 
 </script>
 </head>
