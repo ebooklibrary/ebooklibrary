@@ -32,4 +32,6 @@ public interface QnaBoardDAO {
 	//user'sWriting//멤버번호로 조회할예정 일단 유저네임으로.
 	public List<QnaBoardVO> selectByMemberNo(MemberSearchVO memberSVo);
 	public int selectCountByMemNo(MemberSearchVO memberSVo);
+	//completeQna
+	public int completeQna(int qnaNo);
 }

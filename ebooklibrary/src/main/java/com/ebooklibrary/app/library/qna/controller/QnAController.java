@@ -283,7 +283,6 @@ public class QnAController {
 		
 		logger.info("파라미터값 memberSVo.getMemberNo()={}",memberSVo.getMemberNo());
 		
-		
 		//2.
 		logger.info("키워드 전 키워드값 ");
 		int totalRecord=qnaBoardService.selectCountByMemNo(memberSVo);
@@ -300,7 +299,19 @@ public class QnAController {
 		return "library/qna/qnalist";
 	}
 
-	
+	@RequestMapping("/completeQna.do")
+	public String completeQna(@RequestParam int qnaNo){
+		//1.
+		logger.info("답변완료 처리 페이지 , 파라미터 입력값 qnaNo={}",qnaNo);
+		
+		//2.
+		int cnt = qnaBoardService.completeQna(qnaNo);
+		logger.info("답변 완료 처리값 cnt={}",cnt);
+		
+		//3.
+		
+		return "redirect:/library/qna/qnaList.do";
+	}
 	
 	
 }

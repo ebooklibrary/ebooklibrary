@@ -90,6 +90,11 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 		return getSqlSession().selectOne(namespace+".selectCountByMemNo",memberSVo);
 	}
 
+	@Override
+	public int completeQna(int qnaNo) {
+		return getSqlSession().update(namespace+".updateComplete",qnaNo);
+	}
+
 
 	
 	
