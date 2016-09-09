@@ -56,6 +56,7 @@
 	            bUseModeChanger : true, 
 	        }
 	    });
+	    
 	    /* 
 	    //전송버튼
 	    $("#btBookUp").click(function(){
