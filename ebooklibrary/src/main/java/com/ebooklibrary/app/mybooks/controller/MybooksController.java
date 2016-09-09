@@ -1,13 +1,10 @@
 package com.ebooklibrary.app.mybooks.controller;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -25,7 +22,6 @@ import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
 import com.ebooklibrary.app.mybooks.model.MyBookService;
 import com.ebooklibrary.app.mybooks.model.MyBookVO;
-import com.ebooklibrary.app.mybooks.model.MyBooksVO;
 
 @Controller
 @RequestMapping("/mybooks")
@@ -75,19 +71,19 @@ public class MybooksController {
 		BookUtility bu=new BookUtility();
 		String userId=(String)session.getAttribute("userId");
 		
-		
+		String bookFileName="";
+		String upPath="";
 		if(userId!=null || !userId.isEmpty()){
+			
+			//List<MyBooksVO> alist=myBookService.selectMyBooksByUserId(userId);
 			
 			//이미지 파일명 업데이트
 			MyBookVO myBookVo=myBookService.selectBookByBookNo(bookNo);
-			String bookFileName = bu.toUtf(myBookVo.getBookFileName());
-			String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
-			
+			bookFileName = myBookVo.getBookFileName();
+			upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
 			
 		}
-		
-		
-		List<String> alist=bu.getBook();
+		List<String> alist=bu.getBook(bookFileName, upPath);
         
         model.addAttribute("alist", alist);
 		//model.addAttribute("str", str);
@@ -105,7 +101,6 @@ public class MybooksController {
 		"memberNo"
 		"userName"
 		*/
-		
 		//파일 업로드 처리
 		int uploadType=FileUploadWebUtil.IMAGE_UPLOAD;
 		//=>상품 등록시 이미지 업로드

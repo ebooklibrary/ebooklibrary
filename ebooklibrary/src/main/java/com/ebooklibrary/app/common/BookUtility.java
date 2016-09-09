@@ -15,7 +15,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.ebooklibrary.app.mybooks.controller.MybooksController;
 
 public class BookUtility {
 	
@@ -116,15 +120,16 @@ public class BookUtility {
 	}
 	
 	
-	public List<String> getBook(){
+	public List<String> getBook(String bookFileName, String upPath){
 		//책 txt에서 읽어오기
+		System.out.println("파일명과 경로 : "+upPath+"\\"+bookFileName);
 				
 		List<String> alist=new ArrayList<String>();
 		//List<Character> alist=new ArrayList<Character>();
 		String str = "";
 		
 		BufferedReader reader = null;
-		File file=new File("C:\\Users\\User\\git\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\이드.txt");
+		File file=new File(upPath+"\\"+bookFileName);
 		//File file=new File("C:\\ebook\\ebooklibrary\\ebooklibrary\\src\\main\\webapp\\book_upload\\이드.txt");
 		FileInputStream fis=null;
 		BufferedInputStream bis=null;

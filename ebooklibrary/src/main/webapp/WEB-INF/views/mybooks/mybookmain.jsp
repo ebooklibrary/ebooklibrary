@@ -23,10 +23,6 @@
 			
 		});
 		
-		
-		
-		
-		
 		/* 
 		$(".mybook").hover(function() {
 				$(this).css("cursor","pointer");
@@ -80,15 +76,21 @@
 			//$(".modal").css("display","block");
 			$("#boughtBookList").css("display","block");
 			$("#rentBookList").css("display","none");
+			$("#rentBook").find("input").attr("id",""); //myInput
+			$("#rentBook").find("table").attr("id",""); //myTable
 		});
 		$("#rentBook").click(function() {
 			//$(".modal").css("display","block");
 			$("#rentBookList").css("display","block");
 			$("#boughtBookList").css("display","none");
+			$("#boughtBookList").find("input").attr("id",""); //myInput
+			$("#boughtBookList").find("table").attr("id",""); //myTable
 		});
 		
 		$(".close").click(function() {
 			$(".modal").css("display","none");
+			$(".modal-content").find("input").attr("id","myInput"); //myInput
+			$(".modal-content").find("table").attr("id","myTable"); //myTable
 		});
 		/* 
 		$("#myBtn").click(function() {
@@ -253,13 +255,10 @@
 		<!-- 보관 책장 -->
 		<div id="BookList">
 			<p>${sessionScope.userId } 님의 책장</p>
-			
 			<a id="rentBook" href="#">대여책 목록</a>
 			<a id="boughtBook" href="#">구매책 목록</a>
-			
 					<!-- <a href="#"><FONT style="WRITING-MODE: tb-rl; HEIGHT: 50pt">12345</FONT></a> -->
 			<div id="myBooks">
-			
 			<!-- SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY -->
 			<c:forEach var="map" items="${alist }">
 				<div class="mybook">
@@ -268,33 +267,17 @@
 					<div class="mybookColor"></div>
 				</div>
 			</c:forEach>
-			
-			<!-- 
-				<div class="mybook" id="b01">
-					<span>Game<br><br>Of<br><br>Thrones</span>
-					<input class="mybook1" type="hidden" value="fileUrl">
-					<div id="mybookColor"></div>
-				</div>
-			 -->
-				 
 			</div> <!-- mybooks -->
-			
 		</div> <!-- BookList -->
-		
 	</div> <!-- wrapper -->
 	
-	
-	<!-- 
-	<button id="myBtn">Open Modal</button>
-	 -->
-	<!-- 책목록 미니창 띄우기 -->
+	<!-- 구매책목록 미니창 띄우기 -->
 	<!-- myModal -->
 	<div id="boughtBookList" class="modal">
 	  <div class="modal-content">
-	    <p>나의 구매(대여)책 목록</p>
+	    <p>나의 구매책 목록</p>
 	    <br>
 	    <span class="close">닫기</span>
-	    
 	    <!-- 미니창 안의 책목록및검색 -->
 		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 		<table id="myTable">
@@ -303,7 +286,6 @@
 		    <th style="width:40%;">출판사</th>
 		    <th style="width:20%;">유효날짜</th>
 		  </tr>
-		  
 		<tbody>
 			<c:forEach var="map" items="${alist }">
 				<c:if test="${empty map['RENT_END'] }">
@@ -314,30 +296,18 @@
 					</tr>
 				</c:if>
 			</c:forEach>
-			
-				
-		<!-- 
-			<tr>
-				<td>음악은 그런거니깐</td>
-				<td>Germany</td>
-				<td>오늘내일</td>
-			</tr>
-		-->
 		  </tbody>
-		  
 		</table>
-
 	  </div>
 	</div>
 			
-	<!-- 책목록 미니창 띄우기 -->
+	<!-- 대여책목록 미니창 띄우기 -->
 	<!-- myModal -->
 	<div id="rentBookList" class="modal">
 	  <div class="modal-content">
-	    <p>나의 구매(대여)책 목록</p>
+	    <p>나의 대여책 목록</p>
 	    <br>
 	    <span class="close">닫기</span>
-	    
 	    <!-- 미니창 안의 책목록및검색 -->
 		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 		<table id="myTable">
@@ -346,7 +316,6 @@
 		    <th style="width:40%;">출판사</th>
 		    <th style="width:20%;">유효날짜</th>
 		  </tr>
-		  
 		<tbody>
 			<c:forEach var="map" items="${alist }">
 				<c:if test="${!empty map['RENT_END'] }">
@@ -357,19 +326,8 @@
 					</tr>
 				</c:if>
 			</c:forEach>
-			
-				
-		<!-- 
-			<tr>
-				<td>음악은 그런거니깐</td>
-				<td>Germany</td>
-				<td>오늘내일</td>
-			</tr>
-		-->
 		  </tbody>
-		  
 		</table>
-
 	  </div>
 	</div>
 	
