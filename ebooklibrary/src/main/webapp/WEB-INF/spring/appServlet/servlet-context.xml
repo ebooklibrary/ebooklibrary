@@ -47,6 +47,8 @@
 			<mapping path="/library/notice/noticeDelete.do"/>
 			<mapping path="/library/notice/noticewrite.do"/>
 			<mapping path="/library/notice/noticeEdit.do"/>
+			<mapping path="/member/myInfo.do"/>
+			<mapping path="/member/myPage.do"/>
 			<mapping path="/mybooks/*"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>

@@ -75,7 +75,7 @@
 			</c:if>
 			<c:if test="${!empty sessionScope.userId }">
 				<li>
-				<a href="<c:url value='/member/'/>">
+				<a href="<c:url value='/member/myPage.do'/>">
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 				마이페이지
 				</a></li>
