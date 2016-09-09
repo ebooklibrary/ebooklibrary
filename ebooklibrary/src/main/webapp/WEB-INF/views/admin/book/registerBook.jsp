@@ -14,6 +14,7 @@
 <!-- 폼태그 -->
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <!-- 스마트에디터 -->
+<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
 <script type="text/javascript" src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>" charset="utf-8"></script>
 <!-- 내부 css -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/bookpart.css" />
@@ -39,6 +40,34 @@
 		});
 		$( "#publication" ).datepicker( "option", "dateFormat", "yy/mm/dd" );
 		
+		//전역변수
+	    var obj = [];               
+	    //스마트에디터 프레임생성
+	    nhn.husky.EZCreator.createInIFrame({
+	        oAppRef: obj,
+	        elPlaceHolder: "summary",
+	        sSkinURI: "<c:url value='/smarteditor/SmartEditor2Skin.html'/>", 
+	        htParams : {
+	            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+	            bUseToolbar : true,             
+	            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+	            bUseVerticalResizer : true,     
+	            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+	            bUseModeChanger : true, 
+	        }
+	    });
+	    /* 
+	    //전송버튼
+	    $("#btBookUp").click(function(){
+	        //id가 smarteditor인 textarea에 에디터에서 대입
+	        obj.getById["summary"].exec("UPDATE_CONTENTS_FIELD", []);
+	        //폼 submit
+	        $("#bookfrm1").submit();
+	    });
+		 */
+		
+		
+		/* 
 		var oEditors = [];
 		nhn.husky.EZCreator.createInIFrame({
 		    oAppRef: oEditors,
@@ -46,11 +75,11 @@
 		    sSkinURI: "<c:url value='/smarteditor/SmartEditor2Skin.html'/>",
 		    fCreator: "createSEditor2"
 		});
-		
+		 */
 		
 		$("#btBookUp").click(function(event) {
-			
-			alert($("#summary").val());
+			obj.getById["summary"].exec("UPDATE_CONTENTS_FIELD", []);
+			alertify.alert($("#summary").val());
 			
 			if($("#title").val().length < 1){
 				/* alert("책제목을 입력하세요"); */
@@ -59,45 +88,49 @@
 				return false;
 			}
 			if($("#writer").val().length < 1){
-				alert("작가명을 입력하세요");
+				alertify.alert("작가명을 입력하세요");
 				$("#writer").focus();
 				return false;
 			}
 			if($("#publisher").val().length < 1){
-				alert("출판사를 입력하세요");
+				alertify.alert("출판사를 입력하세요");
 				$("#publisher").focus();
 				return false;
 			}
 			if($("#publication").val().length < 1){
-				alert("출판일을 입력하세요");
+				alertify.alert("출판일을 입력하세요");
 				$("#publication").focus();
 				return false;
 			}
 			if($("#genre").val().length < 1){
-				alert("장르를 입력하세요");
+				alertify.alert("장르를 입력하세요");
 				$("#genre").focus();
 				return false;
 			}
 			if($("#price").val().length < 1){
-				alert("가격을 입력하세요");
+				alertify.alert("가격을 입력하세요");
 				$("#price").focus();
 				return false;
 			}
 			
 			if($("#bookFileName").val().length < 1){
-				alert("등록하실 책을 업로드하여 주세요.");
+				alertify.alert("등록하실 책을 업로드하여 주세요.");
 				$("#bookFileName").focus();
 				return false;
 			}
 			if($("#coverFileName").val().length < 1){
-			alert($("#bookFileName").val());
-				alert("등록하실 책의 커버를 업로드하여 주세요.");
+				alertify.alert($("#bookFileName").val());
+				alertify.alert("등록하실 책의 커버를 업로드하여 주세요.");
 				$("#coverFileName").focus();
 				return false;
 			}
-			if($("#summary").val()==''){
-				alert("내용");
+			
+			
+			if($("#summary").val().length < 1 || $("#summary").val()=="<p>&nbsp;</p>"){
+				
+				alert("내용을 입력하세요.");
 				$("#summary").focus();
+			   
 				return false;
 			}
 			
@@ -136,7 +169,7 @@
 		
 	});
 
-	
+	/* 
 	function submitContents(elClickedObj) {
 		// 에디터의 내용이 textarea에 적용된다.
 		oEditors.getById["summary"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -148,7 +181,7 @@
 		    elClickedObj.form.submit();
 		} catch(e) {}
 	}
-
+ */
 
 </script>
 
@@ -207,8 +240,9 @@
 			
 			<br><br>
 			<p>
-			<label>요약</label>
-			<textarea class="w3-input" name="summary" id="summary"></textarea>
+				<label>요약</label>
+				<!-- <textarea class="w3-input" name="summary" id="summary"></textarea> -->
+				<textarea name="summary" id="summary" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
 			</p>
 			
 		</div>
