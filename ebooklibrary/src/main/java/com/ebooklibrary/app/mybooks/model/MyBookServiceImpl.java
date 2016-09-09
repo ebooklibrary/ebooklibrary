@@ -28,7 +28,7 @@ public class MyBookServiceImpl implements MyBookService {
 	}
 
 	@Override
-	public MyBooksVO selectMyBooksByUserId(String userId) {
+	public List<MyBooksVO> selectMyBooksByUserId(String userId) {
 		return myBookDao.selectMyBooksByUserId(userId);
 	}
 	

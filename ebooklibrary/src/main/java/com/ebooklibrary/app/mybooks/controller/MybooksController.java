@@ -70,7 +70,7 @@ public class MybooksController {
 	}
 	
 	@RequestMapping("/mybook.do")
-	public void bookletTest(HttpServletRequest request, HttpSession session, Model model){
+	public void bookletTest(HttpServletRequest request, HttpSession session,@RequestParam int bookNo , Model model){
 		
 		BookUtility bu=new BookUtility();
 		String userId=(String)session.getAttribute("userId");
@@ -78,10 +78,8 @@ public class MybooksController {
 		
 		if(userId!=null || !userId.isEmpty()){
 			
-			MyBooksVO myBooksVo=myBookService.selectMyBooksByUserId(userId);
-			
 			//이미지 파일명 업데이트
-			MyBookVO myBookVo=myBookService.selectBookByBookNo(myBooksVo.getBookNo());
+			MyBookVO myBookVo=myBookService.selectBookByBookNo(bookNo);
 			String bookFileName = bu.toUtf(myBookVo.getBookFileName());
 			String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
 			

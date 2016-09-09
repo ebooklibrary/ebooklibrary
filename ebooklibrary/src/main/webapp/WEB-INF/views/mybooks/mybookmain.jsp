@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
 		var Ca = /\+/g;
 		var bgImage=decodeURIComponent(bgImage);
 		var bgImage=bgImage.replace(Ca, "");
-		alert(bgImage);
+		//alert(bgImage);
 		
 		/* 배경화면 설정 */
 		$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/"+bgImage+")  no-repeat center center fixed",
@@ -72,21 +73,28 @@
 		$("#changeBackground").click(function() {
 			$("#upFileBox").toggle();
 		});
+		var test;
 		
 		/* 책목록 */
-		$("#myBtn").click(function() {
-			$(".modal").css("display","block");
+		$("#boughtBook").click(function() {
+			//$(".modal").css("display","block");
+			$("#boughtBookList").css("display","block");
+			$("#rentBookList").css("display","none");
 		});
 		$("#rentBook").click(function() {
-			$(".modal").css("display","block");
-		});
-		$("#boughtBook").click(function() {
-			$(".modal").css("display","block");
+			//$(".modal").css("display","block");
+			$("#rentBookList").css("display","block");
+			$("#boughtBookList").css("display","none");
 		});
 		
 		$(".close").click(function() {
 			$(".modal").css("display","none");
 		});
+		/* 
+		$("#myBtn").click(function() {
+			$(".modal").css("display","block");
+		});
+		 */
 		
 		/* 책보기 새창 열림 */
 		$("#booktestatag").click(function() {
@@ -234,11 +242,6 @@
 					</form>
 						<!-- <span id="defalutImage">기본 배경화면</span> -->
 				</div>
-			
-			
-			
-				
-				
 			</div>
 			
 			
@@ -272,27 +275,8 @@
 					<input class="mybook1" type="hidden" value="fileUrl">
 					<div id="mybookColor"></div>
 				</div>
-				
-				<div class="mybook" id="b02">
-					<span>국화꽃<br><br>향기</span>
-					<input class="mybook1" type="hidden" value="fileUrl1">
-					<div id="mybookColor1"></div>
-				</div>
-				 -->
-				
-			 <!-- 
-				<a class="testa" href="#" id="b01">
-					Game<br><br>Of<br><br>Thrones
-					<input type="hidden" value="fileUrl">
-					<span id="mybookColor1"></span>
-				</a>
-				
-				<a class="testa" href="#" id="b02">
-					국화꽃<br><br>향기
-					<input type="hidden" value="fileUrl1">
-					<span id="mybookColor"></span>
-				</a>
 			 -->
+				 
 			</div> <!-- mybooks -->
 			
 		</div> <!-- BookList -->
@@ -304,7 +288,8 @@
 	<button id="myBtn">Open Modal</button>
 	 -->
 	<!-- 책목록 미니창 띄우기 -->
-	<div id="myModal" class="modal">
+	<!-- myModal -->
+	<div id="boughtBookList" class="modal">
 	  <div class="modal-content">
 	    <p>나의 구매(대여)책 목록</p>
 	    <br>
@@ -319,47 +304,25 @@
 		    <th style="width:20%;">유효날짜</th>
 		  </tr>
 		  
-		  <tbody>
-			  <tr>
-			    <td>음악은 그런거니깐</td>
-			    <td>Germany</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Berglunds snabbkop</td>
-			    <td>Sweden</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Island Trading</td>
-			    <td>UK</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Koniglich Essen</td>
-			    <td>Germany</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Laughing Bacchus Winecellars</td>
-			    <td>Canada</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Magazzini Alimentari Riuniti</td>
-			    <td>Italy</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>North/South</td>
-			    <td>UK</td>
-			    <td>오늘내일</td>
-			  </tr>
-			  <tr>
-			    <td>Paris specialites</td>
-			    <td>France</td>
-			    <td>오늘내일</td>
-			  </tr>
+		<tbody>
+			<c:forEach var="map" items="${alist }">
+				<c:if test="${empty map['RENT_END'] }">
+					<tr>
+						<td>${map["TITLE"] }</td>
+						<td>${map["PUBLISHER"] }</td>
+						<td><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				</c:if>
+			</c:forEach>
+			
+				
+		<!-- 
+			<tr>
+				<td>음악은 그런거니깐</td>
+				<td>Germany</td>
+				<td>오늘내일</td>
+			</tr>
+		-->
 		  </tbody>
 		  
 		</table>
@@ -367,7 +330,48 @@
 	  </div>
 	</div>
 			
-	
+	<!-- 책목록 미니창 띄우기 -->
+	<!-- myModal -->
+	<div id="rentBookList" class="modal">
+	  <div class="modal-content">
+	    <p>나의 구매(대여)책 목록</p>
+	    <br>
+	    <span class="close">닫기</span>
+	    
+	    <!-- 미니창 안의 책목록및검색 -->
+		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+		<table id="myTable">
+		  <tr class="header">
+		    <th style="width:40%;">책제목</th>
+		    <th style="width:40%;">출판사</th>
+		    <th style="width:20%;">유효날짜</th>
+		  </tr>
+		  
+		<tbody>
+			<c:forEach var="map" items="${alist }">
+				<c:if test="${!empty map['RENT_END'] }">
+					<tr>
+						<td>${map["TITLE"] }</td>
+						<td>${map["PUBLISHER"] }</td>
+						<td><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				</c:if>
+			</c:forEach>
+			
+				
+		<!-- 
+			<tr>
+				<td>음악은 그런거니깐</td>
+				<td>Germany</td>
+				<td>오늘내일</td>
+			</tr>
+		-->
+		  </tbody>
+		  
+		</table>
+
+	  </div>
+	</div>
 	
 	
 	

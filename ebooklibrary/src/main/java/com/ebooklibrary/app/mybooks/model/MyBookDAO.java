@@ -8,5 +8,5 @@ public interface MyBookDAO {
 	public int insertBook(MyBookVO myBookVo);
 	public List<Map<String, Object>> selectBookByUserId(String userId);
 	public MyBookVO selectBookByBookNo(int bookNo);
-	public MyBooksVO selectMyBooksByUserId(String userId);
+	public List<MyBooksVO> selectMyBooksByUserId(String userId);
 }
