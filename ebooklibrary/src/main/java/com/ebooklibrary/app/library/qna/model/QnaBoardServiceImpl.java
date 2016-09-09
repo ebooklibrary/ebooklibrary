@@ -89,6 +89,11 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		return qnaBoardDao.selectCountByMemNo(memberSVo);
 	}
 
+	@Override
+	public int completeQna(int qnaNo) {
+		return qnaBoardDao.completeQna(qnaNo);
+	}
+
 	
 	
 	

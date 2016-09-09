@@ -64,8 +64,12 @@
 			<c:forEach var="vo" items="${qnaList}">
 			
 				<tr>
-					<td>${vo.qnaNo }</td>
-					<td><a href="<c:url value='/library/qna/readCountAdd.do?qnaNo=${vo.qnaNo }'/>">${vo.title }</a></td>
+					<td>${vo.qnaNo}</td>
+					<td><a href="<c:url value='/library/qna/readCountAdd.do?qnaNo=${vo.qnaNo }'/>">
+						<c:if test="${vo.complete=='Y'}">
+						[답변완료]
+						</c:if>
+						${vo.title }</a></td>
 					<td>${vo.userName }</td>
 					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="MM/dd 
 						 HH:mm:ss"/> </td>

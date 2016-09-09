@@ -31,6 +31,37 @@
 			
 		} 
 	}
+	
+	$().ready(function(){
+		$("#selectAnswer").click(function(event){
+			if(confirm("채택하시겠습니까?")){
+				location.href="<c:url value='/library/qna/completeQna.do?qnaNo="+${param.qnaNo }+"'/>";
+			}else{
+				return false;
+			}
+		});
+		
+		$("#replyCmt").click(function(){
+			if($("#content").val()==""){
+				alert("내용을 입력하세요");
+				$("#content").focus();
+				return false;
+			}
+		});
+		
+		$("#btCmW").click(function(){
+			if($("#content1").val()==""){
+				alert("내용을 입력하세요");
+				$("#content1").focus();
+				return false;
+			}
+		});
+		
+	});
+	
+	/* function complete(){
+		location.href="<c:url value='/library/qna/completeQna.do?qnaNo="+qnaNo+"'/>";
+	} */
 </script>
 <table width="600">
 	<caption>댓글</caption>
@@ -44,15 +75,20 @@
 		<c:set var="i" value="1" />
 			<c:forEach var="clist" items="${ commentList}">			
 				<tr>
-					<td><input type="button" id="selectAnswer" value="답변채택" ></td>
+					<td>
+						<form>
+							
+							<input type="button" id="selectAnswer" onclick="complete(${param.qnaNo})" value="답변채택" >
+						</form>
+					</td>
 					<td>${clist.userName }</td>
 					<td>${clist.content }</td>
 					<td>${clist.regDate }</td>
 					<td><input type="button" onclick="reVisi(${i})" value="덧글"></td>
 				</tr>
 				<tr >
-					<form id="refrm" method="post" action="<c:url value='/comments/commentWrite.do'/>"	>
-					<td class="recmt" id="${i}" name="${i}" colspan="4" style="display:none">
+					<form id="refrm" method="post" action="<c:url value='/comments/commentWrite.do'/>">
+						<td class="recmt" id="${i}" name="${i}" colspan="4" style="display:none">
 							<c:set var="groupN" value="${clist.commentNo }" />
 						<c:if test="${clist.commentNo>clist.groupNo }">
 							<c:set var="groupN" value="${clist.groupNo }" />
@@ -67,7 +103,7 @@
 						<label>${sessionScope.userName} </label> 
 						<textarea name="content" id="content" row="10" cols="30" ></textarea>
 						
-						<input type="submit" value="덧글등록" >
+						<input type="submit" id="replyCmt" value="덧글등록" >
 						<input type="button" onclick="reVisi(${i})" value="취소" >
 					</td>
 					</form>
@@ -84,8 +120,8 @@
 		<input type="hidden" name="userName" value="${sessionScope.userName}"/>
 		<input type="hidden" name="memberNo" value="${sessionScope.memberNo}"/>
 		<label>${sessionScope.userName} </label> 
-		<textarea name="content" row="10" cols="30"></textarea>
+		<textarea name="content" id="content1" row="10" cols="30"></textarea>
 		
-		<input type="submit" value="등록" >
+		<input type="submit" id="btCmW" value="등록" >
 	</form>	
 </div>

@@ -26,7 +26,7 @@
 		(
 		    select rownum as RNUM, QnaLIST_ALL.*
 		    from
-		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,
+		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,COMPLETE,
 					CONTENT,READ_COUNT
 		        from QNA_BOARD 
 		        <include refid="searchWhere"></include>
@@ -119,7 +119,7 @@
 		(
 		    select rownum as RNUM, QnaLIST_ALL.*
 		    from
-		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,
+		        (select QNA_NO, TITLE, USER_NAME, REG_DATE,COMPLETE,
 					CONTENT,READ_COUNT
 		        from QNA_BOARD 
 		        where MEMBER_NO=#{memberNo}
@@ -136,4 +136,10 @@
 		select count(*) from QNA_BOARD where  MEMBER_NO=#{memberNo}
 		
 	</select>
+	
+	<update id="updateComplete" parameterType="int">
+		update QNA_BOARD
+		set COMPLETE='Y'
+		where QNA_NO=#{qnaNo}
+	</update>
 </mapper>
