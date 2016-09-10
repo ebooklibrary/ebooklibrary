@@ -38,6 +38,124 @@ ${pageContext.request.contextPath}
 		</script>
  -->
 <script type="text/javascript">
+
+
+$("#bt2").click(function() {
+	
+	//[{"no":10,"name":"박길동","content":"안녕"},{"no":11,"name":"정길동","content":"요!"},{"no":12,"name":"최길동","content":"hello"}]
+	
+	//spring 컨트롤러에서 jsonView 이용하는 경우
+	$.ajax({
+		url:"<c:url value='/memo/memoList2.do'/>", type:"GET", dataType:"json",
+		success:function(res){
+			alert("응답결과, 개수:"+res.length);
+			
+			if (res.length>0) {
+				var result="";
+				$.each(res, function(idx,item) {
+					result+="번호 : "+item.no+"<br>"
+					+"이름:"+this["name"]+"<br>"
+					+"내용:"+this.content+"<br><br>";
+				});
+				
+				$("#divResult").html(result);
+			}
+			 
+			 
+			 
+		},
+		error:function(xhr, status, error){
+			alert(status+":"+error);
+		}
+		
+		
+		
+	});
+});
+
+
+$("#frm1").submit(function(event) {
+	
+	//{"message":"입력 성공","data":{"no":20,"name":"fff","content":"aaaa"}}
+	/* 
+	var p_name=$("#name").val();
+	var p_content=$("#content").val();
+	var str={name:$("#name").val() , content:$("#content").val() };
+	 */
+	alert($(this).serializeArray());
+	$.ajax({
+		url:"<c:url value='/memo/memoWrite.do'/>",
+		//[1] 파라미터를 객체로 보내는 경우
+		//data:{name:$("#name").val() , content:$("#content").val() },
+		
+		//[2] 파라미터를 쿼리문자열(쿼리스트링)로 보내는 경우
+		//data:"name"=p_name+"&content="+p_content,
+		
+		//[3] 객체를 쿼리문자열로 변환
+		//data: $.param(str),
+		
+		//[4] 입력상자의 값을 쿼리문자열로 변환해서 보냄
+		//data: $(this).serialize(),
+		
+		//[5] 입력상자의 값을 객체로 변환해서 보냄
+		data: $(this).serializeArray(),
+			
+		type:"POST",
+		dataType:"json",
+		cache:false,
+		success:function(res){
+			var result=res.message+"<br>";
+			result+="입력 결과<br>";
+			result+="<p>번호 : "+res.data.no+"</p>";
+			result+="<p>이름 : "+res.data.name+"</p>";
+			result+="<p>내용 : "+res.data.content+"</p>";
+			
+			$("#result").html(result);
+			
+		},
+		error:function(xhr, status, error){
+			alert(status+":"+error);
+		}
+		
+	});
+	
+	event.preventDefault();
+});
+
+
+$("#userid").keyup(function() {
+	//1 , 해당 아이디가 존재하는 경우
+	//2 , 해당 아이디가 존재하지 않는 경우
+	if (vaildate_userid($("#userid").val()) && $("#userid").val().length>=2) {
+		$.ajax({
+			url:"<c:url value='/member/ajaxCheckUserid.do'/>",
+			type:"GET",
+			data: "userid="+$("#userid").val(),
+			success:function(res){
+				var result="";
+				if (res==1) {
+					result="이미 등록된 아이디";
+					$("#chkId").val("N");
+				}else if(res==2){
+					result="사용 가능한 아이디";
+					$("#chkId").val("Y");
+				}
+				$("#message").html(result);
+				
+			},
+			error:function(xhr, status, error){
+				alert(status+":"+error);
+			}
+		});
+	}else{
+		//유효성 검사를 통과하지 못한 경우
+		$("#message").html("아이디 규칙에 맞지 않습니다.");
+		$("#chkId").val("N");
+	}
+});
+
+
+
 $(function() {
 	
 	

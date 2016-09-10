@@ -79,23 +79,8 @@ html {
 #upFileBox:hover {
     box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2);
 }
-/* 기본배경화면 */
-#defalutImage{
-	border: 1px solid #d7d7d7;
-	background-color: rgba(255,220,220, 0.7);
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	padding: 2px;
-	border-radius: 3px;
-	color: #535353;
-	/* margin: 0 10px 10px 0; */
-	
-	clear: both;
-}
-#defalutImage:hover{
-    box-shadow: 1px 1px 1px #aaaaaa;
-    cursor: pointer;
+#moreBookDiv{
+	position: relative;
 }
 
 /* 책 검색 */
@@ -115,14 +100,30 @@ html {
     
 }
 #menuDiv input[type=text]:focus {
-    width: 100%;
+    width: 60%;
 }
 #searchInfo{
 	background-color: rgba(200,255,200, 0.7);
 	border-radius: 5px;
 	padding: 2px 4px 2px 4px;
 }
-
+/* 책검색 버튼 */
+#moreBook{
+	border: 1px solid #d7d7d7;
+	background-color: rgba(255,220,220, 0.7);
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	padding: 2px;
+	border-radius: 3px;
+	color: #535353;
+	/* margin: 0 10px 10px 0; */
+	clear: both;
+}
+#moreBook:hover{
+    box-shadow: 1px 1px 1px #aaaaaa;
+    cursor: pointer;
+}
 
 /* 최근 책장 div */
 #recentBook{
@@ -139,24 +140,21 @@ html {
 	width: 830px;
 	height: 690px;
 	
-	padding: 10px 65px 10px 65px; 
+	padding: 0 65px 10px 65px; 
 	/* border: 1px solid black; */
-	
 }
-
 /* 책 이미지 div */
-.imgtest{
+.recentMyBook{
 	float: left;
 	width: 80px;
 	height: 90px;
-	margin: 30px 40px 98px 40px;
+	margin: 0 40px 125px 40px;
 	/* border: 1px solid black; */
 }
-
 /* 책 이미지 img */
-.imgtest img{
+.recentMyBook img{
 	width: 120px;
-	height: 100px;
+	height: 150px;
 }
 
 
@@ -197,7 +195,7 @@ html {
 	right: 20px;
 	color: green;
 }
-#boughtBook{
+#purchasedBook{
 	position: absolute;
 	right: 140px;
 	color: blue;

@@ -14,14 +14,26 @@
 		$(".mybook").click(function() {
 			alert($(this).find(".mybook1").val());
 		});
-		
 		$(".mybook").click(function() {
 			var bookNo=$(this).find(".mybook1").val();
-			
 			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
-			
-			
 		});
+		$(".purchasedBookDiv").click(function() {
+			var bookNo=$(this).find(".mybook1").val();
+			alert(bookNo);
+			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+		});
+		$(".rentBookDiv").click(function() {
+			var bookNo=$(this).find(".mybook1").val();
+			alert(bookNo);
+			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+		});
+		$(".recentMyBook").click(function() {
+			var bookNo=$(this).find(".mybook1").val();
+			alert(bookNo);
+			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+		});
+		
 		
 		/* 
 		$(".mybook").hover(function() {
@@ -54,10 +66,10 @@
 		
 		/* 책 검색 */
 		$("#menuDiv input[type=text]").focus(function() {
-			$("#menuDiv span").hide();
+			$("#menuDiv #searchInfo").hide();
 		});
 		$("#menuDiv input[type=text]").blur(function() {
-			$("#menuDiv span")
+			$("#menuDiv #searchInfo")
 			  .delay(800)
 			  .queue(function (next) { 
 			    $(this).show(); 
@@ -69,12 +81,45 @@
 		$("#changeBackground").click(function() {
 			$("#upFileBox").toggle();
 		});
-		var test;
+		/* 
+		//책 전체 검색
+		$("#search").keyup(function() {
+			//1 , 해당 아이디가 존재하는 경우
+			//2 , 해당 아이디가 존재하지 않는 경우
+			alert($("#search").val());
+			if (vaildate_userid($("#userid").val()) && $("#userid").val().length>=2) {
+				$.ajax({
+					url:"<c:url value='/member/ajaxCheckUserid.do'/>",
+					type:"GET",
+					data: "bookTitle="+$("#userid").val(),
+					success:function(res){
+						var result="";
+						if (res==1) {
+							result="이미 등록된 아이디";
+							$("#chkId").val("N");
+						}else if(res==2){
+							result="사용 가능한 아이디";
+							$("#chkId").val("Y");
+						}
+						$("#message").html(result);
+						
+					},
+					error:function(xhr, status, error){
+						alert(status+":"+error);
+					}
+				});
+			}else{
+				//유효성 검사를 통과하지 못한 경우
+				$("#message").html("아이디 규칙에 맞지 않습니다.");
+				$("#chkId").val("N");
+			}
+		});
+ */
 		
 		/* 책목록 */
-		$("#boughtBook").click(function() {
+		$("#purchasedBook").click(function() {
 			//$(".modal").css("display","block");
-			$("#boughtBookList").css("display","block");
+			$("#purchasedBookList").css("display","block");
 			$("#rentBookList").css("display","none");
 			$("#rentBook").find("input").attr("id",""); //myInput
 			$("#rentBook").find("table").attr("id",""); //myTable
@@ -82,9 +127,9 @@
 		$("#rentBook").click(function() {
 			//$(".modal").css("display","block");
 			$("#rentBookList").css("display","block");
-			$("#boughtBookList").css("display","none");
-			$("#boughtBookList").find("input").attr("id",""); //myInput
-			$("#boughtBookList").find("table").attr("id",""); //myTable
+			$("#purchasedBookList").css("display","none");
+			$("#purchasedBookList").find("input").attr("id",""); //myInput
+			$("#purchasedBookList").find("table").attr("id",""); //myTable
 		});
 		
 		$(".close").click(function() {
@@ -92,11 +137,6 @@
 			$(".modal-content").find("input").attr("id","myInput"); //myInput
 			$(".modal-content").find("table").attr("id","myTable"); //myTable
 		});
-		/* 
-		$("#myBtn").click(function() {
-			$(".modal").css("display","block");
-		});
-		 */
 		
 		/* 책보기 새창 열림 */
 		$("#booktestatag").click(function() {
@@ -208,27 +248,19 @@
 			<a href="<c:url value='/library/librarymain.do'/>">도서관</a>
 		</div>
 	
+		<!-- COVER_FILE_NAME -->
+		
 		<!-- 최근 책 책장 -->
 		<div id="recentBook">
-		
-			<div class="imgtest">
-				<img alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
-			</div>
-			
-			
-			<div class="imgtest">
-				<img title="QQ규" alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
-			</div>
-			
-			<div class="imgtest">
-				<img title="QQ규" alt="최근책 책장" src="${pageContext.request.contextPath }/images/mybook/testimg.jpg">
-			</div>
-			
-		
+			<c:forEach var="map" items="${alist }">
+				<div class="recentMyBook">
+					<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }">
+					<img title="${map['TITLE'] }" alt="최근책 책장" src="${pageContext.request.contextPath }/book_upload/${map['COVER_FILE_NAME'] }">
+				</div>
+			</c:forEach>
 		</div>
 		
 		<div id="menuDiv">
-		
 			<div id="etc">
 				<!-- 배경화면 바꾸기 -->
 				<div id="changeBackground">
@@ -246,17 +278,19 @@
 				</div>
 			</div>
 			
-			
-			
-			<input type="text" name="search" placeholder="Search..">
-			<span id="searchInfo">찾고 싶은 책이 있으시다면 여기에서!</span>
+			<!-- 책 전체 검색 -->
+			<div id="moreBookDiv">
+				<input type="text" id="search" name="search" placeholder="Search..">
+				<span id="searchInfo">더 보고 싶은 책이 있으시다면 여기에서!</span>
+				<span id="moreBook">상점으로 고고</span>
+			</div>
 		</div>
 		
 		<!-- 보관 책장 -->
 		<div id="BookList">
 			<p>${sessionScope.userId } 님의 책장</p>
 			<a id="rentBook" href="#">대여책 목록</a>
-			<a id="boughtBook" href="#">구매책 목록</a>
+			<a id="purchasedBook" href="#">구매책 목록</a>
 					<!-- <a href="#"><FONT style="WRITING-MODE: tb-rl; HEIGHT: 50pt">12345</FONT></a> -->
 			<div id="myBooks">
 			<!-- SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY -->
@@ -264,7 +298,12 @@
 				<div class="mybook">
 					<span>${map["TITLE"] }</span>
 					<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }">
-					<div class="mybookColor"></div>
+					<c:if test="${empty map['RENT_END'] }">
+						<div class="mybookColor"></div>
+					</c:if>
+					<c:if test="${!empty map['RENT_END'] }">
+						<div class="mybookColor1"></div>
+					</c:if>
 				</div>
 			</c:forEach>
 			</div> <!-- mybooks -->
@@ -273,7 +312,7 @@
 	
 	<!-- 구매책목록 미니창 띄우기 -->
 	<!-- myModal -->
-	<div id="boughtBookList" class="modal">
+	<div id="purchasedBookList" class="modal">
 	  <div class="modal-content">
 	    <p>나의 구매책 목록</p>
 	    <br>
@@ -290,9 +329,10 @@
 			<c:forEach var="map" items="${alist }">
 				<c:if test="${empty map['RENT_END'] }">
 					<tr>
-						<td>${map["TITLE"] }</td>
-						<td>${map["PUBLISHER"] }</td>
-						<td><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/></td>
+						<td><div class="purchasedBookDiv">${map["TITLE"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
+						<td><div class="purchasedBookDiv">${map["PUBLISHER"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
+						<td><div class="purchasedBookDiv"><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/><input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td></td>
+						
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -320,9 +360,9 @@
 			<c:forEach var="map" items="${alist }">
 				<c:if test="${!empty map['RENT_END'] }">
 					<tr>
-						<td>${map["TITLE"] }</td>
-						<td>${map["PUBLISHER"] }</td>
-						<td><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/></td>
+						<td><div class="rentBookDiv">${map["TITLE"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
+						<td><div class="rentBookDiv">${map["PUBLISHER"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
+						<td><div class="rentBookDiv"><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/><input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
 					</tr>
 				</c:if>
 			</c:forEach>

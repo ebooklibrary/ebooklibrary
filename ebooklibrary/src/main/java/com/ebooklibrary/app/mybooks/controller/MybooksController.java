@@ -47,7 +47,6 @@ public class MybooksController {
 		if(userId!=null || !userId.isEmpty()){
 			
 			List<Map<String, Object>> alist=myBookService.selectBookByUserId(userId);
-			
 			logger.info("책 alist={}", alist);
 			
 			model.addAttribute("alist", alist);
