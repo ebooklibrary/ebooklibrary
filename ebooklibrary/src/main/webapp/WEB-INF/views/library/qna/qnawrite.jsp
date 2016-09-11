@@ -48,6 +48,13 @@
 		$("#frmWrite").submit(function() {
 			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 			
+			if($("#title").val().length < 1 || $("#title").val()=="<p>&nbsp;</p>"){
+	            
+	            alert("제목을 입력하세요.");
+	            $("#title").focus();
+	            
+	            return false;
+	         }
 			if($("#content").val().length < 1 || $("#content").val()=="<p>&nbsp;</p>"){
 	            
 	            alert("내용을 입력하세요.");
@@ -98,13 +105,9 @@ function submitContents(elClickedObj) {
 				<div >
 					<label for="userName">${sessionScope.userName }</label>
 				</div>
-			
-				
 					<p>
-					<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
+						<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
 					</p>
-				
-		         
 		        <div>
 		        	<input type="submit" value="작성완료"/>
 		        	<input type="Button" value="글 목록"

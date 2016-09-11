@@ -12,12 +12,17 @@
 					<label>${requestVo.userName}</label><label>레벨체크</label>
 				</div>
 				<div class="">
-					<label for="title">제목</label>
+					<label for="title">책제목</label>
 					<input type="text" id="title" name="title" value="${requestVo.title }"/>
 				</div>
 				<div >
-					<label for="writer">작성자</label>
+					<label for="writer">저자</label>
 					<input type="text" id="userName" name="userName" value="${requestVo.userName }">
+				</div>       	        
+		        
+				<div >
+					<label for="publisher">출판사</label>
+					<input type="text" id="publisher" name="publisher" value="${requestVo.publisher }">
 				</div>       	        
 		        
 		        <div>

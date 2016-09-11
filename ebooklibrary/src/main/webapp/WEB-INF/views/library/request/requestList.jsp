@@ -13,19 +13,31 @@
 			$(location).attr('href',"<c:url value='/library/request/requestList.do'/>");
 		});
 		$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
+		
+		$("#stock").click(function(){
+			if(confirm("입고처리하시겠습니까?")){
+				return true;
+			}else{
+				return false;
+			}
+		});
+		
 	});
-
+	
 	function pageFunc(curPage){
 		document.frmPage.currentPage.value=curPage;
 		frmPage.submit();
 	}	
 
 </script>
-<form name="frmPage" method="post"
-	action="<c:url value='/library/request/requestList.do'/>">
+<form name="frmPage" method="post" 
+	action="<c:url value='/library/qna/qnaList.do'/>">
 	<input type="hidden" name="currentPage">
-	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
-	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+	<input type="hidden" id="myWrite" name="myWrite" value="${param.myWrite }">
+	<input type="hidden" id="myWrite" name="searchCondition" value="${param.searchCondition }">
+	<input type="hidden" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
+	
 </form>
 <h1>요청게시판 입니다</h1>
 <div id="notice_body">
@@ -34,38 +46,59 @@
 		<caption>request</caption>
 		<colgroup>
 			<col style="width: 10%;" />
-			<col style="width: 50%;" />
 			<col style="width: 15%;" />
 			<col style="width: 15%;" />
 			<col style="width: 10%;" />
+			<col style="width: 15%;" />
+			<col style="width: 10%;" />
+			<col style="width: 15%;" />
 		</colgroup>
 		<thead>
 			<tr>
 				<th scope="col">번호</th>
-				<th scope="col">제목</th>
+				<th scope="col">분류</th>
+				<th scope="col">책제목</th>
+				<th scope="col">저자</th>
+				<th scope="col">출판사</th>
 				<th scope="col">작성자</th>
 				<th scope="col">작성일</th>
-				<th scope="col">처리여부</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:if test="${empty requestList}">
 				<tr>
-					<td colspan="4">게시글이 없습니다.</td>
+					<td colspan="7">게시글이 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:if test="${!empty requestList}">
 				<c:forEach var="vo" items="${requestList}">
-
+					
 					<tr>
 						<td>${vo.requestNo }</td>
-						<td><a
-							href="<c:url value='/library/request//requestDetail.do?requestNo=${vo.requestNo }'/>">${vo.title }</a></td>
+						<td>
+							<c:if test="${vo.stocked=='Y' }">
+								[입고완료]							
+							</c:if>
+							<c:if test="${vo.stocked=='N' }">
+								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+									<form id="request_stock" method="post" action="<c:url value='/library/request/requestStock.do?requestNo=${vo.requestNo }'/>">
+										<input type="submit" id="stock" value="입고">
+										입고요청							
+									</form>
+								</c:if>
+								<c:if test="${sessionScope.auchCode=='USER' }">
+									입고요청중
+								</c:if>
+							</c:if>
+						</td>
+						<td>
+							<p>${vo.title }</p>
+						</td>
+						<td>${vo.writer }</td>
+						<td>${vo.publisher }</td>
 						<td>${vo.userName }</td>
-						<td style="text-align: center;"><fmt:formatDate
-								value="${vo.regdate }" pattern="MM/dd 
-						 HH:mm:ss" /></td>
-						<td>${vo.stocked }</td>
+						<td style="text-align: center;"><fmt:formatDate	value="${vo.regdate }" pattern="MM/dd  HH:mm:ss" /></td>
+								
 					</tr>
 
 				</c:forEach>
@@ -102,11 +135,15 @@
 			</a>
 		</c:if>
 	</div>
-	<div class="divPage">
-		<input type="button" id="listGo" value="전체목록" /> <input type="button"
-			id="writeGo" value="글쓰실?" /> <input type="button" id="myWriting"
-			value="내글 보기" />
-	</div>
+<div class="align_left">
+	<input type="button" id="listGo" value="전체목록"/>
+	<input type="button" id="writeGo" value="글쓰실?"/>
+	<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
+		<input type="submit" id="myWriting" value="내글 보기"/>
+		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+		<input type="hidden" id="myWrite" name="myWrite" value="Y">
+	</form>			
+</div>
 
 </div>
 
@@ -117,7 +154,7 @@
 			<option value="title"
 				<c:if test="${param.searchCondition=='title'}">
             		selected
-               </c:if>>제목</option>			
+               </c:if>>책제목</option>			
 			<option value="username"
 				<c:if test="${param.searchCondition=='username'}">
             		selected

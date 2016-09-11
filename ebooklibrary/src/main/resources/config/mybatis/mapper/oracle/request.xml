@@ -9,6 +9,9 @@
 			<if test="searchKeyword!=null and searchKeyword!=''">
 				${searchCondition} like '%' ||#{searchKeyword}|| '%'
 			</if>
+			<if test="myWrite!=null and myWrite!=''">
+				MEMBER_NO=#{memberNo}
+			</if>
 		</where>
 	</sql>
 
@@ -16,8 +19,8 @@
 		<selectKey order="BEFORE" keyProperty="requestNo" resultType="int">
 			select request_seq.nextval from dual
 		</selectKey>
-		insert into request_board(request_no, title,user_name ,publisher,member_no)
-		values (#{requestNo},#{title},#{userName},#{publisher},#{memberNo})
+		insert into request_board(request_no, title,Writer ,publisher,user_name,member_no)
+		values (#{requestNo},#{title},#{writer},#{publisher},#{userName},#{memberNo})
 	</insert>
 
 	<select id="seletctByNoRequest" parameterType="int" resultType="RequestVO">
@@ -27,7 +30,7 @@
 	<update id="editRequest" parameterType="RequestVO">
 		update request_board
 		set
-		title=#{title} ,user_name=#{userName}
+		title=#{title} ,WRITER=#{writer}
 		where request_no =#{requestNo}
 	</update>
 
@@ -60,6 +63,11 @@
 		order by request_no desc
 	</select>
 	
+	<update id="stockBook" parameterType="int">
+		update request_board
+		set stocked='Y'
+		where request_no=#{requestNo}
+	</update>
 </mapper>
 
 

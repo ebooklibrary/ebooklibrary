@@ -11,4 +11,5 @@ public interface RequestDAO {
 	public int deleteRequest(int requestNo);
 	public List<RequestVO> selectAllRequest(SearchVO searchVo);
 	public int requestCount(SearchVO searchVo);
+	public int stockBook(int requestNo);
 }

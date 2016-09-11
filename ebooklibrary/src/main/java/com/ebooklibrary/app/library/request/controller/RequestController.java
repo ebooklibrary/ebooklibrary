@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.library.qna.controller.QnAController;
 import com.ebooklibrary.app.library.qna.model.QnaBoardService;
 import com.ebooklibrary.app.library.qna.model.QnaBoardVO;
+import com.ebooklibrary.app.library.request.model.RequestDAO;
 import com.ebooklibrary.app.library.request.model.RequestService;
 import com.ebooklibrary.app.library.request.model.RequestVO;
 
@@ -33,7 +35,7 @@ public class RequestController {
 	
 	@RequestMapping("/requestList.do")
 	public String listQnaBoard(
-			@ModelAttribute SearchVO searchVo,
+			@ModelAttribute MemberSearchVO searchVo,
 			Model model){
 		//1.
 		logger.info("요청게시판 리스트 ");
@@ -188,18 +190,30 @@ public class RequestController {
 		return "common/message";
 	}
 	
-	@RequestMapping("/requestSelectByMem.do")
-	public String selectByMemberNo(){
+	@RequestMapping("/requestStock.do")
+	public String book_stock(@RequestParam int requestNo,Model model){
 		//1.
+		logger.info("입고 처리 페이지 파라미터값   request={}",requestNo);
 		
 		//2.
+		int cnt =requestService.stockBook(requestNo);
+		logger.info("입고처리 결과  cnt={}",cnt);
 		
 		//3.
+		String msg="",url="/library/request/requestList.do";
+		if(cnt>0){
+			msg="입고처리되었습니다.";
+		}else{
+			msg="입고처리가 되지않았습니다.";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		
 		
 		return "common/message";
 	}
-	
-	
 	
 	
 }
