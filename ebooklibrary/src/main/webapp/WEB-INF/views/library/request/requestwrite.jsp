@@ -12,19 +12,22 @@
 					<label>아이디</label><label>레벨체크</label>
 				</div>
 				<div class="">
-					<label for="title">제목</label>
+					<label for="title">책제목</label>
 					<input type="text" id="title" name="title" />
 				</div>
 				<div >
-					<label for="writer">작성자</label>
-					<input type="text" id="userName" name="userName">
+					<label for="writer">저자</label>
+					<input type="text" id="writer" name="writer">
 				</div>
 		        <div>
-		       		<label for="writer">출판사</label>
+		       		<label for="publisher">출판사</label>
 					<input type="text" id="publisher" name="publisher">
 		        </div>
 		        <div>
 		        	<input type="text" name="memberNo" value="${sessionScope.memberNo }">
+		        </div>
+		        <div>
+		        	<input type="text" name="userName" value="${sessionScope.userName }">
 		        </div>
 		        
 		        <div>

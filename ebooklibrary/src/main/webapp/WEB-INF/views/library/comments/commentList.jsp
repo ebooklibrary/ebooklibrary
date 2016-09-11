@@ -84,10 +84,12 @@
 				<tr>
 					<td>
 					<c:if test="${param.complete!='Y' }">
+						<c:if test="${sessionScope.memberNo==clist.memberNo }">
 						<form>
 							
 							<input type="button" id="selectAnswer" onclick="complete(${param.qnaNo},${clist.commentNo })" value="답변채택" >
 						</form>
+						</c:if>
 					</c:if>	
 					<c:if test="${clist.selectCmt=='Y' }">
 						<img src="<c:url value='/images/library/basic/tumb.png'/>" width="30">

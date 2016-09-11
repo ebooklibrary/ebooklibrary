@@ -44,4 +44,8 @@ private static final Logger logger = LoggerFactory.getLogger(NoticeDaoMybatis.cl
 	public int requestCount(SearchVO searchVo) {
 		return getSqlSession().selectOne(NAMESPACE+".selectRequestCount",searchVo);
 	}
+	@Override
+	public int stockBook(int requestNo) {
+		return getSqlSession().update(NAMESPACE+".stockBook",requestNo);
+	}
 }

@@ -13,8 +13,8 @@
 			order="BEFORE">
 			select comment_seq.nextval from dual
 		</selectKey>
-		insert into QNA_COMMENTS(COMMENT_NO,QNA_NO, user_name,content,group_no)
-		values(#{commentNo},#{qnaNo},#{userName},#{content},#{commentNo})
+		insert into QNA_COMMENTS(COMMENT_NO,QNA_NO,MEMBER_NO, user_name,content,group_no)
+		values(#{commentNo},#{qnaNo},#{userName},#{memberNo},#{content},#{commentNo})
 	</insert>
 	
 	<update id="updateSortNo" parameterType="QnaCommentVO">

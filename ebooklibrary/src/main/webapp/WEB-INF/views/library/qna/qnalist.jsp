@@ -7,7 +7,6 @@
 <script type="text/javascript">
 	$().ready(function(){
 		
-		
 		$("#writeGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/qna/qnaWrite.do'/>");
 		});
@@ -38,7 +37,8 @@
 	<caption>QnA</caption>
 	<colgroup>
 		<col style="width:10%;" />
-		<col style="width:50%;" />
+		<col style="width:10%;" />
+		<col style="width:40%;" />
 		<col style="width:15%;" />
 		<col style="width:15%;" />
 		<col style="width:10%;" />		
@@ -46,6 +46,7 @@
 	<thead>
 	  <tr>
 	    <th scope="col">번호</th>
+	    <th scope="col">분류</th>
 	    <th scope="col">제목</th>
 	    <th scope="col">작성자</th>
 	    <th scope="col">작성일</th>
@@ -55,7 +56,7 @@
 	<tbody >
 		<c:if test="${empty qnaList}">
 			<tr>
-				<td colspan="5">
+				<td colspan="6">
 				게시글이 없습니다.
 				</td>
 			</tr>
@@ -65,14 +66,32 @@
 			
 				<tr>
 					<td>${vo.qnaNo}</td>
-					<td><a href="<c:url value='/library/qna/readCountAdd.do?qnaNo=${vo.qnaNo }'/>">
+					<td>
 						<c:if test="${vo.complete=='Y'}">
 						[답변완료]
 						</c:if>
-						${vo.title }
-						<c:if test="${vo.commentCount!=0 }">
-							[${vo.commentCount }]
+						<c:if test="${vo.complete=='N'}">
+						질문
 						</c:if>
+						
+					</td>
+					<td><a href="<c:url value='/library/qna/readCountAdd.do?qnaNo=${vo.qnaNo }'/>">
+						<c:if test="${vo.complete=='Y'}">
+						<p style="color:#ddd">${vo.title }
+						
+							<c:if test="${vo.commentCount!=0 }">
+								[${vo.commentCount }]
+							</c:if>
+						</p>
+						</c:if>
+						<c:if test="${vo.complete=='N'}">
+							${vo.title }
+							<c:if test="${vo.commentCount!=0 }">
+								[${vo.commentCount }]
+							</c:if>
+						</c:if>
+						
+						
 						</a></td>
 					<td>${vo.userName }</td>
 					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="MM/dd 

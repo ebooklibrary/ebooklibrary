@@ -5,13 +5,19 @@ import java.sql.Timestamp;
 public class RequestVO {
 	private int requestNo;
 	private String title;
-	private String userName;
+	private String writer;
 	private Timestamp regdate;
 	private String publisher;
 	private String stocked;
 	private int memberNo;
+	private String userName;
 	
-	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getRequestNo() {
 		return requestNo;
 	}
@@ -24,11 +30,11 @@ public class RequestVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getUserName() {
-		return userName;
+	public String getWriter() {
+		return writer;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public Timestamp getRegdate() {
 		return regdate;
@@ -56,9 +62,11 @@ public class RequestVO {
 	}
 	@Override
 	public String toString() {
-		return "RequestVO [requestNo=" + requestNo + ", title=" + title + ", userName=" + userName + ", regdate="
-				+ regdate + ", publisher=" + publisher + ", stocked=" + stocked + ", memberNo=" + memberNo + "]";
+		return "RequestVO [requestNo=" + requestNo + ", title=" + title + ", writer=" + writer + ", regdate=" + regdate
+				+ ", publisher=" + publisher + ", stocked=" + stocked + ", memberNo=" + memberNo + ", userName="
+				+ userName + "]";
 	}
+	
 	
 	
 }

@@ -34,4 +34,9 @@ public class RequestServiceImpl implements RequestService{
 	public int requestCount(SearchVO searchVo){
 		return requestDao.requestCount(searchVo);
 	}
+
+	@Override
+	public int stockBook(int requestNo) {
+		return requestDao.stockBook(requestNo);
+	}
 }
