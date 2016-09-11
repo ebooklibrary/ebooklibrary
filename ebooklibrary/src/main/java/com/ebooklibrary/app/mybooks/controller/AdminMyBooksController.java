@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ebooklibrary.app.common.FileUploadWebUtil;
 import com.ebooklibrary.app.mybooks.model.MyBookService;
@@ -28,15 +29,12 @@ public class AdminMyBooksController {
 	@Autowired
 	private MyBookService myBookService;
 	
-	
 	@RequestMapping("/book/registerBook.do")
 	public void registerBook(){}
 	
 	@RequestMapping("/book/uploadBook.do")
 	public String uploadBook(HttpServletRequest request,@ModelAttribute MyBookVO myBookVo, Model model){
-		
-		
-		
+
 		//파일 업로드 처리
 		int uploadType=FileUploadWebUtil.PDS_UPLOAD;
 		//=>상품 등록시 이미지 업로드
@@ -71,6 +69,18 @@ public class AdminMyBooksController {
 		
 		return "redirect:/admin/book/registerBook.do";
 	}
+	
+	@RequestMapping("/book/bookList.do")
+	public String bookList(@RequestParam String searchKeyword, Model model){
+		logger.info("책리스트 파라미터 searchKeyword={}", searchKeyword);
+		
+		model.addAttribute("searchKeyword", searchKeyword);
+		
+		return "library/book/bookList";
+	}
+	
+	
+	
 	
 	
 	

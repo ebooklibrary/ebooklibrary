@@ -8,6 +8,7 @@
 <title>여기가 내 서재</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/mybook/mybookmain.css" />
+
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -67,14 +68,20 @@
 		/* 책 검색 */
 		$("#menuDiv input[type=text]").focus(function() {
 			$("#menuDiv #searchInfo").hide();
+			$("#moreBook").show();
 		});
 		$("#menuDiv input[type=text]").blur(function() {
 			$("#menuDiv #searchInfo")
 			  .delay(800)
 			  .queue(function (next) { 
-			    $(this).show(); 
+			    $(this).show();
+			    $("#moreBook").hide();
 			    next(); 
 			});
+		});
+		$("#moreBook").click(function() {
+			var searchKeyword=$("#search").val();
+			window.open("<c:url value='/admin/book/bookList.do?searchKeyword="+searchKeyword+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
 		});
 		
 		/* 배경화면 메뉴 */
@@ -136,11 +143,7 @@
 			$(".modal").css("display","none");
 			$(".modal-content").find("input").attr("id","myInput"); //myInput
 			$(".modal-content").find("table").attr("id","myTable"); //myTable
-		});
-		
-		/* 책보기 새창 열림 */
-		$("#booktestatag").click(function() {
-			window.open("<c:url value='/mybooks/mybook.do'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0")
+			$(".modal input[type=text]").val("");
 		});
 		
 		/* 배경 바꾸는 ajax */
@@ -177,6 +180,8 @@
 			
 			event.preventDefault();
 		});
+		
+		    
 		
 	}); //ready
 	
@@ -242,14 +247,14 @@
 
 	<div id="wrapper">
 	
-		<div id="tempMenu">
-			<a href="<c:url value='/mybooks/mybook.do'/>" id="booktestatag">내 책 테스트</a> | 
-			<a href="<c:url value='/index.do'/>">첫페이지</a> | 
-			<a href="<c:url value='/library/librarymain.do'/>">도서관</a>
+		<div id="tempMenu" class="ui-widget-content">
+			<ul class="topnav" id="myTopnav">
+				<li><a href="<c:url value='/index.do'/>">첫페이지</a></li>
+				<li><a href="<c:url value='/library/librarymain.do'/>">도서관</a></li>
+				<li><a href="#contact">Contact Us</a></li>
+			</ul>
 		</div>
 	
-		<!-- COVER_FILE_NAME -->
-		
 		<!-- 최근 책 책장 -->
 		<div id="recentBook">
 			<c:forEach var="map" items="${alist }">
@@ -261,6 +266,7 @@
 		</div>
 		
 		<div id="menuDiv">
+		
 			<div id="etc">
 				<!-- 배경화면 바꾸기 -->
 				<div id="changeBackground">
@@ -280,9 +286,11 @@
 			
 			<!-- 책 전체 검색 -->
 			<div id="moreBookDiv">
-				<input type="text" id="search" name="search" placeholder="Search..">
+				<form action="<c:url value='/admin/book/bookList.do'/>" name="searchAllBook" id="searchAllBook" method="post">
+				<input type="text" id="search" name="searchKeyword" placeholder="Search..">
 				<span id="searchInfo">더 보고 싶은 책이 있으시다면 여기에서!</span>
 				<span id="moreBook">상점으로 고고</span>
+				</form>
 			</div>
 		</div>
 		

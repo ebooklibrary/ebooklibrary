@@ -8,10 +8,6 @@ body{
 	
 }
  */
-#tempMenu{
-	background-color: white;
-}
-
 html {
 	background: url(../../images/mybook/back22.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
@@ -21,10 +17,9 @@ html {
 }
 
 #wrapper{
-	
 	width: 1800px;
 	/* position: relative; */
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	position: relative;
 }
 
@@ -45,11 +40,41 @@ html {
 /* 기타 */ 
 #etc{
 	/* border: 1px solid red; */
-	
 	width: 600px;
 	height:200px;
 	
 }
+
+/* 메뉴들 */
+#tempMenu{
+	background-color: white;
+	position: absolute;
+	top: 10px;
+	right: 440px;
+	z-index: 1;
+}
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+#tempMenu li:hover {background-color: #555; }
+
 /* 배경 바꾸기 */
 #changeBackground{
 	
@@ -100,7 +125,7 @@ html {
     
 }
 #menuDiv input[type=text]:focus {
-    width: 60%;
+    width: 70%;
 }
 #searchInfo{
 	background-color: rgba(200,255,200, 0.7);
@@ -118,6 +143,7 @@ html {
 	border-radius: 3px;
 	color: #535353;
 	/* margin: 0 10px 10px 0; */
+	display: none;
 	clear: both;
 }
 #moreBook:hover{
