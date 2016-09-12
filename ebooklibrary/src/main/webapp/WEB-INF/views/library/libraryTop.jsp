@@ -24,9 +24,9 @@
 
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/main_all.css" />
-<<<<<<< HEAD
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/silde_Notice/slide.css" />
-=======
+
 <!-- alert -->
 <!-- ideally at the bottom of the page -->
 <!-- also works in the <head> -->
@@ -37,11 +37,31 @@
 <%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
 <!-- include a theme, can be included into the core instead of 2 separate files -->
 <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
->>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.1.js"></script>
 <script type="text/javascript">
-
+$(function() {
+	var memoCount=0;
+	setInterval(function() {
+		if(${!empty sessionScope.userId}){
+			/* $.ajax({
+				url:"<c:url value='/library/memo/NewMemoCount.do'/>",
+				data:"userId=${sessionScope.userId}",
+				type:"GET",
+				success:function(res){
+					$("#memoCount").text(res);
+					memoCount=res;
+				}
+			});//ajax */
+		}	
+	},3000);
+	
+	$("#memoList").click(function() {
+		window.open("<c:url value='/library/memo/memoList.do'/>",
+				"memoList",
+		"width=700,height=500,left=50,top=50,resizable=yes,location=yes");		
+	});
+});
 
 </script>
 </head>
@@ -94,6 +114,10 @@
 	            </a></li>
 			</c:if>
 			<c:if test="${!empty sessionScope.userId }">
+				<li>
+				<a href="#" id="memoList">				
+				쪽지(<span id="memoCount"></span>)
+				</a></li>				
 				<li>
 				<a href="<c:url value='/member/myPage.do'/>">
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->

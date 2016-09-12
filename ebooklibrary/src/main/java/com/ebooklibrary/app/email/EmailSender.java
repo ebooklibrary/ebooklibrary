@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 
 @Component
 public class EmailSender {
@@ -37,5 +38,7 @@ public class EmailSender {
 		//메일발송
 		mailSender.send(message);		
 	}
+	
+	
 	
 }

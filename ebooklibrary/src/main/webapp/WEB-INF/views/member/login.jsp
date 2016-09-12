@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../library/libraryTop.jsp" %>
+<script type="text/javascript">
+$(function() {
+	$("#seachId").click(function() {				
+		window.open("<c:url value='/member/idsearch.do'/>",
+				"idsearch",
+		"width=450,height=400,left=50,top=50,resizable=yes,location=yes");
+		});
+	
+	$("#seachPwd").click(function() {				
+		window.open("<c:url value='/member/pwdsearch.do'/>",
+				"pwdsearch",
+		"width=450,height=400,left=50,top=50,resizable=yes,location=yes");
+		});
+})//document.ready
+
+
+</script>
+
 	<c:if test="${empty sessionScope.userId }">
 		<h1>로그인 화면</h1>
 		<form action="" method="post">
@@ -8,9 +26,9 @@
 			비밀번호 : <input type="password" name="pwd">
 			<input type="submit" value="로그인">
 		</form><br>
-		<a href="#">회원가입</a>
-		<a href="#">아이디 찾기</a><br>
-		<a href="#">비밀번호 찾기</a>
+		<a href="<c:url value='/member/register.do'/>">회원가입</a><br>
+		<button id="seachId">아이디 찾기</button>   
+		<button id="seachPwd">비밀번호 찾기</button>   
 	
 		
 	</c:if>

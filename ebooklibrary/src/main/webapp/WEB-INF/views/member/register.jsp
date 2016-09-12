@@ -27,7 +27,7 @@
 			}else if($("#emailStatus").val()!='Y'){
 				alert("이메일 인증을 해주세요");
 				return false;
-			}		
+			}
 		});//submit
 		$("#userId").keyup(function() {
 			if(validate_userid($("#userId").val())){
@@ -37,7 +37,6 @@
 					type:"GET",
 					success:function(res){
 						var result="";
-						//res가 1이면 아이디가 존재, 2면 아이디가 존재하지않음
 						if(res==1){
 							result="이미 등록된 아이디 입니다.";
 							$("#chkId").val('N');
@@ -103,21 +102,20 @@
 	<form action="<c:url value='/member/register.do'/>" method="post" id="regForm">
 		<label for="userId">아이디(이메일)</label>
 		<input type="text" name="userId" id="userId"><br>
-		<span id="message" style="color: red;">아이디는 이메일을 적어주세요</span><br>
+		<span id="message" style="color: red;">아이디에는 이메일을 적어주세요</span><br>
 		
 		<span id="emailconfirm">
 		<span>이메일 인증하기</span>
-		<form>
-		<input type="hidden" name="userId">
+
 		<input type="button" value="인증번호 발송" id="btnEmail">
-		</form><br>
+		<br>
 		
 		<labal for="confirm">인증번호</labal>		
 		<input type="text" name="confirm" id="confirm" size="10">
 		<input type="button" value="확인" id="btnEmailOk">
 		</span>
 		<span id="emailOk" style="visibility: hidden;"> 인증되었습니다</span>
-		<input type="hidden" id="emailStatus" value="N">
+		<input type="text" id="emailStatus" value="N">
 		<span id="emailNo" style="visibility: hidden;"> 인증번호를 다시 확인해주세요</span><br>
 		
 		<label for="userName">이름</label>

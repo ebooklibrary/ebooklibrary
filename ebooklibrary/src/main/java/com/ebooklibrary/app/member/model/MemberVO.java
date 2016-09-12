@@ -18,6 +18,7 @@ public class MemberVO {
 	private int cash; /* 북코인 */
 	private String bgImage; /* 회원전용 배경 */
 	private String confrimEmail; /* 이메일인증 */
+	
 	public int getMemberNo() {
 		return memberNo;
 	}

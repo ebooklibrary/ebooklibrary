@@ -48,4 +48,16 @@ public class MemberServiceImpl implements MemberService{
 	public int updateBackImg(MemberVO vo) {
 		return memberDao.updateBackImg(vo);
 	}
+
+	@Override
+	public String selectBymemberVo(MemberVO vo) {
+		return memberDao.selectBymemberVo(vo);
+	}
+
+	@Override
+	public int updateTempPwd(MemberVO vo) {
+		return memberDao.updateTempPwd(vo);
+	}
+	
+	
 }

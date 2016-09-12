@@ -3,6 +3,7 @@
 <%@ include file="../library/libraryTop.jsp" %>
 <div id="myPage_leftMenu">
 	<div>내정보 수정</div>
+	<div>비밀번호 변경</div>
 	<div>주문내역</div>
 	<div>회원탈퇴</div>
 </div>
@@ -16,7 +17,7 @@
 <span>북코인 : </span><span>${memberVo.cash }</span><input type="button" id="btnCharge" value="충전"><br>
 <span>내서재 배경화면</span><br>
 <c:if test="${!empty memberVo.bgImage }">
-<span><div style="background: url(${pageContext.request.contextPath }/images/mybook/${memberVo.bgImage }')"></div>
+<div style="width: 60px;height: 60px;background-image: url('${pageContext.request.contextPath}/images/${memberVo.bgImage }');"></div>
 </c:if>
 <c:if test="${empty memberVo.bgImage }">
 <span>등록된 배경화면이 없습니다</span>
