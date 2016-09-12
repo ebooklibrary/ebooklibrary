@@ -145,12 +145,12 @@
 			}
 			 */
 		}); //click
+		
 		/* 
 		var ge=["n","FANTASY","SCIENCEFICTION","HORROR","DRAMA","ACTIONANDADVENTURE","ROMANCE","MYSTERY","SERIES","TRILOGY","COMICS","SATIRE","BIOGRAPHIES","AUTOBIOGRAPHIES","CHILDREN","DIARIES","SELFHELP","GUIDE","TRAVEL","RELIGION","PRAYERBOOKS","HISTORY","MATH","ANTHOLOGY","POETRY","JOURNALS","ENCYCLOPEDIAS","DICTIONARIES","SCIENCE","ART","COOKBOOKS","HEALTH"];
 		 */
 		var gn=["n","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215"];
 		var gh=["-Select-","판타지","공상과학소설","호러","드라마","액션및어드벤처","로맨스","미스터리","시리즈","트릴로지(3부작책)","만화","풍자","전기","자서전","아동도서","일기형식책","자기계발서","가이드","여행","종교책","기도하는책","역사책","수학책","시(선집),문집","시집","저널,학술지","백과사전","사전","과학책","예술책","요리책","헬스"];
-		
 		/* 책 장르 */
 		var l="";
 		for (var i = 0; i < gn.length; i++) {

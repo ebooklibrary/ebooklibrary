@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebooklibrary.app.common.BookUtility;
+
 @Service
 public class MyBookServiceImpl implements MyBookService {
 
@@ -30,6 +32,18 @@ public class MyBookServiceImpl implements MyBookService {
 	@Override
 	public List<MyBooksVO> selectMyBooksByUserId(String userId) {
 		return myBookDao.selectMyBooksByUserId(userId);
+	}
+
+	@Override
+	public List<MyBookVO> selectBoolAll(BookSearchVO bookSearchVo) {
+		List<MyBookVO> alist= myBookDao.selectBoolAll(bookSearchVo);
+		BookUtility bu=new BookUtility();
+		for (MyBookVO myBookVo : alist) {
+			String genre= bu.getGenre(Integer.parseInt(myBookVo.getGenre()));
+			myBookVo.setGenre(genre);
+		}
+		
+		return alist;
 	}
 	
 }

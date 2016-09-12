@@ -9,5 +9,6 @@ public interface MyBookService {
 	public List<Map<String, Object>> selectBookByUserId(String userId);
 	public MyBookVO selectBookByBookNo(int bookNo);
 	public List<MyBooksVO> selectMyBooksByUserId(String userId);
+	public List<MyBookVO> selectBoolAll(BookSearchVO bookSearchVo);
 	
 }

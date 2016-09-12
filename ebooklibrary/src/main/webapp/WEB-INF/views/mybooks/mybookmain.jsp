@@ -80,9 +80,17 @@
 			});
 		});
 		$("#moreBook").click(function() {
-			var searchKeyword=$("#search").val();
-			window.open("<c:url value='/admin/book/bookList.do?searchKeyword="+searchKeyword+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+			var title=$("#search").val();
+			window.open("<c:url value='/admin/book/bookList.do?title="+title+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+			$("#search").val("");
 		});
+		$("#searchAllBook").submit(function() {
+			var title=$("#search").val();
+			window.open("<c:url value='/admin/book/bookList.do?title="+title+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+			$("#search").val("");
+			event.preventDefault();
+		});
+		
 		
 		/* 배경화면 메뉴 */
 		$("#changeBackground").click(function() {
@@ -286,7 +294,7 @@
 			
 			<!-- 책 전체 검색 -->
 			<div id="moreBookDiv">
-				<form action="<c:url value='/admin/book/bookList.do'/>" name="searchAllBook" id="searchAllBook" method="post">
+				<form name="searchAllBook" id="searchAllBook" method="post">
 				<input type="text" id="search" name="searchKeyword" placeholder="Search..">
 				<span id="searchInfo">더 보고 싶은 책이 있으시다면 여기에서!</span>
 				<span id="moreBook">상점으로 고고</span>

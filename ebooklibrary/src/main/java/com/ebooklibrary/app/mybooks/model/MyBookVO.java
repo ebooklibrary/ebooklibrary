@@ -4,19 +4,19 @@ import java.sql.Timestamp;
 
 public class MyBookVO {
 	
-	private int bookNo;
-	private String title;
-	private String publisher;
-	private String writer;
-	private String publication;
-	private Timestamp reg_date;
-	private String genre;
-	private int price;
-	private String summary;
-	private int sales;
-	private String bookFileName;
-	private String coverFileName;
-	private long bookFileSize;
+	private int bookNo; //책번호
+	private String title; //책제목
+	private String publisher; //출판사
+	private String writer; //작가
+	private String publication; //출판일
+	private Timestamp reg_date; //등록일
+	private String genre; //장르
+	private int price; //가격
+	private String summary; //요약
+	private int sales; //판매부수
+	private String bookFileName; //책파일이름
+	private String coverFileName; //책커버이름
+	private long bookFileSize; //책파일사이즈
 	
 	public MyBookVO() {
 		super();
