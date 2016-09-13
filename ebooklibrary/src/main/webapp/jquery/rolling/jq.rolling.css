@@ -33,9 +33,13 @@
 	font:18px 'tahoma';
 	text-align:center;
 	line-height:290px;
-	background-color:rgb(231,231,231);
 	width:490px;
 	height:290px;
+}
+
+.sp01 .line_href{
+	width:50%;
+	height:100%;
 }
 
 .sp02 {

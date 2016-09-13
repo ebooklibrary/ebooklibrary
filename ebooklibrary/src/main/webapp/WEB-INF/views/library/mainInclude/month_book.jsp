@@ -17,7 +17,14 @@
 	<div>
 		<div id="rolling">
 			<ul>
-				<li class="sp01">SAMPLE 01</li>
+				<li class="sp01">
+					<div class="line_href">
+					<a href="http://www.naver.com">
+						<img alt="테스트" 
+						src="${pageContext.request.contextPath }/images/mybook/bookshelf11.png"></a>
+						</div>
+				</li>
+					         
 				<li class="sp02">SAMPLE 02</li>
 				<li class="sp03">SAMPLE 03</li>
 				<li class="sp04">SAMPLE 04</li>

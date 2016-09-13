@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="config.mybatis.mapper.oracle.memo">
+	<select id="selectToId" parameterType="String" resultType="MemoVO">
+		select * from memo where to_Id=#{userId}
+	</select>
+	
+	<select id="selectFromId" parameterType="String" resultType="MemoVO">
+		select * from memo where from_id=#{userId}
+	</select>
+	
+	<select id="selectMemoCount" parameterType="String" resultType="int">
+		select count(*) from memo where to_Id=#{userId} and checked='N'
+	</select>
+	
+	<insert id="insertMemo" parameterType="MemoVO">
+		<selectKey order="BEFORE" resultType="int" keyProperty="memoNo">
+			select memo_seq.nextval from dual
+		</selectKey>
+		insert into memo(memo_no,to_id,from_id,title,content)
+		values(#{memoNo},#{toId},#{fromId},#{title},#{content})
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

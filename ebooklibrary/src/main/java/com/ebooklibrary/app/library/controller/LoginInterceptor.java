@@ -44,10 +44,22 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		//일반사용자 로그인처리
 		logger.info("일반사용자용 인터셉터");
-		String url=request.getRequestURI();		
+		String uri=request.getRequestURI();		
 		//로그인이 안된경우 먼저 로그인 하도록 에러 처리
 		HttpSession session=request.getSession();
 		String userid=(String)session.getAttribute("userId");
+		
+		/*if(uri.indexOf("/mybooks/mybookmain.do")!=-1){
+			if(userid==null || userid.isEmpty()){
+				request.setAttribute("msg", "먼저 로그인 하세요");
+				request.setAttribute("url", "/member/loginForm.do");
+				RequestDispatcher dispatcher
+				=request.getRequestDispatcher("/WEB-INF/views/common/message.jsp");
+				
+				dispatcher.forward(request, response);
+				return false;//컨트롤러 가 실행되지 않음
+			}
+		}*/
 		
 		if(userid==null || userid.isEmpty()){
 			request.setAttribute("msg", "먼저 로그인 하세요");

@@ -3,6 +3,26 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.book">
+
+	<sql id="searchWhere">
+		<where>
+			<if test="title!=null and title!=''">
+				title like '%' || #{title} || '%'
+			</if>
+			<if test="publisher!=null and publisher!=''">
+				publisher like '%' || #{publisher} || '%'
+			</if>
+			<if test="writer!=null and writer!=''">
+				writer like '%' || #{writer} || '%'
+			</if>
+			
+		</where>
+	</sql>
+
+	<select id="selectBoolAll" parameterType="BookSearchVO" resultType="MyBookVO">
+		select * from book
+		<include refid="searchWhere"></include>
+	</select>
 	
 	<insert id="insertBook" parameterType="MyBookVO">
 		<selectKey keyProperty="bookNo" order="BEFORE" resultType="int">

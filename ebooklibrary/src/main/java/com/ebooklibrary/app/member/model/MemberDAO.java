@@ -12,4 +12,6 @@ public interface MemberDAO {
 	public int selectMemberCount(SearchVO vo);
 	public int selectMemberCheckId(String userId);
 	public int updateBackImg(MemberVO vo);
+	public String selectBymemberVo(MemberVO vo);
+	public int updateTempPwd(MemberVO vo);
 }

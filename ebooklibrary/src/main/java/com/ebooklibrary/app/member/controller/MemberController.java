@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ebooklibrary.app.email.EmailPwdsearch;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
 
@@ -27,6 +28,9 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private EmailPwdsearch emailPwdsearch;
+	
 	@RequestMapping(value="/register.do",method=RequestMethod.GET )
 	public String register_get(){
 		//회원가입 첫페이지
@@ -34,8 +38,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/register.do",method=RequestMethod.POST )
+<<<<<<< HEAD
 	public String register_post(@ModelAttribute MemberVO memberVo,Model model){
 		logger.info("회원가입 처리 memberVo={}",memberVo);
+=======
+	public String register_post(@RequestParam String userId,@ModelAttribute MemberVO memberVo,Model model){
+		logger.info("회원가입 처리 memberVo={},userId={}",memberVo,userId);
+>>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
 		int cnt=memberService.register(memberVo);
 		String msg="",url="";
 		if(cnt>0){
@@ -129,5 +138,48 @@ public class MemberController {
 		MemberVO memberVo=memberService.selectByUserName(userId);
 		
 		model.addAttribute("memberVo", memberVo);
+	}
+	
+	@RequestMapping("/loginForm.do")
+	public void loginForm(){
+		logger.info("로그인 폼 보여주기");
+	}
+	
+	@RequestMapping(value="/idsearch.do",method=RequestMethod.GET)
+	public void idsearch_get(){
+		logger.info("아이디찾기 폼 보여주기");
+	}
+	
+	@RequestMapping(value="/idsearch.do",method=RequestMethod.POST)
+	public String idsearch_post(@ModelAttribute MemberVO memberVo,Model model){
+		logger.info("아이디찾기 memberVo={}",memberVo);
+		
+		String result=memberService.selectBymemberVo(memberVo);
+		model.addAttribute("result", result);
+		
+		return "member/idsearch";
+	}
+
+	@RequestMapping(value="/pwdsearch.do",method=RequestMethod.GET)
+	public void pwdsearch_get(){
+		logger.info("비밀번호찾기 폼 보여주기");
+	}
+	
+	@RequestMapping(value="/pwdsearch.do",method=RequestMethod.POST)
+	public String pwdsearch_post(@ModelAttribute MemberVO vo,Model model){
+		logger.info("비밀번호찾기 memberVo={}",vo);
+		
+		String result=emailPwdsearch.emailSender(vo.getUserId());
+		vo.setPwd(result);
+		int cnt=memberService.updateTempPwd(vo);
+		if(cnt>0){
+			model.addAttribute("msg", "임시 비밀번호를 보냈습니다");
+			model.addAttribute("url", "/member/pwdsearch.do");
+		}else{
+			model.addAttribute("msg", "임시 비밀번호 설정 실패");
+			model.addAttribute("url", "/member/pwdsearch.do");
+		}
+		
+		return "common/message";
 	}
 }

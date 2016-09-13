@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ebooklibrary.app.common.BookUtility;
 import com.ebooklibrary.app.common.FileUploadWebUtil;
+import com.ebooklibrary.app.member.model.MemberService;
+import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.BookSearchVO;
 import com.ebooklibrary.app.mybooks.model.MyBookService;
 import com.ebooklibrary.app.mybooks.model.MyBookVO;
+import com.ebooklibrary.app.mybooks.model.MyBooksVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -28,6 +34,9 @@ public class AdminMyBooksController {
 	
 	@Autowired
 	private MyBookService myBookService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping("/book/registerBook.do")
 	public void registerBook(){}
@@ -71,10 +80,27 @@ public class AdminMyBooksController {
 	}
 	
 	@RequestMapping("/book/bookList.do")
-	public String bookList(@RequestParam String searchKeyword, Model model){
-		logger.info("책리스트 파라미터 searchKeyword={}", searchKeyword);
+	public String bookList(HttpServletRequest request,HttpSession session,@ModelAttribute BookSearchVO bookSearchVo, Model model){
+		logger.info("책리스트 파라미터 bookSearchVo={}", bookSearchVo);
 		
-		model.addAttribute("searchKeyword", searchKeyword);
+		BookUtility bu=new BookUtility();
+		String userId=(String)session.getAttribute("userId");
+		
+		if(userId!=null || !userId.isEmpty()){
+			
+			List<MyBookVO> alist=myBookService.selectBoolAll(bookSearchVo);
+			logger.info("책검색 alist.size()={}", alist.size());
+			
+			String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
+			
+			model.addAttribute("upPath", upPath);
+			model.addAttribute("alist", alist);
+			
+			//이미지 파일명 업데이트
+			MemberVO memVo=memberService.selectByUserName(userId);
+		}
+		
+		model.addAttribute("bookSearchVo", bookSearchVo);
 		
 		return "library/book/bookList";
 	}

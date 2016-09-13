@@ -84,7 +84,7 @@
 				<tr>
 					<td>
 					<c:if test="${param.complete!='Y' }">
-						<c:if test="${sessionScope.memberNo==clist.memberNo }">
+						<c:if test="${sessionScope.memberNo==param.memberNo }">
 						<form>
 							
 							<input type="button" id="selectAnswer" onclick="complete(${param.qnaNo},${clist.commentNo })" value="답변채택" >
