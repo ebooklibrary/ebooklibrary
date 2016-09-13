@@ -1,12 +1,19 @@
 package com.ebooklibrary.app.memo.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class MemoVO {
+	private int memoNo;
 	private String toId;//받는사람
 	private String fromId;//보낸사람
-	private String check;//확인여부
-	private Date sysdate;//보낸시간
+	public int getMemoNo() {
+		return memoNo;
+	}
+	public void setMemoNo(int memoNo) {
+		this.memoNo = memoNo;
+	}
+	private String checked;//확인여부
+	private Timestamp sendDate;//보낸시간
 	private String title;//제목
 	private String content;//내용
 	public String getToId() {
@@ -21,17 +28,18 @@ public class MemoVO {
 	public void setFromId(String fromId) {
 		this.fromId = fromId;
 	}
-	public String getCheck() {
-		return check;
+	public String getChecked() {
+		return checked;
 	}
-	public void setCheck(String check) {
-		this.check = check;
+	public void setChecked(String checked) {
+		this.checked = checked;
 	}
-	public Date getSysdate() {
-		return sysdate;
+	
+	public Timestamp getSendDate() {
+		return sendDate;
 	}
-	public void setSysdate(Date sysdate) {
-		this.sysdate = sysdate;
+	public void setSendDate(Timestamp sendDate) {
+		this.sendDate = sendDate;
 	}
 	public String getTitle() {
 		return title;
@@ -47,9 +55,10 @@ public class MemoVO {
 	}
 	@Override
 	public String toString() {
-		return "MemoVO [toId=" + toId + ", fromId=" + fromId + ", check=" + check + ", sysdate=" + sysdate + ", title="
-				+ title + ", content=" + content + "]";
+		return "MemoVO [memoNo=" + memoNo + ", toId=" + toId + ", fromId=" + fromId + ", checked=" + checked
+				+ ", sendDate=" + sendDate + ", title=" + title + ", content=" + content + "]";
 	}
+	
 	
 	
 }

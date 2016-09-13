@@ -42,9 +42,20 @@
 <script type="text/javascript">
 $(function() {
 	var memoCount=0;
+	if(${!empty sessionScope.userId}){
+		$.ajax({
+			url:"<c:url value='/library/memo/NewMemoCount.do'/>",
+			data:"userId=${sessionScope.userId}",
+			type:"GET",
+			success:function(res){
+				$("#memoCount").text(res);
+				memoCount=res;
+			}
+		});//ajax
+	}//if
 	setInterval(function() {
 		if(${!empty sessionScope.userId}){
-			/* $.ajax({
+			$.ajax({
 				url:"<c:url value='/library/memo/NewMemoCount.do'/>",
 				data:"userId=${sessionScope.userId}",
 				type:"GET",
@@ -52,14 +63,14 @@ $(function() {
 					$("#memoCount").text(res);
 					memoCount=res;
 				}
-			});//ajax */
-		}	
+			});//ajax
+		}//if
 	},3000);
 	
 	$("#memoList").click(function() {
-		window.open("<c:url value='/library/memo/memoList.do'/>",
+		window.open("<c:url value='/library/memo/memo.do'/>",
 				"memoList",
-		"width=700,height=500,left=50,top=50,resizable=yes,location=yes");		
+		"width=725,height=800,left=50,top=50,resizable=yes,location=yes");		
 	});
 });
 
