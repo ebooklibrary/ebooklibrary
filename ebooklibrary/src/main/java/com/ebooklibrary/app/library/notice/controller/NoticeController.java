@@ -125,16 +125,25 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping(value="/noticeDelete.do", method=RequestMethod.GET)
+	@RequestMapping(value="/noticeDelete.do")
 	public String deleteNotice_get(@ModelAttribute NoticeVO noticeVo,Model model){
-		logger.info("관리자용 삭제 화면 보여주기");
+		logger.info("관리자용 삭제 처리");
 		
-		int notice_No = noticeVo.getNoticeNo();
 		
-		logger.info("삭제할 공지사항 번호 notice_No={}"+notice_No);
-		
+		logger.info("noticeVo={}",noticeVo);
 		int cnt = noticeService.deleteNotice(noticeVo);
-		return "";
+		String msg = "" , url = "library/notice/noticeDelete.do?notice_No="+noticeVo.getNoticeNo();
+		if(cnt>0){
+			msg="공지사항 삭제 성공";
+			url ="/library/notice/noticelist.do";
+		}else{
+			msg="공지사항 삭제 실패";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+				
+		return "common/message";
 	}
 	
 	@RequestMapping("/noticelist.do")
