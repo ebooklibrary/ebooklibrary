@@ -54,17 +54,17 @@
 	
 }
 /* 선택 */
-#choice{
+.choice{
 	/* border: 1px solid black; */
 	margin-top: 30px;
 	margin-right: 10px;
 	float: right;
 }
-#choice #quantity{
+.choice #quantity{
 	width: 30px;
 	margin-bottom: 20px;
 }
-#choice input[type=checkbox]{
+.choice input[type=checkbox]{
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -76,7 +76,7 @@
 	-o-transform: scale(2); /* Opera */
 	
 }
-#choice input[type=button]{
+.choice input[type=button]{
 	display: block;
 	margin-top: 10px;
 	
@@ -103,6 +103,33 @@
 }
 #buy{
 	background-color: rgba(0, 0, 0, 0);
+}
+/* 일괄 선택 */
+#choiceAll{
+	display: block;
+	margin-top: 10px;
+	
+	border: 1px solid #adadad;
+	outline: 0;
+	padding: 3px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: #000000;
+	
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	width: 100px;
+	height: 40px;
+	border-radius: 2px;
+	
+	/* font-family:monospace,monospace; */
+	font-family:Verdana,sans-serif;
+	
+	margin-top: 30px;
+	margin-right: 10px;
+	float: right;
 }
 
 /* 책 설명 */
@@ -144,4 +171,26 @@
 	text-align: right;
 	margin-bottom: 50px;
 	margin-top: 10px;
+	
+}
+
+
+/* 장바구니 팝업 */
+.cart{
+	position: relative;
+}
+.popuptext {
+	display:none;
+	font-size:0.8em;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -80px;
 }

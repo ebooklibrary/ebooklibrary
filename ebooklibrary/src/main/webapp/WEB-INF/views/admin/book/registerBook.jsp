@@ -30,16 +30,32 @@
 <%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
 <!-- include a theme, can be included into the core instead of 2 separate files -->
 <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
-
+<!-- common js -->
+<script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+		/* 
 		$( "#publication" ).datepicker({
 			changeMonth: true, changeYear: true
 		});
 		$( "#publication" ).datepicker( "option", "dateFormat", "yy/mm/dd" );
-		
+		 */
+		 
+		 $("#publication").datepicker({
+				dateFormat:"yy/mm/dd",
+				changeMonth: true,
+				changeYear:true,
+				dayNamesMin:['일','월','화','수','목','금','토'],
+				monthNames:['1월','2월','3월','4월','5월','6월',
+				            '7월','8월','9월','10월','11월','12월']
+			});
+		// Getter
+		var monthNamesShort = $( "#publication" ).datepicker( "option", "monthNamesShort" );
+		// Setter
+		$( "#publication" ).datepicker( "option", "monthNamesShort", ['1월','2월','3월','4월','5월','6월',
+		                                   			            '7월','8월','9월','10월','11월','12월'] );
+		 
 		//전역변수
 	    var obj = [];               
 	    //스마트에디터 프레임생성
@@ -80,7 +96,7 @@
 		
 		$("#btBookUp").click(function(event) {
 			obj.getById["summary"].exec("UPDATE_CONTENTS_FIELD", []);
-			alertify.alert($("#summary").val());
+			/* alertify.alert($("#summary").val()); */
 			
 			if($("#title").val().length < 1){
 				/* alert("책제목을 입력하세요"); */
@@ -103,14 +119,14 @@
 				$("#publication").focus();
 				return false;
 			}
-			if($("#genre").val().length < 1){
-				alertify.alert("장르를 입력하세요");
-				$("#genre").focus();
-				return false;
-			}
 			if($("#price").val().length < 1){
 				alertify.alert("가격을 입력하세요");
 				$("#price").focus();
+				return false;
+			}
+			if($("#genre").val()==0){
+				alertify.alert("장르를 입력하세요");
+				$("#genre").focus();
 				return false;
 			}
 			
@@ -146,16 +162,6 @@
 			 */
 		}); //click
 		
-		/* 
-		var ge=["n","FANTASY","SCIENCEFICTION","HORROR","DRAMA","ACTIONANDADVENTURE","ROMANCE","MYSTERY","SERIES","TRILOGY","COMICS","SATIRE","BIOGRAPHIES","AUTOBIOGRAPHIES","CHILDREN","DIARIES","SELFHELP","GUIDE","TRAVEL","RELIGION","PRAYERBOOKS","HISTORY","MATH","ANTHOLOGY","POETRY","JOURNALS","ENCYCLOPEDIAS","DICTIONARIES","SCIENCE","ART","COOKBOOKS","HEALTH"];
-		 */
-		var gn=["n","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215"];
-		var gh=["-Select-","판타지","공상과학소설","호러","드라마","액션및어드벤처","로맨스","미스터리","시리즈","트릴로지(3부작책)","만화","풍자","전기","자서전","아동도서","일기형식책","자기계발서","가이드","여행","종교책","기도하는책","역사책","수학책","시(선집),문집","시집","저널,학술지","백과사전","사전","과학책","예술책","요리책","헬스"];
-		/* 책 장르 */
-		var l="";
-		for (var i = 0; i < gn.length; i++) {
-			l+="<option value='"+gn[i]+"'>"+gh[i]+"</option>";
-		}
 		$("#genre").html(l);
 		
 		/////////////////////////////
@@ -163,7 +169,6 @@
 	      .selectmenu()
 	      .selectmenu( "menuWidget" )
 	        .addClass( "overflow" );
-		
 		/* 
 	    $( "#genre" ).selectmenu();
 		 */

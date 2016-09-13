@@ -38,13 +38,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/register.do",method=RequestMethod.POST )
-<<<<<<< HEAD
 	public String register_post(@ModelAttribute MemberVO memberVo,Model model){
 		logger.info("회원가입 처리 memberVo={}",memberVo);
-=======
-	public String register_post(@RequestParam String userId,@ModelAttribute MemberVO memberVo,Model model){
-		logger.info("회원가입 처리 memberVo={},userId={}",memberVo,userId);
->>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
 		int cnt=memberService.register(memberVo);
 		String msg="",url="";
 		if(cnt>0){
