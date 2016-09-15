@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/silde_Notice/style.css" />
-	
+
 <script type="text/javascript"
 	src="<c:url value ='/jquery/silde_Notice/jquery.js'/>"></script>
 
@@ -32,54 +32,18 @@ $(document).ready(function(){
 <!-- 공지사항 리스트 화면 -->
 <div id="notice_head">
 	<h2>
-		<img alt="공지사항" src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
+		<img alt="공지사항"
+			src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
 	</h2>
 </div>
 <div id="notice_banner">
-	<a href = "<c:url value='/library/notice/noticelist.do'/>"><img alt ="공지사항 배너" src ="${pageContext.request.contextPath}/images/library/notice/banner.png" width="200px" height="50px"></a>
+	<a href="<c:url value='/library/notice/noticelist.do'/>"><img
+		alt="공지사항 배너"
+		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
+		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
-<div class="notice_Ad">
-
-	<!-- Start WOWSlider.com BODY section -->
-	<!-- add to the <body> of your page -->
-	<div id="wowslider-container1">
-		<div class="ws_images">
-			<ul>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide1.jpg"
-					alt="example-slide-1" title="example-slide-1" id="wows1_0" /></li>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide2.jpg"
-					alt="example-slide-2" title="example-slide-2" id="wows1_1" /></li>
-				<li><a href="http://wowslider.net"><img
-						src="${pageContext.request.contextPath }/images/library/notice/exampleslide3.jpg" alt="jquery carousel"
-						title="example-slide-3" id="wows1_2" /></a></li>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide4.jpg"
-					alt="example-slide-4" title="example-slide-4" id="wows1_3" /></li>
-			</ul>
-		</div>
-		<div class="ws_bullets">
-			<div>
-				<a href="#" title="example-slide-1"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/exampleslide1.jpg" alt="example-slide-1" />1</span></a> <a
-					href="#" title="example-slide-2"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/exampleslide2.jpg" alt="example-slide-2" />2</span></a> <a
-					href="#" title="example-slide-3"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/exampleslide3.jpg" alt="example-slide-3" />3</span></a> <a
-					href="#" title="example-slide-4"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/exampleslide4.jpg" alt="example-slide-4" />4</span></a>
-			</div>
-		</div>
-		<div class="ws_script" style="position: absolute; left: -99%">
-			<a href="http://wowslider.com">bootstrap carousel</a> by
-			WOWSlider.com v8.7
-		</div>
-		<div class="ws_shadow"></div>
-	</div>
-	<script type="text/javascript" src="<c:url value ='/jquery/silde_Notice/wowslider.js'/>"></script>
-	<script type="text/javascript" src="<c:url value ='/jquery/silde_Notice/script.js'/>"></script>
-	<!-- End WOWSlider.com BODY section -->
-
-</div>
+<%@include file="../libraryAd.jsp"%>
 <div id="notice_body">
 	<div class="list">
 		<div class="searchbox">
@@ -93,9 +57,7 @@ $(document).ready(function(){
 					type="submit" value="검색">
 			</form>
 		</div>
-		<div>
-			
-		</div>
+		<div></div>
 		<div id="notice_table">
 			<table>
 				<colgroup>
@@ -165,9 +127,9 @@ $(document).ready(function(){
 			</c:if>
 		</div>
 		<c:if test="${sessionScope.auchCode=='ADMIN' }">
-		<div id="noticeWrite">
-			<a href="<c:url value ='/library/notice/noticewrite.do'/>">글쓰기</a>
-		</div>
+			<div id="noticeWrite">
+				<a href="<c:url value ='/library/notice/noticewrite.do'/>">글쓰기</a>
+			</div>
 		</c:if>
 	</div>
 

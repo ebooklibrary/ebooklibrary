@@ -80,13 +80,14 @@ public class AdminMyBooksController {
 	}
 	
 	@RequestMapping("/book/bookList.do")
-	public String bookList(HttpServletRequest request,HttpSession session,@ModelAttribute BookSearchVO bookSearchVo, Model model){
+	public String bookList(HttpServletRequest request,@ModelAttribute BookSearchVO bookSearchVo, Model model){
 		logger.info("책리스트 파라미터 bookSearchVo={}", bookSearchVo);
 		
 		BookUtility bu=new BookUtility();
-		String userId=(String)session.getAttribute("userId");
+		//HttpSession session,
+		//String userId=(String)session.getAttribute("userId");
 		
-		if(userId!=null || !userId.isEmpty()){
+		//if(userId!=null || !userId.isEmpty()){
 			
 			List<MyBookVO> alist=myBookService.selectBoolAll(bookSearchVo);
 			logger.info("책검색 alist.size()={}", alist.size());
@@ -97,8 +98,8 @@ public class AdminMyBooksController {
 			model.addAttribute("alist", alist);
 			
 			//이미지 파일명 업데이트
-			MemberVO memVo=memberService.selectByUserName(userId);
-		}
+			//MemberVO memVo=memberService.selectByUserName(userId);
+		//}
 		
 		model.addAttribute("bookSearchVo", bookSearchVo);
 		

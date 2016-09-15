@@ -38,8 +38,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/register.do",method=RequestMethod.POST )
-	public String register_post(@RequestParam String userId,@ModelAttribute MemberVO memberVo,Model model){
-		logger.info("회원가입 처리 memberVo={},userId={}",memberVo,userId);
+	public String register_post(@ModelAttribute MemberVO memberVo,Model model){
+		logger.info("회원가입 처리 memberVo={}",memberVo);
 		int cnt=memberService.register(memberVo);
 		String msg="",url="";
 		if(cnt>0){

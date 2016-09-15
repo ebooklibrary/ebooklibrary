@@ -146,7 +146,7 @@ $(function() {
 	            </a></li>
 			</c:if>			 
             <li class="last">
-            <a href="/html/06_sitemap/sitemap.asp">
+            <a href="<c:url value='/library/siteMap/librarySiteMap.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_sitemap.gif" alt="사이트맵" /> -->
             사이트맵
             </a></li>

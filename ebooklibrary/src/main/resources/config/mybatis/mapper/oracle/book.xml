@@ -15,13 +15,27 @@
 			<if test="writer!=null and writer!=''">
 				writer like '%' || #{writer} || '%'
 			</if>
-			
+			<if test="genre!=null and genre!=0">
+				and genre =#{genre}
+			</if>
 		</where>
 	</sql>
 
 	<select id="selectBoolAll" parameterType="BookSearchVO" resultType="MyBookVO">
 		select * from book
 		<include refid="searchWhere"></include>
+		<if test="bookSort=='sales'">
+				order by sales desc
+		</if>
+		<if test="bookSort=='publication'">
+				order by publication desc
+		</if>
+		<if test="bookSort=='lowPrice'">
+				order by price asc
+		</if>
+		<if test="bookSort=='highPrice'">
+				order by price desc
+		</if>
 	</select>
 	
 	<insert id="insertBook" parameterType="MyBookVO">

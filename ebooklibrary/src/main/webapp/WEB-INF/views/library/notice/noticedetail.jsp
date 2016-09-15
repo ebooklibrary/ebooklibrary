@@ -5,10 +5,7 @@
 
 
 <script type="text/javascript">
-	function pageProc(curPage) {
-		document.frmPage.currentPage.value = curPage;
-		document.frmPage.submit();
-	}
+
 
 	$(document)
 			.ready(
@@ -16,6 +13,12 @@
 						$("#container_out")
 								.css("background",
 										"url(../../images/library/notice/noticeBackground.png) no-repeat center");
+						
+						$("#btnDelete").click(function(){
+							if(confirm("삭제하시겠습니까?")){
+								location.href = "<c:url value ='/library/notice/noticeDelete.do?noticeNo=${noticeVo.noticeNo }'/>";
+							}
+						});
 					});
 </script>
 
@@ -32,6 +35,7 @@
 		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
 		width="200px" height="50px"></a>
 </div>
+<%@include file="../libraryAd.jsp"%>
 <div id="detail_body">
 	<table class="detail_table">
 		<tr>
@@ -95,7 +99,7 @@
 		</div>	
 		<div class ="notice_delete">
 			<input type ="button" value="글수정" onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'">
-			<input type ="button" value="글삭제" onclick="location.hrtf = '<c:url value ='/library/notice/noticeDelete.do?notice_No=${noticeVo.noticeNo }'/>'">
+			<input type ="button" id="btnDelete"  value="글삭제" >
 		</div>
 	</c:if>
 </div>
