@@ -61,4 +61,18 @@ public class MemoController {
 		return "common/message";
 	}
 	
+	@RequestMapping("/memoCheck.do")
+	@ResponseBody
+	public void memoCheck(@RequestParam int memoNo){
+		logger.info("쪽지 확인체크 파라미터 memoNo={}",memoNo);
+		int cnt = memoService.updateMemoChecked(memoNo);		
+	}
+	
+	@RequestMapping("/memoDelete.do")
+	@ResponseBody
+	public void memoDelete(@RequestParam int memoNo){
+		logger.info("쪽지 확인체크 파라미터 memoNo={}",memoNo);
+		int cnt = memoService.deleteMemo(memoNo);		
+	}
+	
 }

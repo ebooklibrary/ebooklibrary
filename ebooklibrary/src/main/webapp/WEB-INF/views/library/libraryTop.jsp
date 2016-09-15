@@ -45,7 +45,7 @@ $(function() {
 	if(${!empty sessionScope.userId}){
 		$.ajax({
 			url:"<c:url value='/library/memo/NewMemoCount.do'/>",
-			data:"userId=${sessionScope.userId}",
+			data:"userId=${sessionScope.userId}",			
 			type:"GET",
 			success:function(res){
 				$("#memoCount").text(res);

@@ -17,6 +17,32 @@
 		
 		$('#accordion1').accordion();
 		$('#accordion2').accordion({heightStyle: "content"});
+		
+		$(".memoDetail").click(function() {
+			$.ajax({
+				url:"<c:url value='/library/memo/memoCheck.do'/>",
+				data:"memoNo="+$(this).find("p").text(),			
+				type:"GET",
+				success:function(res){
+					
+				}
+			});//ajax
+		});
+		
+		$(".delete").click(function(){
+			if(confirm("삭제 하시겠습니까?")){
+				$.ajax({
+					url:"<c:url value='/library/memo/memoDelete.do'/>",
+					data:"memoNo="+$(this).next().text(),			
+					type:"GET",
+					success:function(res){
+						location.href="<c:url value='/library/memo/memo.do'/>";
+					}
+				});//ajax
+			}//if			
+		});//delete
+			
+		
 	});	
 </script>
 </head>
@@ -34,9 +60,10 @@
 			<c:if test="${!empty toList }">
 				<div><p style="float: left">보낸 사람</p><p style="float: left">제목</p><p style="float: left">보낸 시간</p></div><br>		
 					<div id="accordion1" style="clear:both;overflow: hidden;">										
-						<c:forEach var="vo" items="${toList }">
-							<h3>${vo.toId }${vo.title }${vo.sendDate }</h3>
-							<div><p>${vo.content }</p></div>	
+						<c:forEach var="vo" items="${toList }">							
+							<h3 class="memoDetail">${vo.toId }${vo.title }${vo.sendDate }
+							<button class="delete">삭제</button><p style="display: none;">${vo.memoNo }</p></h3>
+							<div><p>${vo.content }</p></div>
 						</c:forEach>
 					</div>
 			</c:if>	
@@ -47,10 +74,11 @@
 			</c:if>
 			<c:if test="${!empty fromList }">
 				<div><p style="float: left">받은 사람</p><p style="float: left">제목</p><p style="float: left">보낸 시간</p></div><br>		
-					<div id="accordion2" style="clear:both;overflow: hidden;height: 80%">										
-						<c:forEach var="vo" items="${fromList }">
-							<h3>${vo.toId }${vo.title }${vo.sendDate }</h3>
-							<div><p>${vo.content }</p></div>	
+					<div id="accordion2" style="clear:both;overflow: hidden;">										
+						<c:forEach var="vo" items="${toList }">							
+							<h3 class="memoDetail">${vo.fromId }${vo.title }${vo.sendDate }
+							<button class="delete">삭제</button><p style="display: none;">${vo.memoNo }</p></h3>
+							<div><p>${vo.content }</p></div>
 						</c:forEach>
 					</div>
 			</c:if>	

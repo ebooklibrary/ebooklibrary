@@ -3,11 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="config.mybatis.mapper.oracle.memo">
 	<select id="selectToId" parameterType="String" resultType="MemoVO">
-		select * from memo where to_Id=#{userId}
+		select * from memo where to_Id=#{userId} order by memo_no desc
 	</select>
 	
 	<select id="selectFromId" parameterType="String" resultType="MemoVO">
-		select * from memo where from_id=#{userId}
+		select * from memo where from_id=#{userId} order by memo_no desc
 	</select>
 	
 	<select id="selectMemoCount" parameterType="String" resultType="int">
@@ -21,6 +21,14 @@
 		insert into memo(memo_no,to_id,from_id,title,content)
 		values(#{memoNo},#{toId},#{fromId},#{title},#{content})
 	</insert>
+	
+	<update id="updateMemoChecked" parameterType="int"> 
+		update memo set checked='Y' where MEMO_NO=#{memoNo}
+	</update>
+	
+	<delete id="deleteMemo" parameterType="int">
+		delete memo where memo_no=#{memoNo}
+	</delete>
 	
 </mapper>
 

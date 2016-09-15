@@ -27,4 +27,14 @@ public class MemoDAOMybatis extends SqlSessionDaoSupport implements MemoDAO {
 	public int insertMemo(MemoVO memoVo) {
 		return getSqlSession().insert(namespace+".insertMemo", memoVo);
 	}
+
+	@Override
+	public int updateMemoChecked(int memoNo) {
+		return getSqlSession().update(namespace+".updateMemoChecked", memoNo);
+	}
+
+	@Override
+	public int deleteMemo(int memoNo) {
+		return getSqlSession().delete(namespace+".deleteMemo", memoNo);
+	}
 }
