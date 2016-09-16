@@ -17,7 +17,6 @@ public class BookSearchVO extends SearchVO {
 	private int sales; //판매부수
 	private String bookSort; //책정렬
 	
-	
 	public int getBookNo() {
 		return bookNo;
 	}
@@ -84,5 +83,6 @@ public class BookSearchVO extends SearchVO {
 				+ ", publication=" + publication + ", reg_date=" + reg_date + ", genre=" + genre + ", price=" + price
 				+ ", sales=" + sales + ", bookSort=" + bookSort + ", toString()=" + super.toString() + "]";
 	}
+	
 	
 }

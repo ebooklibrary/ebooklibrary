@@ -45,5 +45,10 @@ public class MyBookServiceImpl implements MyBookService {
 		
 		return alist;
 	}
+
+	@Override
+	public int countAllBook(BookSearchVO bookSearchVo) {
+		return myBookDao.countAllBook(bookSearchVo);
+	}
 	
 }

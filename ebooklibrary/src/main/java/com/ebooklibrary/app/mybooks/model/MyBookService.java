@@ -10,5 +10,5 @@ public interface MyBookService {
 	public MyBookVO selectBookByBookNo(int bookNo);
 	public List<MyBooksVO> selectMyBooksByUserId(String userId);
 	public List<MyBookVO> selectBoolAll(BookSearchVO bookSearchVo);
-	
+	public int countAllBook(BookSearchVO bookSearchVo);
 }

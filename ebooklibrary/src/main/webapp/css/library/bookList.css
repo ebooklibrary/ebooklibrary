@@ -6,7 +6,7 @@
 	padding: 20px;
 	
 	width: 800px;
-	height: 1400px;
+	height: 100%;
 }
 /* 검색 */
 #searchSpan{
@@ -64,19 +64,17 @@
 	width: 30px;
 	margin-bottom: 20px;
 }
+/* 
+체크박스 크기 변경
 .choice input[type=checkbox]{
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	
-	/* CSS 체크박스 크기 변환 */
-	-ms-transform: scale(2); /* IE */
-	-moz-transform: scale(2); /* FF */
-	-webkit-transform: scale(2); /* Safari and Chrome */
-	-o-transform: scale(2); /* Opera */
-	
+	CSS 체크박스 크기 변환
+	-ms-transform: scale(2); IE
+	-moz-transform: scale(2); FF
+	-webkit-transform: scale(2); Safari and Chrome
+	-o-transform: scale(2); Opera
 }
-.choice input[type=button]{
+ */
+.choice input{
 	display: block;
 	margin-top: 10px;
 	
@@ -104,33 +102,7 @@
 #buy{
 	background-color: rgba(0, 0, 0, 0);
 }
-/* 일괄 선택 */
-#choiceAll{
-	display: block;
-	margin-top: 10px;
-	
-	border: 1px solid #adadad;
-	outline: 0;
-	padding: 3px;
-	vertical-align: middle;
-	overflow: hidden;
-	text-decoration: none;
-	color: #000000;
-	
-	text-align: center;
-	cursor: pointer;
-	white-space: nowrap;
-	width: 100px;
-	height: 40px;
-	border-radius: 2px;
-	
-	/* font-family:monospace,monospace; */
-	font-family:Verdana,sans-serif;
-	
-	margin-top: 30px;
-	margin-right: 10px;
-	float: right;
-}
+
 
 /* 책 설명 */
 #bookSummaryDiv{
@@ -140,11 +112,12 @@
 	width: 55%;
 	height: 50%;
 	margin-top: 15px;
-	margin-right: 40px;
+	margin-right: 20px;
 	padding: 5px;
+	overflow: hidden;
 }
 #bookSummaryDiv *{
-	float: left;
+	/* float: left; */
 }
 
 /* 책 가격 */
@@ -169,8 +142,16 @@
 /* 정렬 */
 #sortDiv{
 	text-align: right;
-	margin-bottom: 50px;
-	margin-top: 10px;
+	margin-bottom: 100px;
+	margin-top: 30px;
+	
+}
+#sortDiv li{
+	float: right;
+	margin-left: 10px;
+}
+#sortDiv li:hover{
+	cursor: pointer;
 	
 }
 
@@ -193,4 +174,38 @@
     bottom: 120%;
     left: 50%;
     margin-left: -80px;
+}
+
+/* 페이징처리 */
+.divPage{
+	text-align: center;
+}
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+ul.pagination li {display: inline;}
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+/* 장바구니 */
+#cartDiv{
+	position: fixed;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+#cartDiv span{
+	border: 1px solid black;
 }
