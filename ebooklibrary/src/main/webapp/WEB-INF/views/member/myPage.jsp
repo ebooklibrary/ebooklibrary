@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../library/libraryTop.jsp" %>
 <div id="myPage_leftMenu">
-	<div>내정보 수정</div>
+	<div><a href="<c:url value='/member/myInfoChk.do'/>">내정보 수정</a></div>
 	<div>비밀번호 변경</div>
 	<div>주문내역</div>
 	<div>회원탈퇴</div>

@@ -104,16 +104,19 @@ public class MemberController {
 		return memberService.selectMemberCheckId(userId);
 	}
 	
-	@RequestMapping("/myInfoChk.do")
+	@RequestMapping(value="/myInfoChk.do",method=RequestMethod.GET)
+	public String myInfoChk(){
+		return "member/login";
+	}
+	
+	@RequestMapping(value="/myInfoChk.do",method=RequestMethod.POST)
 	public String myInfoChk(HttpSession session,@RequestParam String pwd,
 			Model model){
 		String userId=(String)session.getAttribute("userId");
 		int result=memberService.logincheck(userId, pwd);
 		String msg="",url="/member/login.do";
 		if(result==MemberService.LOGIN_OK){
-			MemberVO memberVo=memberService.selectByUserName(userId);
-			model.addAttribute("memberVo", memberVo);
-			return "member/myInfo";
+			return "redirect:/member/myInfo.do";
 		}else if(result==memberService.PWD_DISAGREE){
 			msg="비밀번호가 다릅니다";
 		}else if(result==memberService.ID_NONE){
@@ -124,6 +127,15 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		return "common/message";
+	}
+	
+	@RequestMapping(value="/myInfo.do",method=RequestMethod.GET)
+	public String myInfo(HttpSession session,Model model){
+		String userId=(String)session.getAttribute("userId");
+		MemberVO memberVo=memberService.selectByUserName(userId);
+		logger.info("내정보 수정화면 띄우기 memberVo={}",memberVo);
+		model.addAttribute("memberVo", memberVo);
+		return "member/myInfo";
 	}
 	
 	@RequestMapping("/myPage.do")

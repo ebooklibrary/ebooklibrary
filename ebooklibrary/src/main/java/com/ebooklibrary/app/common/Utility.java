@@ -15,4 +15,7 @@ public class Utility {
 	
 	//회원관리 테이블 설정
 	public static final int MEMBER_COUNT_PER_PAGE=20;
+	
+	//쪽지 테이블 설정
+	public static final int MEMO_COUNT_PER_PAGE=5;
 }

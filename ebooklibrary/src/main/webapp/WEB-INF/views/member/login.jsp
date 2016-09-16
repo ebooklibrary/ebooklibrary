@@ -35,7 +35,7 @@ $(function() {
 	
 	<c:if test="${!empty sessionScope.userId }">
 		<h1>비밀번호를 한번 더 입력해주세요</h1>
-		<form action="/member/myInfoChk.do" method="post">
+		<form action="<c:url value='/member/myInfoChk.do'/>" method="post">
 			아이디 : <input type="text" name="userId" 
 			value="${sessionScope.userId }" readonly="readonly">
 			비밀번호 : <input type="password" name="pwd">

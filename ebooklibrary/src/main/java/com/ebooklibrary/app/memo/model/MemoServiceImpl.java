@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebooklibrary.app.common.MemoSearchVO;
+
 @Service
 public class MemoServiceImpl implements MemoService{
 	
@@ -16,14 +18,14 @@ public class MemoServiceImpl implements MemoService{
 	}
 
 	@Override
-	public List<MemoVO> selectToId(String userId) {
-		return memoDao.selectToId(userId);
+	public List<MemoVO> selectToId(MemoSearchVO searchVo) {
+		return memoDao.selectToId(searchVo);
 		
 	}
 
 	@Override
-	public List<MemoVO> selectFromId(String userId) {
-		return memoDao.selectFromId(userId);
+	public List<MemoVO> selectFromId(MemoSearchVO searchVo) {
+		return memoDao.selectFromId(searchVo);
 	}
 
 	@Override
@@ -39,6 +41,16 @@ public class MemoServiceImpl implements MemoService{
 	@Override
 	public int deleteMemo(int memoNo) {
 		return memoDao.deleteMemo(memoNo);
+	}
+
+	@Override
+	public int selectToIdCount(MemoSearchVO searchVo) {
+		return memoDao.selectToIdCount(searchVo);
+	}
+
+	@Override
+	public int selectFromIdCount(MemoSearchVO searchVo) {
+		return memoDao.selectFromIdCount(searchVo);
 	}
 	
 	
