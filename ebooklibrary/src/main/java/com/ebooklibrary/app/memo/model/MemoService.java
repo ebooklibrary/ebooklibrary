@@ -7,4 +7,6 @@ public interface MemoService {
 	public List<MemoVO> selectToId(String userId);
 	public List<MemoVO> selectFromId(String userId);
 	public int insertMemo(MemoVO memoVo);
+	public int updateMemoChecked(int memoNo);
+	public int deleteMemo(int memoNo);
 }

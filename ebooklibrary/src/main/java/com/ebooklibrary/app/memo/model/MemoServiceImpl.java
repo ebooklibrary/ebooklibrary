@@ -30,6 +30,16 @@ public class MemoServiceImpl implements MemoService{
 	public int insertMemo(MemoVO memoVo) {
 		return memoDao.insertMemo(memoVo);
 	}
+
+	@Override
+	public int updateMemoChecked(int memoNo) {
+		return memoDao.updateMemoChecked(memoNo);
+	}
+
+	@Override
+	public int deleteMemo(int memoNo) {
+		return memoDao.deleteMemo(memoNo);
+	}
 	
 	
 }
