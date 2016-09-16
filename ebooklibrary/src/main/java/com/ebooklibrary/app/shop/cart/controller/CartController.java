@@ -1,10 +1,8 @@
 package com.ebooklibrary.app.shop.cart.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,9 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ebooklibrary.app.shop.cart.model.CartService;
+import com.ebooklibrary.app.shop.cart.model.CartVO;
 
 @Controller
 @RequestMapping("/shop/cart")
@@ -36,6 +36,19 @@ public class CartController {
 		model.addAttribute("cartList", alist);
 		
 		return "/shop/cart/cartList";
+	}
+	
+	@RequestMapping("/cartInsert")
+	public String cartInsert(@ModelAttribute CartVO cartVo,Model model){
+		
+		logger.info("카트담기 cartVo={}",cartVo);
+		int cnt=cartService.insertCartPd(cartVo);
+		
+		if (cnt<0) {
+			logger.info("카트담기 후 cnt={}",cnt);
+		}
+		
+		return "redirect:/shop/cart/cartList.do";
 	}
 	
 }

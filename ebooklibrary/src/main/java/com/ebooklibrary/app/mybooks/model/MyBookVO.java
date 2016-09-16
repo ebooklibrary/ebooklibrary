@@ -18,13 +18,15 @@ public class MyBookVO {
 	private String coverFileName; //책커버이름
 	private long bookFileSize; //책파일사이즈
 	
+	private String userId; //뷰용 유저아이디
+	
 	public MyBookVO() {
 		super();
 	}
 
 	public MyBookVO(int bookNo, String title, String publisher, String writer, String publication, Timestamp reg_date,
 			String genre, int price, String summary, int sales, String bookFileName, String coverFileName,
-			long bookFileSize) {
+			long bookFileSize, String userId) {
 		super();
 		this.bookNo = bookNo;
 		this.title = title;
@@ -39,6 +41,7 @@ public class MyBookVO {
 		this.bookFileName = bookFileName;
 		this.coverFileName = coverFileName;
 		this.bookFileSize = bookFileSize;
+		this.userId = userId;
 	}
 
 	public int getBookNo() {
@@ -145,12 +148,20 @@ public class MyBookVO {
 		this.bookFileSize = bookFileSize;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
 		return "MyBookVO [bookNo=" + bookNo + ", title=" + title + ", publisher=" + publisher + ", writer=" + writer
 				+ ", publication=" + publication + ", reg_date=" + reg_date + ", genre=" + genre + ", price=" + price
 				+ ", summary=" + summary + ", sales=" + sales + ", bookFileName=" + bookFileName + ", coverFileName="
-				+ coverFileName + ", bookFileSize=" + bookFileSize + "]";
+				+ coverFileName + ", bookFileSize=" + bookFileSize + ", userId=" + userId + "]";
 	}
 
 }

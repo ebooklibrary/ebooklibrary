@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+#cartTable{
+	border: 1px solid black;
+	width: 80%;
+}
+#cartTable th{
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+}
+#cartTable td{
+	text-align: center;
+}
+#cartTable td:nth-of-type(1){
+	text-align: left;
+	padding: 3px 0 3px 10px;
+	border-bottom: 1px solid black;
+}
+#cartTable td:nth-of-type(1) img{
+	margin-right: 10px;
+}
+
+/* 대여일 */
+#rentDate{
+	width: 30px;
+}
+
+.buySpan, .rentSpan, .buyNowP, .deleteP:hover{
+	cursor: pointer;
+}

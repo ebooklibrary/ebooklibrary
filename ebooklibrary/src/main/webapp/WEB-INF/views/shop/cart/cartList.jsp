@@ -1,8 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../../library/libraryTop.jsp"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/cartList.css" />
+<!-- 달력 from jquery ui -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
 <script type="text/javascript">
 $(function() {
+	
+	$("#rentEnd").datepicker({
+			dateFormat:"yy/mm/dd",
+			changeMonth: true,
+			changeYear:true,
+			dayNamesMin:['일','월','화','수','목','금','토'],
+			monthNames:['1월','2월','3월','4월','5월','6월',
+			            '7월','8월','9월','10월','11월','12월']
+		});
+	// Getter
+	var monthNamesShort = $( "#rentEnd" ).datepicker( "option", "monthNamesShort" );
+	// Setter
+	$( "#rentEnd" ).datepicker( "option", "monthNamesShort", ['1월','2월','3월','4월','5월','6월',
+	                                   			            '7월','8월','9월','10월','11월','12월'] );
+ 
+	
+	
 	$("#btnBuy").click(function() {
 		var IMP = window.IMP;
 		IMP.init('imp52577413'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용.
@@ -39,33 +61,64 @@ $(function() {
 		    }
 		});//IMP.request_pay
 	})//click
+	/* 
+	$("#frm").submit(function() {
+		if ($("#period").val()<1) {
+			
+		}
+	});
+	 */
+	$(".buySpan").click(function() {
+		var test=$(this).parent().next().find(".rentPrice").val();
+		alert(test);
+	});
+	var money=0;
+	$(".btRent").click(function() {
+		
+		var price=$(this).parent().find(".rentDate").val();
+		var result=numberWithCommas(price*100);
+		$(this).parent().next().find("span").text(result);
+	});
+	
+	$(".buySpan").click(function() {
+		$(this).css("font-weight",'bold');
+	});
+	$(".rentSpan").click(function() {
+		$(this).css("font-weight",'bold');
+	});
+	
+	
+	
 });//ducument.ready
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 </script>
 <h2>장바구니</h2>
 
-<table border="1px"
-summary="장바구니 목록에 관한 표로서 책제목,작가,대여일,가격등의 정보를 제공합니다">
+<table id="cartTable" summary="장바구니 목록에 관한 표로서 책제목,작가,대여일,가격등의 정보를 제공합니다">
 	<caption>장바구니 목록</caption>
 	<colgroup>
-		<col width="40%"><col>
-		<col width="10%"><col>
-		<col width="10%"><col>
-		<col width="20%"><col>
-		<col width="10%"><col>		
+		<col width="20%">
+		<col width="10%">
+		<col width="10%">
+		<col width="10%">		
+		<col width="10%">		
 	</colgroup>
 	<thead>
 		<tr>
 			<th scope="col">책제목</th>
 			<th scope="col">작가</th>
 			<th scope="col">대여기간</th>
-			<th scope="col">대여만료일</th>
 			<th scope="col">가격</th>			
+			<th scope="col">선택</th>			
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="cartTbody">
 		<c:if test="${empty cartList }">
-				<tr class="align_center">
+				<tr>
 					<td colspan="4">
 						장바구니가 비었습니다.
 					<td>
@@ -76,37 +129,51 @@ summary="장바구니 목록에 관한 표로서 책제목,작가,대여일,가�
 				<c:set var="totalSum" value="0" />
 				<c:forEach var="map" items="${cartList }">
 					<c:set var="sum" value="${map['SELLPRICE']*map['QUANTITY'] }" />
-					<tr class="align_center">
-						<td class="align_left">
-							<img alt="${map['TITLE']}" 
-							src="<c:url value='/pd_images/${map["COVER_FILE_NAME"] }'/>"
+					<tr>
+						<td>
+							<img alt="${map['TITLE']}" src="<c:url value='/book_upload/${map["COVER_FILE_NAME"] }'/>"
 							width="50" align="absmiddle">
 							${map['TITLE'] }
 						</td>
-						<td class="align_right">
+						<td>
 							${map['WRITER'] }
 						</td>
-						<td>
+						<%-- 
+						<td id="period">
 							${map['RENT_DATE'] }일
 						</td>
+						<c:if test="${!empty map['RENT_END'] }">
+							${map['RENT_END'] }일
+						</c:if>
+						 --%>
 						<td>
-						${map['RENT_END'] }
-							
-							일
-						</td>												
-						<td class="align_right">
-						<fmt:formatNumber 
-						value="${map['PRICE']}" pattern="#,###"/>원						
+							<input type="text" id="rentDate" class="rentDate" name="rentDate"> 일
+							<input type="button" name="btRent" class="btRent" value="변경">
+						</td>
+						
+						<!-- <input type="text" id="rentEnd" name="rentEnd" readonly> -->
+						
+						<td>
+							<fmt:formatNumber value="${map['PRICE']}" pattern="#,###"/>원
+							<span class="rentPrice"></span>원
+							<input type="text" name="price" class="price">
+													
+						</td>
+						<td>
+						<p class="deleteP">삭제</p>
+						<p class="buyNowP">바로구매</p>
+						<p><span class="buySpan">구매</span> / <span class="rentSpan">대여</span></p>
+						
 						</td>						
 					</tr>
 					<!-- 장바구니 상품 가격들 -->
 					<c:set var="totalPrice" value="${totalPrice+map['PRICE'] }" />
 				</c:forEach>
 				<tr>
-					<td colspan="4" class="align_right" style="border-right: none;">
+					<td colspan="4" style="border-right: none; text-align: right;">
 						총 구매금액 : <br>
 					</td>
-					<td class="align_right" style="border-left: none;">
+					<td style="border-left: none;">
 						<fmt:formatNumber value="${totalPrice }" 
 						pattern="#,###"/>원<br>						
 					</td>
@@ -114,9 +181,9 @@ summary="장바구니 목록에 관한 표로서 책제목,작가,대여일,가�
 			</c:if>
 	</tbody>  
 </table>
-<div class="align_center" style="margin: 10px 0">
+<div style="margin: 10px 0">
     <p class="titleP">
-    	<img src="${pageContext.request.contextPath}/images/dot7.JPG" align="absmiddle" />
+    	<%-- <img src="${pageContext.request.contextPath}/images/dot7.JPG" align="absmiddle" /> --%>
     	<span class="title">결제 정보</span>
     </p>
     <p>
@@ -125,7 +192,7 @@ summary="장바구니 목록에 관한 표로서 책제목,작가,대여일,가�
 						pattern="#,###"/>원</span>
     </p>
     <c:if test="${!empty cartList }">
-    <p class="center">
+    <p>
         <input type="button" id="btnBuy" value="결제하기"  />
     </p>
     </c:if>
