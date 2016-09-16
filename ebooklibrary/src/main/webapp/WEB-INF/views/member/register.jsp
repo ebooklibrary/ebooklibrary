@@ -106,16 +106,7 @@
 		
 		<span id="emailconfirm">
 		<span>이메일 인증하기</span>
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
-		<input type="button" value="인증번호 발송" id="btnEmail">
-<<<<<<< HEAD
-=======
-		<br>
->>>>>>> branch 'master' of https://github.com/ebooklibrary/ebooklibrary.git
-		
+		<input type="button" value="인증번호 발송" id="btnEmail"><br>
 		<labal for="confirm">인증번호</labal>		
 		<input type="text" name="confirm" id="confirm" size="10">
 		<input type="button" value="확인" id="btnEmailOk">
