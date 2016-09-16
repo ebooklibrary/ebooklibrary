@@ -10,6 +10,8 @@
 <title>포도서관</title>
 <!-- 스마트에디터 -->
 <script type="text/javascript" src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>" charset="utf-8"></script>
+<!-- W3 폼태그 -->
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
 <!-- alert -->
 <!-- ideally at the bottom of the page -->
@@ -22,7 +24,7 @@
 <!-- include a theme, can be included into the core instead of 2 separate files -->
 <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
 
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/main_all.css" />
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/silde_Notice/slide.css" />

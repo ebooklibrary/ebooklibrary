@@ -2,16 +2,13 @@
 <%@ include file="../libraryAdminTop.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- 외부스크립트 정규식 등등 -->
-<script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
-
 <!-- 달력 from jquery ui -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/jqueryui.css" /> --%>
-<!-- 폼태그 -->
+<!-- W3 폼태그 -->
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <!-- 스마트에디터 -->
 <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
@@ -30,7 +27,7 @@
 <%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
 <!-- include a theme, can be included into the core instead of 2 separate files -->
 <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
-<!-- common js -->
+<!-- common.js / 외부스크립트 정규식 등등 -->
 <script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
 
 <script type="text/javascript">

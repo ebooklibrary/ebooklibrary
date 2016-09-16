@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ebooklibrary.app.common.BookUtility;
 import com.ebooklibrary.app.common.FileUploadWebUtil;
+import com.ebooklibrary.app.common.PaginationInfo;
+import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
 import com.ebooklibrary.app.mybooks.model.BookSearchVO;
@@ -80,28 +82,45 @@ public class AdminMyBooksController {
 	}
 	
 	@RequestMapping("/book/bookList.do")
-	public String bookList(HttpServletRequest request,@ModelAttribute BookSearchVO bookSearchVo, Model model){
-		logger.info("책리스트 파라미터 bookSearchVo={}", bookSearchVo);
+	public String bookList(HttpServletRequest request,@ModelAttribute BookSearchVO searchVo, Model model){
+		logger.info("책리스트 파라미터 searchVo={}", searchVo);
 		
 		BookUtility bu=new BookUtility();
-		//HttpSession session,
-		//String userId=(String)session.getAttribute("userId");
-		
-		//if(userId!=null || !userId.isEmpty()){
-			
-			List<MyBookVO> alist=myBookService.selectBoolAll(bookSearchVo);
-			logger.info("책검색 alist.size()={}", alist.size());
-			
-			String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
-			
-			model.addAttribute("upPath", upPath);
-			model.addAttribute("alist", alist);
-			
-			//이미지 파일명 업데이트
+		HttpSession session=request.getSession();
+		if (session.getAttribute("userId")!=null) {
+			String userId=(String)session.getAttribute("userId");
 			//MemberVO memVo=memberService.selectByUserName(userId);
-		//}
+			List<MyBooksVO> myBooksList=myBookService.selectMyBooksByUserId(userId);
+			logger.info("책검색 myBooksList={}",myBooksList);
+			model.addAttribute("myBooksList", myBooksList);
+		}
 		
-		model.addAttribute("bookSearchVo", bookSearchVo);
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//[2] searchVO
+		searchVo.setBlockSize(Utility.BLOCK_SIZE);
+		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		int cnt=myBookService.countAllBook(searchVo);
+		logger.info("토탈 레코드 cnt={}",cnt);
+		
+		pagingInfo.setTotalRecord(cnt);
+		
+		List<MyBookVO> alist=myBookService.selectBoolAll(searchVo);
+		logger.info("책검색 alist.size()={}", alist.size());
+		
+		String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
+		
+		model.addAttribute("upPath", upPath);
+		model.addAttribute("alist", alist);
+		model.addAttribute("pagingInfo",pagingInfo);
+			
+		
+		model.addAttribute("bookSearchVo", searchVo);
 		
 		return "library/book/bookList";
 	}

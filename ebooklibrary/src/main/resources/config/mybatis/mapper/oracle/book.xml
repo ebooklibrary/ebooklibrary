@@ -22,7 +22,14 @@
 	</sql>
 
 	<select id="selectBoolAll" parameterType="BookSearchVO" resultType="MyBookVO">
-		select * from book
+		<!-- select * from book -->
+		
+		select *from
+		(
+		select rownum as RNUM, LIST_ALL.*
+		from
+		(
+		select * from bookListView
 		<include refid="searchWhere"></include>
 		<if test="bookSort=='sales'">
 				order by sales desc
@@ -36,6 +43,14 @@
 		<if test="bookSort=='highPrice'">
 				order by price desc
 		</if>
+		) LIST_ALL
+		)
+	<![CDATA[
+		where  RNUM> #{firstRecordIndex} 
+		and RNUM<= #{firstRecordIndex}
+		+ #{recordCountPerPage}
+	]]>
+	
 	</select>
 	
 	<insert id="insertBook" parameterType="MyBookVO">
@@ -58,6 +73,23 @@
 	
 	<select id="selectBookByBookNo" parameterType="int" resultType="MyBookVO">
 		select * from book where BOOK_NO=#{bookNo}
+	</select>
+	
+	<select id="countAllBook" parameterType="BookSearchVO" resultType="int">
+		select count(*) from bookListView
+		<include refid="searchWhere"></include>
+		<if test="bookSort=='sales'">
+				order by sales desc
+		</if>
+		<if test="bookSort=='publication'">
+				order by publication desc
+		</if>
+		<if test="bookSort=='lowPrice'">
+				order by price asc
+		</if>
+		<if test="bookSort=='highPrice'">
+				order by price desc
+		</if>
 	</select>
 	
 	
