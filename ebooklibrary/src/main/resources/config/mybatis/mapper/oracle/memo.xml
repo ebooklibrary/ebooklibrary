@@ -2,12 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="config.mybatis.mapper.oracle.memo">
-	<select id="selectToId" parameterType="String" resultType="MemoVO">
-		select * from memo where to_Id=#{userId} order by memo_no desc
+	<select id="selectToId" parameterType="MemoSearchVO" resultType="MemoVO">
+		
+		select *
+		from
+		(
+		    select rownum as RNUM, memo_ALL.*
+		    from
+		        (select *
+		        from memo 
+		         where to_Id=#{userId}
+		        order by memo_no desc) memo_ALL    
+		) 
+		<![CDATA[
+		where  RNUM> #{firstRecordIndex} 
+			and RNUM<= #{firstRecordIndex}
+			+ #{recordCountPerPage}
+		]]>
+		
 	</select>
 	
-	<select id="selectFromId" parameterType="String" resultType="MemoVO">
-		select * from memo where from_id=#{userId} order by memo_no desc
+	<select id="selectFromId" parameterType="MemoSearchVO" resultType="MemoVO">
+		
+		select *
+		from
+		(
+		    select rownum as RNUM, memo_ALL.*
+		    from
+		        (select *
+		        from memo 
+		         where from_id=#{userId}
+		        order by memo_no desc) memo_ALL    
+		) 
+		<![CDATA[
+		where  RNUM> #{firstRecordIndex} 
+			and RNUM<= #{firstRecordIndex}
+			+ #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectToIdCount" parameterType="MemoSearchVO" resultType="int">
+		select count(*) from memo where to_Id=#{userId} order by memo_no desc
+	</select>
+	
+	<select id="selectFromIdCount" parameterType="MemoSearchVO" resultType="int">
+		select count(*) from memo where from_id=#{userId} order by memo_no desc
 	</select>
 	
 	<select id="selectMemoCount" parameterType="String" resultType="int">

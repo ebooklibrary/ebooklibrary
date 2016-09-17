@@ -44,9 +44,20 @@
 			
 		
 	});	
+	
+	function pageFunc(curPage,tf){
+		document.frmPage.currentPage.value=curPage;
+		document.frmPage.toFrom.value=tf;
+		frmPage.submit();
+	}	
 </script>
 </head>
 <body>
+<form name="frmPage" method="post" 
+	action="<c:url value='/library/memo/memo.do'/>">
+	<input type="hidden" name="currentPage">
+	<input type="hidden" id="toFrom" name="toFrom">
+</form>
 	<div id="tabs" style="width: 700px;height: 800px">
 		<ul>
 			<li><a id="tab1" href="#tabContent_1">받은 쪽지함</a></li>
@@ -64,8 +75,45 @@
 							<h3 class="memoDetail">${vo.toId }${vo.title }${vo.sendDate }
 							<button class="delete">삭제</button><p style="display: none;">${vo.memoNo }</p></h3>
 							<div><p>${vo.content }</p></div>
-						</c:forEach>
+						</c:forEach>							
 					</div>
+					<!-- 페이징 처리를 위한 div -->
+						<p class="divPage">
+							<!-- 이전 블럭으로 이동 -->
+							<c:if test="${toPagingInfo.firstPage>1}">				
+								<a href="#" 
+							onclick="pageFunc(${toPagingInfo.firstPage-1},'T')">
+									<img src="<c:url value='/images/first.JPG'/>" 
+											alt="이전블럭으로">
+								</a>				
+							</c:if>
+							
+							<!-- 페이지 번호 추가 -->						
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" 
+								begin="${toPagingInfo.firstPage }" 
+								end="${toPagingInfo.lastPage }">
+								<c:if test="${i==toPagingInfo.currentPage }">					
+									<span style="color:blue;font-weight: bold">
+										${i}</span>
+								</c:if>		
+								<c:if test="${i!=toPagingInfo.currentPage }">
+									<a href="#" onclick="pageFunc(${i},'T')">
+										[${i}]</a>
+								</c:if>		
+							</c:forEach>				
+							<!--  페이지 번호 끝 -->
+							
+							<!-- 다음 블럭으로 이동 -->
+							<c:if test
+							="${toPagingInfo.lastPage<toPagingInfo.totalPage}">				
+								<a href="#" 
+							onclick="pageFunc(${toPagingInfo.lastPage+1},'T')">
+									<img src="<c:url value='/images/last.JPG'/>" 
+											alt="다음블럭으로">
+								</a>
+							</c:if>
+						</p>
 			</c:if>	
 		</div>
 		<div id="tabContent_2">
@@ -81,6 +129,43 @@
 							<div><p>${vo.content }</p></div>
 						</c:forEach>
 					</div>
+					<!-- 페이징 처리를 위한 div -->
+						<p class="divPage">
+							<!-- 이전 블럭으로 이동 -->
+							<c:if test="${fromPagingInfo.firstPage>1}">				
+								<a href="#" 
+							onclick="pageFunc(${fromPagingInfo.firstPage-1},'T')">
+									<img src="<c:url value='/images/first.JPG'/>" 
+											alt="이전블럭으로">
+								</a>				
+							</c:if>
+							
+							<!-- 페이지 번호 추가 -->						
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" 
+								begin="${fromPagingInfo.firstPage }" 
+								end="${fromPagingInfo.lastPage }">
+								<c:if test="${i==fromPagingInfo.currentPage }">					
+									<span style="color:blue;font-weight: bold">
+										${i}</span>
+								</c:if>		
+								<c:if test="${i!=fromPagingInfo.currentPage }">
+									<a href="#" onclick="pageFunc(${i},'T')">
+										[${i}]</a>
+								</c:if>		
+							</c:forEach>				
+							<!--  페이지 번호 끝 -->
+							
+							<!-- 다음 블럭으로 이동 -->
+							<c:if test
+							="${fromPagingInfo.lastPage<fromPagingInfo.totalPage}">				
+								<a href="#" 
+							onclick="pageFunc(${fromPagingInfo.lastPage+1},'T')">
+									<img src="<c:url value='/images/last.JPG'/>" 
+											alt="다음블럭으로">
+								</a>
+							</c:if>
+						</p>
 			</c:if>	
 		</div>
 		<div id="tabContent_3">
