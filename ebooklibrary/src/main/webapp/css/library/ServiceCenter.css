@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+#ServiceCenter_head{
+	
+}
+#ServiceCenter_body{
+	float: right;
+	text-align: center;
+	margin-right:330px;
+}
+#ServiceCenter_body h1{
+	margin-right: 177px;
+}
+#ServiceCenter_bodyP1{
+	font-size: 2.0em;
+	font-weight: bold;
+	color: skyblue;
+}
+#ServiceCenter_bodyP2{
+	font-size: 2.0em;
+	font-weight: bold;
+	color:skyblue;
+}
+#ServiceCenter_bodyP1 h1{
+	font-size: 2.5em;
+	font-weight: bold;
+}

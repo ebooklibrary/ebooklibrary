@@ -82,7 +82,7 @@
 	</div>
 	<div class="notice_Content">
 		<p>
-			<textarea class="w3-input" name="content" id="summary" ></textarea>
+			<textarea class="w3-input" name="content" id="summary" style="width:630px; height:530px;  "></textarea>
 		</p>
 	</div>
 	<div class="notice_submit">

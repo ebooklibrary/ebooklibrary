@@ -13,7 +13,7 @@ import com.ebooklibrary.app.library.stiemap.controller.SiteMapController;
 public class ServiceCenterController {
 	public static final Logger logger = LoggerFactory.getLogger(SiteMapController.class);
 	
-	@RequestMapping(value ="/librarySiteMap.do", method = RequestMethod.GET)
+	@RequestMapping(value ="/libraryServeiceCenter.do", method = RequestMethod.GET)
 	public String noticeWrite_get(){
 		logger.info("고객센터 화면 보여주기");
 		

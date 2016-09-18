@@ -16,10 +16,22 @@ $(document).ready(function(){
 });
 
 </script>
+<div id ="ServiceCenter_head">
+	<h1>고객 센터</h1>
+</div>
 
-
-
-<%@include file="../libraryAd.jsp"%>
-
-
+<div>
+	<p>고객센터 정보</p>
+</div>
+<div>
+	<a href="#">1:1 문의</a>
+</div>
+<div>
+	<a href="<c:url value='/library/notice/noticelist.do'/>">공지사항</a>
+</div>
+<div id="ServiceCenter_body">
+	<h1>고객센터</h1>
+	<p id="ServiceCenter_bodyP1"><img src="${pageContext.request.contextPath}/images/library/ServiceCenter/phone.png" alt="전화" style="width: 25px; height: 25px;">&nbsp 전화번호 : 02-000-0000</p>
+	<p id="ServiceCenter_bodyP2">평일 09:00~18:00 주말 공휴일 휴일은 쉽니다.</p>
+</div>
 <%@include file="../libraryBottom.jsp"%>

@@ -1,8 +1,11 @@
 @CHARSET "UTF-8";
 
 /* Layout ***********************************************************************/
+@font-face{font-family: 'BMJUA_ttf'; src=('../font/BMJUA_ttf.ttf')}
+	
 
 body {margin:0px; padding:0px;  }
+body table div p {font-family: 'BMJUA_ttf' }
 
 /* container_out */
 #container_out{ width:100%; margin:0 auto; padding:0; position:relative; overflow:hidden; background:url(/images/gmi/main/main_bg.jpg) no-repeat center top; border: 1px solid hotpink;}

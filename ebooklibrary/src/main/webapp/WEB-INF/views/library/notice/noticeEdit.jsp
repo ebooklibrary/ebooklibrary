@@ -70,7 +70,7 @@ $(document).ready(function(){
 </div>
 <form name="frm1" id="frm1" method="post"
 	action="<c:url value ='/library/notice/noticeEdit.do'/>">
-	<input type ="text" name= "noticeNo" id ="noticeNo" value ="${noticeVo.noticeNo }">
+	<input type ="hidden" name= "noticeNo" id ="noticeNo" value ="${noticeVo.noticeNo }">
 	<div class="notice_Write">
 		<p>공지사항 수정</p>
 	</div>
@@ -82,7 +82,7 @@ $(document).ready(function(){
 	</div>
 	<div class="notice_Content">
 		<p>
-			<textarea class="w3-input" name="content" id="summary" ></textarea>
+			<textarea class="w3-input" name="content" id="summary" style="width:630px; height:530px;"></textarea>
 		</p>
 	</div>
 	<div class="notice_submit">
