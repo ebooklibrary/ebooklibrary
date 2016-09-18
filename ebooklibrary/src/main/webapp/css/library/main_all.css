@@ -8,12 +8,15 @@
 @import url(footer.css);
 @import url(board.css);
 @IMPORT url(ServiceCenter.css);
+body{
+	font-size: 1.03em;
+}
 
 /* 본문프린터용  */
 @media print {
 #head, #visual, #sidebar, #body_foot, #foot, #wing, #fontsize { display: none; }
 #container { background: #fff; }
-#body { margin: 0; padding: 0; background: #fff; }
+#body { margin: 0; padding: 0; background: #fff;}
 }
 
 
