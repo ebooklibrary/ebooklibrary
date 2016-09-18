@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.PaginationInfo;
+import com.ebooklibrary.app.common.PoiExcelSave;
 import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.member.model.MemberService;
@@ -23,6 +26,8 @@ public class AdminController {
 	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private PoiExcelSave poiExcelSave;
 	
 	@RequestMapping("/adminMain.do")
 	public String adminMain(){
@@ -55,7 +60,22 @@ public class AdminController {
 		
 		return "admin/member/memberList";
 	}
-	
+	@RequestMapping("/member/memberSave.do")
+	@ResponseBody
+	public int memberExcelSave(){ 
+		logger.info("회원정보 엑셀저장");
+		MemberSearchVO vo=new MemberSearchVO();
+		
+		//[2] searchVo
+		vo.setBlockSize(Utility.BLOCK_SIZE);
+		vo.setRecordCountPerPage(Utility.MEMBER_COUNT_PER_PAGE);
+		vo.setFirstRecordIndex(0);
+		
+		int result=poiExcelSave.excel(vo);
+		logger.info("엑셀 저장 결과 result={}",result);
+		
+		return result;
+	}
 	
 	
 }

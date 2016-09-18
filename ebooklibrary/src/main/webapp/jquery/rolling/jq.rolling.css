@@ -36,17 +36,15 @@
 	width:490px;
 	height:290px;
 }
-
-.sp01 .line_href{
-	width:50%;
-	height:100%;
+.sp01 img{
+	width:490px;
+	height:290px;
 }
 
 .sp02 {
 	font:18px 'tahoma';
 	text-align:center;
 	line-height:290px;
-	background-color:red;
 	width:490px;
 	height:290px;
 }
@@ -55,7 +53,6 @@
 	font:18px 'tahoma';
 	text-align:center;
 	line-height:290px;
-	background-color:blue;
 	width:490px;
 	height:290px;
 }
@@ -63,7 +60,6 @@
 	font:18px 'tahoma';
 	text-align:center;
 	line-height:290px;
-	background-color:black;
 	width:490px;
 	height:290px;
 }
@@ -71,7 +67,6 @@
 	font:18px 'tahoma';
 	text-align:center;
 	line-height:290px;
-	background-color:white;
 	width:490px;
 	height:290px;
 }

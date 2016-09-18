@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#rolling").rolling(1280,270,{autoscroll:1, delay:2200});
-		
+		//alert($(".a").val());
 	});
 </script>
 <!-- 이달의 책 -->
@@ -17,18 +17,24 @@
 	<div>
 		<div id="rolling">
 			<ul>
-				<li class="sp01">
-					<div class="line_href">
-					<a href="http://www.naver.com">
+			<c:if test="${!empty alist}">
+			<c:set var="n" value="1" />
+				<c:forEach var="vo" items="${alist }">					
+					<li class="sp0${n }">
+					<a href="${vo.eventUrl }">
 						<img alt="테스트" 
-						src="${pageContext.request.contextPath }/images/mybook/bookshelf11.png"></a>
-						</div>
-				</li>
+						src="${pageContext.request.contextPath }/bookevent/${vo.eventImageUrl}" ></a>
+						<input type="text" value="${pageContext.request.contextPath }/bookevent/${vo.eventImageUrl}">
+					</li>
+					<c:set var="n" value="${n+1 }" />
+				</c:forEach>
+				
+			</c:if>
 					         
-				<li class="sp02">SAMPLE 02</li>
+				<!-- <li class="sp02">SAMPLE 02</li>
 				<li class="sp03">SAMPLE 03</li>
 				<li class="sp04">SAMPLE 04</li>
-				<li class="sp05">SAMPLE 05</li>
+				<li class="sp05">SAMPLE 05</li> -->
 			</ul>
 		</div>
 		<ul class="pages"></ul>

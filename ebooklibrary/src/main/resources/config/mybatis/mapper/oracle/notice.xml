@@ -93,7 +93,7 @@
 			    select * from notice_board order by notice_No desc
 			)			
 		<![CDATA[
-		where rownum<=6
+		where rownum<=12
 		]]>
 	</select>
 

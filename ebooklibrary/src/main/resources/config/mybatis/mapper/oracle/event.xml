@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.event">
+	<insert id="insertEvent" parameterType="EventVO">
+		<selectKey order="BEFORE" keyProperty="eventNo" resultType="int">
+			select event_seq.nextval from dual
+		</selectKey>
+		insert into event(EVENT_NO,EVENT_NAME,EVENT_IMAGE_URL,EVENT_URL,EVENT_KIND)
+		values(#{eventNo},#{eventName},#{eventImageUrl},#{eventUrl},#{eventKind})
+	</insert>
+	
+	<select id="selectEvent" resultType="EventVO">
+		select *
+		from(
+			    select * from event order by event_no desc
+			)			
+		<![CDATA[
+		where rownum<=5
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

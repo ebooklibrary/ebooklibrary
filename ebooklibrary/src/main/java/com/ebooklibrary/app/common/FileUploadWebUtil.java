@@ -28,6 +28,7 @@ public class FileUploadWebUtil {
 	//책 업로드인지, 배경 이미지 업로드인지 구분해주는 상수
 	public static final int PDS_UPLOAD=1; //자료실 파일 업로드
 	public static final int IMAGE_UPLOAD=2; //배경이미지 업로드
+	public static final int EVENTIMAGE_UPLOAD=3; //이벤트이미지 업로드
 	
 	@Resource(name="fileUploadProperties")
 	private Properties fileUploadProps;
@@ -100,7 +101,7 @@ public class FileUploadWebUtil {
 
 	      //순수파일명에 현재시간을 연결한 후 .확장자를 연결한다
 	      String fileName = fName+getCurrentTime()+ext;
-	      if (uploadType==IMAGE_UPLOAD) {
+	      if (uploadType==IMAGE_UPLOAD || uploadType==EVENTIMAGE_UPLOAD) {
 	    	  fileName=fileName.replaceAll(" ", "");
 	      }
 	      
@@ -120,17 +121,20 @@ public class FileUploadWebUtil {
 	   public String getUploadPath(HttpServletRequest request, int uploadType){
 	      //업로드 경로를 구하는 메서드
 	      String realPath="";
-
-	      String type=fileUploadProps.getProperty("file.upload.type");
+	      String type=fileUploadProps.getProperty("file.upload.type");  
+	     
 
 	      if(type.equals("test")){
 	         //테스트인 경우 => 테스트 경로를 구한다
 	    	 if (uploadType==PDS_UPLOAD) {
 				//자료실 파일 업로드
 	    		 realPath=fileUploadProps.getProperty("file.upload.path.test");
-			}else{
+			}else if(uploadType==IMAGE_UPLOAD){
 				//상품 등록시 파일 이미지 업로드
 				realPath=fileUploadProps.getProperty("imageFile.upload.path.test");
+			}else{
+				//책 이벤트등록
+				realPath=fileUploadProps.getProperty("eventimageFile.upload.path.test");
 			}
 	         logger.info("테스트 경로={}", realPath);
 	      }else{
@@ -139,10 +143,14 @@ public class FileUploadWebUtil {
 				//자료실
 	    		 realPath=fileUploadProps.getProperty("file.upload.path");
 	    		 logger.info("PDS_UPLOAD={}", PDS_UPLOAD);
-			}else{
+			}else if(uploadType==IMAGE_UPLOAD){
 				//상품 등록시 파일 이미지 업로드
 				realPath=fileUploadProps.getProperty("imageFile.upload.path");
 				logger.info("IMAGE_UPLOAD={}", IMAGE_UPLOAD);
+			}else{
+				//책이벤트 이미지 등록
+				realPath=fileUploadProps.getProperty("eventimageFile.upload.path");
+				logger.info("IMAGE_UPLOAD={}", EVENTIMAGE_UPLOAD);
 			}
 	    	  
 	         //realPath=fileUploadProps.getProperty("file.upload.path");

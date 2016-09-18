@@ -3,7 +3,18 @@
 <!-- include bottom -->
 </div>
 <!--container-->
-
+<script type="text/javascript">
+	$(function() {
+		$.ajax({
+			url:"<c:url value='/visitorBottom.do'/>",
+			type:"GET",
+			success:function(res){
+				$("#todayVisitor").text(res.todayVisitor);
+				$("#totalVisitor").text(res.totalVisitor);
+			}
+		});//ajax
+	});
+</script>
 
 
     <!--//footer-->
@@ -12,8 +23,8 @@
 <div id="visitor">
   <h2 class="skip">방문자수</h2>
   <dl>
-  <dt>오늘 : </dt><dd>32</dd>
-  <dt>전체 : </dt><dd>69,315</dd>
+  <dt>오늘 : </dt><dd id="todayVisitor"></dd>
+  <dt>전체 : </dt><dd id="totalVisitor"></dd>
   </dl>
   </div> 
  

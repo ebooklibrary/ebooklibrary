@@ -1,34 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!--공지사항-->
-<div id="tab1" >
-<div class="add_notice2">공지사항</div>
+<div id="tab1">
+	<div class="add_notice2">공지사항</div>
 	<div class="list2">
-		<table  summary="최근 공지사항 6건을 보여주는 표입니다" class="table3">
-			<c:if test="${empty noticeVo }">
-				<tr>
-					<td style="text-align: center;">해당 데이터가 없습니다</td>
-				</tr>
-			</c:if>
-			<c:if test="${!empty noticeVo }">
-				<c:forEach var="vo" items="${noticeVo }">
+		<table summary="최근 공지사항 6건을 보여주는 표입니다" class="table3">
+			<tbody>
+				<c:if test="${empty noticeVo }">
 					<tr>
-						<td>${vo.noticeNo }</td>
-						<td><a
-							href="<c:url value ='/library/notice/readCountAdd.do?notice_No=${vo.noticeNo}'/>">
-								${vo.title }</a></td>
-						<td>${vo.userName }</td>
-						<td><fmt:formatDate value="${vo.regdate }"
-								pattern="yyyy-MM-dd" /></td>
-						<td>${vo.readCount }</td>
+						<td style="text-align: center;">해당 데이터가 없습니다</td>
 					</tr>
-				</c:forEach>
-			</c:if>
-
+				</c:if>
+				<c:if test="${!empty noticeVo }">
+					<c:forEach var="vo" items="${noticeVo }">
+						<tr>
+							<c:if test="${fn:length(vo.title)>20}">
+                           ${fn:substring(vo.title,0,20)}...
+                        </c:if>
+							<c:if test="${fn:length(vo.title)<=20}">
+							<td><a
+								href="<c:url value ='/library/notice/readCountAdd.do?notice_No=${vo.noticeNo}'/>">
+									ㆍ${vo.title }</a></td>
+                        </c:if>
+							<td><fmt:formatDate value="${vo.regdate }"
+									pattern="yyyy-MM-dd" /></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</tbody>
 		</table>
 	</div>
-<div class="add_notice"><a href="<c:url value='/library/notice/noticelist.do'/>">공지사항 더보기</a></div>
+	<div class="add_notice">
+		<a href="<c:url value='/library/notice/noticelist.do'/>">공지사항 더보기</a>
+	</div>
 </div>
-	<!--알립니다-->
+<!--알립니다-->
