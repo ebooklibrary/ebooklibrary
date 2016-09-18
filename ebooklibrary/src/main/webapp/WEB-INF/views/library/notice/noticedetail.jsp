@@ -90,7 +90,8 @@
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
-
+	<p> 1
+	</p>
 	</table>
 		<div class="notice_list">
 			<a href="<c:url value ='/library/notice/noticelist.do'/>"><img
