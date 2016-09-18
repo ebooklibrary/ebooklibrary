@@ -8,6 +8,6 @@
 <%@include file="mainInclude/month_book.jsp" %>
 <%@include file="mainInclude/m_search.jsp" %>
 <%@include file="mainInclude/mybook.jsp" %>
-<%@include file="mainInclude/tab1.jsp" %>
+<c:import url="/library/notice/mainNotice.do"></c:import>
 
 <%@ include file="libraryBottom.jsp"%>

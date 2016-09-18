@@ -221,5 +221,13 @@ public class NoticeController {
 		return "redirect:/library/notice/noticedetail.do?notice_No="+nextNotice_No;
 	}
 	
+	@RequestMapping("/mainNotice.do")
+	public String mainNotice(Model model){
+		logger.info("메인 공지사항 띄우기");
+		List<NoticeVO> noticeVo=noticeService.selectMainNotice();
+		
+		model.addAttribute("noticeVo", noticeVo);
+		return "library/mainInclude/tab1";
+	}
 	
 }

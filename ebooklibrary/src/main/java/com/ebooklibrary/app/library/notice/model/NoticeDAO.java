@@ -16,6 +16,7 @@ public interface NoticeDAO {
 	public int nextPageNotice(int notice_No);	
 	public int nextPage();
 	public int minPage();
+	public List<NoticeVO> selectMainNotice();
 	
 	
 }

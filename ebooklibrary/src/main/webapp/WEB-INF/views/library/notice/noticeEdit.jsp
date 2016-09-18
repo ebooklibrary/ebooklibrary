@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<c:if test="${sessionScope.auchCode=='ADMIN' }">
+	<%@include file="../../admin/libraryAdminTop.jsp"%>
+</c:if>
+<c:if test="${sessionScope.auchCode!='ADMIN' }">
 <%@include file="../libraryTop.jsp"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+</c:if>
 <!-- alert -->
 <!-- ideally at the bottom of the page -->
 <!-- also works in the <head> -->
