@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.visitor">
+
+	<select id="selectMaxDate" resultType="int">
+		select to_char(sysdate,'dd')-to_char(max(DAILY_DATE),'dd') from visitor
+	</select>
+	
+	<insert id="insertSysdate">
+		insert into visitor(DAILY_DATE,TODAY_VISITOR,TOTAL_VISITOR)
+		values(to_char(sysdate,'yyyy/mm/dd'),1,0)
+	</insert>
+	
+	<select id="selectTotalSum" resultType="int">
+		select sum(TODAY_VISITOR) from visitor
+	</select>
+	<update id="updateTotalVisitor" parameterType="int">
+		update visitor
+		set TOTAL_VISITOR=#{totalVisitor}
+		where DAILY_DATE=(select max(DAILY_DATE) from visitor )
+	</update>
+	
+	<update id="updateTodayVisitor">
+		update visitor
+		set TODAY_VISITOR=TODAY_VISITOR+1
+		where DAILY_DATE=(select max(DAILY_DATE) from visitor )
+	</update>
+	
+	<select id="selectToday" resultType="VisitorVO">
+		select * from visitor where DAILY_DATE=(select max(DAILY_DATE) from visitor )
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

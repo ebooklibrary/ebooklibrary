@@ -86,6 +86,16 @@
 	<select id="minPage" parameterType="int" resultType="int">
 		select MIN(Notice_No) from notice_board
 	</select>
+	
+	<select id="selectMainNotice" resultType="NoticeVO">
+		select *
+		from(
+			    select * from notice_board order by notice_No desc
+			)			
+		<![CDATA[
+		where rownum<=6
+		]]>
+	</select>
 
 </mapper>
 

@@ -70,5 +70,10 @@ public class NoticeServiceImp implements NoticeService{
 	public int nextPage() {
 		return noticedao.nextPage();
 	}
+
+	@Override
+	public List<NoticeVO> selectMainNotice() {
+		return noticedao.selectMainNotice();
+	}
 	
 }

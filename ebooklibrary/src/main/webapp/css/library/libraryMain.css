@@ -73,26 +73,35 @@ body {margin:0px; padding:0px;  }
 
   /* 알립니다 */
   #tab1 { margin:0 0 0 30px;  width:299px; padding:0px; height:184px; overflow:hidden; position:relative; float:left; }
-  #tab1 .tabmenu { width:100%; height:25px; margin:0px; padding:0px; position:relative;}
-  #tab1 .tabmenu ul { list-style: none; float: left; width:100%; margin: 0; padding: 0; }
-  #tab1 .tabmenu ul li { display: inline; float: left; margin: 0; padding:0;  }
-  #tab1 .tabmenu ul li img {font-size:1%; vertical-align:middle;}
  
-  #tab1 .tabcontent { display: none; position: absolute; left: 0px; top:43px; width: 299px; height: 100px; margin:0px; padding: 0px;  }
-  .list ul li .tabcontent ul { margin:0px; padding:0px; list-style:none; top:0px; left:0px; }
-  .list ul li .tabcontent ul li {height: 23px; white-space: nowrap; width: 100%; }  
-  .list ul li .tabcontent ul li span {  float:right; width:65px; color:#666666; background:none; font-size:11px; padding:0; margin:0;}
-  .list ul li .tabcontent ul li a { float:left; display:block; text-decoration:none; overflow:hidden; width:210px; float:left; padding:0 0 0 11px; background:url(/images/gmi/main/m_icon.gif) no-repeat 5px 45%; color:#666666;}
-  .list ul li .tabcontent ul li a:hover { text-decoration: underline; color:#279196;}
-  .list ul li .tabcontent ul li img { vertical-align:bottom; }
+ .list2 table {
+	border-top: solid 3px #6f90e7;
+	border-bottom: solid 1px #DEDEDE;
+	margin-top: 25px;
+	width: 100%;
+	float: right;
+	margin-right: 70px;
+}
+.list2 th {
+	background: #F7F7F7 url("/images/board/th_bg.gif") no-repeat right
+		bottom;
+	height: 31px;
+	border-bottom: solid 1px #E6E6E6;
+}
 
-   #tab1 div.tabmore a { position: absolute; right: 0; top: -35px; }
-   #tab1 div.tabmore img { vertical-align: top; }
-   #tab1 #tab1c1 div.tabmore a {  right: 0px; }
-   #tab1 #tab1c2 div.tabmore a { right: 0px;  }
+.list2 th.last {
+	background-image: none;
+}
 
-
-
+.list2 td {
+	height: 29px;
+	background: White;
+	text-align: center;
+	padding: 3px 0px;
+	border-bottom: solid 1px #DEDEDE;
+}
+  
+  
 /*도서관 소통공간*/
 
   #sns { width:232px; margin:0 0 0 33px; padding:0; float:left; position:relative; overflow:hidden;}

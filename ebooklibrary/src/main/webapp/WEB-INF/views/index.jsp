@@ -25,6 +25,14 @@
                     $(this).css("background", "");
                 }
 		);
+		
+		$.ajax({
+			url:"<c:url value='/visitor.do'/>",
+			type:"GET",
+			success:function(res){
+				
+			}
+		});//ajax
 	});
 
 

@@ -16,4 +16,5 @@ public interface NoticeService {
 	public int minPage();
 	public int nextPageNotice(int notice_No);	
 	public int nextPage();
+	public List<NoticeVO> selectMainNotice();
 }

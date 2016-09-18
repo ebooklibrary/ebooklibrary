@@ -98,4 +98,11 @@ public class NoticeDaoMybatis extends SqlSessionDaoSupport implements NoticeDAO{
 	public int nextPage() {
 		return getSqlSession().selectOne(NAMESPACE+".maxPage");
 	}
+
+
+
+	@Override
+	public List<NoticeVO> selectMainNotice() {
+		return getSqlSession().selectList(NAMESPACE+".selectMainNotice");
+	}
 }
