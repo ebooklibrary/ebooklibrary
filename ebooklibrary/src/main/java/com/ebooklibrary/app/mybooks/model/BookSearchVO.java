@@ -16,6 +16,7 @@ public class BookSearchVO extends SearchVO {
 	private int price; //가격
 	private int sales; //판매부수
 	private String bookSort; //책정렬
+	private String searchKeyword; //메인쪽 서치키워드
 	
 	public int getBookNo() {
 		return bookNo;
@@ -77,12 +78,18 @@ public class BookSearchVO extends SearchVO {
 	public void setBookSort(String bookSort) {
 		this.bookSort = bookSort;
 	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	@Override
 	public String toString() {
 		return "BookSearchVO [bookNo=" + bookNo + ", title=" + title + ", publisher=" + publisher + ", writer=" + writer
 				+ ", publication=" + publication + ", reg_date=" + reg_date + ", genre=" + genre + ", price=" + price
-				+ ", sales=" + sales + ", bookSort=" + bookSort + ", toString()=" + super.toString() + "]";
+				+ ", sales=" + sales + ", bookSort=" + bookSort + ", searchKeyword=" + searchKeyword + ", toString()="
+				+ super.toString() + "]";
 	}
-	
 	
 }

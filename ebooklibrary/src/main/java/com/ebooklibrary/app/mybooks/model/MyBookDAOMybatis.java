@@ -45,6 +45,11 @@ public class MyBookDAOMybatis extends SqlSessionDaoSupport implements MyBookDAO 
 		return getSqlSession().selectOne(namespace+".countAllBook", bookSearchVo);
 	}
 
+	@Override
+	public List<MyBookVO> schFromMain(BookSearchVO bookSearchVo) {
+		return getSqlSession().selectList(namespace+".schFromMain", bookSearchVo);
+	}
+
 	
 	
 }

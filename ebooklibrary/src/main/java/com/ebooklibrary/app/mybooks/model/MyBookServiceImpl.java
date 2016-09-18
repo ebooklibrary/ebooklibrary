@@ -36,7 +36,17 @@ public class MyBookServiceImpl implements MyBookService {
 
 	@Override
 	public List<MyBookVO> selectBoolAll(BookSearchVO bookSearchVo) {
-		List<MyBookVO> alist= myBookDao.selectBoolAll(bookSearchVo);
+		List<MyBookVO> alist=null;
+		
+		String keyword=bookSearchVo.getSearchKeyword();
+		if (keyword!=null && !keyword.isEmpty()) {
+			alist=myBookDao.schFromMain(bookSearchVo);
+			System.out.println("메인 검색어"+keyword);
+		}else{
+			alist= myBookDao.selectBoolAll(bookSearchVo);
+			System.out.println("내부 검색어"+keyword);
+		}
+		
 		BookUtility bu=new BookUtility();
 		for (MyBookVO myBookVo : alist) {
 			String genre= bu.getGenre(Integer.parseInt(myBookVo.getGenre()));

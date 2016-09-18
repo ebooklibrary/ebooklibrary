@@ -163,10 +163,12 @@
 			<c:if test="${!empty bookSearchVo.writer}">
 				"${bookSearchVo.writer}" - 작가별 검색 결과
 			</c:if>
-			<c:if test="${bookSearchVo.genre !='0'}">
+			<c:if test="${!empty bookSearchVo.genre && bookSearchVo.genre !='0'}">
 				"${bookSearchVo.genre}" - 장르별 검색 결과
 			</c:if>
-			<%-- <img alt="검색결과 아이콘" src="<c:url value='/images/mybook/icon/searchengineresult1.png'/>"> --%>
+			<c:if test="${!empty bookSearchVo.searchKeyword}">
+				"${bookSearchVo.searchKeyword}" - 통합검색 결과
+			</c:if>
 		</p>
 		
 		<form action="<c:url value='/admin/book/bookList.do'/>" method="post" id="searchFrm">

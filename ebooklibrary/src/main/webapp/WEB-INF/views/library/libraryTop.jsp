@@ -114,9 +114,6 @@ $(function() {
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
             첫화면
             </a></li>
-            <li>
-				<a href="<c:url value='/mybooks/mybookmain.do'/>">내 서재</a>
-            </li>
 			<c:if test="${empty sessionScope.userId }">
 				<li>
 				<a href="<c:url value='/member/login.do'/>">
@@ -130,6 +127,9 @@ $(function() {
 	            </a></li>
 			</c:if>
 			<c:if test="${!empty sessionScope.userId }">
+				<li>
+				<a href="<c:url value='/mybooks/mybookmain.do'/>">내 서재</a>
+            	</li>
 				<li>
 				<a href="#" id="memoList">				
 				쪽지(<span id="memoCount"></span>)

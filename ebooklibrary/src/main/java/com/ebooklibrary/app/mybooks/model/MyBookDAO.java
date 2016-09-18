@@ -11,5 +11,6 @@ public interface MyBookDAO {
 	public List<MyBooksVO> selectMyBooksByUserId(String userId);
 	public List<MyBookVO> selectBoolAll(BookSearchVO bookSearchVo);
 	public int countAllBook(BookSearchVO bookSearchVo);
+	public List<MyBookVO> schFromMain(BookSearchVO bookSearchVo);
 	
 }

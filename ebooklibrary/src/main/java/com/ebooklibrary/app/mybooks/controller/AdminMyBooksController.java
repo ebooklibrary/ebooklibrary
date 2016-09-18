@@ -108,13 +108,17 @@ public class AdminMyBooksController {
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
+		String keyword=searchVo.getSearchKeyword();
+		
+		logger.info("서치 쁘이오 키워드={}",keyword);
+		
 		int cnt=myBookService.countAllBook(searchVo);
 		logger.info("토탈 레코드 cnt={}",cnt);
-		
 		pagingInfo.setTotalRecord(cnt);
 		
 		List<MyBookVO> alist=myBookService.selectBoolAll(searchVo);
 		logger.info("책검색 alist.size()={}", alist.size());
+		
 		
 		String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
 		

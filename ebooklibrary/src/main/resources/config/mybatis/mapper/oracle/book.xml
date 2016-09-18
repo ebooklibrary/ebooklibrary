@@ -92,6 +92,10 @@
 		</if>
 	</select>
 	
+	<select id="schFromMain" parameterType="BookSearchVO" resultType="MyBookVO">
+		SELECT * FROM bookListView
+ 		 WHERE title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
+	</select>
 	
 </mapper>
 
