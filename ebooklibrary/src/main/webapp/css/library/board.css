@@ -550,3 +550,16 @@
 .siteMap_6 div a{
 	line-height: 22px;
 }
+
+/* qnaDetail */
+
+.qnadetail{
+	width: 100%;
+	margin-top: 30px;
+}
+
+/* qnaCmt */
+
+.qnaCmt td{
+	border: 1px solid black; 
+}

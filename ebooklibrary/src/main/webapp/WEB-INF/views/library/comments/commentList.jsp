@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript">
 	
@@ -70,11 +71,10 @@
 		
 	}
 </script>
-<table width="600">
+<table id="qnaCmt" width="900px">
 	<caption>댓글</caption>
 	<colgroup>
 		<col style="width:10%;" />
-		<col style="width:20%;" />
 		<col style="width:30%;" />
 		<col style="width:15%;" />
 	</colgroup>
@@ -95,9 +95,12 @@
 						<img src="<c:url value='/images/library/basic/tumb.png'/>" width="30">
 					</c:if>
 					</td>
-					<td>${clist.userName }</td>
-					<td>${clist.content }</td>
-					<td>${clist.regDate }</td>
+					<td>
+						<c:if test="">
+						</c:if>
+					</td>
+					<td>${clist.userName } : ${clist.content }</td>
+					<td><fmt:formatDate value="${clist.regDate }" pattern="yy/MM/dd hh:mm:ss"/> </td>
 					<td><input type="button" onclick="reVisi(${i})" value="덧글"></td>
 				</tr>
 				<tr >
