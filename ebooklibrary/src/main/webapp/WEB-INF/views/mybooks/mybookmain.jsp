@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/mybook/mybookmain.css" />
 
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".mybook").click(function() {
@@ -189,6 +191,39 @@
 			event.preventDefault();
 		});
 		
+		var memoCount=0;
+		if(${!empty sessionScope.userId}){
+			$.ajax({
+				url:"<c:url value='/library/memo/NewMemoCount.do'/>",
+				data:"userId=${sessionScope.userId}",			
+				type:"GET",
+				success:function(res){
+					$("#memoCount").text(res);
+					memoCount=res;
+				}
+			});//ajax
+		}//if
+		setInterval(function() {
+			if(${!empty sessionScope.userId}){
+				$.ajax({
+					url:"<c:url value='/library/memo/NewMemoCount.do'/>",
+					data:"userId=${sessionScope.userId}",
+					type:"GET",
+					success:function(res){
+						$("#memoCount").text(res);
+						memoCount=res;
+					}
+				});//ajax
+			}//if
+		},3000);
+		
+		$("#memoList").click(function() {
+			window.open("<c:url value='/library/memo/memo.do'/>",
+					"memoList",
+			"width=725,height=800,left=50,top=50,resizable=yes,location=yes");		
+		});
+		
+		
 		    
 		
 	}); //ready
@@ -259,6 +294,9 @@
 			<ul class="topnav" id="myTopnav">
 				<li><a href="<c:url value='/index.do'/>">첫페이지</a></li>
 				<li><a href="<c:url value='/library/librarymain.do'/>">도서관</a></li>
+				<c:if test="${!empty sessionScope.userId }">
+				<li><a href="#" id="memoList">쪽지(<span id="memoCount"></span>)</a></li>
+				</c:if>
 				<li><a href="#contact">Contact Us</a></li>
 			</ul>
 		</div>

@@ -13,18 +13,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ebooklibrary.app.common.BookUtility;
 import com.ebooklibrary.app.common.FileUploadWebUtil;
 import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.member.model.MemberService;
-import com.ebooklibrary.app.member.model.MemberVO;
 import com.ebooklibrary.app.mybooks.model.BookSearchVO;
 import com.ebooklibrary.app.mybooks.model.MyBookService;
 import com.ebooklibrary.app.mybooks.model.MyBookVO;
 import com.ebooklibrary.app.mybooks.model.MyBooksVO;
+import com.ebooklibrary.app.shop.cart.model.CartService;
 
 @Controller
 @RequestMapping("/admin")
@@ -36,6 +35,9 @@ public class AdminMyBooksController {
 	
 	@Autowired
 	private MyBookService myBookService;
+	
+	@Autowired
+	private CartService cartService;
 	
 	@Autowired
 	private MemberService memberService;
@@ -87,8 +89,9 @@ public class AdminMyBooksController {
 		
 		BookUtility bu=new BookUtility();
 		HttpSession session=request.getSession();
+		String userId="";
 		if (session.getAttribute("userId")!=null) {
-			String userId=(String)session.getAttribute("userId");
+			userId=(String)session.getAttribute("userId");
 			//MemberVO memVo=memberService.selectByUserName(userId);
 			List<MyBooksVO> myBooksList=myBookService.selectMyBooksByUserId(userId);
 			logger.info("책검색 myBooksList={}",myBooksList);
@@ -118,9 +121,12 @@ public class AdminMyBooksController {
 		model.addAttribute("upPath", upPath);
 		model.addAttribute("alist", alist);
 		model.addAttribute("pagingInfo",pagingInfo);
-			
 		
 		model.addAttribute("bookSearchVo", searchVo);
+		
+		/*사이드 장바구니 목록*/
+		List<Map<String, Object>> cartList=cartService.selectCartView(userId);			
+		model.addAttribute("cartList", cartList);
 		
 		return "library/book/bookList";
 	}

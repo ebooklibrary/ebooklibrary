@@ -1,5 +1,5 @@
 /**
- * common.js 
+ * options.js 
  */
 
 	function validate_LN(userid) {

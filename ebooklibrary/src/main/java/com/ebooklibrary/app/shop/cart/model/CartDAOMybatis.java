@@ -26,4 +26,14 @@ public class CartDAOMybatis extends SqlSessionDaoSupport implements CartDAO{
 		return getSqlSession().selectList(namespace+".selectCartView", userId);
 	}
 
+	@Override
+	public int updateCart(CartVO cartVo) {
+		return getSqlSession().update(namespace+".updateCart", cartVo);
+	}
+
+	@Override
+	public int delCart(int cartNo) {
+		return getSqlSession().delete(namespace+".delCart", cartNo);
+	}
+
 }

@@ -21,6 +21,18 @@
 		,to_char(rent_end,'yyyy/mm/dd hh24:mi:ss') as rent_end,price,title,cover_file_name,writer from cartView
 		where user_id=#{userid}
 	</select>
+	
+	<update id="updateCart">
+		update cart
+		   set rent_date=#{rentDate}, price=#{price}
+		 where cart_no=#{cartNo}
+	</update>
+	
+	<delete id="delCart" parameterType="int">
+		delete cart
+		 where cart_no=#{cartNo}
+	</delete>
+	
 </mapper>
 
 

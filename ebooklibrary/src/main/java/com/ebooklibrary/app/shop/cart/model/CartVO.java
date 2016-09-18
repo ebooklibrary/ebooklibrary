@@ -7,9 +7,9 @@ public class CartVO {
 	private String  userId;//회원아이디
 	private int  bookNo;//책번호
 	private int  rentDate;//대여기간
+	private String rentEnd; //대여 만료일
 	private int price;//대여가격
 	private Timestamp  regdate;//장바구니에 담은일자
-	
 	public int getCartNo() {
 		return cartNo;
 	}
@@ -34,6 +34,12 @@ public class CartVO {
 	public void setRentDate(int rentDate) {
 		this.rentDate = rentDate;
 	}
+	public String getRentEnd() {
+		return rentEnd;
+	}
+	public void setRentEnd(String rentEnd) {
+		this.rentEnd = rentEnd;
+	}
 	public int getPrice() {
 		return price;
 	}
@@ -49,8 +55,7 @@ public class CartVO {
 	@Override
 	public String toString() {
 		return "CartVO [cartNo=" + cartNo + ", userId=" + userId + ", bookNo=" + bookNo + ", rentDate=" + rentDate
-				+ ", price=" + price + ", regdate=" + regdate + "]";
+				+ ", rentEnd=" + rentEnd + ", price=" + price + ", regdate=" + regdate + "]";
 	}
-	
 	
 }

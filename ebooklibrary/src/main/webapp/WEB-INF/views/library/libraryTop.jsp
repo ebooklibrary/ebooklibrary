@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"> 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -92,7 +92,7 @@ $(function() {
 		</a>
 	</div>
 	<div class="menuform">
-		책검색
+		<a href="<c:url value='/admin/book/bookList.do'/>">책검색</a>
 	</div>
 	<div class="menuform">
 		<a href="<c:url value='/library/request/requestList.do'/>">요청게시판</a>
@@ -114,6 +114,9 @@ $(function() {
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
             첫화면
             </a></li>
+            <li>
+				<a href="<c:url value='/mybooks/mybookmain.do'/>">내 서재</a>
+            </li>
 			<c:if test="${empty sessionScope.userId }">
 				<li>
 				<a href="<c:url value='/member/login.do'/>">

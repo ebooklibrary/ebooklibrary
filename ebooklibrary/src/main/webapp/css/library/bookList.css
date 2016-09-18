@@ -1,12 +1,45 @@
 @CHARSET "UTF-8";
 
+#container{
+	overflow: scroll;
+}
+/* 사이드 장바구니 목록 */
+#cartDiv{
+	border: 1px solid #ffe6e6;
+	border-radius: 3px;
+	float: right;
+	width: 150px;
+	padding: 5px;
+	position: absolute;
+	top: 180px;
+	right: 300px;
+}
+#cartDiv li{
+	text-align: center;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #efefef;
+}
+#cartDiv li:first-of-type{
+	background-color: rgba(240,240,240,0.5);
+	border-radius: 5px;
+}
+#cartDiv li:last-of-type{
+	margin-top: 20px;
+	padding: 5px 0 5px 0;
+	background-color: rgba(255,240,210,0.5);
+	border-radius: 5px;
+}
+
 #bookListWrapper{
-	margin: 0;
-	border: 1px solid black;
+	/* border: 1px solid black; */
+	margin: 20px 0 0 20px;
 	padding: 20px;
 	
 	width: 800px;
 	height: 100%;
+}
+#countSpan{
+	color: orange;
 }
 /* 검색 */
 #searchSpan{
@@ -144,9 +177,9 @@
 	text-align: right;
 	margin-bottom: 100px;
 	margin-top: 30px;
-	
 }
 #sortDiv li{
+	border-bottom: 1px solid #acffc2;
 	float: right;
 	margin-left: 10px;
 }
@@ -198,14 +231,3 @@ ul.pagination li a.active {
     color: white;
 }
 ul.pagination li a:hover:not(.active) {background-color: #ddd;}
-
-/* 장바구니 */
-#cartDiv{
-	position: fixed;
-	position: absolute;
-	top: 20px;
-	right: 20px;
-}
-#cartDiv span{
-	border: 1px solid black;
-}

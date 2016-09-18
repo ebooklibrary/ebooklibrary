@@ -9,4 +9,6 @@ public interface CartService {
 	public static final int BOOK_NO=1;
 	public int insertCartPd(CartVO cartVo);
 	public List<Map<String, Object>> selectCartView(String userId);
+	public int updateCart(CartVO cartVo);
+	public int delCart(int cartNo);
 }

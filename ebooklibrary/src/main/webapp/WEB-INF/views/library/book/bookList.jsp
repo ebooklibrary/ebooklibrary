@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../libraryTop.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>이건 북리스트</title>
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/bookList.css" />
 
@@ -26,21 +23,21 @@
 		//$( "#sortDiv input" ).checkboxradio();
 		$("#genre").html(l);
 		
-		/* 
-		$("#searchFrm").submit(function() {
+		$(".cartFrm").submit(function() {
 			$.ajax({
-				url:"<c:url value='/admin/book/bookList.do'/>",
+				url:"<c:url value='/shop/cart/cartInsert.do'/>",
 				type:"POST",
 				data: $(this).serializeArray(),
 				success:function(res){
-					
+					if (res<0) {
+						alert("이미 장바구니 목록에 추가되었습니다.");
+					}
 				},
 				error:function(xhr, status, error){
 					alert(status+":"+error);
 				}
 			});
 		});
-		 */
 		
 		 /* 조건별 검색 */
 		$("#searchSpan span").click(function() {
@@ -152,14 +149,11 @@
 
 </script>
 
-</head>
-<body>
-
 	<div id="bookListWrapper">
 	
 		
 	
-		<p>12건의  검색결과 
+		<p><span id="countSpan">${alist.size()}</span> 건의  검색결과 
 			<c:if test="${!empty bookSearchVo.title}">
 				"${bookSearchVo.title}" - 제목별 검색 결과
 			</c:if>
@@ -172,10 +166,11 @@
 			<c:if test="${bookSearchVo.genre !='0'}">
 				"${bookSearchVo.genre}" - 장르별 검색 결과
 			</c:if>
+			<%-- <img alt="검색결과 아이콘" src="<c:url value='/images/mybook/icon/searchengineresult1.png'/>"> --%>
 		</p>
 		
 		<form action="<c:url value='/admin/book/bookList.do'/>" method="post" id="searchFrm">
-			<p id="searchSpan">검색 : 
+			<p id="searchSpan">검색 키워드 : 
 				<span>제목</span>
 				<span>출판사</span>
 				<span>작가</span>
@@ -212,7 +207,7 @@
 		</c:if>
 		
 		<c:forEach var="vo" items="${alist}">
-		<form action="<c:url value='/shop/cart/cartInsert.do'/>" method="post" id="cartFrm">
+		<form method="post" id="cartFrm" class="cartFrm">
 		<c:if test="${!empty sessionScope.userId }">
 			<input type="hidden" id="userId" name="userId" value="${sessionScope.userId }">
 			<input type="hidden" id="price" name="price" value="${vo.price }">
@@ -286,26 +281,17 @@
 			</ul>
 		</div>
 		
-		<!-- 
-		<ul class="pagination">
-		  <li><a href="#">&laquo;</a></li>
-		  <li><a href="#">1</a></li>
-		  <li><a class="active" href="#">2</a></li>
-		  <li><a href="#">3</a></li>
-		  <li><a href="#">4</a></li>
-		  <li><a href="#">5</a></li>
-		  <li><a href="#">6</a></li>
-		  <li><a href="#">&raquo;</a></li>
-		</ul> -->
-		
 	</div>
-	
+	<!-- 사이드 장바구니 -->
 	<div id="cartDiv">
-		<span>장바구니 목록</span>
-		<span>구매하러 가기</span>
-		<a href="<c:url value='/shop/cart/cartList.do'/>">장바구니</a>
-		
+		<nav>
+			<ul>
+				<li>장바구니 목록</li>
+				<c:forEach var="map" items="${cartList }">
+					<li>${map['TITLE'] }</li>
+				</c:forEach>
+				<li><a href="<c:url value='/shop/cart/cartList.do'/>">구매 페이지</a></li>
+			</ul>
+		</nav>
 	</div>
-
-</body>
-</html>
+<%@include file="../libraryBottom.jsp"%>

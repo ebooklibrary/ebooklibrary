@@ -25,6 +25,14 @@ public class CartServiceImpl implements CartService{
 	public List<Map<String, Object>> selectCartView(String userId){
 		return cartDao.selectCartView(userId);
 	}
+	@Override
+	public int updateCart(CartVO cartVo) {
+		return cartDao.updateCart(cartVo);
+	}
+	@Override
+	public int delCart(int cartNo) {
+		return cartDao.delCart(cartNo);
+	}
 	
 	
 }
