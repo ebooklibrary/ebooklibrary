@@ -1,8 +1,11 @@
 @CHARSET "UTF-8";
 
 /* Layout ***********************************************************************/
+@font-face{font-family: 'BMJUA_ttf'; src=('../font/BMJUA_ttf.ttf')}
+	
 
 body {margin:0px; padding:0px;  }
+body table div p {font-family: 'BMJUA_ttf' }
 
 /* container_out */
 #container_out{ width:100%; margin:0 auto; padding:0; position:relative; overflow:hidden; background:url(/images/gmi/main/main_bg.jpg) no-repeat center top; border: 1px solid hotpink;}
@@ -74,14 +77,8 @@ body {margin:0px; padding:0px;  }
   /* 알립니다 */
   #tab1 { margin:0 0 0 30px;  width:299px; padding:0px; height:184px; overflow:hidden; position:relative; float:left; }
  
- .list2 table {
-	border-top: solid 3px #6f90e7;
-	border-bottom: solid 1px #DEDEDE;
-	margin-top: 25px;
-	width: 100%;
-	float: right;
-	margin-right: 70px;
-}
+
+ /* 공지사항 */
 .list2 th {
 	background: #F7F7F7 url("/images/board/th_bg.gif") no-repeat right
 		bottom;

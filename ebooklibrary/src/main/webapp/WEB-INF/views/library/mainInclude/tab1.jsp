@@ -4,11 +4,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
 <!--공지사항-->
 <div id="tab1" >
-<div>공지사항</div>
-<div><a href="<c:url value='/library/notice/noticelist.do'/>">
-공지사항 더보기</a></div>
+<div class="add_notice2">공지사항</div>
 	<div class="list2">
-		<table  summary="최근 공지사항 6건을 보여주는 표입니다">
+		<table  summary="최근 공지사항 6건을 보여주는 표입니다" class="table3">
 			<c:if test="${empty noticeVo }">
 				<tr>
 					<td style="text-align: center;">해당 데이터가 없습니다</td>
@@ -31,6 +29,6 @@
 
 		</table>
 	</div>
-
+<div class="add_notice"><a href="<c:url value='/library/notice/noticelist.do'/>">공지사항 더보기</a></div>
 </div>
 	<!--알립니다-->

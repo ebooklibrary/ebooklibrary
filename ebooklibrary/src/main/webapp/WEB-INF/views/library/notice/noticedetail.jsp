@@ -92,16 +92,12 @@
 		</tr>
 
 	</table>
-		<a href="<c:url value ='/library/notice/noticelist.do'/>"><img
-			class="img1" alt="리스트"
-			src="${pageContext.request.contextPath }/images/library/notice/List.jpg"></a>
-
-	<c:if test="${sessionScope.auchCode=='ADMIN' }">
 		<div class="notice_list">
-			<a href="<c:url value ='/library/notice/noticelist.do'/>" hidden="hidden"><img
+			<a href="<c:url value ='/library/notice/noticelist.do'/>"><img
 				class="img1" alt="리스트" 
-				src="${pageContext.request.contextPath }/images/library/notice/List.jpg"></a>
+				src="${pageContext.request.contextPath }/images/library/notice/List.jpg" ></a>
 		</div>	
+	<c:if test="${sessionScope.auchCode=='ADMIN' }">	
 		<div class ="notice_delete">
 			<input type ="button" value="글수정" onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'">
 			<input type ="button" id="btnDelete"  value="글삭제" >

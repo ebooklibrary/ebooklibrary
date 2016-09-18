@@ -105,8 +105,10 @@
 		<span id="message" style="color: red;">아이디에는 이메일을 적어주세요</span><br>
 		
 		<span id="emailconfirm">
+
 		<span>이메일 인증하기</span>
-		<input type="button" value="인증번호 발송" id="btnEmail">
+		<input type="button" value="인증번호 발송" id="btnEmail"><br>
+
 		<labal for="confirm">인증번호</labal>		
 		<input type="text" name="confirm" id="confirm" size="10">
 		<input type="button" value="확인" id="btnEmailOk">
