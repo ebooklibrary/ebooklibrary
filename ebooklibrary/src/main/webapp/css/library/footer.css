@@ -9,7 +9,7 @@
 	overflow: hidden;
 	clear: both;
 	background: url(/images/gmi/inc/foot_bar_top.gif) repeat-x top;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 } /* 전체내용을담는것 */
 
 /*개인정보등*/

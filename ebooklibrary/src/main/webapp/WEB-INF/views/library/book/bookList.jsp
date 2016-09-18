@@ -24,17 +24,31 @@
 		$("#genre").html(l);
 		
 		$(".cartFrm").submit(function() {
+			if (${empty sessionScope.userId }) {
+				/* 
+				alertify.alert("로그인하여 주세요.");
+				$(location).attr('href', "<c:url value='/member/login.do'/>");
+				 */
+				
+				alertify.alert("로그인하여 주세요.", function (e) {
+				    if (e) {
+				    	$(location).attr('href', "<c:url value='/member/login.do'/>");
+				    }
+				});
+				
+				return false;
+			}
 			$.ajax({
 				url:"<c:url value='/shop/cart/cartInsert.do'/>",
 				type:"POST",
 				data: $(this).serializeArray(),
 				success:function(res){
 					if (res<0) {
-						alert("이미 장바구니 목록에 추가되었습니다.");
+						alertify.alert("이미 장바구니 목록에 추가되었습니다.");
 					}
 				},
 				error:function(xhr, status, error){
-					alert(status+":"+error);
+					alertify.alert(status+":"+error);
 				}
 			});
 		});
@@ -125,13 +139,16 @@
 		
 		/* 장바구니 클릭시 메시지 */
 		$(".cart").click(function() {
-			$(this).find(".popuptext").show().delay(2000)
-			.queue(function (next) {
-				$(this).hide();
-				next();
-			});
-			
+			if (${!empty sessionScope.userId }) {
+				$(this).find(".popuptext").show().delay(2000)
+				.queue(function (next) {
+					$(this).hide();
+					next();
+				});
+			}
 		});
+		
+		
 		/* 
 		$(".cart").click(function() {
 			$("#cartFrm").submit();

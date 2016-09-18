@@ -56,6 +56,8 @@ body{
 
 #mbSpan{
 	font-size: 1.5em;
+	/* font-family:monospace,monospace; */
+	font-family:Verdana,sans-serif;
 }
 #main_video{
 	width: 100%;

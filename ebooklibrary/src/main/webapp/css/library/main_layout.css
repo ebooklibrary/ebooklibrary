@@ -17,27 +17,47 @@ body {margin:0px; padding:0px;  }
 
 /* rightmenu 옆에 붙는 메뉴 */
 #rightmenu{
-      position:absolute;
-      right:1px;
-      width: 170px;
-      height: 600px;   
-
-      margin-top:170px;
-      border: 1px solid black;
-   }
-   #rightmenu .menuform{
-      width:100%;
-      height:10%;
-      margin: 20px 0 20px 0;
-      border: 1px solid red;
-   }
+	position:absolute;
+	right:1px;
+	width: 180px;
+	height: 600px;   
+	
+	margin-top:170px;
+	/* border: 1px solid black; */
+}
+#rightmenu .menuform{
+	width:90%;
+	height:10%;
+	margin: 20px 0 20px 0;
+	border-radius: 3px;
+	/* border: 1px solid red; */
+	background-color: rgba(255, 220, 220, 0.5);
+}
+#rightmenu .menuform a{
+	display:inline-block;
+	margin: 15px 0 0 15px;
+	font-size: 1.2em;
+	
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 3px;
+	
+	/* font-family:monospace,monospace; */
+	font-family:Verdana,sans-serif;
+}
+.menuFlagColor{
+	float: right;
+	height: 100%;
+	width:20%;
+	background-color: rgba(255, 255, 200, 0.5);
+	clear:both;
+}
 
 
 /* containers */
 #container{
 	width:1270px;
 	height:936px;
-	border: 1px solid pink;
+	/* border: 1px solid pink; */
 	margin: 38px 0 0 197px;
 }
 
@@ -74,7 +94,7 @@ body {margin:0px; padding:0px;  }
 	width: 45%;
 	height:390px;
 	margin:45px 0 0 0; 
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	
 	
 }
@@ -86,8 +106,8 @@ body {margin:0px; padding:0px;  }
     float:right;
 	width: 45%;
 	height:390px;
-	margin:45px 0 0 0; 
-	border: 1px solid black;
+	margin:45px 15px; 0 0; 
+	/* border: 1px solid black; */
 	}
 	#tab1 #tab1c1 .tabmore{
 		position: relative;

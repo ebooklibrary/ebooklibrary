@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../library/libraryTop.jsp" %>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/loginForm.css" />
 <script type="text/javascript">
 	$(function() {		
 		$("#regForm").submit(function() {
@@ -98,15 +99,16 @@
 	}
 
 </script>
-	<h1>회원가입</h1>
+<div id="regiWrapper" class="FormWrapperDiv">
+	<p id="titlePtag">회원가입</p>
 	<form action="<c:url value='/member/register.do'/>" method="post" id="regForm">
 		<label for="userId">아이디(이메일)</label>
-		<input type="text" name="userId" id="userId"><br>
-		<span id="message" style="color: red;">아이디에는 이메일을 적어주세요</span><br>
+		<input type="text" name="userId" id="userId" placeholder="아이디는 이메일을 적어주세요"><br>
+		<span id="message" style="color: red;"></span><br>
 		
 		<span id="emailconfirm">
 
-		<span>이메일 인증하기</span>
+		<!-- <span>이메일 인증하기</span> -->
 		<input type="button" value="인증번호 발송" id="btnEmail"><br>
 
 		<labal for="confirm">인증번호</labal>		
@@ -114,7 +116,7 @@
 		<input type="button" value="확인" id="btnEmailOk">
 		</span>
 		<span id="emailOk" style="visibility: hidden;"> 인증되었습니다</span>
-		<input type="text" id="emailStatus" value="N">
+		<input type="hidden" id="emailStatus" value="N">
 		<span id="emailNo" style="visibility: hidden;"> 인증번호를 다시 확인해주세요</span><br>
 		
 		<label for="userName">이름</label>
@@ -123,7 +125,7 @@
 		<input type="password" name="pwd" id="pwd"><br>	
 		<label for="pwd2">비밀번호 확인</label>
 		<input type="password" name="pwd2" id="pwd2"><br>
-		<label for="hp">전화번호</label>
+		<label for="hp" class="lineLabel">전화번호</label>
 		<select name="hp1" id="hp1">
 			<option value="010">010</option>
 			<option value="011">011</option>
@@ -131,15 +133,16 @@
 			<option value="017">017</option>			
 			<option value="019">019</option>			
 		</select>
-		<input type="text" name="hp2" id="hp2">-
+		<input type="text" name="hp2" id="hp2"> -
 		<input type="text" name="hp3" id="hp3"><br>
 		<label for="birth">생일</label>
 		<input type="text" name="birth" id="birth"><br>
-		<label for="gender">성별</label>
+		<label for="gender" class="lineLabel">성별</label>
 		<input type="radio" name="gender" value="M" checked="checked">남자
 		<input type="radio" name="gender" value="F" >여자<br>
-		<input type="text" name="chkId" id="chkId">
+		<input type="hidden" name="chkId" id="chkId">
 		
-		<input type="submit" value="가입">
+		<input type="submit" id="regiSubmit" value="가입">
 	</form>
+</div>
 <%@ include file="../library/libraryBottom.jsp"%>

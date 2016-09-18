@@ -74,6 +74,12 @@ $(function() {
 				"memoList",
 		"width=725,height=800,left=50,top=50,resizable=yes,location=yes");		
 	});
+	
+	$(".menuform").click(function() {
+		var href=$(this).find("a").attr("href");
+		$(location).attr('href', href);
+	});
+	
 });
 
 </script>
@@ -85,24 +91,28 @@ $(function() {
 	<div id="rightmenu">
 	<div class="menuform">
 		<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
+		<div class="menuFlagColor" id="qnaDivColor"></div>
 	</div>
 	<div class="menuform">
 		<a href="<c:url value='/library/notice/noticelist.do'/>"> 
 		공지사항
 		</a>
+		<div class="menuFlagColor" id="noticeDivColor"></div>
 	</div>
 	<div class="menuform">
 		<a href="<c:url value='/admin/book/bookList.do'/>">책검색</a>
+		<div class="menuFlagColor" id="schDivColor"></div>
 	</div>
 	<div class="menuform">
 		<a href="<c:url value='/library/request/requestList.do'/>">요청게시판</a>
+		<div class="menuFlagColor" id="requestDivColor"></div>
 	</div>
 </div>
   <div id="header">  
   <!--logo Start-->   
 	 <h2 class="skip">로고</h2>
 	 	 <div id="logo"><a href="<c:url value='/library/librarymain.do'/>">
-	 	 로고
+	 	 <img alt="로고 이미지" src="<c:url value='/images/library/main/logo.JPG'/>">
 	 	 </a></div>
   <!--//#logo End-->
 	<!--global_menu Start-->
