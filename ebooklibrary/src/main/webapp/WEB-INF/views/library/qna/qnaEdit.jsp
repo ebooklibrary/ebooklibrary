@@ -128,9 +128,11 @@ function submitContents(elClickedObj) {
 		        </div>
 		        
 		        <div id="Bticon">
-		        	<input type="submit" value="수정하기" style="width:80px; height:30px;"/>
-		        	<input type="reset" value="취소" style="width:80px; height:30px;"
-		        	onclick="location.href='<c:url value="/library/qna/qnaDetail.do?qnaNo=${param.qnaNo }"/>';" />
+		        	<c:if test="${qnaBoardVo.memberNo==sessionScope.memberNo }">
+			        	<input type="submit" value="수정하기" style="width:80px; height:30px;"/>
+			        	<input type="reset" value="취소" style="width:80px; height:30px;"
+			        	onclick="location.href='<c:url value="/library/qna/qnaDetail.do?qnaNo=${param.qnaNo }"/>';" />
+		        	</c:if>
 		        </div>
 		       </div>
 		</fieldset>

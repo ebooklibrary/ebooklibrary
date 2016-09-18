@@ -13,12 +13,12 @@
 	<form name="frmDelete" id="frmDelete" method="post" 
 		action="<c:url value='/library/qna/qnaDelete.do'/>">
 		<input type="hidden" name="qnaNo" value="${param.qnaNo }"/>
-       <div align=center style="line-height:160%;padding:5px;"><b>글을 삭제하시겠습니까?</b>
+       <div align="center" style="line-height:160%;padding:5px;"><b>글을 삭제하시겠습니까?</b>
        </div>
        <br>
-    <div height=30>
-        <input type=submit class=submit value=" 확  인 " >
-        <input type=button id="prePage" value="이전화면" >
-	</div>
+	    <div id="btDelicons" align="center">
+	        <input type=submit value=" 확  인 " style="width:80px; height:30px;">
+	        <input type=button id="prePage" value="이전화면" style="width:80px; height:30px;">
+		</div>
 	</form>
 <%@include file="../libraryBottom.jsp" %>
