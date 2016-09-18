@@ -31,7 +31,7 @@
 <div id="notice_head">
 	<h2>
 		<img alt="공지사항"
-			src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
+			src="${pageContext.request.contextPath }/images/library/notice/notice.jpg" style="width: 150px;">
 	</h2>
 </div>
 <div id="notice_banner">
@@ -90,7 +90,8 @@
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
-
+	<p> 1
+	</p>
 	</table>
 		<div class="notice_list">
 			<a href="<c:url value ='/library/notice/noticelist.do'/>"><img
