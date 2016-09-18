@@ -3,6 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/css/silde_Notice/style.css" />
+
+
 <%@include file="../libraryTop.jsp" %>
 <script type="text/javascript">
 	$().ready(function(){
@@ -12,7 +16,8 @@
 		});
 		$("#listGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/qna/qnaList.do'/>");
-		});		
+		});	
+		$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
 	});
 	
 	function pageFunc(curPage){
@@ -30,15 +35,56 @@
 	<input type="hidden" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
 	
 </form>
-	<h1>QnA게시판입니다</h1>
-	<div class=""></div>
-	<table class="list"
+
+<!-- qna 리스트 화면 -->
+<div id="notice_head">
+	<h2>
+		<img alt="qna"
+			src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
+	</h2>
+</div>
+<div id="notice_banner">
+	<a href="<c:url value='/library/notice/noticelist.do'/>"><img
+		alt="qna 배너"
+		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
+		width="200px" height="50px"></a>
+</div>
+<!-- 광고 -->
+<%@include file="../libraryAd.jsp"%>
+<div id="notice_body">	
+	<div class="searchbox">
+   	<form name="frmSearch" id="search" method="post" 
+   	action="<c:url value='/library/qna/qnaList.do' />" >
+        <div class="searchbox">
+        <select name="searchCondition">
+            <option value="title"
+           	   <c:if test="${param.searchCondition=='title'}">
+            		selected
+               </c:if>
+            >제목</option>
+            <option value="content" 
+            	<c:if test="${param.searchCondition=='content'}">
+            		selected
+               </c:if>
+            >내용</option>
+            <option value="user_name" 
+            	<c:if test="${param.searchCondition=='user_name'}">
+            		selected
+               </c:if>
+            >작성자</option>
+        </select>   
+        <input type="text" name="searchKeyword" 
+        	title="검색어 입력" value="${param.searchKeyword}" >   
+		<input type="submit" value="검색">
+    </form>
+	</div>
+	<div class="list">
+	<table
 	 	summary="질문게시판에 관한 표로써, 글번호, 제목, 작성자, 작성일, 조회수, 답변완료에 대한 정보를 제공합니다.">
-	<caption>QnA</caption>
 	<colgroup>
 		<col style="width:10%;" />
-		<col style="width:10%;" />
-		<col style="width:40%;" />
+		<col style="width:15%;" />
+		<col style="width:35%;" />
 		<col style="width:15%;" />
 		<col style="width:15%;" />
 		<col style="width:10%;" />		
@@ -103,7 +149,8 @@
 			</c:forEach>
 		</c:if>
 	</tbody>
-	</table>	   
+	</table>
+	</div>	   
 <div class="align_left">
 	<input type="button" id="listGo" value="전체목록"/>
 	<input type="button" id="writeGo" value="글쓰실?"/>
@@ -150,30 +197,8 @@
 		</a>
 	</c:if>
 </div>
-<div class="align_center">
-   	<form name="frmSearch" method="post" 
-   	action="<c:url value='/library/qna/qnaList.do' />" >
-        <select name="searchCondition">
-            <option value="title"
-           	   <c:if test="${param.searchCondition=='title'}">
-            		selected
-               </c:if>
-            >제목</option>
-            <option value="content" 
-            	<c:if test="${param.searchCondition=='content'}">
-            		selected
-               </c:if>
-            >내용</option>
-            <option value="user_name" 
-            	<c:if test="${param.searchCondition=='user_name'}">
-            		selected
-               </c:if>
-            >작성자</option>
-        </select>   
-        <input type="text" name="searchKeyword" 
-        	title="검색어 입력" value="${param.searchKeyword}" >   
-		<input type="submit" value="검색">
-    </form>
+
+</div>
 </div>
 <input type="hidden" value="${sessionScope.memberNo }"/>
 

@@ -110,10 +110,20 @@ public class QnAController {
 		logger.info("디테일 페이지 접속 입력값  QnaNo={}", qnaNo);
 		
 		QnaBoardVO qnaBoardVo = qnaBoardService.selectByNo(qnaNo);
-		
 		logger.info("결과값은 qnaBoardVo={}",qnaBoardVo);
 		
+		int maxQnaNo= qnaBoardService.maxQnaNo();
+		QnaBoardVO postQnaVo = qnaBoardService.selectByNo(maxQnaNo);
+		logger.info("결과값은 postQnaVo={}",postQnaVo);
+		
+		int minQnaNo= qnaBoardService.minQnaNo();
+		QnaBoardVO preQnaVO = qnaBoardService.selectByNo(minQnaNo);
+		logger.info("결과값은 preQnaVO={}",preQnaVO);
+		
+		
 		model.addAttribute("qnaBoardVo",qnaBoardVo);
+		model.addAttribute("preQnaVO",preQnaVO);
+		model.addAttribute("postQnaVo",postQnaVo);
 		
 		return "library/qna/qnaDetail";
 		
