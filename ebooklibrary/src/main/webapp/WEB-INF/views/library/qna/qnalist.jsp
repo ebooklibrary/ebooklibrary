@@ -2,11 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/css/silde_Notice/style.css" />
-
-
+	href="${pageContext.request.contextPath }/css/library/qna.css" />
 <%@include file="../libraryTop.jsp" %>
 <script type="text/javascript">
 	$().ready(function(){
@@ -27,6 +24,7 @@
 
 </script>
 <form name="frmPage" method="post" 
+<input type="hidden" value="${sessionScope.memberNo }"/>
 	action="<c:url value='/library/qna/qnaList.do'/>">
 	<input type="hidden" name="currentPage">
 	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
@@ -40,43 +38,43 @@
 <div id="notice_head">
 	<h2>
 		<img alt="qna"
-			src="${pageContext.request.contextPath }/images/library/notice/notice.jpg">
+			src="${pageContext.request.contextPath }/images/library/qna/qnaboard.png" width="200px" height="50px">
 	</h2>
 </div>
 <div id="notice_banner">
-	<a href="<c:url value='/library/notice/noticelist.do'/>"><img
+	<a href="<c:url value='/library/qna/qnaList.do'/>"><img
 		alt="qna 배너"
-		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
+		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
 		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
 <%@include file="../libraryAd.jsp"%>
 <div id="notice_body">	
 	<div class="searchbox">
-   	<form name="frmSearch" id="search" method="post" 
-   	action="<c:url value='/library/qna/qnaList.do' />" >
-        <div class="searchbox">
-        <select name="searchCondition">
-            <option value="title"
-           	   <c:if test="${param.searchCondition=='title'}">
-            		selected
-               </c:if>
-            >제목</option>
-            <option value="content" 
-            	<c:if test="${param.searchCondition=='content'}">
-            		selected
-               </c:if>
-            >내용</option>
-            <option value="user_name" 
-            	<c:if test="${param.searchCondition=='user_name'}">
-            		selected
-               </c:if>
-            >작성자</option>
-        </select>   
-        <input type="text" name="searchKeyword" 
-        	title="검색어 입력" value="${param.searchKeyword}" >   
-		<input type="submit" value="검색">
-    </form>
+	   	<form name="frmSearch" id="search" method="post" 
+	   		action="<c:url value='/library/qna/qnaList.do' />" >
+	        <div class="searchbox">
+	        <select name="searchCondition">
+	            <option value="title"
+	           	   <c:if test="${param.searchCondition=='title'}">
+	            		selected
+	               </c:if>
+	            >제목</option>
+	            <option value="content" 
+	            	<c:if test="${param.searchCondition=='content'}">
+	            		selected
+	               </c:if>
+	            >내용</option>
+	            <option value="user_name" 
+	            	<c:if test="${param.searchCondition=='user_name'}">
+	            		selected
+	               </c:if>
+	            >작성자</option>
+	        </select>   
+	        <input type="text" name="searchKeyword" 
+	        	title="검색어 입력" value="${param.searchKeyword}" >   
+			<input type="submit" value="검색">
+	    </form>
 	</div>
 	<div class="list">
 	<table
@@ -150,11 +148,11 @@
 		</c:if>
 	</tbody>
 	</table>
-	</div>	   
-<div class="align_left">
-	<input type="button" id="listGo" value="전체목록"/>
-	<input type="button" id="writeGo" value="글쓰실?"/>
+</div>	   
+<div class="bticons">
 	<form id="myWrite" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
+		<input type="button" id="listGo" value="전체목록"/>
+		<input type="button" id="writeGo" value="글쓰기"/>
 		<input type="submit" id="myWriting" value="내글 보기"/>
 		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
 		<input type="hidden" id="myWrite" name="myWrite" value="Y">
@@ -197,9 +195,9 @@
 		</a>
 	</c:if>
 </div>
+</div>
+</div>
 
-</div>
-</div>
-<input type="hidden" value="${sessionScope.memberNo }"/>
+
 
 <%@include file="../libraryBottom.jsp" %>

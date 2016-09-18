@@ -73,28 +73,48 @@ $(document).ready(function(){
 		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
 		width="200px" height="50px"></a>
 </div>
+<div id="Write_body">
 <form name="frm1" id="frm1" method="post"
 	action="<c:url value ='/library/notice/noticeEdit.do'/>">
 	<input type ="hidden" name= "noticeNo" id ="noticeNo" value ="${noticeVo.noticeNo }">
 	<div class="notice_Write">
 		<p>공지사항 수정</p>
 	</div>
-	<div class="notice_Title">
+	<div id="detail_body">
+		<table class="detail_table">
+			<tr>
+				<td class="qnaTitle">
+					<label for="title">제목</label>
+				</td>
+				<td  colspan="5" >
+					<input type="text" id="title" name="title" value="${noticeVo.title }" size="35" style="padding-left:10px;"/>
+				</td>
+			<tr>
+				<td class="qnaTitle">
+					<label for="userName">작성자</label>
+				</td>
+				<td style="padding-left:10px;">	
+					 <input type="hidden" name="userName" id="userName" value ="${noticeVo.userName }" readonly="readonly">
+				</td>
+			</tr>
+		</table>
+			<textarea class="w3-input" name="content" id="summary" style="width:630px; height:530px;"></textarea>
+			
+	<%-- <div class="notice_Title">
 		제목 : <input type="text" name="title" id="title" value="${noticeVo.title }">
 	</div>
 	<div class="notice_UserName">
-		작성자 : <input type="text" name="userName" id="userName" value ="${noticeVo.userName }" readonly="readonly">
 	</div>
 	<div class="notice_Content">
 		<p>
 			<textarea class="w3-input" name="content" id="summary" style="width:630px; height:530px;"></textarea>
 		</p>
-	</div>
+	</div> --%>
 	<div class="notice_submit">
 		<input type="submit" id="btsubmit" value="글수정">
 		<input type="button" id="btn1" value="취소" onclick="location.href='<c:url value="/library/notice/noticelist.do"/>'" />
 	</div>
-	
+	</div>
 </form>
-
+</div>
 <%@include file="../libraryBottom.jsp"%>

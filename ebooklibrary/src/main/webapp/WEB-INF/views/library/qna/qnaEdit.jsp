@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/css/library/qna.css" />
 <%@include file="../libraryTop.jsp" %>
 <!-- 스마트에디터 -->
 <script type="text/javascript" src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>" charset="utf-8"></script>
@@ -64,6 +66,7 @@
 	         }
 			
 		});
+		$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
 		
 		
 	});
@@ -80,43 +83,57 @@ function submitContents(elClickedObj) {
 	    elClickedObj.form.submit();
 	} catch(e) {}
 }
-
-/* 
-
-
- */
-
 	
 </script>
+<!-- qna 수정화면 -->
+<div id="notice_head">
+	<h2>
+		<img alt="공지사항"
+			src="${pageContext.request.contextPath }/images/library/qna/qnaboard.png" width="200px" height="50px">
+	</h2>
+</div>
+<div id="notice_banner">
+	<a href="<c:url value='/library/qna/qnaList.do'/>"><img
+		alt="공지사항 배너"
+		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
+		width="200px" height="50px"></a>
+</div>
+<%@include file="../libraryAd.jsp"%>
+<div id="Write_body">
 	<form name="frmEdit" id="frmEdit" method="post" 
-		
 		action="<c:url value='/library/qna/qnaEdit.do'/>" >
-		<input type="hidden" name="qnaNo" value="${qnaBoardVo.qnaNo }"/>
 		<fieldset>
 			<legend>QnA 수정하기</legend>
-				<div class="">
-					<label>${qnaBoardVo.userName}</label><label>레벨체크</label>
-				</div>
-				<div class="">
-					<label for="title">제목</label>
-					<input type="text" id="title" name="title" value="${qnaBoardVo.title }"/>
-				</div>
-				<div >
-					<label for="userName">작성자</label>
-					<input type="text" id="userName" name="userName" value="${qnaBoardVo.userName }">
-				</div>
-		        <div>
-		        	<label for="content">내용</label>
-		        </div>
+				<input type="hidden" name="qnaNo" value="${qnaBoardVo.qnaNo }"/>
+				<div id="detail_body">
+				<table class="detail_table">
+						<tr>
+							<td class="qnaTitle">
+								<label for="title">제목</label>
+							</td>
+							<td  colspan="5" >
+								<input type="text" id="title" name="title" value="${qnaBoardVo.title }" size="35" style="padding-left:10px;"/>
+							</td>
+						<tr>
+							<td class="qnaTitle">
+								<label for="userName">작성자</label>
+							</td>
+							<td style="padding-left:10px;">	
+								<input type="hidden" name="userName" id="userName" value ="${qnaBoardVo.userName }" readonly="readonly">
+							</td>
+						</tr>
+					</table>
 		        <div>
 		        	<textarea name="content" id="content" rows="12" cols="40">${qnaBoardVo.content }</textarea>
 		        </div>
 		        
-		        <div>
-		        	<input type="submit" value="수정하기"/>
-		        	<input type="reset" value="취소"
-		        	onclick="location.href='<c:url value="/library/qna/qnaDetail.do?qnaNo=${param.qanNo }"/>';" />
+		        <div id="Bticon">
+		        	<input type="submit" value="수정하기" style="width:80px; height:30px;"/>
+		        	<input type="reset" value="취소" style="width:80px; height:30px;"
+		        	onclick="location.href='<c:url value="/library/qna/qnaDetail.do?qnaNo=${param.qnaNo }"/>';" />
 		        </div>
+		       </div>
 		</fieldset>
 	</form>
+</div>
 <%@include file="../libraryBottom.jsp" %>

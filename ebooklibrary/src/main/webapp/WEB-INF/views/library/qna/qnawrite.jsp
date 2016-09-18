@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/css/library/qna.css" />
 <%@include file="../libraryTop.jsp" %>
 <!-- 스마트에디터 -->
 <script type="text/javascript" src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>" charset="utf-8"></script>
@@ -64,10 +66,9 @@
 	         }
 			
 		});
-		
+		$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
 		
 	});
-
 
 function submitContents(elClickedObj) {
 	// 에디터의 내용이 textarea에 적용된다.
@@ -80,39 +81,49 @@ function submitContents(elClickedObj) {
 	    elClickedObj.form.submit();
 	} catch(e) {}
 }
-
-/* 
-
-
- */
-
 	
 </script>
-<div>
+<!-- qna 쓰기 화면 -->
+<div id="notice_head">
+	<h2>
+		<img alt="qna"
+			src="${pageContext.request.contextPath }/images/library/qna/qnaboard.png"width="200px" height="50px">
+	</h2>
+</div>
+<div id="notice_banner">
+	<a href="<c:url value='/library/qna/qnaList.do'/>"><img
+		alt="qna 배너"
+		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
+		width="200px" height="50px"></a>
+</div>
+
+<%@include file="../libraryAd.jsp"%>
+<div id="Write_body">
 	<form name="frmWrite" id="frmWrite" method="post" 
-		
 		action="<c:url value='/library/qna/qnaWrite.do'/>" >
 		<fieldset>
 			<legend>QnA 글쓰기</legend>
-				<input type="text" id="memberNo" name="memberNo" value="${sessionScope.memberNo }">
-				<div class="">
-					<label>${sessionScope.userName }</label><label>레벨체크</label>
-				</div>
-				<div class="">
-					<label for="title">제목</label>
-					<input type="text" id="title" name="title" />
-				</div>
-				<div >
-					<label for="userName">${sessionScope.userName }</label>
-				</div>
-					<p>
-						<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
-					</p>
-		        <div>
-		        	<input type="submit" value="작성완료"/>
+				<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }">
+				<div id="detail_body">
+				<table class="detail_table">
+					<tr >
+						<td class="qnaTitle">제목</td>
+						<td  colspan="5">
+							<input type="text" id="title" name="title" size="35" />
+						</td>
+					</tr>
+					<tr>
+						<td  class="qnaTitle">작성자</td>
+						<td  >&nbsp;&nbsp;${sessionScope.userName }</td>
+					</tr>
+				</table>
+				<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
+		        <div id="Bticon">
 		        	<input type="Button" value="글 목록"
-		        	onclick="location.href='<c:url value="/library/qna/qnaList.do"/>';" />
+		        	onclick="location.href='<c:url value="/library/qna/qnaList.do"/>';" style="width:80px; height:30px;"/>
+		        	<input type="submit" value="작성완료" style="width:80px; height:30px;"/>
 		        </div>
+		       </div> 
 		</fieldset>
 	</form>
 </div>

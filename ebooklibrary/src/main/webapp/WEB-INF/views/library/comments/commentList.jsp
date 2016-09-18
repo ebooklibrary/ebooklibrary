@@ -75,12 +75,8 @@
 		
 	}
 </script>
-<table id="qnaCmt" width="600px">
+<table id="qnaCmt" width="650px">
 	<caption>댓글</caption>
-	<colgroup>
-		<col style="10px;" />
-		<col style="250px;" />
-	</colgroup>
 	<tbody>
 		<c:set var="i" value="1" />
 			<c:forEach var="clist" items="${ commentList}">			
@@ -95,7 +91,7 @@
 							</c:if>
 						</c:if>	
 						<c:if test="${clist.selectCmt=='Y' }">
-							<img src="<c:url value='/images/library/qna/selected.png'/>" width="30" >
+							<img src="<c:url value='/images/library/qna/selected.png'/>" width="50" >
 						</c:if>
 					</td>
 					
