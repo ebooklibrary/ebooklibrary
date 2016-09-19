@@ -10,33 +10,93 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/mybook/mybookmain.css" />
 
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
-
+<!-- alert -->
+<!-- ideally at the bottom of the page -->
+<!-- also works in the <head> -->
+<%-- <c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/> --%>
+<script src="<c:url value='/alertify.js-0.3.11/lib/alertify.min.js'/>"></script>
+<!-- include the core styles -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/>" />
+<%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
+<!-- include a theme, can be included into the core instead of 2 separate files -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".mybook").click(function() {
-			alert($(this).find(".mybook1").val());
-		});
-		$(".mybook").click(function() {
-			var bookNo=$(this).find(".mybook1").val();
-			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
-		});
+		
+		/* alert 커스텀 */
+		alertify.set({ labels: {
+			    ok     : "예",
+			    cancel : "아니오"
+			} }); 
+
+		/* 버튼 리버스 (좌우 위치이동) */
+		alertify.set({ buttonReverse: true });
+		
 		$(".purchasedBookDiv").click(function() {
 			var bookNo=$(this).find(".mybook1").val();
-			alert(bookNo);
-			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
-		});
-		$(".rentBookDiv").click(function() {
-			var bookNo=$(this).find(".mybook1").val();
-			alert(bookNo);
-			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
-		});
-		$(".recentMyBook").click(function() {
-			var bookNo=$(this).find(".mybook1").val();
-			alert(bookNo);
 			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
 		});
 		
+		$(".recentMyBook, .rentBookDiv, .mybook").click(function() {
+			var bookNo=$(this).find(".mybook1").val();
+			var bookEnd=$(this).find(".mybookRentEnd").val();
+
+			var today = new Date();
+			var bookEnd = new Date(bookEnd);
+			
+			var bookEnd=$.getDate(bookEnd);
+			var str=bookEnd.split("-"); //2016-09-13
+			var endDate=new Date(str[0],str[1]-1,str[2]);
+			
+			var today=$.getDate(today);
+			var str1=today.split("-"); //2016-09-13
+			var thisDay=new Date(str1[0],str1[1]-1,str1[2]);
+			var period=(endDate-thisDay)/(60*60*24*1000);
+			
+			if (period<1) {
+				alertify.confirm("대여기간이 만료되었습니다. 연장하시겠습니까?", function (e) {
+					if (e) {
+						$(location).attr('href', "<c:url value='/shop/cart/extendBook.do?bookNo="+bookNo+"&userId=${sessionScope.userId}'/>");
+				    } else {
+				    	return false;
+				    }
+				});
+				
+				return false;
+			}else{
+				if (period==4) {
+					alertify.alert("대여기간이 하루 남았습니다.", function (e) {
+					    if (e) {
+							window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+					    }
+					});
+					
+				}else{
+					window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+				}
+				
+			}
+			
+			/* 
+			alertify.alert("", function (e) {
+			    if (e) {
+					window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+			    }
+			});
+			 */
+		});
+		$.getDate=function(date){
+			var str=date.getFullYear()+"-"+$.findDate(date.getMonth()+1)+"-"+$.findDate(date.getDate());
+			return str;
+		}
+		$.findDate=function(d){
+			var res=d;
+			if (d<10) {
+				res="0"+d;
+			}
+			return res;
+		}
 		
 		/* 
 		$(".mybook").hover(function() {
@@ -98,40 +158,6 @@
 		$("#changeBackground").click(function() {
 			$("#upFileBox").toggle();
 		});
-		/* 
-		//책 전체 검색
-		$("#search").keyup(function() {
-			//1 , 해당 아이디가 존재하는 경우
-			//2 , 해당 아이디가 존재하지 않는 경우
-			alert($("#search").val());
-			if (vaildate_userid($("#userid").val()) && $("#userid").val().length>=2) {
-				$.ajax({
-					url:"<c:url value='/member/ajaxCheckUserid.do'/>",
-					type:"GET",
-					data: "bookTitle="+$("#userid").val(),
-					success:function(res){
-						var result="";
-						if (res==1) {
-							result="이미 등록된 아이디";
-							$("#chkId").val("N");
-						}else if(res==2){
-							result="사용 가능한 아이디";
-							$("#chkId").val("Y");
-						}
-						$("#message").html(result);
-						
-					},
-					error:function(xhr, status, error){
-						alert(status+":"+error);
-					}
-				});
-			}else{
-				//유효성 검사를 통과하지 못한 경우
-				$("#message").html("아이디 규칙에 맞지 않습니다.");
-				$("#chkId").val("N");
-			}
-		});
- */
 		
 		/* 책목록 */
 		$("#purchasedBook").click(function() {
@@ -173,7 +199,7 @@
 						var bimg=decodeURIComponent(bimg);
 						var bimg=bimg.replace(Ca, "");
 						
-						alert("${pageContext.request.contextPath }/backimg/"+bimg);
+						/* alert("${pageContext.request.contextPath }/backimg/"+bimg); */
 						
 						$("html").css({"background":"url(${pageContext.request.contextPath }/backimg/"+bimg+")  no-repeat center center fixed",
 							"-webkit-background-size": "cover",
@@ -292,12 +318,13 @@
 	
 		<div id="tempMenu" class="ui-widget-content">
 			<ul class="topnav" id="myTopnav">
-				<li><a href="<c:url value='/index.do'/>">첫페이지</a></li>
-				<li><a href="<c:url value='/library/librarymain.do'/>">도서관</a></li>
 				<c:if test="${!empty sessionScope.userId }">
+				<li><a href="<c:url value='/member/myPage.do'/>">${sessionScope.userId }님</a></li>
+				<li><a href="<c:url value='/member/logout.do'/>">LogOut</a></li>
 				<li><a href="#" id="memoList">쪽지(<span id="memoCount"></span>)</a></li>
 				</c:if>
-				<li><a href="#contact">Contact Us</a></li>
+				<%-- <li><a href="<c:url value='/index.do'/>">첫페이지</a></li> --%>
+				<li><a href="<c:url value='/library/librarymain.do'/>">도서관</a></li>
 			</ul>
 		</div>
 	
@@ -306,6 +333,7 @@
 			<c:forEach var="map" items="${alist }">
 				<div class="recentMyBook">
 					<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }">
+					<input class="mybookRentEnd" type="hidden" value="${map['RENT_END'] }">
 					<img title="${map['TITLE'] }" alt="최근책 책장" src="${pageContext.request.contextPath }/book_upload/${map['COVER_FILE_NAME'] }">
 				</div>
 			</c:forEach>
@@ -352,6 +380,7 @@
 				<div class="mybook">
 					<span>${map["TITLE"] }</span>
 					<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }">
+					<input class="mybookRentEnd" type="hidden" value="${map['RENT_END'] }">
 					<c:if test="${empty map['RENT_END'] }">
 						<div class="mybookColor"></div>
 					</c:if>
@@ -371,6 +400,7 @@
 	    <p>나의 구매책 목록</p>
 	    <br>
 	    <span class="close">닫기</span>
+	    
 	    <!-- 미니창 안의 책목록및검색 -->
 		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 		<table id="myTable">
@@ -414,8 +444,8 @@
 			<c:forEach var="map" items="${alist }">
 				<c:if test="${!empty map['RENT_END'] }">
 					<tr>
-						<td><div class="rentBookDiv">${map["TITLE"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
-						<td><div class="rentBookDiv">${map["PUBLISHER"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
+						<td><div class="rentBookDiv">${map["TITLE"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"><input class="mybookRentEnd" type="hidden" value="${map['RENT_END'] }"></div></td>
+						<td><div class="rentBookDiv">${map["PUBLISHER"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"><input class="mybookRentEnd" type="hidden" value="${map['RENT_END'] }"></div></td>
 						<td><div class="rentBookDiv"><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/><input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
 					</tr>
 				</c:if>

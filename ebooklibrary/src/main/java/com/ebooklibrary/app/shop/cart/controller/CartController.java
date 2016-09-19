@@ -60,6 +60,16 @@ public class CartController {
 		}
 		return cnt;
 	}
+	@RequestMapping("/extendBook")
+	public String extendBook(@ModelAttribute CartVO cartVo,Model model){
+		
+		logger.info("카트담기 cartVo={}",cartVo);
+		cartService.insertCartPd(cartVo);
+		
+		return "redirect:/shop/cart/cartList.do";
+	}
+	
+	
 	
 	@RequestMapping("/updateCart")
 	@ResponseBody
