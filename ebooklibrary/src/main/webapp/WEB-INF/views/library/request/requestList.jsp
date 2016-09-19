@@ -153,7 +153,9 @@
 		<c:if test="${!empty sessionScope.memberNo }">
 			<input type="submit" id="myWriting" value="내글 보기"/>
 		</c:if>
-		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+		<c:if test="${!empty sessionScope.memberNo }">
+			<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+		</c:if>
 		<input type="hidden" id="myWrite" name="myWrite" value="Y">
 	</form>			
 </div>	
