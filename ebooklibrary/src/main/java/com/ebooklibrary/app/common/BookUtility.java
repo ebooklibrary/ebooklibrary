@@ -40,6 +40,7 @@ public class BookUtility {
 	public static final int DIARIES=115;	//일기형식책
 	public static final int SELFHELP=116;	//자기계발서
 	
+	
 	public static final int GUIDE=201;	//가이드
 	public static final int TRAVEL=202;	//여행
 	public static final int RELIGION=203;	//종교책
@@ -55,6 +56,10 @@ public class BookUtility {
 	public static final int ART=213;	//예술책
 	public static final int COOKBOOKS=214;	//요리책
 	public static final int HEALTH=215;	//헬스
+	public static final int CULTURE=216;	//문화
+	public static final int ECONOMIC=217;	//경제
+	
+	
 
 	//책 번호로 책 장르 찾기
 	public String getGenre(int genreNo){
@@ -67,7 +72,7 @@ public class BookUtility {
 		hmap.put(104, "드라마");
 		hmap.put(105, "액션및어드벤처");
 		hmap.put(106, "로맨스");
-		hmap.put(107, "미스터리");
+		hmap.put(107, "미스터리(추리)");
 		hmap.put(108, "시리즈");
 		hmap.put(109, "트릴로지(3부작책)");
 		hmap.put(110, "만화");
@@ -93,6 +98,8 @@ public class BookUtility {
 		hmap.put(213, "예술책");
 		hmap.put(214, "요리책");
 		hmap.put(215, "헬스");
+		hmap.put(216, "문화");
+		hmap.put(217, "경제");
 		
 		//genreNo
 		Iterator<Integer> iter= hmap.keySet().iterator();

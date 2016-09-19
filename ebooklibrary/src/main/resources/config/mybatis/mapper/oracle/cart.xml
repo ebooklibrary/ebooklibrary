@@ -12,8 +12,8 @@
 		<selectKey order="BEFORE" resultType="int" keyProperty="cartNo">
 			select cart_seq.nextval from dual
 		</selectKey>
-		insert into cart(cart_no,user_id,book_no,rent_date)
-		values(#{cartNo},#{userId},#{bookNo},#{rentDate})
+		insert into cart(cart_no,user_id,book_no,rent_date,price)
+		values(#{cartNo},#{userId},#{bookNo},#{rentDate},#{price})
 	</insert>	
 	
 	<select id="selectCartView" parameterType="String" resultType="map">
