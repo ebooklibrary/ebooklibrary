@@ -6,7 +6,8 @@
 <%@ include file="libraryTop.jsp" %>
 
 <%@include file="mainInclude/m_search.jsp" %>
-<%@include file="mainInclude/month_book.jsp" %>
+<c:import url="/event/mainEvent.do"></c:import>
+<%-- <%@include file="mainInclude/month_book.jsp" %> --%>
 <%@include file="mainInclude/mybook.jsp" %>
 <c:import url="/library/notice/mainNotice.do"></c:import>
 
