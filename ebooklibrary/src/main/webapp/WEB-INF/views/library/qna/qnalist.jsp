@@ -7,6 +7,7 @@
 <%@include file="../libraryTop.jsp" %>
 <script type="text/javascript">
 	$().ready(function(){
+		$("#qnaDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 		
 		$("#writeGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/qna/qnaWrite.do'/>");
@@ -23,9 +24,8 @@
 	}	
 
 </script>
-<form name="frmPage" method="post" 
-<input type="hidden" value="${sessionScope.memberNo }"/>
-	action="<c:url value='/library/qna/qnaList.do'/>">
+<form name="frmPage" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
+<input type="hidden" value="${sessionScope.memberNo }"/>	
 	<input type="hidden" name="currentPage">
 	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
 	<input type="hidden" id="myWrite" name="myWrite" value="${param.myWrite }">
@@ -42,7 +42,8 @@
 	</h2>
 </div>
 <div id="notice_banner">
-	<a href="<c:url value='/library/qna/qnaList.do'/>"><img
+	<a href="<c:url value='/library/qna/qnaList.do'/>">
+	<img
 		alt="qna 배너"
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
 		width="200px" height="50px"></a>
@@ -52,6 +53,7 @@
 <div id="notice_body">	
 	   	<form name="frmSearch" id="searchbox2" method="post" 
 	   		action="<c:url value='/library/qna/qnaList.do' />" >
+	   		
 	        <div class="searchbox3">
 	        <select name="searchCondition">
 	            <option value="title"
@@ -152,7 +154,9 @@
 	<form id="myWrite" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
 		<input type="button" id="listGo" value="전체목록"/>
 		<input type="button" id="writeGo" value="글쓰기"/>
-		<input type="submit" id="myWriting" value="내글 보기"/>
+		<c:if test="${!empty sessionScope.memberNo }">
+			<input type="submit" id="myWriting" value="내글 보기"/>
+		</c:if>
 		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
 		<input type="hidden" id="myWrite" name="myWrite" value="Y">
 	</form>			

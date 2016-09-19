@@ -50,17 +50,17 @@
 
 #qnaCmt td:nth-child(n){
 	width:100px;
-
+	height:30px;
 }
 #qnaCmt td:nth-child(2n){
 	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
+	border-bottom: 3px solid gray;
 	width:250px;
 }
 #qnaCmt td:nth-child(3n){
 	text-align:right;
 	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
+	border-bottom: 3px solid gray;
 	width:250px;
 }
 #content{

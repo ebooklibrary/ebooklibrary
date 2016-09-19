@@ -83,7 +83,7 @@
 				<tr>
 					<td style="text-align:right">
 						<c:if test="${param.complete!='Y' }">
-							<c:if test="${sessionScope.memberNo==param.memberNo }">
+							<c:if test="${sessionScope.memberNo==param.memberNo &&  param.memberNo!=clist.memberNo}">
 							<form>
 								
 								<input type="button" id="selectAnswer" onclick="complete(${param.qnaNo},${clist.commentNo })" value="답변채택" >
@@ -106,7 +106,9 @@
 						
 					<td>
 						<fmt:formatDate value="${clist.regDate }" pattern="MM/dd hh:mm:ss"/> 
-						<input type="button" onclick="reVisi(${i})" value="덧글쓰기">
+						
+							<input type="button" onclick="reVisi(${i})" value="덧글쓰기">
+						
 					</td>
 				</tr>
 				<tr >

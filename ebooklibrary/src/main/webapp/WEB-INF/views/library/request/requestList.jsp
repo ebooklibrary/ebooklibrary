@@ -7,6 +7,8 @@
 <%@include file="../libraryTop.jsp" %>
 <script type="text/javascript">
 	$().ready(function(){
+		$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
+		
 		$("#writeGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/request/requestWrite.do'/>");
 		});
@@ -46,13 +48,13 @@
 <div id="notice_head">
 	<h2>
 		<img alt="qna"
-			src="${pageContext.request.contextPath }/images/library/qna/qnaboard.png" width="200px" height="50px">
+			src="${pageContext.request.contextPath }/images/library/request/request.png" width="200px" height="50px">
 	</h2>
 </div>
 <div id="notice_banner">
 	<a href="<c:url value='/library/request/requestList.do'/>"><img
 		alt="request 배너"
-		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
+		src="${pageContext.request.contextPath}/images/library/request/banner2.png"
 		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
@@ -147,8 +149,10 @@
 <div class="bticons">
 	<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
 		<input type="button" id="listGo" value="전체목록"/>
-		<input type="button" id="writeGo" value="글쓰실?"/>
-		<input type="submit" id="myWriting" value="내글 보기"/>
+		<input type="button" id="writeGo" value="글쓰기"/>
+		<c:if test="${!empty sessionScope.memberNo }">
+			<input type="submit" id="myWriting" value="내글 보기"/>
+		</c:if>
 		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
 		<input type="hidden" id="myWrite" name="myWrite" value="Y">
 	</form>			
