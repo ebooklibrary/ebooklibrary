@@ -1,7 +1,9 @@
 @CHARSET "UTF-8";
 /* qnaList */
 .bticons{
+	
 	text-align:right;
+	padding-top:20px;
 	margin-right:70px;
 }
 /* qnaWrite */
@@ -75,3 +77,11 @@
 	padding:20px;
 	margin-left:140px;
 }
+.searchbox3{
+	both:clear;
+	width:660px;
+	text-align:right;
+	margin-top:20px;
+	margin-right:100px;
+	
+} 

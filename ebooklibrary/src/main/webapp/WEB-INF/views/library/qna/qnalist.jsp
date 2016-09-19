@@ -50,10 +50,9 @@
 <!-- 광고 -->
 <%@include file="../libraryAd.jsp"%>
 <div id="notice_body">	
-	<div class="searchbox">
-	   	<form name="frmSearch" id="search" method="post" 
+	   	<form name="frmSearch" id="searchbox2" method="post" 
 	   		action="<c:url value='/library/qna/qnaList.do' />" >
-	        <div class="searchbox">
+	        <div class="searchbox3">
 	        <select name="searchCondition">
 	            <option value="title"
 	           	   <c:if test="${param.searchCondition=='title'}">
@@ -74,8 +73,8 @@
 	        <input type="text" name="searchKeyword" 
 	        	title="검색어 입력" value="${param.searchKeyword}" >   
 			<input type="submit" value="검색">
+			</div>
 	    </form>
-	</div>
 	<div class="list">
 	<table
 	 	summary="질문게시판에 관한 표로써, 글번호, 제목, 작성자, 작성일, 조회수, 답변완료에 대한 정보를 제공합니다.">

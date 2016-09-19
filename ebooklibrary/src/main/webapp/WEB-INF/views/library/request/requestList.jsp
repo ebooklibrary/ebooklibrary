@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/qna.css" />
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/request.css" />
 <%@include file="../libraryTop.jsp" %>
 <script type="text/javascript">
 	$().ready(function(){
@@ -30,6 +31,8 @@
 	}	
 
 </script>
+
+
 <form name="frmPage" method="post" 
 	action="<c:url value='/library/qna/qnaList.do'/>">
 	<input type="hidden" name="currentPage">
@@ -39,9 +42,44 @@
 	<input type="hidden" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
 	
 </form>
-<h1>요청게시판 입니다</h1>
+<!-- request 리스트 화면 -->
+<div id="notice_head">
+	<h2>
+		<img alt="qna"
+			src="${pageContext.request.contextPath }/images/library/qna/qnaboard.png" width="200px" height="50px">
+	</h2>
+</div>
+<div id="notice_banner">
+	<a href="<c:url value='/library/request/requestList.do'/>"><img
+		alt="request 배너"
+		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
+		width="200px" height="50px"></a>
+</div>
+<!-- 광고 -->
+<%@include file="../libraryAd.jsp"%>
+
 <div id="notice_body">
-	<table class="list"
+	<div class="searchbox">
+		<form name="frmSearch" method="post"
+			action="<c:url value='/library/request/requestList.do' />">
+			<div class="search_box" >
+				<select name="searchCondition">
+					<option value="title"
+						<c:if test="${param.searchCondition=='title'}">
+		            		selected
+		               </c:if>>책제목</option>			
+					<option value="username"
+						<c:if test="${param.searchCondition=='username'}">
+		            		selected
+		               </c:if>>작성자</option>
+				</select> <input type="text" name="searchKeyword" title="검색어 입력"
+					value="${param.searchKeyword}"> <input type="submit"
+					value="검색">
+			</div>
+		</form>
+	</div>
+	<div class="list">
+	<table 
 		summary="요청게시판에 관한 표로써, 글번호, 제목, 작성자, 작성일, , 처리여부에 대한 정보를 제공합니다.">
 		<caption>request</caption>
 		<colgroup>
@@ -106,6 +144,16 @@
 			</c:if>
 		</tbody>
 	</table>
+<div class="bticons">
+	<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
+		<input type="button" id="listGo" value="전체목록"/>
+		<input type="button" id="writeGo" value="글쓰실?"/>
+		<input type="submit" id="myWriting" value="내글 보기"/>
+		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+		<input type="hidden" id="myWrite" name="myWrite" value="Y">
+	</form>			
+</div>	
+	</div>
 	<!-- 페이징 처리를 위한 div -->
 	<div class="divPage">
 		<!-- 이전 블럭으로 이동 -->
@@ -135,33 +183,9 @@
 			</a>
 		</c:if>
 	</div>
-<div class="align_left">
-	<input type="button" id="listGo" value="전체목록"/>
-	<input type="button" id="writeGo" value="글쓰실?"/>
-	<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
-		<input type="submit" id="myWriting" value="내글 보기"/>
-		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
-		<input type="hidden" id="myWrite" name="myWrite" value="Y">
-	</form>			
-</div>
+
 
 </div>
 
-<div class="divSearch">
-	<form name="frmSearch" method="post"
-		action="<c:url value='/library/request/requestList.do' />">
-		<select name="searchCondition">
-			<option value="title"
-				<c:if test="${param.searchCondition=='title'}">
-            		selected
-               </c:if>>책제목</option>			
-			<option value="username"
-				<c:if test="${param.searchCondition=='username'}">
-            		selected
-               </c:if>>작성자</option>
-		</select> <input type="text" name="searchKeyword" title="검색어 입력"
-			value="${param.searchKeyword}"> <input type="submit"
-			value="검색">
-	</form>
-</div>
+
 <%@include file="../libraryBottom.jsp" %>
