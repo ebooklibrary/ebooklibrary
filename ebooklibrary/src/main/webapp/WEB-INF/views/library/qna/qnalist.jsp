@@ -27,7 +27,10 @@
 <form name="frmPage" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
 <input type="hidden" value="${sessionScope.memberNo }"/>	
 	<input type="hidden" name="currentPage">
-	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+	<c:if test="${!empty sessionScope.memberNo }">
+	
+		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+	</c:if>
 	<input type="hidden" id="myWrite" name="myWrite" value="${param.myWrite }">
 	<input type="hidden" id="myWrite" name="searchCondition" value="${param.searchCondition }">
 	<input type="hidden" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
