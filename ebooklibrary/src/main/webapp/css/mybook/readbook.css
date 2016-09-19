@@ -1,5 +1,21 @@
 @CHARSET "UTF-8";
 
+#titleP{
+	padding: 10px 80px 20px 100px;
+	font-size: 1.4em;
+	/* font-family:monospace,monospace; */
+	font-family:Verdana,sans-serif;
+}
+#titleP span:nth-of-type(1){
+	padding-right: 5px;
+	border-bottom: 1px solid gray;
+}
+#titleP span:nth-of-type(2){
+	float: right;
+	border-bottom: 1px solid pink;
+	font-size: 0.8em;
+}
+
 #wrapper{
 	margin: 0 auto;
 	border: 1px solid black;

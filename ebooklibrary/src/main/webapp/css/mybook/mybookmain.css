@@ -22,17 +22,6 @@ html {
 	/* border: 1px solid red; */
 	position: relative;
 }
-/* #exBookDiv{
-	position: absolute;
-	display: none;
-	border: 1px solid black;
-	width: 500px;
-	height: 1000px;
-	z-index: 1;
-	
-	top:20%;
-	right: 20%;
-} */
 
 /* 책 관련 메뉴 */
 #menuDiv{

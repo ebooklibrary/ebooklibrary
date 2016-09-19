@@ -81,11 +81,11 @@ public class MybooksController {
 			bookFileName = myBookVo.getBookFileName();
 			upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
 			
+			model.addAttribute("title", myBookVo.getTitle());
 		}
 		List<String> alist=bu.getBook(bookFileName, upPath);
         
         model.addAttribute("alist", alist);
-		//model.addAttribute("str", str);
 		
 		//return "mybooks/mybook";
 	}
