@@ -160,6 +160,10 @@
 		});
 		 */
 		
+		 $("#bookTitleP, #bookListDiv img").click(function() {
+			 $(location).attr('href', '<c:url value='/admin/book/bookDetail.do'/>');
+		});
+		 
 		
 	}); //ready
 	
@@ -315,6 +319,7 @@
 		</div>
 		
 	</div>
+	
 	<!-- 사이드 장바구니 -->
 	<c:if test="${sessionScope.auchCode!='ADMIN' }">	
 		<div id="cartDiv">
