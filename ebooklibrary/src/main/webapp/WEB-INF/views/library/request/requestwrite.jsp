@@ -32,7 +32,8 @@ $().ready(function(){
 		<fieldset>
 			<legend>요청게시판 글쓰기</legend>
 				<div class="">
-					<label>${sesssionScope.userName }</label>
+					<label>작성자</label>
+					<input type="text" name="userName" id="userName" value="${sesssionScope.userName }" >
 				</div>
 				<div class="">
 					<label for="title">책제목</label>
