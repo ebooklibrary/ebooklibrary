@@ -90,7 +90,6 @@ $(function() {
 		 
 		$(this).parent().parent().parent().find(".rentPriceP").hide();
 		$(this).parent().parent().parent().find(".buyPriceP").show();
-		
 	});
 		
 	$(".rentSpan").click(function() {
@@ -121,13 +120,28 @@ $(function() {
 			data: "cartNo="+$(this).parent().find(".cartNo").val()+"&rentDate="+$(this).parent().find(".rentDate").val(),
 			/* data: $(this).serializeArray(), */
 			success:function(res){
-				
+				/* location.reload(); */
+				$(location).attr('href', '<c:url value='/shop/cart/cartList.do'/>');
 			},
 			error:function(xhr, status, error){
 				alertify.alert(status+":"+error);
 			}
 		});
 	});
+	$(".buySpan").click(function() {
+		$.ajax({
+			url:"<c:url value='/shop/cart/updateCart.do'/>",
+			type:"POST",
+			data: "cartNo="+$(this).parent().parent().parent().find(".cartNo").val()+"&rentDate=0",
+			success:function(res){
+				$(location).attr('href', '<c:url value='/shop/cart/cartList.do'/>');
+			},
+			error:function(xhr, status, error){
+				alertify.alert(status+":"+error);
+			}
+		});
+	});
+	
 	
 	$(".deleteP").click(function() {
 		$.ajax({
@@ -225,8 +239,11 @@ function numberWithCommas(x) {
 					<c:if test="${!empty map['RENT_DATE'] }">
 						<c:set var="rentSum" value="${map['RENT_DATE']*100 }" />
 					</c:if>
-					
-					<c:set var="sum" value="${map['SELLPRICE']*map['QUANTITY'] }" />
+					<%-- 
+					<c:if test="${!empty map['RENT_DATE'] && map['RENT_DATE']!=0 }">
+						<c:set var="sum" value="${map['SELLPRICE']*map['QUANTITY'] }" />
+					</c:if>
+					 --%>
 					<tr>
 						<td>
 							<img alt="${map['TITLE']}" src="<c:url value='/book_upload/${map["COVER_FILE_NAME"] }'/>" width="50" align="absmiddle">
@@ -289,7 +306,12 @@ function numberWithCommas(x) {
 					
 					</tr>
 					<!-- 장바구니 상품 가격들 -->
-					<c:set var="totalPrice" value="${totalPrice+map['PRICE'] }" />
+					<c:if test="${!empty map['RENT_DATE'] && map['RENT_DATE']!=0 }">
+						<c:set var="totalPrice" value="${totalPrice+rentSum }" />
+					</c:if>
+					<c:if test="${empty map['RENT_DATE'] || map['RENT_DATE']==0 }">
+						<c:set var="totalPrice" value="${totalPrice+map['PRICE'] }" />
+					</c:if>
 				</c:forEach>
 				
 				
