@@ -9,3 +9,19 @@
 	margin-top:20px;
 	margin-right:70px;
 }
+.requestbt{
+	background-color: rgba(194,203,248, 0.7);
+	margin-top:15px;
+	border-radius: 5px;
+	pading-right:10px;
+	width:74px;
+	height:30px;
+	white-space: nowrap;
+}
+#ReqWrite_body {
+	float: right;
+	width:600px;
+	height: 800px;
+	overflow: hidden;
+	margin-right: 100px;
+}

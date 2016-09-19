@@ -2,14 +2,37 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../libraryTop.jsp" %>
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/request.css" />
+<script type="text/javascript">
+$().ready(function(){
+	$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
+	$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
+});
+</script>
+<!-- request 리스트 화면 -->
+<div id="notice_head">
+	<h2>
+		<img alt="qna"
+			src="${pageContext.request.contextPath }/images/library/request/request.png" style="width: 150px;">
+	</h2>
+</div>
+<div id="notice_banner">
+	<a href="<c:url value='/library/request/requestList.do'/>"><img
+		alt="request 배너"
+		src="${pageContext.request.contextPath}/images/library/request/banner2.png"
+		width="200px" height="50px"></a>
+</div>
+<!-- 광고 -->
+<%@include file="../libraryAd.jsp"%>
 
-<div>
+
+<div id="ReqWrite_body">
 	<form name="frmWrite" id="frmWrite" method="post" 			
 		action="<c:url value='/library/request/requestWrite.do'/>" >
 		<fieldset>
 			<legend>요청게시판 글쓰기</legend>
 				<div class="">
-					<label>아이디</label><label>레벨체크</label>
+					<label>${sesssionScope.userName }</label>
 				</div>
 				<div class="">
 					<label for="title">책제목</label>

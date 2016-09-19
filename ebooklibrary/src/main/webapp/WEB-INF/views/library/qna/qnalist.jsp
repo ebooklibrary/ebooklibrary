@@ -58,7 +58,7 @@
 	   		action="<c:url value='/library/qna/qnaList.do' />" >
 	   		
 	        <div class="searchbox3">
-	        <select name="searchCondition" id="selectCdt">
+	        <select name="searchCondition"  class="searchCondition">
 	            <option value="title"
 	           	   <c:if test="${param.searchCondition=='title'}">
 	            		selected
@@ -76,8 +76,8 @@
 	            >작성자</option>
 	        </select>   
 	        <input type="text" name="searchKeyword" 
-	        	title="검색어 입력" value="${param.searchKeyword}" >   
-			<input type="submit" value="검색">
+	        	title="검색어 입력" value="${param.searchKeyword}" class="searchCondition">   
+			<input type="submit" value="검색" id="searchInfo2">
 			</div>
 	    </form>
 	<div class="list">
@@ -155,10 +155,10 @@
 </div>	   
 <div class="bticons">
 	<form id="myWrite" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
-		<input type="button" id="listGo" value="전체목록"/>
-		<input type="button" id="writeGo" value="글쓰기"/>
+		<input type="button" id="listGo" value="전체목록" class="qnabt"/>
+		<input type="button" id="writeGo" value="글쓰기" class="qnabt"/>
 		<c:if test="${!empty sessionScope.memberNo }">
-			<input type="submit" id="myWriting" value="내글 보기"/>
+			<input type="submit" id="myWriting" value="내글 보기" class="qnabt"/>
 		</c:if>
 		<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
 		<input type="hidden" id="myWrite" name="myWrite" value="Y">
