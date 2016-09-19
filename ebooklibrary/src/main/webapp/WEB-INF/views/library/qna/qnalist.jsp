@@ -58,7 +58,7 @@
 	   		action="<c:url value='/library/qna/qnaList.do' />" >
 	   		
 	        <div class="searchbox3">
-	        <select name="searchCondition">
+	        <select name="searchCondition" id="selectCdt">
 	            <option value="title"
 	           	   <c:if test="${param.searchCondition=='title'}">
 	            		selected

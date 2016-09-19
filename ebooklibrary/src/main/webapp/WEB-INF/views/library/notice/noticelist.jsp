@@ -52,18 +52,20 @@ $(document).ready(function(){
 <%@include file="../libraryAd.jsp"%>
 <div id="notice_body">
 	<div class="list">
-		<div class="searchbox">
+		
 			<form name="search" id="search"
 				action="<c:url value='/library/notice/noticelist.do'/>">
+				<div id="search2">
 				<select name="searchCondition">
 					<option value="title">제목</option>
 					<option value="writer">글쓴이</option>
 					<option value="content">내용</option>
 				</select> <input type="text" name="searchKeyword"> <input
 					type="submit" value="검색">
+				</div>
 			</form>
-		</div>
-		<div></div>
+		
+		
 		<div id="notice_table">
 			<table>
 				<colgroup>

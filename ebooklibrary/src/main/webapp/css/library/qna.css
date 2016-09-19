@@ -37,6 +37,18 @@
 	margin-right:125px;
 	padding:3px;
 }
+#selectCdt{
+	height:19px;
+}
+
+.searchbox3{
+	both:clear;
+	width:660px;
+	text-align:right;
+	margin-top:20px;
+	margin-right:100px;
+	
+} 
 /* qnadeletePage */
 
 /* qnaComment */
@@ -77,11 +89,3 @@
 	padding:20px;
 	margin-left:140px;
 }
-.searchbox3{
-	both:clear;
-	width:660px;
-	text-align:right;
-	margin-top:20px;
-	margin-right:100px;
-	
-} 

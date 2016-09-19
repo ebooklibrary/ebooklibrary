@@ -43,9 +43,9 @@
 	margin-left: 20px;
 }
 
-#search {
+/* #search {
 	margin-left: 478px;
-}
+} */
 
 
 
@@ -67,6 +67,15 @@
 .list, .write, .view {
 	width: 100%;
 }
+
+#search2{
+	
+	width:90%;
+	text-align:right;
+/* 	margin-right:10px; */
+	
+}
+
 
 .list .searchbox {
 	clear: both;
