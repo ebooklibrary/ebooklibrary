@@ -72,31 +72,28 @@
 
 #qnaCmt{
 	padding:70px;
-	margin-right:400px;
+	 
 	margin-bottom:10px;
-	/* font-size: 1.3em; */
+	
+	text-align:center;
+	white-space: nowrap;
+	width:90%;
+	
+}
+#qnaCmt td{
+	height:25px;
+}
+#qnaCmt .cmtTr_1{
+	white-space: nowrap
+	
 }
 
-#qnaCmt td:nth-child(n){
-	width:100px;
-	height:30px;
-}
-#qnaCmt td:nth-child(2n){
-	border-top: 1px solid gray;
-	border-bottom: 3px solid gray;
-	width:250px;
-}
-#qnaCmt td:nth-child(3n){
-	text-align:right;
-	border-top: 1px solid gray;
-	border-bottom: 3px solid gray;
-	width:250px;
-}
+
 #content{
 	/* text-align:center; */
 	margin-left: 10px;
 }
-#replyLb{
+.replyLb{
 	margin-left: 120px;
 	
 }
@@ -105,4 +102,35 @@
 	width:500px;
 	padding:20px;
 	margin-left:140px;
+	margin-top:40px;
+}
+.recmt{
+	width:300px;
+	padding:10px;
+}
+
+
+.cmt_td1{
+	text-align:right;
+	white-space: nowrap
+}
+.cmt_td2{
+	text-align:left;
+	border-top:1px solid black;
+	border-bottom:1px solid black;
+	white-space: nowrap
+}
+.cmt_td3{
+	text-align:center;
+	border-top:1px solid black;
+	white-space: nowrap
+}
+.cmt_td4{
+	text-align:center;
+	border-bottom:1px solid black;
+	white-space: nowrap
+}
+.cmt_td5{
+	width:300px;
+	padding:10px;
 }

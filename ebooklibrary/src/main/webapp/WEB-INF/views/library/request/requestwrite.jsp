@@ -7,6 +7,22 @@
 $().ready(function(){
 	$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 	$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
+	
+	$("#frmWrite").submit(function(){
+		if($("#title").val().length<1){
+			alert("책제목을 입력하세요");				
+			$("#title").focus();
+			return false;
+		}else if($("#writer").val().length<1){
+			alert("저자를 입력하세요");				
+			$("#title").focus();
+			return false;
+		}else if($("#publisher").val().length<1){
+			alert("출판사를 입력하세요");				
+			$("#title").focus();
+			return false;
+		}	
+	});
 });
 </script>
 <!-- request 리스트 화면 -->
@@ -26,39 +42,28 @@ $().ready(function(){
 <%@include file="../libraryAd.jsp"%>
 
 
-<div id="ReqWrite_body">
+<div id="ReqWrite_body" class="FormRequest">
 	<form name="frmWrite" id="frmWrite" method="post" 			
 		action="<c:url value='/library/request/requestWrite.do'/>" >
 		<fieldset>
-			<legend>요청게시판 글쓰기</legend>
-				<div class="">
-					<label>작성자</label>
-					<input type="text" name="userName" id="userName" value="${sesssionScope.userName }" >
-				</div>
-				<div class="">
-					<label for="title">책제목</label>
-					<input type="text" id="title" name="title" />
-				</div>
-				<div >
-					<label for="writer">저자</label>
-					<input type="text" id="writer" name="writer">
-				</div>
-		        <div>
-		       		<label for="publisher">출판사</label>
-					<input type="text" id="publisher" name="publisher">
-		        </div>
-		        <div>
-		        	<input type="text" name="memberNo" value="${sessionScope.memberNo }">
-		        </div>
-		        <div>
-		        	<input type="text" name="userName" value="${sessionScope.userName }">
-		        </div>
-		        
-		        <div>
-		        	<input type="submit" value="작성완료"/>
-		        	<input type="Button" value="글 목록"
-		        	onclick="location.href='<c:url value="/library/request/requestList.do"/>';" />
-		        </div>
+			<legend>책 요청하기</legend>
+	        	<input type="hidden" name="memberNo" value="${sessionScope.memberNo }">
+				<input type="hidden" name="userName" id="userName" value="${sessionScope.userName }" readonly="readonly">
+				<br>
+				<label for="title">책제목</label>
+				<input type="text" class="inputText" id="title" name="title" />
+				<br>
+				<label for="writer">저  자</label>
+				&nbsp;&nbsp;<input type="text" class="inputText" id="writer" name="writer" />
+	       		<br>
+	       		<label for="publisher">출판사</label>
+				<input type="text" class="inputText" id="publisher" name="publisher">
+	        	<br>
+	        	<div id="request_align_right">
+	        		<input type="Button" value="글 목록" class="requestbt"
+	        		onclick="location.href='<c:url value="/library/request/requestList.do"/>';" />
+	        		<input type="submit" value="작성완료" class="requestbt"/>
+	        	</div>
 		</fieldset>
 	</form>
 </div>

@@ -9,13 +9,16 @@
 	$().ready(function(){
 		$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 		
+		$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
+
 		$("#writeGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/request/requestWrite.do'/>");
 		});
+
+		
 		$("#listGo").click(function(){
 			$(location).attr('href',"<c:url value='/library/request/requestList.do'/>");
 		});
-		$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
 		
 		$("#stock").click(function(){
 			if(confirm("입고처리하시겠습니까?")){
@@ -24,13 +27,24 @@
 				return false;
 			}
 		});
+		$("#deleteRequest").click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				return true;
+			}else{
+				return false;
+			}
+		});
+		
 		
 	});
 	
 	function pageFunc(curPage){
 		document.frmPage.currentPage.value=curPage;
 		frmPage.submit();
-	}	
+	}
+	function requestEdit(requNo){
+		href.location("<c:url value='/library/request/requestEdit.do'/>");
+	}
 
 </script>
 
@@ -60,7 +74,7 @@
 <!-- 광고 -->
 <%@include file="../libraryAd.jsp"%>
 
-<div id="notice_body">
+<div id="request_body">
 	<div class="searchbox">
 		<form name="frmSearch" method="post"
 			action="<c:url value='/library/request/requestList.do' />">
@@ -81,17 +95,21 @@
 		</form>
 	</div>
 	<div class="list">
-	<table 
+	<table id="requestList"
 		summary="요청게시판에 관한 표로써, 글번호, 제목, 작성자, 작성일, , 처리여부에 대한 정보를 제공합니다.">
 		<caption>request</caption>
 		<colgroup>
+			<col style="width: 6%;" />
+			<col style="width: 15%;" />
+			<col style="width: 22%;" />
+			<col style="width: 8%;" />
+			<col style="width: 12%;" />
 			<col style="width: 10%;" />
 			<col style="width: 15%;" />
-			<col style="width: 15%;" />
-			<col style="width: 10%;" />
-			<col style="width: 15%;" />
-			<col style="width: 10%;" />
-			<col style="width: 15%;" />
+			<col style="width: 7%;" />
+			<col style="width: 7%;" />
+			
+			
 		</colgroup>
 		<thead>
 			<tr>
@@ -102,6 +120,7 @@
 				<th scope="col">출판사</th>
 				<th scope="col">작성자</th>
 				<th scope="col">작성일</th>
+				<th scope="col" colspan="2">비고</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -121,9 +140,8 @@
 							</c:if>
 							<c:if test="${vo.stocked=='N' }">
 								<c:if test="${sessionScope.auchCode=='ADMIN' }">
-									<form id="request_stock" method="post" action="<c:url value='/library/request/requestStock.do?requestNo=${vo.requestNo }'/>">
-										<input type="submit" id="stock" value="입고">
-										입고요청							
+									<form id="request_stock" method="post" action="<c:url value='/library/request/requestStock.do?requestNo=${vo.requestNo }'/>" >
+										<input type="submit" id="stock" value="입고하기">
 									</form>
 								</c:if>
 								<c:if test="${sessionScope.auchCode=='USER' }">
@@ -137,8 +155,28 @@
 						<td>${vo.writer }</td>
 						<td>${vo.publisher }</td>
 						<td>${vo.userName }</td>
-						<td style="text-align: center;"><fmt:formatDate	value="${vo.regdate }" pattern="MM/dd  HH:mm:ss" /></td>
-								
+						<td style="text-align: center;"><fmt:formatDate	value="${vo.regdate }" pattern="MM/dd" /></td>
+						<td > 
+							<c:if test="${vo.stocked=='N' }">
+								<c:if test="${sessionScope.memberNo==vo.memberNo }">
+									<form name="frmEdit" method="GET"
+											action="<c:url value='/library/request/requestEdit.do' />">
+											<input type="hidden" value="${vo.requestNo }" name="requestNo"/>
+										<input type="submit"   value="수정"/>
+									</form>
+								</c:if>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${vo.stocked=='N' }">
+								<c:if test="${sessionScope.memberNo==vo.memberNo }">
+									<form name="frmDelete" method="post"
+											action="<c:url value='/library/request/requestDelete.do?requestNo=${vo.requestNo }' />">
+										<input type="submit" id="deleteRequest" value="삭제"/>
+									</form>
+								</c:if>
+							</c:if>
+						</td>		
 					</tr>
 
 				</c:forEach>

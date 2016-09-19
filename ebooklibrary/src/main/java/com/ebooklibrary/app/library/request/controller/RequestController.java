@@ -14,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.PaginationInfo;
-import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
-import com.ebooklibrary.app.library.qna.controller.QnAController;
-import com.ebooklibrary.app.library.qna.model.QnaBoardService;
-import com.ebooklibrary.app.library.qna.model.QnaBoardVO;
+
 import com.ebooklibrary.app.library.request.model.RequestDAO;
 import com.ebooklibrary.app.library.request.model.RequestService;
 import com.ebooklibrary.app.library.request.model.RequestVO;
@@ -28,7 +25,7 @@ import com.ebooklibrary.app.library.request.model.RequestVO;
 public class RequestController {
 	
 	private static final Logger logger
-	= LoggerFactory.getLogger(QnAController.class);
+	= LoggerFactory.getLogger(RequestController.class);
 	
 	@Autowired
 	private RequestService requestService;
@@ -93,28 +90,14 @@ public class RequestController {
 		
 	}
 	
-	@RequestMapping("/requestDetail.do") 
-	public String QnaBoardDetail(@RequestParam(defaultValue="0") 
-	int requestNo,Model model){
-		logger.info("디테일 페이지 접속 입력값  QnaNo={}", requestNo);
-		
-		RequestVO vo = requestService.selectByNoRequest(requestNo);
-		
-		logger.info("결과값은 qnaBoardVo={}",vo);
-		
-		model.addAttribute("requestVo",vo);
-		
-		return "library/request/requestDetail";
-		
-	}
 	
 	@RequestMapping(value="/requestEdit.do",method=RequestMethod.GET)
-	public String QnaBoardEdit(@RequestParam(defaultValue="0") int requestNo,Model model){
-		logger.info("수정 페이지 접속 파라미터 입력값 qnaNo={}",requestNo);
+	public String QnaBoardEdit(@RequestParam int requestNo,Model model){
+		logger.info("request 수정 페이지 접속 파라미터 입력값 requestNo={}",requestNo);
 		
 		RequestVO vo = requestService.selectByNoRequest(requestNo);
 		
-		logger.info("수정페이지 입력 파라미터값 qnaBoardVo={}",vo);
+		logger.info("request 수정페이지 입력 파라미터값 vo={}",vo);
 		
 		model.addAttribute("requestVo",vo);		
 		
@@ -127,18 +110,19 @@ public class RequestController {
 			Model model){
 		
 		//1.
-		logger.info("수정 페이지 수정처리 파라미터 vo={}",vo);
+		logger.info("request 수정 페이지 수정처리 파라미터 vo={}",vo);
 		
 		//2.
 		int cnt = requestService.editRequest(vo);
 		logger.info("결과값 cnt={}",cnt);
 		
-		String msg="",url="/library/request/requestEdit.do?requestNo="+vo.getRequestNo();
+		String msg="",url="/library/request/requestList.do";
 		if(cnt>0){
 			msg="글 수정 성공";
-			url="/library/request/requestDetail.do?requestNo="+vo.getRequestNo();
+			
 		}else{
 			msg="글 수정 실패";
+			
 		}
 		
 		//3.
@@ -148,20 +132,7 @@ public class RequestController {
 		return "common/message";
 	}
 	
-	@RequestMapping(value="/requestDelete.do",method=RequestMethod.GET)
-	public String QnaBoardDelete(@RequestParam(defaultValue="0") int requestNo){
-		//1.
-		
-		
-		logger.info("삭제 페이지 보여주기");
-		
-		//2.
-		
-		
-		//3.
-		
-		return "library/request/requestDelete";
-	}
+
 	
 	@RequestMapping(value="/requestDelete.do",method=RequestMethod.POST)
 	public String QnaBoardDelete(@RequestParam(defaultValue="0") int requestNo
@@ -174,10 +145,10 @@ public class RequestController {
 		int cnt = requestService.deleteRequest(requestNo);
 		logger.info("삭제 결과처리값 cnt={}",cnt);	
 		
-		String msg="",url="/library/request/requestDetail.do?requestNo="+requestNo;
+		String msg="",url="/library/request/requestList.do";
 		if(cnt>0){
 			msg="삭제 되었습니다.";
-			url="/library/request/requestList.do";
+			
 		}else{
 			msg="삭제에 실패했습니다.";
 		}
