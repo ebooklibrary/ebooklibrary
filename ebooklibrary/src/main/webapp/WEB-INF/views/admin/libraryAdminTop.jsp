@@ -38,7 +38,7 @@
 			<div class="menuFlagColor" id="memDivColor"></div>
 		</div>
 		<div class="menuform">
-			<a style="margin: 2px 0 0 2px;" href="<c:url value='/library/notice/noticelist.do'/>">책 목록<br>/이벤트 등록</a>
+			<a style="margin: 2px 0 0 2px;" href="<c:url value='/admin/book/bookList.do'/>">책 목록</a>
 			<div class="menuFlagColor" id="bookListDivColor"></div>
 		</div>
 	</div>
@@ -61,7 +61,7 @@
             <li class="first">
             <a href="<c:url value='/index.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
-            첫화면
+            관리자 페이지
             </a></li>			
 			<c:if test="${!empty sessionScope.userId }">
 				<li>
@@ -71,9 +71,9 @@
 				</a></li>				
 	            <c:if test="${sessionScope.auchCode=='ADMIN' }">
 	            <li>
-	            <a href="<c:url value='/admin/adminMain.do'/>">
+	            <a href="<c:url value='/library/librarymain.do'/>">
 	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
-	            관리자 페이지가기
+	            도서관 페이지
 	            </a>
 	            </li>
 	            </c:if>         

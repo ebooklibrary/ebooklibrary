@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface EventDAO {
 	public int insertEvent(EventVO eventVo);
-	public List<EventVO> selectEvent();
+	public List<EventVO> selectEvent(int eventKind);
 }
