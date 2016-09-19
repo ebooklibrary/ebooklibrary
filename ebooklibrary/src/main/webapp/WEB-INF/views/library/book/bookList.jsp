@@ -21,6 +21,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		//$( "#sortDiv input" ).checkboxradio();
+		$("#schDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 		$("#genre").html(l);
 		
 		$(".cartFrm").submit(function() {

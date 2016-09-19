@@ -19,7 +19,7 @@
 <p><span class="mpSpanInfo">북코인 </span><input type="button" id="btnCharge" value="충전"><span class="mpSpanVal">${memberVo.cash }</span></p>
 <span class="mpSpanInfo">내서재 배경화면</span><br>
 <c:if test="${!empty memberVo.bgImage }">
-<div class="mpSpanVal" style="width: 60px;height: 60px;background-image: url('${pageContext.request.contextPath}/images/${memberVo.bgImage }');"></div>
+<div class="mpSpanVal" style="width: 60px;height: 60px;background-image: url('${pageContext.request.contextPath}/backimg/${memberVo.bgImage }');"></div>
 </c:if>
 <c:if test="${empty memberVo.bgImage }">
 <span class="mpSpanVal">등록된 배경화면이 없습니다</span>

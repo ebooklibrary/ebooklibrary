@@ -145,6 +145,7 @@ public class MemberController {
 		logger.info("마이페이지 보여주기");
 		String userId=(String)session.getAttribute("userId");
 		MemberVO memberVo=memberService.selectByUserName(userId);
+		logger.info("내정보페이지 memberVo={}",memberVo);
 		
 		model.addAttribute("memberVo", memberVo);
 	}

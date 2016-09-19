@@ -32,6 +32,9 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		//background-color: rgba(255, 255, 200, 0.5);
+		$("#bookRegiDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
+		
 		/* 
 		$( "#publication" ).datepicker({
 			changeMonth: true, changeYear: true

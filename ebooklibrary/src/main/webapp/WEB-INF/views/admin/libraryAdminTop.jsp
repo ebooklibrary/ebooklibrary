@@ -11,7 +11,12 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/main_all.css" />
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript">
-
+	$(document).ready(function() {
+		$(".menuform").click(function() {
+			var href=$(this).find("a").attr("href");
+			$(location).attr('href', href);
+		});
+	});
 </script>
 </head>
 <body>
@@ -21,23 +26,32 @@
 <!-- 옆에붙을 메뉴 -->
 	<div id="rightmenu">
 		<div class="menuform">
-			<a href="<c:url value='/library/notice/noticelist.do'/>">공지사항 등록/수정</a>
+			<a style="margin: 2px 0 0 2px;" href="<c:url value='/library/notice/noticelist.do'/>">공지사항<br> 등록/수정</a>
+			<div class="menuFlagColor" id="noticeDivColor"></div>
 		</div>
 		<div class="menuform">
 			<a href="<c:url value='/admin/book/registerBook.do'/>">책 등록</a>
+			<div class="menuFlagColor" id="bookRegiDivColor"></div>
 		</div>
 		<div class="menuform">
-			<a href="<c:url value='/admin/member/memberList.do'/>">회원 관리</a>			
+			<a href="<c:url value='/admin/member/memberList.do'/>">회원 관리</a>
+			<div class="menuFlagColor" id="memDivColor"></div>
 		</div>
 		<div class="menuform">
-			책 목록/이벤트 등록
+			<a style="margin: 2px 0 0 2px;" href="<c:url value='/library/notice/noticelist.do'/>">책 목록<br>/이벤트 등록</a>
+			<div class="menuFlagColor" id="bookListDivColor"></div>
 		</div>
 	</div>
   <div id="header">  
   <!--logo Start-->   
 	 <h2 class="skip">로고</h2>
+	 <%-- 
 	 	 <div id="logo"><a href="<c:url value='/library/librarymain.do'/>">
 	 	 로고
+	 	 </a></div>
+	 	  --%>
+	 	 <div id="logo"><a href="<c:url value='/library/librarymain.do'/>">
+	 	 	<img alt="로고 이미지" src="<c:url value='/images/library/main/logo.JPG'/>">
 	 	 </a></div>
   <!--//#logo End-->
 	<!--global_menu Start-->

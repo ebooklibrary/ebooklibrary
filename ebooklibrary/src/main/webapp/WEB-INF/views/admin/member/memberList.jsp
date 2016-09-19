@@ -3,6 +3,7 @@
 <%@ include file="../libraryAdminTop.jsp" %>
 <script type="text/javascript">
 	$(function() {
+		$("#memDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 		$("#excelSave").click(function() {
 			$.ajax({
 				url:"<c:url value='/admin/member/memberSave.do'/>",

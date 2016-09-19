@@ -23,6 +23,7 @@ function pageProc(curPage){
 }
 
 $(document).ready(function(){
+	$("#noticeDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 	$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
 });
 
