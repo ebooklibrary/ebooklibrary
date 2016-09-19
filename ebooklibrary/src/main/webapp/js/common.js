@@ -32,7 +32,7 @@
 	}
 	//회원가입 생일
 	function validate_birth(birth) {
-		var pattern=new RegExp(/^[0-9]{6}$/);
+		var pattern=new RegExp(/^[0-9]{8}$/);
 		return pattern.test(birth);
 	}
 	

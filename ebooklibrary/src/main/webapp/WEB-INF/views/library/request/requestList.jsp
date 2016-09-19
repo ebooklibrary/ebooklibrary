@@ -65,7 +65,7 @@
 		<form name="frmSearch" method="post"
 			action="<c:url value='/library/request/requestList.do' />">
 			<div class="search_box" >
-				<select name="searchCondition">
+				<select name="searchCondition" class="searchCondition">
 					<option value="title"
 						<c:if test="${param.searchCondition=='title'}">
 		            		selected
@@ -75,8 +75,8 @@
 		            		selected
 		               </c:if>>작성자</option>
 				</select> <input type="text" name="searchKeyword" title="검색어 입력"
-					value="${param.searchKeyword}"> <input type="submit"
-					value="검색">
+					value="${param.searchKeyword}" class="searchCondition"> <input type="submit"
+					value="검색" id="searchInfo2">
 			</div>
 		</form>
 	</div>
@@ -146,20 +146,20 @@
 			</c:if>
 		</tbody>
 	</table>
-<div class="bticons">
-	<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
-		<input type="button" id="listGo" value="전체목록"/>
-		<input type="button" id="writeGo" value="글쓰기"/>
-		<c:if test="${!empty sessionScope.memberNo }">
-			<input type="submit" id="myWriting" value="내글 보기"/>
-		</c:if>
-		<c:if test="${!empty sessionScope.memberNo }">
-			<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
-		</c:if>
-		<input type="hidden" id="myWrite" name="myWrite" value="Y">
-	</form>			
-</div>	
-	</div>
+	<div class="bticons">
+		<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
+			<input type="button" id="listGo" value="전체목록" class="requestbt"/>
+			<input type="button" id="writeGo" value="글쓰기" class="requestbt"/>
+			<c:if test="${!empty sessionScope.memberNo }">
+				<input type="submit" id="myWriting" value="내글 보기" class="requestbt"/>
+			</c:if>
+			<c:if test="${!empty sessionScope.memberNo }">
+				<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+			</c:if>
+			<input type="hidden" id="myWrite" name="myWrite" value="Y">
+		</form>			
+	</div>	
+</div>
 	<!-- 페이징 처리를 위한 div -->
 	<div class="divPage">
 		<!-- 이전 블럭으로 이동 -->
