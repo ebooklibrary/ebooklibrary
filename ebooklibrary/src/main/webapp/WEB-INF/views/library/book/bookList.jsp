@@ -240,8 +240,17 @@
 			<div id="bookListDiv">
 				<img alt="테스트" src="<c:url value='/book_upload/${vo.coverFileName }'/>">
 				<p id="bookTitleP">[${vo.genre}] ${vo.title }</p>
-				<div class="choice">
+				<c:if test="${sessionScope.auchCode=='ADMIN' }">
+					<div class="choice">
+						<div class="cart">
+						<input type="submit" id="bookEdit" name="bookEdit" value="수정" class="cart">
+						</div>						
+						<input type="button" id="bookDelete" name="bookDelete" value="삭제">
+					</div>
+				</c:if>
 				
+				<c:if test="${sessionScope.auchCode!='ADMIN' }">				
+					<div class="choice">				
 						<c:if test="${!empty vo.userId}">
 							이미 가지고 있지롱
 						</c:if>
@@ -253,9 +262,9 @@
 							
 							<input type="button" id="buy" name="buy" value="바로구매">
 							
-						</c:if>
-						
-				</div>
+						</c:if>						
+					</div>
+				</c:if>
 				<div id="bookSummaryDiv">${vo.summary }</div>
 				<div id="bookPriceDiv">
 					<p>구매가격 : <fmt:formatNumber value="${vo.price }" pattern="#,###,###" />원</p>
@@ -307,15 +316,17 @@
 		
 	</div>
 	<!-- 사이드 장바구니 -->
-	<div id="cartDiv">
-		<nav>
-			<ul>
-				<li>장바구니 목록</li>
-				<c:forEach var="map" items="${cartList }">
-					<li>${map['TITLE'] }</li>
-				</c:forEach>
-				<li><a href="<c:url value='/shop/cart/cartList.do'/>">구매 페이지</a></li>
-			</ul>
-		</nav>
-	</div>
+	<c:if test="${sessionScope.auchCode!='ADMIN' }">	
+		<div id="cartDiv">
+			<nav>
+				<ul>
+					<li>장바구니 목록</li>
+					<c:forEach var="map" items="${cartList }">
+						<li>${map['TITLE'] }</li>
+					</c:forEach>
+					<li><a href="<c:url value='/shop/cart/cartList.do'/>">구매 페이지</a></li>
+				</ul>
+			</nav>
+		</div>
+	</c:if>
 <%@include file="../libraryBottom.jsp"%>
