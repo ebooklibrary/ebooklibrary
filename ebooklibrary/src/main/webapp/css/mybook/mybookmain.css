@@ -22,7 +22,17 @@ html {
 	/* border: 1px solid red; */
 	position: relative;
 }
-
+/* #exBookDiv{
+	position: absolute;
+	display: none;
+	border: 1px solid black;
+	width: 500px;
+	height: 1000px;
+	z-index: 1;
+	
+	top:20%;
+	right: 20%;
+} */
 
 /* 책 관련 메뉴 */
 #menuDiv{
@@ -226,6 +236,11 @@ ul.topnav li a {
 	right: 140px;
 	color: blue;
 }
+#ExpiredBook{
+	position: absolute;
+	right: 260px;
+	color: #800080;
+}
 
 /* 책목록 책장안의 div */
 #myBooks{
@@ -370,6 +385,44 @@ ul.topnav li a {
 }
 
 
+/* 만료된 책 검색을 위한 미니창 띄우기 */
+/* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content1 {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+/* The Close Button */
+.exClose {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.exClose:hover,
+.exClose:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 /* 띄운 미니창 안의 책목록 */
 #myInput {
   background-image: url('/css/searchicon.png');
@@ -399,6 +452,38 @@ ul.topnav li a {
 }
 
 #myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* 띄운 미니창 안의 만료된 책목록 */
+#exInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 50%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#exTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#exTable th, #exTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#exTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#exTable tr.header, #exTable tr:hover {
   background-color: #f1f1f1;
 }
 
