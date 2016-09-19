@@ -107,18 +107,22 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/myInfoChk.do",method=RequestMethod.GET)
-	public String myInfoChk(){
+	public String myInfoChk(@RequestParam(defaultValue="0") int pwdChange){
 		return "member/login";
 	}
 	
 	@RequestMapping(value="/myInfoChk.do",method=RequestMethod.POST)
 	public String myInfoChk(HttpSession session,@RequestParam String pwd,
-			Model model){
+			@RequestParam(defaultValue="0") int pwdChange,Model model){
 		String userId=(String)session.getAttribute("userId");
 		int result=memberService.logincheck(userId, pwd);
 		String msg="",url="/member/login.do";
 		if(result==MemberService.LOGIN_OK){
-			return "redirect:/member/myInfo.do";
+			if(pwdChange!=1){
+				return "redirect:/member/myInfo.do";
+			}else{
+				return "redirect:/member/pwdChange.do";
+			}			
 		}else if(result==memberService.PWD_DISAGREE){
 			msg="비밀번호가 다릅니다";
 		}else if(result==memberService.ID_NONE){
@@ -129,6 +133,12 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		return "common/message";
+	}
+	
+	@RequestMapping(value="/pwdChange.do",method=RequestMethod.GET)
+	public String pwdChange_get(){
+		logger.info("비밀번호 변경화면");
+		return "member/pwdChange";
 	}
 	
 	@RequestMapping(value="/myInfo.do",method=RequestMethod.GET)
@@ -204,5 +214,10 @@ public class MemberController {
 		}
 		
 		return "common/message";
+	}
+	
+	@RequestMapping(value="/cashAdd.do")
+	public void cashAdd(){
+		logger.info("북코인 충전화면 보여주기");
 	}
 }

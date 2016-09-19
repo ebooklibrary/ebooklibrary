@@ -6,9 +6,7 @@
 <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/loginForm.css" />
-
 <script type="text/javascript">
 $(function() {
 	
@@ -68,4 +66,7 @@ $(function() {
 	<input type="submit" id="chgSubmit" value="회원정보 수정">
 	</form>
 </div>
+
+<%@ include file="mypageRightMenu.jsp" %>
+
 <%@ include file="../library/libraryBottom.jsp" %>

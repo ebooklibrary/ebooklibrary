@@ -4,7 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/member.css" />
-
+<script type="text/javascript">
+	$(function() {
+		$("#btnCharge").click(function() {
+			window.open("<c:url value='/member/cashAdd.do'/>",
+					"cashAdd",
+			"width=450,height=450,left=50,top=50,resizable=yes,location=yes");
+			});
+		});	
+</script>
 <div id="myPageInfoDiv">
 <p>내정보</p>
 <p><span class="mpSpanInfo">아이디 </span><span class="mpSpanVal">${memberVo.userId }</span></p>
@@ -16,7 +24,8 @@
 </p>
 <p><span class="mpSpanInfo">생일 </span><span class="mpSpanVal">${memberVo.birth }</span></p>
 <p><span class="mpSpanInfo">가입일 </span><span class="mpSpanVal"><fmt:formatDate value="${memberVo.regDate }" pattern="yyyy-MM-dd"/></span></p>
-<p><span class="mpSpanInfo">북코인 </span><input type="button" id="btnCharge" value="충전"><span class="mpSpanVal">${memberVo.cash }</span></p>
+<p><span class="mpSpanInfo">북코인 </span><span class="mpSpanVal">${memberVo.cash }</span></p>
+<input type="button" id="btnCharge" value="충전">
 <span class="mpSpanInfo">내서재 배경화면</span><br>
 <c:if test="${!empty memberVo.bgImage }">
 <div class="mpSpanVal" style="width: 60px;height: 60px;background-image: url('${pageContext.request.contextPath}/backimg/${memberVo.bgImage }');
@@ -31,23 +40,7 @@
 </c:if>
 </div>
 
-<div id="myPage_leftMenu">
-	<div class="danger">
-	  <p><a href="<c:url value='/member/myInfoChk.do'/>">내정보 수정</a></p>
-	</div>
-	
-	<div class="success">
-	  <p>비밀번호 변경</p>
-	</div>
-	
-	<div class="info">
-	  <p>주문내역</p>
-	</div>
-	
-	<div class="warning">
-	  <p>회원탈퇴</p>
-	</div>
-</div>
+<%@ include file="mypageRightMenu.jsp" %>
 <%-- 
 <div id="myPage_leftMenu">
 	<div><a href="<c:url value='/member/myInfoChk.do'/>">내정보 수정</a></div>
