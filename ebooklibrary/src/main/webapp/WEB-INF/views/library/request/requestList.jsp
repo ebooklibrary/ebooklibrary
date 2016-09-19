@@ -48,7 +48,7 @@
 <div id="notice_head">
 	<h2>
 		<img alt="qna"
-			src="${pageContext.request.contextPath }/images/library/request/request.png" width="200px" height="50px">
+			src="${pageContext.request.contextPath }/images/library/request/request.png" style="width: 150px;">
 	</h2>
 </div>
 <div id="notice_banner">

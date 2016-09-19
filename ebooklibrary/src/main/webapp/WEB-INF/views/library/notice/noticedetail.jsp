@@ -31,7 +31,7 @@
 <div id="notice_head">
 	<h2>
 		<img alt="공지사항"
-			src="${pageContext.request.contextPath }/images/library/notice/notice.jpg" style="width: 150px;">
+			src="${pageContext.request.contextPath }/images/library/notice/notice.png" style="width: 150px;">
 	</h2>
 </div>
 <div id="notice_banner">
