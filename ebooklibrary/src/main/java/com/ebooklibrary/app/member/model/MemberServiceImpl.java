@@ -58,6 +58,11 @@ public class MemberServiceImpl implements MemberService{
 	public int updateTempPwd(MemberVO vo) {
 		return memberDao.updateTempPwd(vo);
 	}
+
+	@Override
+	public int updateUserInfo(MemberVO vo) {
+		return memberDao.updateUserInfo(vo);
+	}
 	
 	
 }

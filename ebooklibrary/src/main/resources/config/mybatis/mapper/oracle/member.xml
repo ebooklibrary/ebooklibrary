@@ -72,7 +72,11 @@
 		where user_id=#{userId}
 	</update>
 	
-	
+	<update id="updateUserInfo">
+		update member
+		   set hp1=#{hp1}, hp2=#{hp2}, hp3=#{hp3}, BIRTH=#{birth}, gender=#{gender}
+		 where user_id=#{userId} 
+	</update>
 	
 	
 	

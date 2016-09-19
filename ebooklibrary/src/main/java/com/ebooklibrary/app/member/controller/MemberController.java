@@ -132,10 +132,23 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/myInfo.do",method=RequestMethod.GET)
-	public String myInfo(HttpSession session,Model model){
+	public String myInfo_get(HttpSession session,Model model){
 		String userId=(String)session.getAttribute("userId");
 		MemberVO memberVo=memberService.selectByUserName(userId);
 		logger.info("내정보 수정화면 띄우기 memberVo={}",memberVo);
+		model.addAttribute("memberVo", memberVo);
+		return "member/myInfo";
+	}
+	
+	@RequestMapping(value="/myInfo.do",method=RequestMethod.POST)
+	public String myInfo_post(HttpSession session,@ModelAttribute MemberVO memberVo ,Model model){
+		String userId=(String)session.getAttribute("userId");
+		
+		memberVo.setUserId(userId);
+		
+		memberService.updateUserInfo(memberVo);
+		
+		logger.info("내정보 수정 처리 memberVo={}",memberVo);
 		model.addAttribute("memberVo", memberVo);
 		return "member/myInfo";
 	}
