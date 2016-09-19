@@ -76,12 +76,27 @@ public class EventController {
 	@RequestMapping("/mainEvent.do")
 	public String selectEvent(HttpServletRequest request,Model model){
 		logger.info("메인이벤트 페이지 보여주기");
-		List<EventVO> alist=eventService.selectEvent();
+		List<EventVO> alist=eventService.selectEvent(eventService.MAIN_EVENT);
 		logger.info("메인이벤트 페이지 alist={}",alist.size());
 		String path=fileUti.getUploadPath(request, FileUploadWebUtil.EVENTIMAGE_UPLOAD);
 		
 		model.addAttribute("alist", alist);
 		model.addAttribute("path", path);
 		return "library/mainInclude/month_book";
+	}
+	
+	@RequestMapping("/sideEvent.do")
+	public String selectSideEvent(HttpServletRequest request,Model model){
+		logger.info("사이드이벤트 페이지 보여주기");
+		List<EventVO> recommandList=eventService.selectEvent(eventService.RECOMMAND_EVENT);
+		List<EventVO> bestList=eventService.selectEvent(eventService.BEST_EVENT);
+		logger.info("추천이벤트 페이지 alist={}",recommandList.size());
+		logger.info("베스트이벤트 페이지 alist={}",bestList.size());
+		String path=fileUti.getUploadPath(request, FileUploadWebUtil.EVENTIMAGE_UPLOAD);
+		
+		model.addAttribute("recommandList", recommandList);
+		model.addAttribute("alist3", bestList);
+		model.addAttribute("path", path);
+		return "library/libraryAd";
 	}
 }

@@ -135,6 +135,11 @@ public class AdminMyBooksController {
 		return "library/book/bookList";
 	}
 	
+
+	@RequestMapping("/book/bookDetail.do")
+	public String bookDetail(){
+		return "library/book/bookDetail";
+	}
 	
 	
 	

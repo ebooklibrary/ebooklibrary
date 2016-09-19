@@ -11,10 +11,10 @@
 		values(#{eventNo},#{eventName},#{eventImageUrl},#{eventUrl},#{eventKind})
 	</insert>
 	
-	<select id="selectEvent" resultType="EventVO">
+	<select id="selectEvent" resultType="EventVO" parameterType="int">
 		select *
 		from(
-			    select * from event order by event_no desc
+			    select * from event where EVENT_KIND=#{eventKind} order by event_no desc
 			)			
 		<![CDATA[
 		where rownum<=5

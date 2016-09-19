@@ -8,5 +8,5 @@ public interface EventService {
 	public static final int BEST_EVENT=3;
 	
 	public int insertEvent(EventVO eventVo);
-	public List<EventVO> selectEvent();
+	public List<EventVO> selectEvent(int eventKind);
 }

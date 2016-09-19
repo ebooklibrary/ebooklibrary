@@ -15,7 +15,7 @@ public class EventDAOMybatis extends SqlSessionDaoSupport implements EventDAO {
 	}
 
 	@Override
-	public List<EventVO> selectEvent() {
-		return getSqlSession().selectList(namespace+".selectEvent");
+	public List<EventVO> selectEvent(int eventKind) {
+		return getSqlSession().selectList(namespace+".selectEvent",eventKind);
 	}
 }
