@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.oracle.cash">
+	<!-- 캐시충전 -->
+	<update id="updateCash" parameterType="MemberVO">
+		update member
+		set cash=cash+#{cash}
+		where user_id=#{userId}
+	</update>
+	
+	<update id="updateMinusCash" parameterType="MemberVO">
+		update member
+		set cash=cash-#{cash}
+		where user_id=#{userId}
+	</update>
+	
+	<insert id="insertCashCharge" parameterType="CashVO">
+		<selectKey order="BEFORE" resultType="int" keyProperty="cashChargNo">
+			select BOOK_CASH_SEQ.nextval from dual
+		</selectKey>
+		insert into CASH_CHARGE(CASH_CHARG_NO,IMP_UID,MERCHANT_UID,USERID,PAID_AMOUNT,APPLY_NUM)
+		values(#{cashChargNo},#{impUid},#{merchantUid},#{userid},#{paidAmount},#{applyNum})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

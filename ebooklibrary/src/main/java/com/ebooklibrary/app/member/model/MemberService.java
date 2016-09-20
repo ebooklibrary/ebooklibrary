@@ -26,4 +26,5 @@ public interface MemberService {
 	public String selectBymemberVo(MemberVO vo);
 	public int updateTempPwd(MemberVO vo);
 	public int updateUserInfo(MemberVO vo);
+	
 }

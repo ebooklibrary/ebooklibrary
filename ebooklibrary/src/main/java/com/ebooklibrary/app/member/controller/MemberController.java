@@ -216,8 +216,5 @@ public class MemberController {
 		return "common/message";
 	}
 	
-	@RequestMapping(value="/cashAdd.do")
-	public void cashAdd(){
-		logger.info("북코인 충전화면 보여주기");
-	}
+	
 }
