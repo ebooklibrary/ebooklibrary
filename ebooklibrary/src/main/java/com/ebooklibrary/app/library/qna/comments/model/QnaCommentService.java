@@ -10,4 +10,10 @@ public interface QnaCommentService {
 	public int insertQnaReComment(QnaCommentVO qcVo);
 	public int countQnaComment(int qnaNo);
 	public int selectedComment(int commentNo);
+	
+	//코멘트 수정
+	public int updateComment(QnaCommentVO qcVo);
+	
+	//코멘트 삭제
+	public int deleteComment(QnaCommentVO qcVo);
 }

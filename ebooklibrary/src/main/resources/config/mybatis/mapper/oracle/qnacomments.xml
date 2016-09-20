@@ -8,13 +8,17 @@
 		select * from  QNA_COMMENTS where QNA_NO=#{qnaNo} order by  group_No, sort_No asc
 	</select>
 	
+	<select id="maxSortNoBygroupNo" parameterType="QnaCommentVO" resultType="int">
+		select max(sort_no) from QNA_COMMENTS where group_no=#{groupNo}
+	</select>
+	
 	<insert id="insertComment" parameterType="QnaCommentVO">
 		<selectKey keyProperty="commentNo" resultType="int"
 			order="BEFORE">
 			select comment_seq.nextval from dual
 		</selectKey>
-		insert into QNA_COMMENTS(COMMENT_NO,QNA_NO,MEMBER_NO, user_name,content,group_no)
-		values(#{commentNo},#{qnaNo},#{userName},#{memberNo},#{content},#{commentNo})
+		insert into QNA_COMMENTS(COMMENT_NO,QNA_NO,MEMBER_NO, user_name,content,group_no,CMT_GROUP_NO)
+		values(#{commentNo},#{qnaNo},#{memberNo},#{userName},#{content},#{commentNo},#{commentNo})
 	</insert>
 	
 	<update id="updateSortNo" parameterType="QnaCommentVO">
@@ -29,9 +33,9 @@
 			select comment_seq.nextval from dual
 		</selectKey>
 		insert into QNA_COMMENTS(COMMENT_NO,member_No,qna_no,content, user_name,
-			 group_no, step_no, sort_No )
+			 group_no, step_no, sort_No,CMT_GROUP_NO ,ORIGIN_USER)
 		values(#{commentNo},#{memberNo}, #{qnaNo},#{content},#{userName},
-					#{groupNo}, #{stepNo}, #{sortNo})
+					#{groupNo}, #{stepNo}, #{sortNo},#{cmtGroupNo},#{originUser})
 	</insert>
 	
 	<select id="CountCommentByQna" parameterType="int" resultType="int">
@@ -42,4 +46,27 @@
 		update QNA_COMMENTS SET SELECT_CMT='Y' WHERE COMMENT_NO=#{commentNo}
 	</update>
 	
+	<update id="updateComment" parameterType="QnaCommentVO">
+		update QNA_COMMENTS SET CONTENT=#{content} WHERE COMMENT_NO=#{commentNo} and sort_no=#{sortNo}
+	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from QNA_COMMENTS where COMMENT_NO=#{commentNo}
+	</delete>
+	<delete id="deleteGroupNo" parameterType="int">
+		delete from QNA_COMMENTS where CMT_GROUP_NO=#{cmtGroupNo}
+	</delete>
+	 
+	
+	<select id="countGroupNo" parameterType="int" resultType="int">
+		select count(*) from QNA_COMMENTS where CMT_GROUP_NO=#{cmtGroupNo}
+	</select>
+	
+	<select id="countGroupNoY" parameterType="int" resultType="int">
+		select count(*) from QNA_COMMENTS where CMT_GROUP_NO=#{cmtGroupNo} and DELETE_CMT='Y'
+	</select>
+	
+	<update id="holdingDeleteCmt" parameterType="int" >
+		update QNA_COMMENTS SET DELETE_CMT='Y' WHERE COMMENT_NO=#{commentNo}
+	</update>
 </mapper>
