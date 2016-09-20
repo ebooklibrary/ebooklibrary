@@ -63,6 +63,8 @@ public class MemberServiceImpl implements MemberService{
 	public int updateUserInfo(MemberVO vo) {
 		return memberDao.updateUserInfo(vo);
 	}
+
+	
 	
 	
 }

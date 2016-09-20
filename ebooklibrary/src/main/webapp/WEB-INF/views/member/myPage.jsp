@@ -7,9 +7,9 @@
 <script type="text/javascript">
 	$(function() {
 		$("#btnCharge").click(function() {
-			window.open("<c:url value='/member/cashAdd.do'/>",
+			window.open("<c:url value='/cash/cashAdd.do'/>",
 					"cashAdd",
-			"width=450,height=450,left=50,top=50,resizable=yes,location=yes");
+			"width=800,height=700,left=50,top=50,resizable=yes,location=yes");
 			});
 		});	
 </script>
@@ -24,7 +24,7 @@
 </p>
 <p><span class="mpSpanInfo">생일 </span><span class="mpSpanVal">${memberVo.birth }</span></p>
 <p><span class="mpSpanInfo">가입일 </span><span class="mpSpanVal"><fmt:formatDate value="${memberVo.regDate }" pattern="yyyy-MM-dd"/></span></p>
-<p><span class="mpSpanInfo">북코인 </span><span class="mpSpanVal">${memberVo.cash }</span></p>
+<p><span class="mpSpanInfo">북코인 </span><span class="mpSpanVal">${memberVo.cash }</p>
 <input type="button" id="btnCharge" value="충전">
 <span class="mpSpanInfo">내서재 배경화면</span><br>
 <c:if test="${!empty memberVo.bgImage }">

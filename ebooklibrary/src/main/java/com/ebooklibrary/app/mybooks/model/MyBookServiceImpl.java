@@ -60,5 +60,20 @@ public class MyBookServiceImpl implements MyBookService {
 	public int countAllBook(BookSearchVO bookSearchVo) {
 		return myBookDao.countAllBook(bookSearchVo);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectMyBookListByUserId(BookSearchVO bookSearchVo) {
+		return myBookDao.selectMyBookListByUserId(bookSearchVo);
+	}
+
+	@Override
+	public int deleteMybook(MyBooksVO myBooksVo) {
+		return myBookDao.deleteMybook(myBooksVo);
+	}
+
+	@Override
+	public int myBookCount(BookSearchVO bookSearchVo) {
+		return myBookDao.myBookCount(bookSearchVo);
+	}
 	
 }

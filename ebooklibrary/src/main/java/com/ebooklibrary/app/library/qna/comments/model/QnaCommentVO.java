@@ -9,16 +9,37 @@ public class QnaCommentVO {
 	private String userName;
 	private String content;
 	private int groupNo;
+	private int cmtGroupNo;
 	private int sortNo;
 	private int stepNo;
 	private Timestamp regDate;
 	private String selectCmt;
+	private String deleteCmt;
+	private String originUser;
 	
-	
-	
-	
-	
-	
+	public String getOriginUser() {
+		return originUser;
+	}
+
+	public void setOriginUser(String originUser) {
+		this.originUser = originUser;
+	}
+
+	public int getCmtGroupNo() {
+		return cmtGroupNo;
+	}
+
+	public void setCmtGroupNo(int cmtGroupNo) {
+		this.cmtGroupNo = cmtGroupNo;
+	}
+
+	public String getDeleteCmt() {
+		return deleteCmt;
+	}
+
+	public void setDeleteCmt(String deleteCmt) {
+		this.deleteCmt = deleteCmt;
+	}
 
 	public String getSelectCmt() {
 		return selectCmt;
@@ -107,8 +128,9 @@ public class QnaCommentVO {
 	@Override
 	public String toString() {
 		return "QnaCommentVO [commentNo=" + commentNo + ", qnaNo=" + qnaNo + ", memberNo=" + memberNo + ", userName="
-				+ userName + ", content=" + content + ", groupNo=" + groupNo + ", sortNo=" + sortNo + ", stepNo="
-				+ stepNo + ", regDate=" + regDate + ", selectCmt=" + selectCmt + "]";
+				+ userName + ", content=" + content + ", groupNo=" + groupNo + ", cmtGroupNo=" + cmtGroupNo
+				+ ", sortNo=" + sortNo + ", stepNo=" + stepNo + ", regDate=" + regDate + ", selectCmt=" + selectCmt
+				+ ", deleteCmt=" + deleteCmt + ", originUser=" + originUser + "]";
 	}
 	
 	

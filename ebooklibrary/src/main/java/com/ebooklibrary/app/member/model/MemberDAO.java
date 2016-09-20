@@ -15,4 +15,5 @@ public interface MemberDAO {
 	public String selectBymemberVo(MemberVO vo);
 	public int updateTempPwd(MemberVO vo);
 	public int updateUserInfo(MemberVO vo);
+	
 }

@@ -2,7 +2,7 @@ package com.ebooklibrary.app.mybooks.model;
 
 import java.sql.Timestamp;
 
-public class MyBooksVO {
+public class MyBooksVO{
 
 	private int myBookNo;
 	private int bookNo;
@@ -10,20 +10,6 @@ public class MyBooksVO {
 	private Timestamp rentEnd;
 	private int price;
 	private String userId;
-	
-	public MyBooksVO() {
-		super();
-	}
-
-	public MyBooksVO(int myBookNo, int bookNo, Timestamp rentStart, Timestamp rentEnd, int price, String userId) {
-		super();
-		this.myBookNo = myBookNo;
-		this.bookNo = bookNo;
-		this.rentStart = rentStart;
-		this.rentEnd = rentEnd;
-		this.price = price;
-		this.userId = userId;
-	}
 
 	public int getMyBookNo() {
 		return myBookNo;

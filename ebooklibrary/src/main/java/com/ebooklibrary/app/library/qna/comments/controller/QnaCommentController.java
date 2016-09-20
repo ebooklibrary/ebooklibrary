@@ -56,11 +56,11 @@ public class QnaCommentController {
 		int cnt= 0;
 		if(qnaCommentVo.getStepNo()>0){
 			cnt= qnaCommentsService.insertQnaReComment(qnaCommentVo);
-			logger.info("코맨트 입력 처리 값 cnt={}",cnt);
+			logger.info("댓글의 댓글 코맨트 입력 처리 값 cnt={}",cnt);
 		}else{
 			
 			cnt =qnaCommentsService.insertQnaComment(qnaCommentVo);
-			logger.info("코맨트 입력 처리 값 cnt={}",cnt);
+			logger.info("기본댓글 코맨트 입력 처리 값 cnt={}",cnt);
 		}
 		
 		
@@ -68,5 +68,33 @@ public class QnaCommentController {
 		return "redirect:/library/qna/qnaDetail.do?qnaNo="+qnaCommentVo.getQnaNo();
 	}
 	
+	@RequestMapping("/commentEdit.do")
+	public String editComment(@ModelAttribute QnaCommentVO qnaCommentVo){
+		//1.
+		logger.info("comment Edit처리페이지 입력값 qnaCommentVo={}",qnaCommentVo);
+		
+		//2.
+		int cnt= qnaCommentsService.updateComment(qnaCommentVo);
+		logger.info("comment edit 처리 결과값 cnt={}",cnt);
+		
+		//3.
+		
+		
+		return "redirect:/library/qna/qnaDetail.do?qnaNo="+qnaCommentVo.getQnaNo();
+	}
+	
+	@RequestMapping("/commentDelete.do")
+	public String deleteComment(@ModelAttribute QnaCommentVO qnaCommentVo){
+		//1.
+		logger.info("comment 삭제 처리페이지 입력 파라미터값 qnaCommentVo={}",qnaCommentVo);
+		
+		//2.
+		int cnt = qnaCommentsService.deleteComment(qnaCommentVo);
+		logger.info("삭제 컨트롤러 처리 결과값 cnt={}",cnt);
+		
+		//3.
+		
+		return "redirect:/library/qna/qnaDetail.do?qnaNo="+qnaCommentVo.getQnaNo();
+	}
 	
 }

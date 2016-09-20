@@ -9,6 +9,36 @@
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript">
 	
+	
+	$().ready(function(){
+		
+		$("#replyCmt").click(function(){
+			if($("#content").val()==""){
+				alert("내용을 입력하세요");
+				$("#content").focus();
+				return false;
+			}
+		});
+		
+		$("#btCmW").click(function(){
+			if($("#content1").val()==""){
+				alert("내용을 입력하세요");
+				$("#content1").focus();
+				return false;
+			}
+		});
+		
+		$("#delCmtfrm").submit(function(){
+			if(confirm("삭제하시겠습니까?")){
+				
+				return true;
+			}
+			return false;
+		});
+		
+		
+		
+	});
 	function reVisi(num){
 		
 		if(document.getElementById(num).style.display=="none"){
@@ -42,26 +72,6 @@
 			
 		} 
 	}
-	
-	$().ready(function(){
-		
-		$("#replyCmt").click(function(){
-			if($("#content").val()==""){
-				alert("내용을 입력하세요");
-				$("#content").focus();
-				return false;
-			}
-		});
-		
-		$("#btCmW").click(function(){
-			if($("#content1").val()==""){
-				alert("내용을 입력하세요");
-				$("#content1").focus();
-				return false;
-			}
-		});
-		
-	});
 	
 	function complete(qnaNo,commentNo){
 		if(confirm("채택하시겠습니까?")){
@@ -100,35 +110,45 @@
 			<c:forEach var="clist" items="${ commentList}">			
 				<tr class="cmtTr_1">
 					<td class="cmt_td1" rowspan="2">
-						<c:if test="${param.complete!='Y' }">
-							<c:if test="${sessionScope.memberNo==param.memberNo &&  param.memberNo!=clist.memberNo}">
-							<form>
-								
-								<input type="button" id="selectAnswer"
-								 onclick="complete(${param.qnaNo},${clist.commentNo })" value="답변채택" >
-							</form>
+							<c:if test="${param.complete!='Y' }">
+								<c:if test="${sessionScope.memberNo==param.memberNo &&  param.memberNo!=clist.memberNo}">
+									<form>
+										
+										<c:if test="${clist.deleteCmt=='N' }">
+										<input type="button" id="selectAnswer"
+										 onclick="complete(${param.qnaNo},${clist.commentNo })" value="답변채택" >
+										</c:if>	
+									</form>
+								</c:if>
 							</c:if>
-						</c:if>	
 						<c:if test="${clist.selectCmt=='Y' }">
 							<img src="<c:url value='/images/library/qna/selected.png'/>" width="50" >
 						</c:if>
 					</td>
 					
 					<td class="cmt_td2" rowspan="2">
+						
 						<c:if test="${clist.stepNo>0 }">
 							<c:forEach begin='1' end="${clist.stepNo }" varStatus="status" >
-								<img src="<c:url value='/images/library/qna/reply.png'/>" width="15">
+								&nbsp;&nbsp;<img src="<c:url value='/images/library/qna/reply.png'/>" width="15">
 							</c:forEach>
 						</c:if>
-						${clist.userName } : ${clist.content }
-						
+						<c:if test="${clist.deleteCmt=='N' }">
+							<c:if test="${!empty clist.originUser }">
+								To.${clist.originUser}<br>
+							</c:if>
+							${clist.userName } : ${clist.content }
+						</c:if>
+						<c:if test="${clist.deleteCmt=='Y' }">
+							작성자가 삭제한 댓글입니다.
+						</c:if>
 					</td>
 						
 					<td class="cmt_td3">
 						<fmt:formatDate value="${clist.regDate }" pattern="MM/dd hh:mm:ss"/> 
 					</td>
 					<td>
-						<c:if test="${sessionScope.memberNo!=clist.memberNo}">
+						<c:if test="${sessionScope.memberNo==clist.memberNo}">
 							<input type="button" onclick="cmtEdit(${j})" value="수정">
 						</c:if>
 					</td>
@@ -140,22 +160,32 @@
 						</c:if>
 					</td>
 					<td>
-						<c:if test="${sessionScope.memberNo!=clist.memberNo}">
-							<input type="button" value="삭제">
+						<c:if test="${sessionScope.memberNo==clist.memberNo}">
+							<form id="delCmtfrm" method="post" action="<c:url value='/comments/commentDelete.do'/>">
+								<input type="hidden" name="qnaNo" value="${param.qnaNo }"/>
+								<input type="hidden" name="commentNo" value="${clist.commentNo }"/>
+								<input type="hidden" name="groupNo" value="${clist.groupNo }"/>
+								<input type="hidden" name="cmtGroupNo" value="${clist.cmtGroupNo }"/>
+								<input type="hidden" name="sortNo" value="${clist.sortNo}"/>
+								<input type="submit" value="삭제">
+							</form>
 						</c:if>
 					</td>
 				</tr>
 				<tr>	
-					<form id="refrm" method="post" action="<c:url value='/comments/commentWrite.do'/>">
-						<td class="recmt" id="${i}" name="${i}" colspan="5" style="display:none;" >
+					<td class="recmt" id="${i}" name="${i}" colspan="5" style="display:none;" >
+						<form id="refrm" method="post" action="<c:url value='/comments/commentWrite.do'/>">
 							<c:set var="groupNo" value="${clist.commentNo }" />
+							
 							<c:if test="${clist.commentNo>clist.groupNo }">
 								<c:set var="groupNo" value="${clist.groupNo }" />
 							</c:if>
 							<input type="hidden" name="groupNo" value="${groupNo }"/>
+							<input type="hidden" name="cmtGroupNo" value="${clist.commentNo }"/>
 							<input type="hidden" name="qnaNo" value="${param.qnaNo }"/>
 							<input type="hidden" name="stepNo" value="${clist.stepNo+1}"/>
 							<input type="hidden" name="sortNo" value="${clist.sortNo +1}"/>
+							<input type="hidden" name="originUser" value="${clist.userName}"/>
 							
 							<input type="hidden" name="userName" value="${sessionScope.userName}"/>
 							<input type="hidden" name="memberNo" value="${sessionScope.memberNo}"/>
@@ -164,13 +194,15 @@
 							
 							<input type="submit" id="replyCmt" value="덧글등록" >
 							<input type="button" onclick="reVisi(${i})" value="취소" >
-						</td>
-					</form>
+						</form>
+					</td>
 				</tr>
 				<tr>
 					<td class="cmt_td5" id="${j}" name="${j}"  colspan="5" style="display:none;" >
-						<form id="refrm" method="post" action="<c:url value='/comments/commentUpdate.do'/>">
+						<form id="refrm" method="post" action="<c:url value='/comments/commentEdit.do'/>">
 							<input type="hidden" name="groupNo" value="${clist.groupNo }"/>
+							<input type="hidden" name="commentNo" value="${clist.commentNo }"/>
+							
 							<input type="hidden" name="qnaNo" value="${param.qnaNo }"/>
 							<input type="hidden" name="stepNo" value="${clist.stepNo}"/>
 							<input type="hidden" name="sortNo" value="${clist.sortNo}"/>

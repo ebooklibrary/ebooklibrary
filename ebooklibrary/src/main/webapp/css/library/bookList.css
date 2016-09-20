@@ -178,7 +178,10 @@
 #sortDiv{
 	text-align: right;
 	margin-bottom: 100px;
-	margin-top: 30px;
+	margin-top: 50px;
+	padding-top: 5px;
+	border-top: 1px solid gray;
+	
 }
 #sortDiv li{
 	border-bottom: 1px solid #acffc2;

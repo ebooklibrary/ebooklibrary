@@ -12,16 +12,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ebooklibrary.app.common.BookUtility;
 import com.ebooklibrary.app.common.FileUploadWebUtil;
+import com.ebooklibrary.app.common.PaginationInfo;
+import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.BookSearchVO;
 import com.ebooklibrary.app.mybooks.model.MyBookService;
 import com.ebooklibrary.app.mybooks.model.MyBookVO;
+import com.ebooklibrary.app.mybooks.model.MyBooksVO;
 
 @Controller
 @RequestMapping("/mybooks")
@@ -155,6 +160,80 @@ public class MybooksController {
 		*/
 	}
 	
+	@RequestMapping("/mybookList.do")
+	public String mybookList(HttpServletRequest request,@ModelAttribute BookSearchVO searchVo, Model model){
+		
+		
+		
+		
+		logger.info("책리스트 파라미터 searchVo={}", searchVo);
+		
+		BookUtility bu=new BookUtility();
+		HttpSession session=request.getSession();
+		String userId="";
+		List<Map<String, Object>> myBooksList=null;
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//[2] searchVO
+		searchVo.setBlockSize(Utility.BLOCK_SIZE);
+		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		String keyword=searchVo.getSearchKeyword();
+		
+		logger.info("서치 쁘이오 키워드={}",keyword);
+		
+		
+		
+		if (session.getAttribute("userId")!=null) {
+			userId=(String)session.getAttribute("userId");
+			searchVo.setUserId(userId);
+			
+			int cnt=myBookService.myBookCount(searchVo);
+			
+			logger.info("토탈 레코드 cnt={}",cnt);
+			pagingInfo.setTotalRecord(cnt);
+			
+			myBooksList=myBookService.selectMyBookListByUserId(searchVo);
+			logger.info("책검색 myBooksList={}",myBooksList);
+		}
+		logger.info("책검색 alist.size()={}", myBooksList.size());
+		
+		
+		String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
+		
+		model.addAttribute("upPath", upPath);
+		model.addAttribute("alist", myBooksList);
+		model.addAttribute("pagingInfo",pagingInfo);
+		
+		model.addAttribute("bookSearchVo", searchVo);
+		
+		
+		return "mybooks/mybookList";
+	}
+	
+	@RequestMapping("/deleteMybook")
+	public String deleteMybook(HttpServletRequest request, @RequestParam int bookNo){
+		logger.info("삭제 파라미터 bookNo={}",bookNo);
+		HttpSession session=request.getSession();
+		String userId="";
+		MyBooksVO booksVo=new MyBooksVO();
+		
+		booksVo.setBookNo(bookNo);
+		
+		if (session.getAttribute("userId")!=null) {
+			userId=(String)session.getAttribute("userId");
+			booksVo.setUserId(userId);
+			int cnt=myBookService.deleteMybook(booksVo);
+			logger.info("삭제 처리 cnt={}",cnt);
+		}
+		
+		return "redirect:/mybooks/mybookList.do";
+	}
 	
 	/*
 	@RequestMapping("/changeBackImg.do")

@@ -15,6 +15,7 @@
 <!-- also works in the <head> -->
 <%-- <c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/> --%>
 <script src="<c:url value='/alertify.js-0.3.11/lib/alertify.min.js'/>"></script>
+
 <!-- include the core styles -->
 <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/>" />
 <%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
@@ -35,17 +36,30 @@
 		
 		$(".purchasedBookDiv").click(function() {
 			var bookNo=$(this).find(".mybook1").val();
-			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+			window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=20, left=60, width=1550, height=950, resizable=0, location=0");
+		});
+		$("#myAllBook").click(function() {
+			var bookNo=$(this).find(".mybook1").val();
+			window.open("<c:url value='/mybooks/mybookList.do'/>", "책보기", "top=20, left=60, width=850, height=950, resizable=0, location=0");
 		});
 		
 		$(".exBookDiv").click(function() {
 			var bookNo=$(this).find(".mybook1").val();
 			var bookEnd=$(this).find(".mybookRentEnd").val();
-			
+	    	var expiredDay=$(this).parent().parent().find(".bookRentDate").val();
+	    	
+	    	var expiredTerm=(-expiredDay);
+	    	
 			alertify.confirm("대여기간이 만료되었습니다. 연장하시겠습니까?", function (e) {
 				if (e) {
 					$(location).attr('href', "<c:url value='/shop/cart/extendBook.do?bookNo="+bookNo+"&userId=${sessionScope.userId}'/>");
 			    } else {
+			    	/* alert(expiredTerm); */
+			    	if (expiredTerm>=3) {
+						alertify.alert("이 책은 만료일로부터 "+(expiredTerm-1)+"일 경과하였습니다.");
+					}else{
+						alertify.alert("이 책은 "+expiredTerm+" 일 후 대여목록에서 제외 됩니다. (만료일 기준 3일 경과 후 대여목록에서 제외)");
+					}
 			    	return false;
 			    }
 			});
@@ -67,12 +81,12 @@
 			var thisDay=new Date(str1[0],str1[1]-1,str1[2]);
 			var period=(endDate-thisDay)/(60*60*24*1000);
 			
-			if (period<1) {
+			if (period<0) {
 				alertify.confirm("대여기간이 만료되었습니다. 연장하시겠습니까?", function (e) {
 					if (e) {
 						$(location).attr('href', "<c:url value='/shop/cart/extendBook.do?bookNo="+bookNo+"&userId=${sessionScope.userId}'/>");
 				    } else {
-				    	var theDay=3+period;
+				    	var theDay=((-period)+1);
 				    	alertify.alert("이 책은 "+theDay+" 일 후 이 목록에서 제외 됩니다. (만료일 기준 3일 경과 후 목록에서 제외)");
 				    	return false;
 				    }
@@ -80,15 +94,15 @@
 				
 				return false;
 			}else{
-				if (period==1) {
-					alertify.alert("대여기간이 하루 남았습니다.", function (e) {
+				if (period==0) {
+					alertify.alert("이 책은 오늘 대여 만료 예정입니다.", function (e) {
 					    if (e) {
-							window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+							window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=20, left=60, width=1550, height=950, resizable=0, location=0");
 					    }
 					});
-					
+					 
 				}else{
-					window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+					window.open("<c:url value='/mybooks/mybook.do?bookNo="+bookNo+"'/>", "책보기", "top=20, left=60, width=1550, height=950, resizable=0, location=0");
 				}
 				
 			}
@@ -105,14 +119,6 @@
 			}
 			return res;
 		}
-		
-		/* 
-		$(".mybook").hover(function() {
-				$(this).css("cursor","pointer");
-			}, function() {
-				$(this).css("cursor","");
-		});
-		 */
 		 
 		 /* 
 		 var Ca = /\+/g;
@@ -149,14 +155,16 @@
 			    next(); 
 			});
 		});
+		/* 
 		$("#moreBook").click(function() {
 			var title=$("#search").val();
 			window.open("<c:url value='/admin/book/bookList.do?title="+title+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
 			$("#search").val("");
 		});
+		 */
 		$("#searchAllBook").submit(function() {
-			var title=$("#search").val();
-			window.open("<c:url value='/admin/book/bookList.do?title="+title+"'/>", "책보기", "top=50, left=50, width=1550, height=900, resizable=0, location=0");
+			var keyword=$("#search").val();
+			window.open("<c:url value='/admin/book/bookList.do?searchKeyword="+keyword+"'/>", "책보기", "top=50, left=50, width=1650, height=900, resizable=0, location=0");
 			$("#search").val("");
 			event.preventDefault();
 		});
@@ -166,7 +174,11 @@
 		$("#changeBackground").click(function() {
 			$("#upFileBox").toggle();
 		});
-		
+		 
+		$("#menuDiv").mouseleave(function () {
+			$("#upFileBox").hide();
+		});
+
 		/* 책목록 */
 		$("#purchasedBook").click(function() {
 			//$(".modal").css("display","block");
@@ -325,11 +337,12 @@
 		<div id="tempMenu" class="ui-widget-content">
 			<ul class="topnav" id="myTopnav">
 				<c:if test="${!empty sessionScope.userId }">
-				<li><a href="<c:url value='/member/myPage.do'/>">${sessionScope.userId }님</a></li>
+				<li><a href="<c:url value='/member/myPage.do'/>">${sessionScope.userName }님</a></li>
 				<li><a href="<c:url value='/member/logout.do'/>">LogOut</a></li>
 				<li><a href="#" id="memoList">쪽지(<span id="memoCount"></span>)</a></li>
 				</c:if>
 				<%-- <li><a href="<c:url value='/index.do'/>">첫페이지</a></li> --%>
+				<li><a id="myAllBook" href="#">전체 책목록</a></li>
 				<li><a href="<c:url value='/library/librarymain.do'/>">도서관</a></li>
 			</ul>
 		</div>
@@ -337,7 +350,8 @@
 		<!-- 최근 책 책장 -->
 		<div id="recentBook">
 			<c:forEach var="map" items="${alist }">
-				<c:if test="${map['RENTDATE'] >-3 || empty map['RENTDATE'] }">
+			<%-- <input class="RENTDATE" type="text" value="${map['RENTDATE'] }, ${map['TITLE'] }"> --%>
+				<c:if test="${map['RENTDATE'] >=-1 || empty map['RENTDATE'] }">
 				<div class="recentMyBook">
 					<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }">
 					<input class="mybookRentEnd" type="hidden" value="${map['RENT_END'] }">
@@ -370,16 +384,16 @@
 			<!-- 책 전체 검색 -->
 			<div id="moreBookDiv">
 				<form name="searchAllBook" id="searchAllBook" method="post">
-				<input type="text" id="search" name="searchKeyword" placeholder="Search..">
+				<input type="text" id="search" name="searchKeyword" placeholder="책제목, 작가, 출판사를 입력하세요..">
 				<span id="searchInfo">더 보고 싶은 책이 있으시다면 여기에서!</span>
-				<span id="moreBook">상점으로 고고</span>
+				<!-- <span id="moreBook">상점으로 고고</span> -->
 				</form>
 			</div>
 		</div>
 		
 		<!-- 보관 책장 -->
 		<div id="BookList">
-			<p>${sessionScope.userId } 님의 책장</p>
+			<p>${sessionScope.userName } 님의 책장</p>
 			<a id="rentBook" href="#">대여책 목록</a>
 			<a id="purchasedBook" href="#">구매책 목록</a>
 			<a id="ExpiredBook" href="#">만료된 책 목록</a>
@@ -397,6 +411,9 @@
 					</c:if>
 					<c:if test="${!empty map['RENT_END'] }">
 						<div class="mybookColor1"></div>
+					</c:if>
+					<c:if test="${map['RENTDATE'] < -1 }">
+						<div class="mybookColor2"></div>
 					</c:if>
 				</div>
 				</c:if>
@@ -484,11 +501,11 @@
 		  </tr>
 		<tbody>
 			<c:forEach var="map" items="${alist }">
-				<c:if test="${empty map['RENT_END'] && map['RENTDATE'] <= -3 }">
+				<c:if test="${!empty map['RENT_END'] && map['RENTDATE'] < -1 }">
 					<tr>
 						<td><div class="exBookDiv">${map["TITLE"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"><input class="mybookRentEnd" type="hidden" value="${map['RENT_END'] }"></div></td>
 						<td><div class="exBookDiv">${map["PUBLISHER"] }<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"><input class="mybookRentEnd" type="hidden" value="${map['RENT_END'] }"></div></td>
-						<td><div class="exBookDiv"><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/><input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"></div></td>
+						<td><div class="exBookDiv"><fmt:formatDate value="${map['RENT_END'] }" pattern="yyyy-MM-dd"/><input class="mybook1" type="hidden" value="${map['BOOK_NO'] }"><input class="bookRentDate" type="hidden" value="${map['RENTDATE'] }"></div></td>
 					</tr>
 				</c:if>
 			</c:forEach>

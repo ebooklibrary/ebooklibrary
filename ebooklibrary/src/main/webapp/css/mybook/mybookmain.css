@@ -107,6 +107,7 @@ ul.topnav li a {
 	position: relative;
 }
 
+
 /* 책 검색 */
 #menuDiv input[type=text] {
     width: 130px;
@@ -229,6 +230,7 @@ ul.topnav li a {
 	position: absolute;
 	right: 260px;
 	color: #800080;
+	font-weight: bold;
 }
 
 /* 책목록 책장안의 div */
@@ -241,30 +243,6 @@ ul.topnav li a {
 	clear: both;
 }
 
-/* 책목록 책장안의 책 */
-/* 
-.testa{
-	background: url(../../images/mybook/whiteBar.png);
-	width: 25px;
-	height: 124px;
-	float: left;
-	margin: 0 5px 27px 5px;
-	padding-top: 5px;
-	border-radius: 5px;
-	box-shadow: 5px 2px 5px black;
-	
-	position:relative;
-	
-	white-space: normal;
-	overflow:hidden;
-	text-overflow: ellipsis;
-	
-	word-wrap: break-word;
-    font-family: monospace;
-    letter-spacing: 0.5em;
-    line-height: 14px;
-}
- */
  
 .mybook{
 	float: left;
@@ -287,18 +265,6 @@ ul.topnav li a {
 	line-height: 14px;
 }
 
- /* 
-.mybook a{
-	writing-mode:tb-rl;
-    -webkit-transform:rotate(90deg);
-    -moz-transform:rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform:rotate(90deg);
-    transform: rotate(90deg);
-    white-space:nowrap;
-}
-*/
-
 .mybook span{
 	width:1px;
     word-wrap: break-word;
@@ -306,14 +272,6 @@ ul.topnav li a {
     letter-spacing: 0.5em;
     
 }
-/* 
-.mybook a{
-	width:1px;
-    word-wrap: break-word;
-    font-family: monospace;
-    letter-spacing: 0.5em;
-}
- */
 
 /* 책 라벨 */
 .mybookColor{
@@ -334,7 +292,20 @@ ul.topnav li a {
 	margin: 0;
 	left: 0;
 }
+.mybookColor2{
+	width: 25px;
+	height: 10px;
+	position: absolute;
+	bottom: 5px;
+	background-color: purple;
+	margin: 0;
+	left: 0;
+}
 
+/* 미니창 책 목록 */
+.purchasedBookDiv, .rentBookDiv, .exBookDiv{
+	cursor: pointer;
+}
 
 /* 구매 및 대여별 책 검색을 위한 미니창 띄우기 */
 /* The Modal (background) */
