@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mybatis.mapper.oracle.order">
+
 	<insert id="insertOrders" parameterType="OrderVO">
 		<selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
 			select	order_seq.nextval from dual
@@ -19,6 +20,17 @@
 		delete from cart
 		where user_id=#{userId}
 	</delete>
+	
+	<insert id="insertMyBooks" parameterType="map">
+		<if test="RENT_DATE==0">
+			insert into my_books(my_book_no,book_no,price,user_id)
+			values(MYBOOKS_SEQ.nextval,#{BOOK_NO},#{PRICE},#{USER_ID})
+		</if>
+		<if test="RENT_DATE!=0">
+			insert into my_books(my_book_no,book_no,rent_end,price,user_id)
+			values(MYBOOKS_SEQ.nextval,#{BOOK_NO},sysdate+#{RENT_DATE},#{PRICE},#{USER_ID})
+		</if>
+	</insert>
 </mapper>
 
 

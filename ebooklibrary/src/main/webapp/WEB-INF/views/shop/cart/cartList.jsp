@@ -9,6 +9,8 @@
 <script type="text/javascript">
 $(function() {
 	
+	
+	
 	$("#btnBuy").click(function() {
 		var radioChk=$('input:radio[name="payment"]').is(":checked");
 		if (radioChk==false) {
@@ -21,42 +23,51 @@ $(function() {
 			return false;
 		}
 		
-		var IMP = window.IMP;
-		IMP.init('imp52577413'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용.
-		
-		IMP.request_pay({
-		    pg : 'inicis', // version 1.1.0부터 지원. 
-		        /*
-		            'kakao':카카오페이,
-		            'inicis':이니시스, 'html5_inicis':이니시스(웹표준결제), 
-		            'nice':나이스, 
-		            'jtnet':jtnet, 
-		            'uplus':LG유플러스,
-		            'danal':다날
-		        */
-		    pay_method : 'card', // 'card':신용카드, 'trans':실시간계좌이체, 'vbank':가상계좌, 'phone':휴대폰소액결제
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '포도서관',
-		    //amount : $("#totPriceInput").val(),
-		    amount : 300,
-		    buyer_email : ''+$("#userId").val(),
-		    buyer_name : ''+$("#userName").val(),			   
-		    buyer_tel : ''+$("#userHp").val(),
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;		        
-		        location.href="";		        
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-		        alertify.alert(msg);
-		    }
-		});//IMP.request_pay
-	})//click
+		if($("#totPriceInput").val()==0){
+			$('input:radio[name="payment"][value="cash"]').prop('checked', true);
+			if(confirm("캐시로 결제합니다 계속하시겠습니까?")){
+				location.href="<c:url value='/shop/order/myBooksInsert.do'/>";
+			}
+		}else{			
+			var IMP = window.IMP;
+			IMP.init('imp52577413'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용.
+			
+			IMP.request_pay({
+			    pg : 'inicis', // version 1.1.0부터 지원. 
+			        /*
+			            'kakao':카카오페이,
+			            'inicis':이니시스, 'html5_inicis':이니시스(웹표준결제), 
+			            'nice':나이스, 
+			            'jtnet':jtnet, 
+			            'uplus':LG유플러스,
+			            'danal':다날
+			        */
+			    pay_method : 'card', // 'card':신용카드, 'trans':실시간계좌이체, 'vbank':가상계좌, 'phone':휴대폰소액결제
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '포도서관',
+			    //amount : $("#totPriceInput").val(),
+			    amount :$("#totPriceInput").val() ,
+			    buyer_email : ''+$("#userId").val(),
+			    buyer_name : ''+$("#userName").val(),			   
+			    buyer_tel : ''+$("#userHp").val(),
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			    	var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;		        
+			        location.href="<c:url value='/shop/order/myBooksInsert.do'/>";
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			        alertify.alert(msg);
+			    }
+			});//IMP.request_pay
+			
+		}			
+	});//click	
+	
 	/* 
 	$("#frm").submit(function() {
 		if ($("#period").val()<1) {
@@ -109,7 +120,7 @@ $(function() {
 	$(".btRent").click(function() {
 		
 		var rentdate=$(this).parent().find(".rentDate").val();
-		var result=numberWithCommas(rentdate*100);
+		var result=numberWithCommas(rentdate*100);		
 		$(this).parent().parent().parent().find(".rentPrice").text(result);
 	});
 	
@@ -117,7 +128,7 @@ $(function() {
 		$.ajax({
 			url:"<c:url value='/shop/cart/updateCart.do'/>",
 			type:"POST",
-			data: "cartNo="+$(this).parent().find(".cartNo").val()+"&rentDate="+$(this).parent().find(".rentDate").val(),
+			data: "cartNo="+$(this).parent().find(".cartNo").val()+"&rentDate="+$(this).parent().find(".rentDate").val()+"&price="+$(this).parent().find(".rentDate").val()*100,
 			/* data: $(this).serializeArray(), */
 			success:function(res){
 				/* location.reload(); */
@@ -169,6 +180,10 @@ $(function() {
 		
 		if (cash>0) {
 			var res=totPrice-cash;
+			if(res<0){
+				res=0;
+				$("#finalCash").text(numberWithCommas(cash-totPrice));
+			}
 			var result=numberWithCommas(res);
 			$("#totalPrice").val(res);
 			$("#finalPriceSpan").text(result+" 원");
@@ -176,11 +191,13 @@ $(function() {
 			$("#totalPrice").val(totPrice);
 		}
 	});
+	
 	$("#btCashCancel").click(function() {
 		var totPrice=$("#totPriceInput").val();
 		$("#totalPrice").val(totPrice);
 		var result=numberWithCommas(totPrice);
 		$("#finalPriceSpan").text(result+" 원");
+		$("#finalCash").text(numberWithCommas(${memberVo.cash }));
 	});
 	
 	
@@ -364,7 +381,7 @@ function numberWithCommas(x) {
 	    </p>
 	    <p>
 	        <span class="sp1">북캐시</span>
-	        <span><fmt:formatNumber value="${memberVo.cash }" pattern="#,###"/> 원</span>
+	        <span id="finalCash"><fmt:formatNumber value="${memberVo.cash }" pattern="#,###"/> 원</span>
 	        <input type="button" class="btCash" id="btCash" value="캐시 적용">
 	    </p>
 	    <p>
