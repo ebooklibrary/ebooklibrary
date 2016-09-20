@@ -7,6 +7,7 @@ import com.ebooklibrary.app.common.SearchVO;
 public class BookSearchVO extends SearchVO {
 
 	private int bookNo; //책번호
+	private String userId;
 	private String title; //책제목
 	private String publisher; //출판사
 	private String writer; //작가
@@ -23,6 +24,12 @@ public class BookSearchVO extends SearchVO {
 	}
 	public void setBookNo(int bookNo) {
 		this.bookNo = bookNo;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getTitle() {
 		return title;
@@ -86,10 +93,10 @@ public class BookSearchVO extends SearchVO {
 	}
 	@Override
 	public String toString() {
-		return "BookSearchVO [bookNo=" + bookNo + ", title=" + title + ", publisher=" + publisher + ", writer=" + writer
-				+ ", publication=" + publication + ", reg_date=" + reg_date + ", genre=" + genre + ", price=" + price
-				+ ", sales=" + sales + ", bookSort=" + bookSort + ", searchKeyword=" + searchKeyword + ", toString()="
-				+ super.toString() + "]";
+		return "BookSearchVO [bookNo=" + bookNo + ", userId=" + userId + ", title=" + title + ", publisher=" + publisher
+				+ ", writer=" + writer + ", publication=" + publication + ", reg_date=" + reg_date + ", genre=" + genre
+				+ ", price=" + price + ", sales=" + sales + ", bookSort=" + bookSort + ", searchKeyword="
+				+ searchKeyword + "]";
 	}
 	
 }

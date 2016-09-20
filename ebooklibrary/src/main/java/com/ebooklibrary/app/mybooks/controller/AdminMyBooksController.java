@@ -125,7 +125,7 @@ public class AdminMyBooksController {
 		model.addAttribute("upPath", upPath);
 		model.addAttribute("alist", alist);
 		model.addAttribute("pagingInfo",pagingInfo);
-		
+		logger.info("토탈 레코드 searchVo={}",searchVo.getCurrentPage());
 		model.addAttribute("bookSearchVo", searchVo);
 		
 		/*사이드 장바구니 목록*/

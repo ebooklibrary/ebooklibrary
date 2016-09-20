@@ -11,4 +11,7 @@ public interface MyBookService {
 	public List<MyBooksVO> selectMyBooksByUserId(String userId);
 	public List<MyBookVO> selectBoolAll(BookSearchVO bookSearchVo);
 	public int countAllBook(BookSearchVO bookSearchVo);
+	public List<Map<String, Object>> selectMyBookListByUserId(BookSearchVO bookSearchVo);
+	public int myBookCount(BookSearchVO bookSearchVo);
+	public int deleteMybook(MyBooksVO myBooksVo);
 }

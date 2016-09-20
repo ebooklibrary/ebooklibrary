@@ -58,6 +58,12 @@
 			});
 		});
 		
+		$('#searchInput').keydown(function (e){
+		    if(e.keyCode == 13){
+		    	$("#searchFrm").submit();
+		    }
+		})
+		
 		 /* 조건별 검색 */
 		$("#searchSpan span").click(function() {
 			$("#searchSpan span").css("border","");
@@ -168,16 +174,14 @@
 	}); //ready
 	
 	function pageFunc(curPage) {
-		document.frmPage.currentPage.value=curPage;
-		document.frmPage.submit();
+		document.searchFrm.currentPage.value=curPage;
+		document.searchFrm.submit();
 	}
 	
 
 </script>
 
 	<div id="bookListWrapper">
-	
-		
 	
 		<p><span id="countSpan">${alist.size()}</span> 건의  검색결과 
 			<c:if test="${!empty bookSearchVo.title}">
@@ -197,14 +201,15 @@
 			</c:if>
 		</p>
 		
-		<form action="<c:url value='/admin/book/bookList.do'/>" method="post" id="searchFrm">
+		<form action="<c:url value='/admin/book/bookList.do'/>" name="searchFrm" method="post" id="searchFrm">
+		<input type="hidden" name="currentPage" value="${bookSearchVo.currentPage }">
 			<p id="searchSpan">검색 키워드 : 
 				<span>제목</span>
 				<span>출판사</span>
 				<span>작가</span>
 				<span>장르<select name="genre" id="genre" style="display:none; margin-left: 5px;"></select></span>
 			</p>
-			<input type="text" class="w3-input" id="searchInput" name="title">
+			<input type="text" class="w3-input" id="searchInput" name="title" style="border-bottom: 1px solid orange">
 			<!-- <input type="hidden" id="titleInput" name=""> -->
 		
 		
@@ -277,16 +282,6 @@
 			</div>
 		</form>
 		</c:forEach>
-		
-		<%-- 
-		<!-- 페이징 처리를 위한 form 시작-->
-		<form name="frmPage" method="post" action="<c:url value='/shop/order/orderList.do'/>">
-			<input type="hidden" name="startDay" value="${dateSearchVO.startDay }">
-			<input type="hidden" name="endDay" value="${dateSearchVO.endDay }">
-			<input type="hidden" name="currentPage">
-		</form>
-		<!-- 페이징 처리 form 끝 -->
-		 --%>
 		 
 		<div class="divPage">		
 			<ul class="pagination">

@@ -50,6 +50,21 @@ public class MyBookDAOMybatis extends SqlSessionDaoSupport implements MyBookDAO 
 		return getSqlSession().selectList(namespace+".schFromMain", bookSearchVo);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectMyBookListByUserId(BookSearchVO bookSearchVo) {
+		return getSqlSession().selectList(namespace+".selectMyBookListByUserId", bookSearchVo);
+	}
+
+	@Override
+	public int deleteMybook(MyBooksVO myBooksVo) {
+		return getSqlSession().delete(namespace+".deleteMybook", myBooksVo);
+	}
+
+	@Override
+	public int myBookCount(BookSearchVO bookSearchVo) {
+		return getSqlSession().selectOne(namespace+".myBookCount", bookSearchVo);
+	}
+
 	
 	
 }

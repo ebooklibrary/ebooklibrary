@@ -50,7 +50,6 @@
 		and RNUM<= #{firstRecordIndex}
 		+ #{recordCountPerPage}
 	]]>
-	
 	</select>
 	
 	<insert id="insertBook" parameterType="MyBookVO">
@@ -65,6 +64,36 @@
 		SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, floor(M.RENT_END-SYSDATE) AS "RENTDATE", B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY
 		  FROM MY_BOOKS M, BOOK B
 		 WHERE M.BOOK_NO=B.BOOK_NO AND USER_ID=#{userId}
+	</select>
+	
+	<select id="selectMyBookListByUserId" parameterType="BookSearchVO" resultType="map">
+	select *from
+		(
+		select rownum as RNUM, LIST_ALL.*
+		from
+		(
+		SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, floor(M.RENT_END-SYSDATE) AS "RENTDATE", B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PRICE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY
+		  FROM MY_BOOKS M, BOOK B
+		 WHERE M.BOOK_NO=B.BOOK_NO AND USER_ID=#{userId}
+		 <if test="searchKeyword!=null and searchKeyword!=''">
+		 and title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
+		 </if>
+		 ) LIST_ALL
+		)
+		 <![CDATA[
+		where RNUM> #{firstRecordIndex} 
+		and RNUM<= #{firstRecordIndex}
+		+ #{recordCountPerPage}
+	]]>
+	</select>
+	
+	<select id="myBookCount" parameterType="BookSearchVO" resultType="int">
+		SELECT count(*)
+		  FROM MY_BOOKS M, BOOK B
+		 WHERE M.BOOK_NO=B.BOOK_NO AND USER_ID=#{userId}
+		 <if test="searchKeyword!=null and searchKeyword!=''">
+		 and title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
+		 </if>
 	</select>
 	
 	<select id="selectMyBooksByUserId" parameterType="string" resultType="MyBooksVO">
@@ -96,6 +125,10 @@
 		SELECT * FROM bookListView
  		 WHERE title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
 	</select>
+	
+	<delete id="deleteMybook" parameterType="MyBooksVO">
+		delete MY_BOOKS where USER_ID=#{userId} and book_no=#{bookNo}
+	</delete>
 	
 </mapper>
 
