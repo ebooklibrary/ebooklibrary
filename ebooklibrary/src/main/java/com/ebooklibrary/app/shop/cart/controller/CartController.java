@@ -87,6 +87,7 @@ public class CartController {
 		//price 
 		cartVo.setPrice(days*100);
 		cartVo.setRentEnd(endDate);
+		//책번호로 책조회한후 구매누를시 책가격 cartVo에 입력,렌트!=0 렌트값 입력
 		
 		cartService.updateCart(cartVo);
 	}

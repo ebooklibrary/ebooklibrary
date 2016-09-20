@@ -29,5 +29,10 @@ public class OrderDAOMybatis extends SqlSessionDaoSupport
 			+".deleteCartByUserid", userid);
 	}
 
+	@Override
+	public int insertMyBooks(Map<String, Object> map) {
+		return getSqlSession().insert(namespace+".insertMyBooks",map);
+	}
+
 	
 }

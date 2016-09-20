@@ -11,4 +11,5 @@ public interface CartService {
 	public List<Map<String, Object>> selectCartView(String userId);
 	public int updateCart(CartVO cartVo);
 	public int delCart(int cartNo);
+	public int deleteCart(Map<String, Object> map);
 }

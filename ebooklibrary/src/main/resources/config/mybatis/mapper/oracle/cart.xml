@@ -22,15 +22,25 @@
 		where user_id=#{userid}
 	</select>
 	
-	<update id="updateCart">
+	<update id="updateCart" parameterType="CartVO">
 		update cart
 		   set rent_date=#{rentDate}, price=#{price}
 		 where cart_no=#{cartNo}
 	</update>
 	
-	<delete id="delCart" parameterType="int">
+	<!-- <delete id="delCart" parameterType="int">
 		delete cart
 		 where cart_no=#{cartNo}
+	</delete> -->
+	
+	<delete id="delCart" parameterType="int">
+		delete from cart
+		 where cart_no=#{cartNo}
+	</delete>
+	
+	<delete id="deleteCart" parameterType="map">
+		delete from cart
+		 where cart_no=#{CART_NO}
 	</delete>
 	
 </mapper>
