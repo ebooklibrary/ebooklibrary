@@ -1,5 +1,6 @@
 package com.ebooklibrary.app.shop.order.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,14 +38,35 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@RequestMapping("/myBooksInsert.do")	
-	public String myBooksInsert(HttpSession session,Model model){
+	public String myBooksInsert(@ModelAttribute OrderVO orderVo,HttpSession session,Model model){
 		logger.info("내책리스트에 책추가");
 		String userId=(String)session.getAttribute("userId");
-		List<Map<String, Object>> cartList=cartService.selectCartView(userId);
+		List<Map<String, Object>> cartList=cartService.selectCartView(userId);		
 		logger.info("카트뷰 cartList={}",cartList.size());
-		int cnt=orderService.MyBooksInsert(cartList);
+		List<OrderVO> orderList=new ArrayList<OrderVO>();
+		for(int i=0;i<cartList.size();i++){
+			Map<String, Object> map=cartList.get(i);
+			orderVo.setUserId(userId);
+			logger.info("price={}",((Number)map.get("PRICE")).intValue());
+			orderVo.setPrice(((Number)map.get("PRICE")).intValue());
+			orderVo.setBookNo(((Number)map.get("BOOK_NO")).intValue());
+			if(((Number)map.get("RENT_DATE")).intValue()==0){
+				orderVo.setBuyClass("B");
+			}else{
+				orderVo.setBuyClass("R");
+			}
+			if(orderVo.getImpUid()==null || orderVo.getImpUid().isEmpty()){
+				orderVo.setImpUid("");
+				orderVo.setMerchantUid("");
+				orderVo.setApplyNum("");
+			}
+			orderList.add(orderVo);
+		}
+		int cnt=orderService.MyBooksInsert(cartList,orderList);
+		MemberVO memberVo=memberService.selectByUserName(userId);
 		
 		model.addAttribute("cartList", cartList);
+		model.addAttribute("memberVo", memberVo);
 		return "shop/order/orderComplete";
 	}
 	

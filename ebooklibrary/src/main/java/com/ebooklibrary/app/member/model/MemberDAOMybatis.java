@@ -1,6 +1,7 @@
 package com.ebooklibrary.app.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -51,6 +52,11 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO 
 	@Override
 	public int updateUserInfo(MemberVO vo) {
 		return getSqlSession().update(namespace+".updateUserInfo", vo);
+	}
+
+	@Override
+	public int updateCash(Map<String, Object> map) {
+		return getSqlSession().update(namespace+".updateCash",map);
 	}
 
 	

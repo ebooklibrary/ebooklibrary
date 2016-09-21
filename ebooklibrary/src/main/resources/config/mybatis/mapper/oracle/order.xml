@@ -5,11 +5,11 @@
 <mapper namespace="com.mybatis.mapper.oracle.order">
 
 	<insert id="insertOrders" parameterType="OrderVO">
-		<selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
+		<selectKey keyProperty="ordersNo" resultType="int" order="BEFORE">
 			select	order_seq.nextval from dual
 		</selectKey>
-		insert into orders(orders_no, user_id, price) 
-		values(#{orderNo},#{userId}, #{price})
+		insert into orders(orders_no, user_id, price,ORDERS_DATE,BOOK_NO,BUY_CLASS,IMP_UID,MERCHANT_UID,APPLY_NUM) 
+		values(#{ordersNo},#{userId}, #{price},sysdate,#{bookNo},#{buyClass}, #{impUid},#{merchantUid}, #{applyNum})
 	</insert>
 	<update id="insertOrderDetails" parameterType="map">
 		insert into order_Detail 

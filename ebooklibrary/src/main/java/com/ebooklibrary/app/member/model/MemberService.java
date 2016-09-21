@@ -1,6 +1,7 @@
 package com.ebooklibrary.app.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ebooklibrary.app.common.SearchVO;
 
@@ -26,5 +27,6 @@ public interface MemberService {
 	public String selectBymemberVo(MemberVO vo);
 	public int updateTempPwd(MemberVO vo);
 	public int updateUserInfo(MemberVO vo);
+	public int updateCash(Map<String, Object> map);
 	
 }

@@ -77,7 +77,12 @@
 		   set hp1=#{hp1}, hp2=#{hp2}, hp3=#{hp3}, BIRTH=#{birth}, gender=#{gender}
 		 where user_id=#{userId} 
 	</update>
-	
+	<!-- 캐시 변경 -->
+	<update id="updateCash" parameterType="map">
+		update member
+		set cash=#{cash}
+		where user_id=#{userId}
+	</update>
 	
 	
 	<!-- 내서재 배경화면 -->

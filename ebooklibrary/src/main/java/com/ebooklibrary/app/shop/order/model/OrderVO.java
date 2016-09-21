@@ -4,16 +4,22 @@ import java.sql.Timestamp;
 
 public class OrderVO {
 
-	private int orderNo;				//주문번호
-	private String userId;			//고객고유번호(회원아이디)(FK)
-	private int price;			//주문총금액
-	private Timestamp orderDate;		//주문일자
+	private int ordersNo;				
+	private String userId;				
+	private int price;					
+	private Timestamp ordersDate;	
+	private int bookNo;
+	private String buyClass;
+	private String impUid;
+	private String merchantUid;
+	private String applyNum;
 	
-	public int getOrderNo() {
-		return orderNo;
+	
+	public int getOrdersNo() {
+		return ordersNo;
 	}
-	public void setOrderNo(int orderNo) {
-		this.orderNo = orderNo;
+	public void setOrdersNo(int ordersNo) {
+		this.ordersNo = ordersNo;
 	}
 	public String getUserId() {
 		return userId;
@@ -27,17 +33,49 @@ public class OrderVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public Timestamp getOrderDate() {
-		return orderDate;
+	public Timestamp getOrdersDate() {
+		return ordersDate;
 	}
-	public void setOrderDate(Timestamp orderDate) {
-		this.orderDate = orderDate;
+	public void setOrdersDate(Timestamp ordersDate) {
+		this.ordersDate = ordersDate;
 	}
+	public int getBookNo() {
+		return bookNo;
+	}
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
+	}
+	public String getBuyClass() {
+		return buyClass;
+	}
+	public void setBuyClass(String buyClass) {
+		this.buyClass = buyClass;
+	}
+	public String getImpUid() {
+		return impUid;
+	}
+	public void setImpUid(String impUid) {
+		this.impUid = impUid;
+	}
+	public String getMerchantUid() {
+		return merchantUid;
+	}
+	public void setMerchantUid(String merchantUid) {
+		this.merchantUid = merchantUid;
+	}
+	public String getApplyNum() {
+		return applyNum;
+	}
+	public void setApplyNum(String applyNum) {
+		this.applyNum = applyNum;
+	}
+	
 	@Override
 	public String toString() {
-		return "OrderVO [orderNo=" + orderNo + ", userId=" + userId + ", price=" + price + ", orderDate=" + orderDate
-				+ "]";
-	}	 
-	 
+		return "OrderVO [ordersNo=" + ordersNo + ", userId=" + userId + ", price=" + price + ", ordersDate="
+				+ ordersDate + ", bookNo=" + bookNo + ", buyClass=" + buyClass + ", impUid=" + impUid + ", merchantUid="
+				+ merchantUid + ", applyNum=" + applyNum + "]";
+	}
+	
 	
 }

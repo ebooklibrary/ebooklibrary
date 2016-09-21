@@ -15,7 +15,6 @@
 <script src="<c:url value='/alertify.js-0.3.11/lib/alertify.min.js'/>"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.1.js"></script>
 <script type="text/javascript">
-
 	$(function() {
 		$("#cashadd").click(function() {
 			$.ajax({
