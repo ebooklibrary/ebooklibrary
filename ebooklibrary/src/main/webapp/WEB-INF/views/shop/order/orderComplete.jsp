@@ -119,6 +119,11 @@ summary="주문 상품 목록에 관한 표로써, 상품명,가격, 수량, 금
         <span><fmt:formatNumber pattern="#,###"
         	value='${sum}' /> 원     </span>
     </p>
+    <p>
+    	<span class="sp1">남은 북코인 : </span>
+        <span><fmt:formatNumber pattern="#,###"
+        	value='${memberVo.cash}' />     </span>
+    </p>
 </div>
 
 <%@ include file="../../library/libraryBottom.jsp"%>    

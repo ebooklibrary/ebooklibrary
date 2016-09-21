@@ -1,6 +1,7 @@
 package com.ebooklibrary.app.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateUserInfo(MemberVO vo) {
 		return memberDao.updateUserInfo(vo);
+	}
+
+	@Override
+	public int updateCash(Map<String, Object> map) {
+		return memberDao.updateCash(map);
 	}
 
 	

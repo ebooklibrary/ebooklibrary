@@ -43,8 +43,10 @@ public class OrderController {
 		List<Map<String, Object>> cartList=cartService.selectCartView(userId);
 		logger.info("카트뷰 cartList={}",cartList.size());
 		int cnt=orderService.MyBooksInsert(cartList);
+		MemberVO memberVo=memberService.selectByUserName(userId);
 		
 		model.addAttribute("cartList", cartList);
+		model.addAttribute("memberVo", memberVo);
 		return "shop/order/orderComplete";
 	}
 	

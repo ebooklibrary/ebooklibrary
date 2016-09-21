@@ -7,9 +7,10 @@
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
 <script type="text/javascript">
-$(function() {
-	
-	
+$(function() {	
+	var afterCash=0;
+	var beforeCash=$("#beforeCash").val();
+	var firstPrice=$("#totPriceInput").val();
 	
 	$("#btnBuy").click(function() {
 		var radioChk=$('input:radio[name="payment"]').is(":checked");
@@ -22,13 +23,75 @@ $(function() {
 			alertify.alert("동의를 하셔야 합니다.");
 			return false;
 		}
-		
-		if($("#totPriceInput").val()==0){
-			$('input:radio[name="payment"][value="cash"]').prop('checked', true);
-			if(confirm("캐시로 결제합니다 계속하시겠습니까?")){
-				location.href="<c:url value='/shop/order/myBooksInsert.do'/>";
-			}
-		}else{			
+		//북코인+카드
+		if($('input:radio[id="cash"]').is(":checked")){
+			if($("#totalPrice").val()==0){
+				$.ajax({
+					url:"<c:url value='/member/updateCash.do'/>",
+					data:"cash="+afterCash,						
+					type:"POST",
+					success:function(res){
+						location.href="<c:url value='/shop/order/myBooksInsert.do'/>";							
+					},error: function(xhr,status, error){
+						alert("에러발생 - "+status +":" + error);
+					}
+				});//ajax	
+			}else{
+				$.ajax({
+					url:"<c:url value='/member/updateCash.do'/>",
+					data:"cash="+afterCash,						
+					type:"POST",
+					success:function(res){
+						var IMP = window.IMP;
+						IMP.init('imp52577413'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용.
+						
+						IMP.request_pay({
+						    pg : 'inicis', // version 1.1.0부터 지원. 
+						        /*
+						            'kakao':카카오페이,
+						            'inicis':이니시스, 'html5_inicis':이니시스(웹표준결제), 
+						            'nice':나이스, 
+						            'jtnet':jtnet, 
+						            'uplus':LG유플러스,
+						            'danal':다날
+						        */
+						    pay_method : 'card', // 'card':신용카드, 'trans':실시간계좌이체, 'vbank':가상계좌, 'phone':휴대폰소액결제
+						    merchant_uid : 'merchant_' + new Date().getTime(),
+						    name : '포도서관',
+						    //amount : $("#totPriceInput").val(),
+						    amount :$("#totalPrice").val(),
+						    buyer_email : ''+$("#userId").val(),
+						    buyer_name : ''+$("#userName").val(),			   
+						    buyer_tel : ''+$("#userHp").val(),
+						}, function(rsp) {
+						    if ( rsp.success ) {
+						    	var msg = '결제가 완료되었습니다.';
+						        msg += '고유ID : ' + rsp.imp_uid;
+						        msg += '상점 거래ID : ' + rsp.merchant_uid;
+						        msg += '결제 금액 : ' + rsp.paid_amount;
+						        msg += '카드 승인번호 : ' + rsp.apply_num;		        
+						        location.href="<c:url value='/shop/order/myBooksInsert.do'/>";
+						    } else {
+						        var msg = '결제에 실패하였습니다.';
+						        msg += '에러내용 : ' + rsp.error_msg;
+						        alertify.alert(msg);
+						        $.ajax({
+									url:"<c:url value='/member/updateCash.do'/>",
+									data:"cash="+beforeCash,						
+									type:"POST",
+									success:function(res){
+										/* $(location).attr('href', '<c:url value='/shop/cart/cartList.do'/>'); */
+									}
+						        });//ajax
+						    }
+						});//IMP.request_pay						
+					},error: function(xhr,status, error){
+						alert("에러발생 - "+status +":" + error);
+					}
+				});//ajax	
+			}//if
+		//카드
+		}else{
 			var IMP = window.IMP;
 			IMP.init('imp52577413'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용.
 			
@@ -46,7 +109,7 @@ $(function() {
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '포도서관',
 			    //amount : $("#totPriceInput").val(),
-			    amount :$("#totPriceInput").val() ,
+			    amount :firstPrice,
 			    buyer_email : ''+$("#userId").val(),
 			    buyer_name : ''+$("#userName").val(),			   
 			    buyer_tel : ''+$("#userHp").val(),
@@ -63,9 +126,9 @@ $(function() {
 			        msg += '에러내용 : ' + rsp.error_msg;
 			        alertify.alert(msg);
 			    }
-			});//IMP.request_pay
-			
-		}			
+			});//IMP.request_pay	
+		}//if
+				
 	});//click	
 	
 	/* 
@@ -128,7 +191,7 @@ $(function() {
 		$.ajax({
 			url:"<c:url value='/shop/cart/updateCart.do'/>",
 			type:"POST",
-			data: "cartNo="+$(this).parent().find(".cartNo").val()+"&rentDate="+$(this).parent().find(".rentDate").val()+"&price="+$(this).parent().find(".rentDate").val()*100,
+			data: "cartNo="+$(this).parent().find(".cartNo").val()+"&rentDate="+$(this).parent().find(".rentDate").val(),
 			/* data: $(this).serializeArray(), */
 			success:function(res){
 				/* location.reload(); */
@@ -139,11 +202,12 @@ $(function() {
 			}
 		});
 	});
+	
 	$(".buySpan").click(function() {
 		$.ajax({
 			url:"<c:url value='/shop/cart/updateCart.do'/>",
 			type:"POST",
-			data: "cartNo="+$(this).parent().parent().parent().find(".cartNo").val()+"&rentDate=0",
+			data: "cartNo="+$(this).parent().parent().parent().find(".cartNo").val()+"&rentDate=0&bookNo="+$(this).find(".bookNo").val(),
 			success:function(res){
 				$(location).attr('href', '<c:url value='/shop/cart/cartList.do'/>');
 			},
@@ -173,22 +237,32 @@ $(function() {
 		$(this).parent().parent().find(".frmPurchase").submit();
 	});
 	
-	/* 결제 가격 */
+	
+	
+	/* 캐쉬 관련 */
 	$("#btCash").click(function() {
 		var cash="${memberVo.cash }";
 		var totPrice=$("#totPriceInput").val();
 		
+		
 		if (cash>0) {
-			var res=totPrice-cash;
-			if(res<0){
-				res=0;
-				$("#finalCash").text(numberWithCommas(cash-totPrice));
+			var afterPrice=totPrice-cash;
+			afterCash=cash-totPrice;
+			//캐시에서 총 가격을 뺀 수
+			if(afterCash<0){
+				afterCash=0;
 			}
-			var result=numberWithCommas(res);
-			$("#totalPrice").val(res);
+			//총가격에서 캐시를 뺀 수
+			if(afterPrice<0){
+				afterPrice=0;
+				$("#finalCash").text(numberWithCommas(cash-totPrice)+" 원");
+			}
+			var result=numberWithCommas(afterPrice);
+			$("#totalPrice").val(afterPrice);			
 			$("#finalPriceSpan").text(result+" 원");
 		}else{
 			$("#totalPrice").val(totPrice);
+			$("#totPriceInput").val(totPrice);
 		}
 	});
 	
@@ -197,7 +271,7 @@ $(function() {
 		$("#totalPrice").val(totPrice);
 		var result=numberWithCommas(totPrice);
 		$("#finalPriceSpan").text(result+" 원");
-		$("#finalCash").text(numberWithCommas(${memberVo.cash }));
+		$("#finalCash").text(numberWithCommas(${memberVo.cash })+" 원");
 	});
 	
 	
@@ -310,13 +384,18 @@ function numberWithCommas(x) {
 							<c:if test="${empty map['RENT_DATE'] || map['RENT_DATE']==0 }">
 								<span class="buySpan"
 									style="font-weight: bold;font-size:1.2em;border:1px solid pink;"
-								>구매</span> / <span class="rentSpan">대여</span> 
+								>구매
+								<input type="hidden" name="bookNo" class='bookNo' value='${map["BOOK_NO"] }'>
+								</span> / <span class="rentSpan">대여</span> 
 							</c:if>
 							<!-- 대여 -->
 							<c:if test="${!empty map['RENT_DATE'] && map['RENT_DATE']!=0 }">
-								<span class="buySpan">구매</span> / <span class="rentSpan"
+								<span class="buySpan">구매
+								<input type="hidden" name="bookNo" class='bookNo' value='${map["BOOK_NO"] }'>
+								</span> / 
+								<span class="rentSpan"
 								style="font-weight: bold;font-size:1.2em;border:1px solid pink;"
-								>대여</span>
+								>대여</span>								
 							</c:if>
 							</p>
 						</td>						
@@ -381,7 +460,7 @@ function numberWithCommas(x) {
 	    </p>
 	    <p>
 	        <span class="sp1">북캐시</span>
-	        <span id="finalCash"><fmt:formatNumber value="${memberVo.cash }" pattern="#,###"/> 원</span>
+	        <span id="finalCash"><fmt:formatNumber value="${memberVo.cash }" pattern="#,###"/> 원</span>	        
 	        <input type="button" class="btCash" id="btCash" value="캐시 적용">
 	    </p>
 	    <p>
@@ -394,7 +473,7 @@ function numberWithCommas(x) {
 	        <span class="sp1">결제방법</span>
 	        <span>
 	        	<input type="radio" name="payment" id="cash" value="cash">
-	        	<label for="cash">북캐시</label>
+	        	<label for="cash">북캐시+신용/체크카드</label>
 	        	<input type="radio" name="payment" id="card" value="card">
 	        	<label for="card">신용/체크카드</label>
 	        </span>
@@ -434,12 +513,14 @@ function numberWithCommas(x) {
 	<!-- 주문 총 금액 hidden field -->
 	<input type="hidden" name="totalPrice" 
 	id="totalPrice">
+	<input type="hidden" id="beforeCash" value="${memberVo.cash }">
 	<input type="hidden" name="userId" 
 	id="userId" value="${memberVo.userId }" >
 	<input type="hidden" name="userName" 
 	id="userName" value="${memberVo.userName }" >
 	<input type="hidden" name="userHp" 
 	id="userHp" value="${memberVo.hp1}-${memberVo.hp2}-${memberVo.hp3}" >
+	<input type="hidden" id="oriCash" value="${memberVo.cash} ">
 
 
 
