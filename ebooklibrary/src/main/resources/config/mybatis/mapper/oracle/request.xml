@@ -64,9 +64,13 @@
 	</select>
 	
 	<update id="stockBook" parameterType="int">
-		update request_board
-		set stocked='Y'
-		where request_no=#{requestNo}
+		<![CDATA[
+		update REQUEST_BOARD
+        set stocked =  case stocked when 'Y' then 'N'
+        when    'N' then 'Y'
+        end
+        where request_no=#{requestNo}
+        ]]>
 	</update>
 </mapper>
 

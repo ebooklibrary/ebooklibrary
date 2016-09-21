@@ -16,6 +16,35 @@ $().ready(function(){
 	});
 	
 	$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
+	
+	$("#Btn_qnaEdit").click(function(){
+		$(location).attr('href', "<c:url value='/library/qna/qnaEdit.do?qnaNo=${param.qnaNo}'/>");
+	});
+	$("#Btn_qnaList").click(function(){
+		$(location).attr('href', "<c:url value='/library/qna/qnaList.do'/>");
+	});
+	
+	
+	
+	$("#btn_delqna").click(function(){
+		deleteqna(event,"삭제하시겠습니까?")
+	});
+	
+	function deleteqna(event,msg){
+		 var evt = event;
+	        event.preventDefault();
+	        alertify.confirm(msg, function (e) {
+	            if (e) {
+	                $("#deleteQna").submit();
+	                return true;
+	            } else {
+	                return false;
+	            }	
+	        });
+	}
+	
+	
+	
 });
 
 
@@ -23,19 +52,19 @@ $().ready(function(){
 <!-- qna 상세보기 화면 -->
 <div id="notice_head">
 	<h2>
-		<img alt="공지사항"
+		<img alt="qna"
 			src="${pageContext.request.contextPath }/images/library/qna/qnaboard.png"width="200px" height="50px">
 	</h2>
 </div>
 <div id="notice_banner">
 	<a href="<c:url value='/library/notice/noticelist.do'/>"><img
-		alt="공지사항 배너"
+		alt="qna 배너"
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
-		width="200px" height="50px"></a>
+		width="200px" height="50px" style="margin-bottom:80px;"></a>
 </div>
 <%@include file="../libraryAd.jsp"%>
 	<div id="detail_body">
-	<table class="detail_table">
+	<table class="detail_table" id="qnaDetail">
 		<tr>
 			<td class="td_1">제목</td>
 			<td class="td_5" colspan="5" >&nbsp;&nbsp;&nbsp;${qnaBoardVo.title }</td>
@@ -83,18 +112,15 @@ $().ready(function(){
 		</tr>
 
 	</table>
-		<div style="text-align:right">
-			<input type="button" id="preWriting" value="이전글"/>
-			<input type="button" id="nextWriting" value="다음글"/>
-		</div>
-		<div class="center" style="padding-bottom:20px">
-		
-			
+		<div id="bt_Detailcenter" >
 			<c:if test="${sessionScope.memberNo==qnaBoardVo.memberNo}">
-			<a href="<c:url value='/library/qna/qnaEdit.do?qnaNo=${param.qnaNo }'/>" >수정</a> |
-        	<a href="<c:url value='/library/qna/qnaDelete.do?qnaNo=${param.qnaNo }'/>" >삭제</a> |
+				<form id="deleteQna" method="post" action="<c:url value='/library/qna/qnaDelete.do'/>">
+					<input type="hidden" name="qnaNo" value="${param.qnaNo }"/>
+					<input type="button" id="Btn_qnaEdit" value="수정" class="btqnaDt"/>
+					<input type="submit" id="btn_delqna" value="삭제" class="btqnaDt"/>
+					<input type="button" id="Btn_qnaList" value="목록" class="btqnaDt"/>
+				</form>
         	</c:if>
-        	<a href="<c:url value='/library/qna/qnaList.do'/>" >목록</a>			
 		</div>
 	<c:import url="/comments/commentList.do?qnaNo=${param.qnaNo }&complete=${qnaBoardVo.complete }&memberNo=${qnaBoardVo.memberNo }"></c:import>
 	</div>

@@ -4,6 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/library/qna.css" />
+<!-- <link href="http://ts.daumcdn.net/custom/blog/0/606/skin/images/nanumgothic.css" rel="stylesheet" type="text/css"> -->
 <%@include file="../libraryTop.jsp" %>
 <script type="text/javascript">
 	$().ready(function(){
@@ -49,11 +50,12 @@
 	<img
 		alt="qna 배너"
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
-		width="200px" height="50px"></a>
+		width="200px" height="50px" ></a>
 </div>
 <!-- 광고 -->
 <%@include file="../libraryAd.jsp"%>
-<div id="notice_body">	
+<div id=qna_body>
+<div id="qnaList_body">	
 	   	<form name="frmSearch" id="searchbox2" method="post" 
 	   		action="<c:url value='/library/qna/qnaList.do' />" >
 	   		
@@ -78,10 +80,10 @@
 	        <input type="text" name="searchKeyword" 
 	        	title="검색어 입력" value="${param.searchKeyword}" class="searchCondition">   
 			<input type="submit" value="검색" id="searchInfo2">
-			</div>
+			</div><!-- //searchbox3 -->
 	    </form>
 	<div class="list">
-	<table
+	<table id="qnatable"
 	 	summary="질문게시판에 관한 표로써, 글번호, 제목, 작성자, 작성일, 조회수, 답변완료에 대한 정보를 제공합니다.">
 	<colgroup>
 		<col style="width:10%;" />
@@ -143,7 +145,7 @@
 						</a></td>
 					<td>${vo.userName }</td>
 					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="MM/dd 
-						 HH:mm:ss"/> </td>
+						 "/> </td>
 					<td>${vo.readCount }</td>
 					
 				</tr>
@@ -152,7 +154,9 @@
 		</c:if>
 	</tbody>
 	</table>
-</div>	   
+</div><!-- //list -->
+</div>	
+
 <div class="bticons">
 	<form id="myWrite" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
 		<input type="button" id="listGo" value="전체목록" class="qnabt"/>
@@ -164,8 +168,9 @@
 		<input type="hidden" id="myWrite" name="myWrite" value="Y">
 	</form>			
 </div>
+   
 <!-- 페이징 처리를 위한 div -->
-<div class="divPage">
+<div class="qnadivPage">
 	<!-- 이전 블럭으로 이동 -->
 	<c:if test="${pagingInfo.firstPage>1}">				
 		<a href="#" 

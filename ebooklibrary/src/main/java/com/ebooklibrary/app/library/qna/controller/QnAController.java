@@ -44,11 +44,11 @@ public class QnAController {
 		//paging
 		PaginationInfo pagingInfo= new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.QNA_BLOCK_SIZE);
-		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setRecordCountPerPage(Utility.QNA_COUNT_PER_PAGE);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 		
 		//searchVo
-		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		searchVo.setRecordCountPerPage(Utility.QNA_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		//2.

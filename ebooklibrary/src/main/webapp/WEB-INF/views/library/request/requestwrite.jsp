@@ -59,10 +59,10 @@ $().ready(function(){
 	       		<label for="publisher">출판사</label>
 				<input type="text" class="inputText" id="publisher" name="publisher">
 	        	<br>
-	        	<div id="request_align_right">
-	        		<input type="Button" value="글 목록" class="requestbt"
+	        	<div id="request_align_center">
+	        		<input type="submit" value="작성완료" class="reqbt"/>
+	        		<input type="Button" value="글 목록" class="reqbt"
 	        		onclick="location.href='<c:url value="/library/request/requestList.do"/>';" />
-	        		<input type="submit" value="작성완료" class="requestbt"/>
 	        	</div>
 		</fieldset>
 	</form>
