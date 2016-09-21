@@ -1,36 +1,60 @@
 @CHARSET "UTF-8";
+/* requestList */
+#req_body{
+	width: 780px;
+	height: 650px;
+	overflow: hidden;
+	margin-right:20px;
+	float: right;
+}
+#reqList_body {
+	
+	height:530px;
+}
+
+.reqbt {
+	font-weight:bold;
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 17px;
+  background: #4778cc;
+  padding: 5px 12px 5px 12px;
+  border: solid #1f628d 0px;
+  text-decoration: none;
+}
+
+.reqbt:hover {
+  background: #5494f5;
+  text-decoration: none;
+}
+
+
+
+
 .search_box{
 	text-align:right;
 	margin-top:20px;
 	margin-right:70px;
 }
 .requebticons{
+	height:50px;
 	text-align:right;
-	margin-top:20px;
-	margin-right:70px;
+	
+	margin-right:80px;
 }
-.requestbt{
-	background-color: rgba(209,209,209, 0.7);
-	margin-top:15px;
-	border-radius: 5px;
-	pading-right:10px;
-	width:78px;
-	height:30px;
-	white-space: nowrap;
-}
-#request_align_right{
+
+#request_align_center{
 	text-align:center;
 	margin-right:20px;
+	padding:20px;
+	
 }
 #writer{
 	clear:both;
 	
-}
-#request_body {
-	width: 800px;
-	height: 800px;
-	overflow: hidden;
-	float: right;
 }
 
 
@@ -55,8 +79,35 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
-#requestList td{
-	height:40px;
+#requestList{
+	width:700px;
 }
 
+#requestList td{
+	height:44px;
+}
+
+.reqdivPage {
+	clear: both;
+	text-align:center;
+	
+	font-size:1.3em;
+}
+
+.btreqList{
+	border:1px solid #000;
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  font-family: Arial;
+  color: #fff;
+  font-size: 15px;
+  background: #9e9ea3;
+  padding: 4px 3px 4px 3px;
+  text-decoration: none;
+}
+
+.btreqList:hover {
+  background: #000300;
+  text-decoration: none;
+}

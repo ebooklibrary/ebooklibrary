@@ -164,7 +164,7 @@ public class RequestController {
 	@RequestMapping("/requestStock.do")
 	public String book_stock(@RequestParam int requestNo,Model model){
 		//1.
-		logger.info("입고 처리 페이지 파라미터값   request={}",requestNo);
+		logger.info("입고 처리 페이지 파라미터값   requestNo={}",requestNo);
 		
 		//2.
 		int cnt =requestService.stockBook(requestNo);
@@ -176,6 +176,31 @@ public class RequestController {
 			msg="입고처리되었습니다.";
 		}else{
 			msg="입고처리가 되지않았습니다.";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/requestNotStock.do")
+	public String book_notstock(@RequestParam int requestNo,Model model){
+		//1.
+		logger.info("입고 취소처리 페이지 파라미터값   requestNo={}",requestNo);
+		
+		//2.
+		int cnt =requestService.stockBook(requestNo);
+		logger.info("입고처리 결과  cnt={}",cnt);
+		
+		//3.
+		String msg="",url="/library/request/requestList.do";
+		if(cnt>0){
+			msg="입고취소 처리되었습니다.";
+		}else{
+			msg="입고취소처리가 되지않았습니다.";
 		}
 		
 		model.addAttribute("msg",msg);

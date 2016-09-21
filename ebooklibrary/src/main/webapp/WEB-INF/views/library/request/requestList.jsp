@@ -20,20 +20,29 @@
 			$(location).attr('href',"<c:url value='/library/request/requestList.do'/>");
 		});
 		
+		$("#notstock").click(function(){
+			confirm("#req_stockCencel",event, "입고처리 하시겠습니까?");
+		});
 		$("#stock").click(function(){
-			if(confirm("입고처리하시겠습니까?")){
-				return true;
-			}else{
-				return false;
-			}
+			confirm("#request_stock",event, "입고처리 하시겠습니까?");
 		});
+		
 		$("#deleteRequest").click(function(){
-			if(confirm("삭제하시겠습니까?")){
-				return true;
-			}else{
-				return false;
-			}
+			confirm("#frmDelete",event, "삭제 하시겠습니까?");
 		});
+		
+		function confirm(id,event, msg) {
+	        var evt = event;
+	        event.preventDefault();
+	        alertify.confirm(msg, function (e) {
+	            if (e) {
+	                $(id).submit();
+	                return true;
+	            } else {
+	                return false;
+	            }	
+	        });
+	    } 
 		
 		
 	});
@@ -50,7 +59,7 @@
 
 
 <form name="frmPage" method="post" 
-	action="<c:url value='/library/qna/qnaList.do'/>">
+	action="<c:url value='/library/request/requestList.do'/>">
 	<input type="hidden" name="currentPage">
 	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
 	<input type="hidden" id="myWrite" name="myWrite" value="${param.myWrite }">
@@ -73,8 +82,8 @@
 </div>
 <!-- 광고 -->
 <%@include file="../libraryAd.jsp"%>
-
-<div id="request_body">
+<div id="req_body">
+<div id="reqList_body">
 	<div class="searchbox">
 		<form name="frmSearch" method="post"
 			action="<c:url value='/library/request/requestList.do' />">
@@ -106,8 +115,8 @@
 			<col style="width: 12%;" />
 			<col style="width: 10%;" />
 			<col style="width: 15%;" />
-			<col style="width: 7%;" />
-			<col style="width: 7%;" />
+			<col style="width: 6%;" />
+			<col style="width: 6%;" />
 			
 			
 		</colgroup>
@@ -119,7 +128,7 @@
 				<th scope="col">저자</th>
 				<th scope="col">출판사</th>
 				<th scope="col">작성자</th>
-				<th scope="col">작성일</th>
+				<th scope="col">요청일</th>
 				<th scope="col" colspan="2">비고</th>
 			</tr>
 		</thead>
@@ -136,16 +145,17 @@
 						<td>${vo.requestNo }</td>
 						<td>
 							<c:if test="${vo.stocked=='Y' }">
-								[입고완료]							
+								[입고완료]	
 							</c:if>
 							<c:if test="${vo.stocked=='N' }">
 								<c:if test="${sessionScope.auchCode=='ADMIN' }">
 									<form id="request_stock" method="post" action="<c:url value='/library/request/requestStock.do?requestNo=${vo.requestNo }'/>" >
-										<input type="submit" id="stock" value="입고하기">
+										<input type="submit" id="stock" value="입고하기" class="btreqList">
 									</form>
 								</c:if>
 								<c:if test="${sessionScope.auchCode=='USER' }">
 									입고요청중
+									
 								</c:if>
 							</c:if>
 						</td>
@@ -162,21 +172,30 @@
 									<form name="frmEdit" method="GET"
 											action="<c:url value='/library/request/requestEdit.do' />">
 											<input type="hidden" value="${vo.requestNo }" name="requestNo"/>
-										<input type="submit"   value="수정"/>
+										<input type="submit"   value="수정" class="btreqList"/>
 									</form>
 								</c:if>
 							</c:if>
+							
 						</td>
 						<td>
 							<c:if test="${vo.stocked=='N' }">
 								<c:if test="${sessionScope.memberNo==vo.memberNo }">
 									<form name="frmDelete" method="post"
 											action="<c:url value='/library/request/requestDelete.do?requestNo=${vo.requestNo }' />">
-										<input type="submit" id="deleteRequest" value="삭제"/>
+										<input type="submit" id="deleteRequest" value="삭제" class="btreqList"/>
 									</form>
 								</c:if>
 							</c:if>
-						</td>		
+						</td>
+						<c:if test="${vo.stocked=='Y' }">
+							
+								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+									<form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
+										<input type="submit" id="notstock" value="입고취소" class="btreqList">
+									</form>
+								</c:if>
+							</c:if>		
 					</tr>
 
 				</c:forEach>
@@ -184,12 +203,14 @@
 			</c:if>
 		</tbody>
 	</table>
-	<div class="bticons">
+</div>
+</div>
+	<div class="requebticons">
 		<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
-			<input type="button" id="listGo" value="전체목록" class="requestbt"/>
-			<input type="button" id="writeGo" value="글쓰기" class="requestbt"/>
+			<input type="button" id="listGo" value="전체목록" class="reqbt"/>
+			<input type="button" id="writeGo" value="글쓰기" class="reqbt"/>
 			<c:if test="${!empty sessionScope.memberNo }">
-				<input type="submit" id="myWriting" value="내글 보기" class="requestbt"/>
+				<input type="submit" id="myWriting" value="내글 보기" class="reqbt"/>
 			</c:if>
 			<c:if test="${!empty sessionScope.memberNo }">
 				<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
@@ -197,9 +218,9 @@
 			<input type="hidden" id="myWrite" name="myWrite" value="Y">
 		</form>			
 	</div>	
-</div>
+
 	<!-- 페이징 처리를 위한 div -->
-	<div class="divPage">
+	<div class="reqdivPage">
 		<!-- 이전 블럭으로 이동 -->
 		<c:if test="${pagingInfo.firstPage>1}">
 			<a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})"> <img

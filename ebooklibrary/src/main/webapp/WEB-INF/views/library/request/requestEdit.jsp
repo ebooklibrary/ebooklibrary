@@ -52,15 +52,15 @@ $().ready(function(){
 				<label for="title">책제목</label>
 				<input type="text" class="inputText" id="title" name="title" value="${requestVo.title }" />
 				<br>
-				<label for="writer">저  자</label>
+				<label for="writer">저    자</label>
 				&nbsp;&nbsp;<input type="text" class="inputText" id="writer" name="writer"  value="${requestVo.title }"/>
 	       		<br>
 	       		<label for="publisher">출판사</label>
 				<input type="text" class="inputText" id="publisher" name="publisher" value="${requestVo.publisher }">
 	        	<br>
-		        <div id="request_align_right">
-		        	<input type="submit" value="수정하기" class="requestbt"/>
-		        	<input type="reset" value="취소" class="requestbt"
+		        <div id="request_align_center">
+		        	<input type="submit" value="수정하기" class="reqbt"/>
+		        	<input type="reset" value="취소" class="reqbt"
 		        	onclick="location.href='<c:url value="/library/request/requestList.do"/>';" />
 		        </div>
 		</fieldset>

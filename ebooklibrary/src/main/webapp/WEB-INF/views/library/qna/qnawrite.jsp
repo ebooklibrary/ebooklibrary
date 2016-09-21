@@ -94,17 +94,16 @@ function submitContents(elClickedObj) {
 	<a href="<c:url value='/library/qna/qnaList.do'/>"><img
 		alt="qna 배너"
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
-		width="200px" height="50px"></a>
+		width="200px" height="50px" style="margin-bottom:80px;"></a>
 </div>
 
 <%@include file="../libraryAd.jsp"%>
-<div id="Write_body">
+<div id="qna_body">
 	<form name="frmWrite" id="frmWrite" method="post" 
 		action="<c:url value='/library/qna/qnaWrite.do'/>" >
 		<fieldset>
-			<legend>QnA 글쓰기</legend>
 				<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }">
-				<div id="detail_body">
+				<div id="Write_body">
 				<table class="detail_table">
 					<tr >
 						<td class="qnaTitle">제목</td>
@@ -118,10 +117,10 @@ function submitContents(elClickedObj) {
 					</tr>
 				</table>
 				<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
-		        <div id="Bticon">
+		        <div id="bt_Detailcenter">
+		        	<input type="submit" value="작성완료"  class="reqbt"/>
 		        	<input type="Button" value="글 목록"
-		        	onclick="location.href='<c:url value="/library/qna/qnaList.do"/>';" style="width:80px; height:30px;"/>
-		        	<input type="submit" value="작성완료" style="width:80px; height:30px;"/>
+		        	 	onclick="location.href='<c:url value="/library/qna/qnaList.do"/>';" class="reqbt" />
 		        </div>
 		       </div> 
 		</fieldset>

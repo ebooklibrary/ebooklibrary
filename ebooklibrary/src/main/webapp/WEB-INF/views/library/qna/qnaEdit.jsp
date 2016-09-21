@@ -96,7 +96,7 @@ function submitContents(elClickedObj) {
 	<a href="<c:url value='/library/qna/qnaList.do'/>"><img
 		alt="공지사항 배너"
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
-		width="200px" height="50px"></a>
+		width="200px" height="50px" style="margin-bottom:80px;"></a>
 </div>
 <%@include file="../libraryAd.jsp"%>
 <div id="Write_body">
@@ -127,10 +127,10 @@ function submitContents(elClickedObj) {
 		        	<textarea name="content" id="content" rows="12" cols="40">${qnaBoardVo.content }</textarea>
 		        </div>
 		        
-		        <div id="Bticon">
+		        <div id="BtEditicon">
 		        	<c:if test="${qnaBoardVo.memberNo==sessionScope.memberNo }">
-			        	<input type="submit" value="수정하기" style="width:80px; height:30px;"/>
-			        	<input type="reset" value="취소" style="width:80px; height:30px;"
+			        	<input type="submit" value="수정하기" class="qnabt"/>
+			        	<input type="reset" value="취소" class="qnabt"
 			        	onclick="location.href='<c:url value="/library/qna/qnaDetail.do?qnaNo=${param.qnaNo }"/>';" />
 		        	</c:if>
 		        </div>
