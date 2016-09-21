@@ -11,6 +11,7 @@ public class CashVO {
 	private String paidAmount;//결제금액
 	private String applyNum;//카드승인번호
 	private Timestamp sysDate;//구매날짜
+	
 	public int getCashChargNo() {
 		return cashChargNo;
 	}

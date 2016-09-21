@@ -1,9 +1,12 @@
 package com.ebooklibrary.app.shop.order.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
+
+import com.ebooklibrary.app.common.DateSearchVO;
 
 @Repository
 public class OrderDAOMybatis extends SqlSessionDaoSupport
@@ -33,6 +36,17 @@ public class OrderDAOMybatis extends SqlSessionDaoSupport
 	public int insertMyBooks(Map<String, Object> map) {
 		return getSqlSession().insert(namespace+".insertMyBooks",map);
 	}
+
+	@Override
+	public List<OrderVO> selectOrderAll(DateSearchVO searchVo) {
+		return getSqlSession().selectList(namespace+".selectOrder", searchVo);
+	}
+
+	@Override
+	public int selectOrderCount(DateSearchVO searchVo) {
+		return getSqlSession().selectOne(namespace+".selectOrderCount2", searchVo);
+	}
+
 
 	
 }

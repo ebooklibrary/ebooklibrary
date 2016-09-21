@@ -143,6 +143,14 @@ public class MemberController {
 		logger.info("비밀번호 변경화면");
 		return "member/pwdChange";
 	}
+	@RequestMapping(value="/pwdChange.do",method=RequestMethod.POST)
+	public String pwdChange_post(@ModelAttribute MemberVO vo,Model model){
+		logger.info("비밀번호 변경처리");
+		int cnt=memberService.updateTempPwd(vo);
+		model.addAttribute("msg", "비밀번호 변경 완료");
+		model.addAttribute("url", "/member/myPage.do");
+		return "member/pwdChange";
+	}
 	
 	@RequestMapping(value="/myInfo.do",method=RequestMethod.GET)
 	public String myInfo_get(HttpSession session,Model model){

@@ -53,7 +53,7 @@
 						    	$.ajax({
 									url:"<c:url value='/cash/cashCharge.do'/>",
 									data:"impUid="+imp_uid+"&merchantUid="+merchant_uid
-									+"&userid=${sessionScope.userId}&paidAmount="+paid_amount
+									+"&userid=${sessionScope.userId}&price="+paid_amount
 									+"&applyNum="+apply_num,
 									type:"POST",
 									success:function(res){

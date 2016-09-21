@@ -1,6 +1,5 @@
 package com.ebooklibrary.app.shop.order.model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ebooklibrary.app.common.DateSearchVO;
 import com.ebooklibrary.app.shop.cart.model.CartDAO;
 
 @Service
@@ -46,6 +46,17 @@ public class OrderServiceImpl implements OrderService{
 		}
 		return cnt;
 	}
+
+	@Override
+	public List<OrderVO> selectOrderAll(DateSearchVO searchVo) {
+		return orderDao.selectOrderAll(searchVo);
+	}
+
+	@Override
+	public int selectOrderCount(DateSearchVO searchVo) {
+		return orderDao.selectOrderCount(searchVo);
+	}
+
 
 }
 

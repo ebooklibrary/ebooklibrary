@@ -11,7 +11,8 @@
 	</div>
 	
 	<div class="info">
-	  <p>주문내역</p>
+	  <p>
+	  <a href="<c:url value='/shop/order/orderList.do'/>">주문내역</a></p>
 	</div>
 	
 	<div class="warning">

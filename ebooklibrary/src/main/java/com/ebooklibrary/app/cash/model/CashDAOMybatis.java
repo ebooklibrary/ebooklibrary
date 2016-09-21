@@ -4,6 +4,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.shop.order.model.OrderVO;
 
 @Repository
 public class CashDAOMybatis extends SqlSessionDaoSupport implements CashDAO{
@@ -20,7 +21,7 @@ public class CashDAOMybatis extends SqlSessionDaoSupport implements CashDAO{
 	}
 
 	@Override
-	public int insertCashCharge(CashVO vo) {
+	public int insertCashCharge(OrderVO vo) {
 		return getSqlSession().update(namespace+".insertCashCharge", vo);
 	}
 }

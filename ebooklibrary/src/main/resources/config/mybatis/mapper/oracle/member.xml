@@ -10,6 +10,8 @@
 			</if>
 		</where>
 	</sql>
+	
+	
 
 	<insert id="inserMember" parameterType="MemberVO">
 		<selectKey keyProperty="memberNo" resultType="int" order="BEFORE">
