@@ -7,6 +7,9 @@
 <c:if test="${sessionScope.auchCode!='ADMIN' }">
 <%@include file="../libraryTop.jsp"%>
 </c:if>
+<!-- 스마트에디터 -->
+<script type="text/javascript" src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>" charset="utf-8"></script>
+
 <!-- alert -->
 <!-- ideally at the bottom of the page -->
 <!-- also works in the <head> -->
@@ -77,7 +80,7 @@
 <form name="frm1" id="frm1" method="post"
 	action="<c:url value ='/library/notice/noticewrite.do'/>">
 	<div class="notice_Write">
-		<p>공지사항 입력</p>
+		<p>공지사항 입력 페이지</p>
 	</div>
 	<div class="notice_Title">
 		제목 : <input type="text" name="title" id="title">

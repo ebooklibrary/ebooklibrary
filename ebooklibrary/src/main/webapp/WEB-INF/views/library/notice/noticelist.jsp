@@ -136,7 +136,7 @@ $(document).ready(function(){
 		</div>
 		<c:if test="${sessionScope.auchCode=='ADMIN' }">
 			<div id="noticeWrite">
-				<a href="<c:url value ='/library/notice/noticewrite.do'/>">글쓰기</a>
+				<input type = "submit" id ="noticeSubmit" value="글쓰기" onclick="location.href='<c:url value ="/library/notice/noticewrite.do"/>'"/>
 			</div>
 		</c:if>
 	</div>

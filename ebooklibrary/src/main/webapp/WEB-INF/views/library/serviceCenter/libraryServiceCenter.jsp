@@ -24,7 +24,7 @@ $(document).ready(function(){
 	<p>고객센터 정보</p>
 </div>
 <div>
-	<a href="#">1:1 문의</a>
+	<a href="<c:url value ='/library/serviceCenter/question.do'/>">1:1 문의</a>
 </div>
 <div>
 	<a href="<c:url value='/library/notice/noticelist.do'/>">공지사항</a>

@@ -336,7 +336,6 @@
 
 .detail_table {
 	width: 100%;
-	margin-top: 30px;
 	font-size: 1em;
 }
 
@@ -393,6 +392,15 @@
 	margin-top: 80px;
 	margin-bottom: 30px;
 }
+#noticeSubmit{
+   background-color: rgba(221,221,221, 0.7);
+   margin-top:15px;
+   border-radius: 5px;
+   pading-right:10px;
+   width:74px;
+   height:30px;
+   white-space: nowrap;
+}
 /* 공지사항 쓰기 CSS  */
 .notice_list a img {
 	clear:both;
@@ -411,6 +419,11 @@
 	margin-bottom: 50px;
 	font-size: 1.3em;
 	margin-right: 15px;
+}
+.notice_Write p{
+	font-weight: bold;
+	font-size: 1.3em;
+	text-align: left;
 }
 
 .notice_Title {
@@ -445,6 +458,19 @@
 }
 
 /* 공지사항 수정  css */
+#edit_body{
+	float: right;
+	width: 700px;
+	height: 800px;
+	overflow: hidden;
+	margin-bottom: 50px;
+}
+.edit_submit{
+	clear: both;
+	float: right;
+	margin-top: 25px;
+	margin-right: 63px;
+}
 
 /* 사이트맵 css */
 .siteMap {
@@ -603,3 +629,33 @@
 	line-height: 22px;
 }
 
+
+
+/* 고객센터 css */
+/* 1:1 문의 css */
+#question{
+	clear:both;
+	float:right;
+	width:800px;
+	height:90%;
+	margin-top: 100px;
+}
+.question_head{
+	margin-left: 30px;
+}
+.question_p{
+	margin-bottom: 30px; 
+	margin-left:30px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+.question_body{
+	margin-left: 30px;
+	margin-top: 30px;
+}
+.question_submit{
+	clear: both;
+	float: right;
+	margin-right:133px;
+	margin-top: 30px;
+}
