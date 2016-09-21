@@ -21,7 +21,8 @@
 						title="example-slide-3" id="wows1_2" /></a></li>
 				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide4.jpg"
 					alt="example-slide-4" title="example-slide-4" id="wows1_3" /></li>
-				
+				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide4.jpg"
+					alt="example-slide-4" title="example-slide-4" id="wows1_3" /></li>
 			</ul>
 		</div>
 		<div class="ws_bullets">

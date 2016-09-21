@@ -6,6 +6,7 @@ public interface OrderDAO {
 	public int insertOrders(OrderVO orderVo);
 	public int insertOrderDetails(Map<String, Object> map);
 	public int deleteCartByUserid(String userid);
+	public int insertMyBooks(Map<String, Object> map);
 	
 	
 }

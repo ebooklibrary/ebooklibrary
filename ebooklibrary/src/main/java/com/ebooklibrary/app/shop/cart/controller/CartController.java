@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.MyBookService;
+import com.ebooklibrary.app.mybooks.model.MyBookVO;
+import com.ebooklibrary.app.mybooks.model.MyBooksVO;
 import com.ebooklibrary.app.shop.cart.model.CartService;
 import com.ebooklibrary.app.shop.cart.model.CartVO;
 
@@ -32,6 +35,9 @@ public class CartController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MyBookService myBookService;
 	
 	@RequestMapping("/cartList.do")
 	public String cartView(HttpSession session,Model model){
@@ -83,10 +89,18 @@ public class CartController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String endDate = sdf.format(today);
 		
-		logger.info("장바구니 날짜 endDate={}",endDate);
 		//price 
-		cartVo.setPrice(days*100);
-		cartVo.setRentEnd(endDate);
+		if(days!=0){
+			cartVo.setPrice(days*100);
+			cartVo.setRentEnd(endDate);
+		}else{
+			int bookNo=cartVo.getBookNo();
+			MyBookVO bookVo=myBookService.selectBookByBookNo(bookNo);
+			cartVo.setPrice(bookVo.getPrice());			
+		}
+		logger.info("장바구니 날짜 endDate={}",endDate);			
+		
+		//책번호로 책조회한후 구매누를시 책가격 cartVo에 입력,렌트!=0 렌트값 입력
 		
 		cartService.updateCart(cartVo);
 	}

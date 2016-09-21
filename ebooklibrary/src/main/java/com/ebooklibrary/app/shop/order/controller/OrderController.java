@@ -1,5 +1,6 @@
 package com.ebooklibrary.app.shop.order.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
@@ -35,32 +37,37 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@RequestMapping(value="/orderSheet.do",method=RequestMethod.GET)
-	public String orderSheet_get(HttpSession session,Model model){
-		
+	@RequestMapping("/myBooksInsert.do")	
+	public String myBooksInsert(@ModelAttribute OrderVO orderVo,HttpSession session,Model model){
+		logger.info("내책리스트에 책추가");
 		String userId=(String)session.getAttribute("userId");
-		logger.info("주문 보여주기 파라미터 userId={}",userId);
-		List<Map<String, Object>> alist=cartService.selectCartView(userId);
-		logger.info("주문 보여주기 장바구니 alist={}",alist.size());
+		List<Map<String, Object>> cartList=cartService.selectCartView(userId);		
+		logger.info("카트뷰 cartList={}",cartList.size());
+		List<OrderVO> orderList=new ArrayList<OrderVO>();
+		for(int i=0;i<cartList.size();i++){
+			Map<String, Object> map=cartList.get(i);
+			orderVo.setUserId(userId);
+			logger.info("price={}",((Number)map.get("PRICE")).intValue());
+			orderVo.setPrice(((Number)map.get("PRICE")).intValue());
+			orderVo.setBookNo(((Number)map.get("BOOK_NO")).intValue());
+			if(((Number)map.get("RENT_DATE")).intValue()==0){
+				orderVo.setBuyClass("B");
+			}else{
+				orderVo.setBuyClass("R");
+			}
+			if(orderVo.getImpUid()==null || orderVo.getImpUid().isEmpty()){
+				orderVo.setImpUid("");
+				orderVo.setMerchantUid("");
+				orderVo.setApplyNum("");
+			}
+			orderList.add(orderVo);
+		}
+		int cnt=orderService.MyBooksInsert(cartList,orderList);
 		MemberVO memberVo=memberService.selectByUserName(userId);
-		logger.info("주문자 정보 보여주기 memberVo={}",memberVo);
 		
-		model.addAttribute("cartList", alist);
+		model.addAttribute("cartList", cartList);
 		model.addAttribute("memberVo", memberVo);
-		
-		return "shop/order/orderSheet";
+		return "shop/order/orderComplete";
 	}
-	@RequestMapping(value="/orderSheet.do",method=RequestMethod.POST)
-	public String orderSheet_post(@ModelAttribute OrderVO orderVo,HttpSession session){
-		//1.
-		String userId=(String)session.getAttribute("userId");
-		orderVo.setUserId(userId);
-		logger.info("결제하기 파라미터 orderVo={}",orderVo);
-		//2.
-		int cnt = orderService.insertOrders(orderVo);
-		logger.info("결제하기 결과 cnt={}",cnt);
-		
-		//3.
-		return "redirect:/shop/order/orderComplete.do?orderNo="+orderVo.getOrderNo();
-	}
+	
 }

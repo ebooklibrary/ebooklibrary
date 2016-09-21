@@ -35,5 +35,9 @@ public class CartDAOMybatis extends SqlSessionDaoSupport implements CartDAO{
 	public int delCart(int cartNo) {
 		return getSqlSession().delete(namespace+".delCart", cartNo);
 	}
+	@Override
+	public int deleteCart(Map<String, Object> map) {
+		return getSqlSession().delete(namespace+".deleteCart", map);
+	}
 
 }

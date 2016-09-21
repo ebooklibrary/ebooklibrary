@@ -17,4 +17,5 @@ public interface NoticeService {
 	public int nextPageNotice(int notice_No);	
 	public int nextPage();
 	public List<NoticeVO> selectMainNotice();
+	public List<NoticeVO> selectServiceCenterNotice();
 }

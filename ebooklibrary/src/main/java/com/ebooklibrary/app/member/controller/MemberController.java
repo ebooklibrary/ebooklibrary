@@ -1,5 +1,8 @@
 package com.ebooklibrary.app.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -214,6 +217,18 @@ public class MemberController {
 		}
 		
 		return "common/message";
+	}
+	
+	@RequestMapping("/updateCash.do")
+	@ResponseBody
+	public int updateCash(HttpSession session, @RequestParam int cash){
+		logger.info("사용자 캐시 변경 cash={}",cash);
+		
+		String userId=(String)session.getAttribute("userId");
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("cash", cash);
+ 		return memberService.updateCash(map);		
 	}
 	
 	
