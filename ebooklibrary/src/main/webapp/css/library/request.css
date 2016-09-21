@@ -2,14 +2,14 @@
 /* requestList */
 #req_body{
 	width: 780px;
-	height: 650px;
+	height: 700px;
 	overflow: hidden;
 	margin-right:20px;
 	float: right;
 }
 #reqList_body {
 	
-	height:530px;
+	height:560px;
 }
 
 .reqbt {
@@ -84,7 +84,7 @@
 }
 
 #requestList td{
-	height:44px;
+	height:46px;
 }
 
 .reqdivPage {

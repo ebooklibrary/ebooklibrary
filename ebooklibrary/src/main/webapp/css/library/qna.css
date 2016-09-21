@@ -2,14 +2,14 @@
 /* qnaList */
 #qna_body{
 	width: 730px;
-	height: 650px;
+	height: 700px;
 	overflow: hidden;
 	margin-right:20px;
 	float: right;
 }
 #qnaList_body {
 	
-	height:530px;
+	height:560px;
 }
 
 .list #qnatable {
@@ -22,7 +22,7 @@
 }
 
 .list #qnatable td {
-	height:44px;
+	height:46px;
 }
 
 

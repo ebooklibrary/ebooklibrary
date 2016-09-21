@@ -144,8 +144,7 @@
 						
 						</a></td>
 					<td>${vo.userName }</td>
-					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="MM/dd 
-						 "/> </td>
+					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="YYYY-MM-dd"/> </td>
 					<td>${vo.readCount }</td>
 					
 				</tr>
