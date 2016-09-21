@@ -12,30 +12,62 @@ body {margin:0px; padding:0px;  }
 	padding: 0;
 	position: relative;
 	overflow: hidden;
-	background: url(../../images/library/main/test2.JPG) no-repeat center;
+	background: url(../../images/library/main/test2.png) no-repeat center;
+	 
 }
 
+
 /* rightmenu 옆에 붙는 메뉴 */
+/* 버튼들 */
+#menuController{
+	float: right;
+	padding-top: 10px;
+	padding-right: 230px;
+	margin-bottom: 40px;
+}
+#menuController a{
+	display: none;
+}
+
+.menuBut{
+	font-size:30px;
+	cursor:pointer;
+}
+/* 메뉴들 */
 #rightmenu{
+	font-family: "Lato", sans-serif;
 	position:absolute;
+	position: fixed;
 	right:1px;
-	width: 180px;
-	height: 600px;   
-	
-	margin-top:170px;
-	/* border: 1px solid black; */
+	/* width: 180px; */
+	width: 0px;
+	/* height: 600px; */
+	height: 100%;
+	padding-top: 140px;
+	/* margin-top:170px; */
+	border-left: 1px solid #e0e0e0;
+	background-color: white;
+	z-index: 1;
 }
 #rightmenu .menuform{
-	width:90%;
-	height:10%;
+	width:100%;
+	height:50px;
 	margin: 20px 0 20px 0;
-	border-radius: 3px;
+	padding-left: 30px;
+	/* text-align:center; */
+	vertical-align: middle;
+	
 	/* border: 1px solid red; */
-	background-color: rgba(255, 220, 220, 0.5);
+	/* background-color: rgba(255, 220, 220, 0.5); */
+}
+#lastMenuForm{
+	border-bottom: 1px solid #e0e0e0; 
+	padding-bottom: 100px;
+	margin-bottom: 20px;
 }
 #rightmenu .menuform a{
 	display:inline-block;
-	margin: 15px 0 0 15px;
+	/* margin: 15px 0 0 15px; */
 	font-size: 1.2em;
 	
 	background-color: rgba(255, 255, 255, 0.3);
@@ -44,14 +76,50 @@ body {margin:0px; padding:0px;  }
 	/* font-family:monospace,monospace; */
 	font-family:Verdana,sans-serif;
 }
-.menuFlagColor{
-	float: right;
-	height: 100%;
-	width:20%;
-	background-color: rgba(255, 255, 200, 0.5);
-	clear:both;
+/* 좌측메뉴 장바구니 */
+#sidecartDiv{
+	margin-top: 30px;
+	width:180px;
 }
 
+#sidecartDiv p:first-child{
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-bottom: 50px;
+}
+#sidecartDiv p{
+	overflow:hidden;
+	height:20px;
+	margin: 20px 0 20px 0;
+	/* padding-left: 30px; */
+	text-align:center;
+	vertical-align: middle;
+}
+#sidecartDiv p:last-child{
+	margin-top: 50px;
+}
+#sidecartDiv p:last-child a{
+	font-weight: bold;
+	border: 1px solid black;
+	border-radius: 3px;
+	padding: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	
+}
+
+
+
+/* 메뉴 여닫이 */
+@media screen and (max-height: 450px) {
+	.sidemenu {padding-top: 15px;}
+	.sidemenu a {font-size: 18px;}
+}
+.sidemenu a:hover, .offcanvas a:focus{
+    /* color: #f1f1f1; */
+    color: black;
+    font-weight: bold;
+}
 
 /* containers */
 #container{
@@ -91,26 +159,31 @@ body {margin:0px; padding:0px;  }
 /* mybook */
 #mybook{
 	float:left;
-	width: 45%;
-	height:390px;
-	margin:45px 0 0 0; 
+	width: 500px;
+	height:300px;
+	margin:140px 15px; 
 	/* border: 1px solid black; */
-	
-	
+	text-align: center;
 }
 #slideshow{
 	border: 1px solid gray;
 }
-  /* 공지사항 */
-  #tab1 { 
-    float:right;
-	width: 45%;
-	height:390px;
-	margin:45px 15px; 0 0; 
+ /* 공지사항 */
+ #tab1 { 
+	float:right;
+	width: 500px;
+	height:300px;
+	margin:145px 15px;
 	/* border: 1px solid black; */
-	}
-	#tab1 #tab1c1 .tabmore{
-		position: relative;
-		bottom: 1px;
-		right: 1px;
-	}
+}
+#tab1 #tab1c1 .tabmore{
+	position: relative;
+	bottom: 1px;
+	right: 1px;
+}
+.list2{
+	border-top: 
+}
+.add_notice a{
+	color: gray;
+}

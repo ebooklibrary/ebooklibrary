@@ -15,7 +15,7 @@
 					</tr>
 				</c:if>
 				<c:if test="${!empty noticeVo }">
-					<c:forEach var="vo" items="${noticeVo }">
+					<c:forEach begin="0" end="7" var="vo" items="${noticeVo }">
 						<tr>
 							<c:if test="${fn:length(vo.title)>20}">
                            ${fn:substring(vo.title,0,20)}...

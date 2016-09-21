@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../library/libraryTop.jsp" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/loginForm.css" />    
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/loginForm.css" />
+
+<%@ include file="mypageRightMenu.jsp" %>
+    
 <div id="regiWrapper" class="FormWrapperDiv">
 <p id="titlePtag">비밀번호 변경</p>
 	<form action="<c:url value='/member/pwdChange.do'/>" method="post" id="regForm">
@@ -15,6 +18,6 @@
 	</form>
 </div>
 
-<%@ include file="mypageRightMenu.jsp" %>
+
 
 <%@ include file="../library/libraryBottom.jsp" %>

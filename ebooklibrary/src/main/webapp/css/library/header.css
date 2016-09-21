@@ -5,23 +5,44 @@
 /*메인헤더,서브헤더부분*/
 
 /* header (global_menu,top_menu) **********/
-#header {
-	margin: 0 0 0 180px;
-	width: 1300px;
-	height: 100px;
+#fakeHeader{
 	/* border: 1px solid black; */
+	width: 100%;
+	height: 90px;
+	padding-left: 200px;
+	position: absolute;
+	border-bottom: 1px solid #e8e8e8;
+	/* background-color: rgba(235,235,235, 0.2); */
 }
+#header {
+	margin: 0 auto;
+	/* position: fixed; */
+	top:0px;
+	left:0px;
+	padding:0 150px;
+	/* margin: 0 0 0 180px; */
+	/* width: 1300px; */
+	width:100%;
+	height: 100px;
+	
+	z-index: -1;
+	text-align: center;
+}
+
 
 /* logo */
 #logo {
+	/* border: 1px solid black; */
+	float: left;
 	width: 149px;
 	/* height: 58px; */
 	/* margin: 28px 0 0 10px; */
-	height: 90%;
+	height: 85%;
 	margin-left: 10px;
-	
+	/* text-align: center; */
+	display: inline-block;
 	padding: 0;
-	float: left;
+	/* float: left; */
 }
 #logo img{
 	width: 100%;
@@ -29,11 +50,38 @@
 }
 
 /* gnb_menu */
-#gnb {width:45%; float:right; margin:30px 20px 0 0; padding:0; height:100%; }
- #gnb #global {margin:0; padding:4px 0 0 0; float:left; width:100%; }
- #gnb #global li.first {margin:0; display:inline; float:left; padding:0 10px 0 0; background:none; }
- #gnb #global li {margin:0; display:inline; float:left; padding:0 10px 0 10px;  background:url(/images/gmi/inc/gnb_bar.gif) no-repeat left;}
- #gnb #global li.last {margin:0; display:inline; float:left; padding:0 0 0 10px;  background:url(/images/gmi/inc/gnb_bar.gif) no-repeat left;}
+#gnb {
+	/* border: 1px solid black; */
+	width: 700px;
+	float: right;
+	margin: 55px 0 0 0;
+	padding: 0;
+	
+}
+
+#gnb #global {
+	margin: 0;
+	padding: 4px 0 0 0;
+	float: left;
+	width: 100%;
+}
+
+/* #gnb #global li.first {margin:0; display:inline; text-align:center; padding:0 10px 0 0; background:none; } */
+/* #gnb #global li.last {margin:0; display:inline; padding:0 0 0 10px;  background:url(/images/gmi/inc/gnb_bar.gif) no-repeat left;} */
+ #gnb #global li {
+	margin: 0 7px;
+	padding-left: 15px;
+	text-align: center;
+	display: inline;
+	border-left: 1px solid #dfdfdf;
+	/* border-right: 1px solid black; */
+}
+#gnb #global li a{
+	text-align: center;
+	margin: 0 auto;
+}
+#gnb #global li.first {border-left: 0;}
+#gnb #global li.last {}
  #gnb #global img { vertical-align:middle;}
 
  #gnb #intro_btn  { padding:0; height:26px; float:left; width:98px;}

@@ -37,7 +37,7 @@
 				<li class="sp05">SAMPLE 05</li> -->
 			</ul>
 		</div>
-		<ul class="pages"></ul>
+		<!-- <ul class="pages"></ul> -->
 	</div>
 </div>
 

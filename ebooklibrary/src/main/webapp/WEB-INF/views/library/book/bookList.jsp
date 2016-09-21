@@ -209,7 +209,7 @@
 				<span>작가</span>
 				<span>장르<select name="genre" id="genre" style="display:none; margin-left: 5px;"></select></span>
 			</p>
-			<input type="text" class="w3-input" id="searchInput" name="title" style="border-bottom: 1px solid orange">
+			<input type="text" class="w3-input" id="searchInput" name="title" placeholder="조건별 검색을 원할시 위의 원하시는 조건을 클릭 후 검색하세요.">
 			<!-- <input type="hidden" id="titleInput" name=""> -->
 		
 		

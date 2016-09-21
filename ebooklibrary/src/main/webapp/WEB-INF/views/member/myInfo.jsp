@@ -29,7 +29,7 @@ $(function() {
 
 </script>
 
-
+<%@ include file="mypageRightMenu.jsp" %>
 
 <div id="regiWrapper" class="FormWrapperDiv">
 <p id="titlePtag">내정보 수정</p>
@@ -66,7 +66,5 @@ $(function() {
 	<input type="submit" id="chgSubmit" value="회원정보 수정">
 	</form>
 </div>
-
-<%@ include file="mypageRightMenu.jsp" %>
 
 <%@ include file="../library/libraryBottom.jsp" %>

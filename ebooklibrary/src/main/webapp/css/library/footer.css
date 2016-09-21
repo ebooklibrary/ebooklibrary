@@ -21,7 +21,7 @@
  
  
  /* 주소,연락처등 */  
- #foot_add { margin:0 0 0 350px; padding:0; float:left; width:400px; font-size:12px; color:#333;}
+ #foot_add { margin:0 0 0 350px; padding:0; float:left; width:550px; height:50px; font-size:12px; color:#333;}
  #foot_add img {vertical-align:top; font-size:0px; line-height:0px; }
  #foot_add address {margin:0 0 5px 0; padding:0; font-style:normal;  }
  #foot_add p {margin:0; padding:0; color:#999; }
@@ -32,7 +32,7 @@
  	width:20%;
  	height:48px;
  	margin:0;
- 	border:1px solid black;
+ 	/* border:1px solid black; */
  }
 
 

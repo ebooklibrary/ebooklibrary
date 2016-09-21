@@ -80,41 +80,98 @@ $(function() {
 		$(location).attr('href', href);
 	});
 	
+	/* 사이드메뉴 */
+	$("#menuController a").hide();
+	//열기
+	$("#menuController span").click(function() {
+		$("#menuController span").hide();
+		$("#menuController a").show();
+	});
+	//닫기
+	$("#menuController a").click(function() {
+		$("#menuController a").hide();
+		$("#menuController span").show();
+	});
+	
+	if(${!empty sessionScope.userId}){
+		$.ajax({
+			url:"<c:url value='/library/mainCart.do'/>",
+			data:"userId=${sessionScope.userId}",			
+			type:"GET",
+			dataType:"json",
+			success:function(res){
+				/* alert("응답결과, 개수:"+res.length); */
+				
+				if (res.length>0) {
+					var result="<p>장바구니 목록</p>";
+					$.each(res, function(idx,item) {
+						result+="<p>"+item.title+"</p>";
+					});
+					result+="<p><a href='<c:url value='/shop/cart/cartList.do'/>'>구매 페이지</a></p>";
+					$("#sidecartDiv").html(result);
+				}
+			},
+			error:function(xhr, status, error){
+				alertify.alert(status+":"+error);
+			}
+		});//ajax
+	}//if
+	
+	
+	
 });
+
+
+function openNav() {
+    document.getElementById("rightmenu").style.width = "180px";
+}
+
+function closeNav() {
+    document.getElementById("rightmenu").style.width = "0";
+}
 
 </script>
 </head>
 <body>
-<!--container_out-->
-<div id="container_out">
+<div id="fakeHeader"></div>
+
 <!-- 옆에붙을 메뉴 -->
-	<div id="rightmenu">
+<div id="rightmenu" class="sidemenu">
+
+	
 	<div class="menuform">
 		<a href="<c:url value='/library/qna/qnaList.do'/>">QNA</a>
-		<div class="menuFlagColor" id="qnaDivColor"></div>
+		<!-- <div class="menuFlagColor" id="qnaDivColor"></div> -->
 	</div>
 	<div class="menuform">
 		<a href="<c:url value='/library/notice/noticelist.do'/>"> 
 		공지사항
 		</a>
-		<div class="menuFlagColor" id="noticeDivColor"></div>
+		<!-- <div class="menuFlagColor" id="noticeDivColor"></div> -->
 	</div>
 	<div class="menuform">
 		<a href="<c:url value='/admin/book/bookList.do'/>">책검색</a>
-		<div class="menuFlagColor" id="schDivColor"></div>
+		<!-- <div class="menuFlagColor" id="schDivColor"></div> -->
 	</div>
-	<div class="menuform">
+	<div class="menuform" id="lastMenuForm">
 		<a href="<c:url value='/library/request/requestList.do'/>">요청게시판</a>
-		<div class="menuFlagColor" id="requestDivColor"></div>
+		<!-- <div class="menuFlagColor" id="requestDivColor"></div> -->
 	</div>
+	
+	<c:if test="${!empty sessionScope.userId }">
+	<!-- 사이드 메뉴 장바구니 -->
+	<div id="sidecartDiv" class="menuformBottom">
+		<%-- <p><a href="<c:url value='/shop/cart/cartList.do'/>">구매 페이지</a></p> --%>
+	</div>
+	</c:if>
 </div>
-  <div id="header">  
-  <!--logo Start-->   
-	 <h2 class="skip">로고</h2>
-	 	 <div id="logo"><a href="<c:url value='/library/librarymain.do'/>">
-	 	 <img alt="로고 이미지" src="<c:url value='/images/library/main/logo.JPG'/>">
-	 	 </a></div>
-  <!--//#logo End-->
+	
+
+<!--container_out-->
+<div id="container_out">
+	
+	
+	<div id="header">  
 	<!--global_menu Start-->
 	<h2 class="skip">글로벌메뉴</h2>
 	<div id="gnb">      
@@ -141,8 +198,7 @@ $(function() {
 				<a href="<c:url value='/mybooks/mybookmain.do'/>">내 서재</a>
             	</li>
 				<li>
-				<a href="#" id="memoList">				
-				쪽지(<span id="memoCount"></span>)
+				<a href="#" id="memoList">쪽지(<span id="memoCount"></span>)
 				</a></li>				
 				<li>
 				<a href="<c:url value='/member/myPage.do'/>">
@@ -169,7 +225,21 @@ $(function() {
     </div>
 	<!--//#gnb_menu-->
 	
+	<!--logo Start-->   
+	<h2 class="skip">로고</h2>
+		 <div id="logo"><a href="<c:url value='/library/librarymain.do'/>">
+	<img alt="로고 이미지" src="<c:url value='/images/library/main/logo.JPG'/>">
+	</a></div>
+	<!--//#logo End-->
+	
+	
+	
 </div>
 <!--header end-->
+	<div id="menuController">
+		<span class="menuBut" onclick="openNav()">&#9776; menu open</span>
+		<a href="javascript:void(0)" class="menuBut" onclick="closeNav()">&times; menu close</a>
+	</div>
+  
 <div id="container">
 <!-- include top -->

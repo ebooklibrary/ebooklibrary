@@ -5,7 +5,7 @@
 }
 /* 사이드 장바구니 목록 */
 #cartDiv{
-	border: 1px solid #ffe6e6;
+	/* border: 1px solid #ffe6e6; */
 	border-radius: 3px;
 	float: right;
 	width: 150px;
@@ -32,7 +32,7 @@
 
 #bookListWrapper{
 	/* border: 1px solid black; */
-	margin: 20px 0 0 20px;
+	margin: 20px 0 0 200px;
 	padding: 20px;
 	
 	width: 800px;
@@ -53,7 +53,13 @@
 	margin-left: 10px;
 	padding: 5px;
 }
-
+/* 검색인풋 */
+#searchInput{
+	border: 1px solid #f2f2f2;
+	border-bottom: 1px solid orange;
+	width: 65%;
+	margin-top: 30px;
+}
 
 #bookListDiv{
 	/* border: 1px solid black; */
@@ -180,7 +186,9 @@
 	margin-bottom: 100px;
 	margin-top: 50px;
 	padding-top: 5px;
-	border-top: 1px solid gray;
+	/* border: 1px solid gray; */
+	border-top: 3px solid gray;
+	height: 50px;
 	
 }
 #sortDiv li{
@@ -217,9 +225,11 @@
 /* 페이징처리 */
 .divPage{
 	text-align: center;
+	margin: 0 auto;
 }
 ul.pagination {
     display: inline-block;
+    text-align:center;
     padding: 0;
     margin: 0;
 }

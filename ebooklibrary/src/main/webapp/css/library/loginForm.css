@@ -8,13 +8,19 @@
 	font-size: 1.2em;
 	float: left;
 }
+
 #loginWrapper{
-	float: left;
-	margin: 10px 0 0 10px;
+	margin: 0 auto;
+	/* margin: 10px 0 0 10px; */
+	margin-left: 30%;
+	margin-top: 15%; 
 }
+
 #regiWrapper{
-	float: left;
-	margin: 30px 0px 0 40px;
+	margin: 0 auto;
+	/* margin: 10px 0 0 10px; */
+	margin-left: 30%;
+	margin-top: 15%; 
 }
 #titlePtag{
 	font-size: 1.2em;
@@ -78,7 +84,7 @@ input[type=button]{
 	padding: 0px;
 }
 #loginSubmitBt{
-	height: 60px; 
+	height: 60px;
 }
 #regiSubmit{
 	margin-top: 30px;

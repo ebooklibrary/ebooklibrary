@@ -130,6 +130,10 @@
 		delete MY_BOOKS where USER_ID=#{userId} and book_no=#{bookNo}
 	</delete>
 	
+	<select id="selectCartByUserId" parameterType="String" resultType="MyBookVO">
+		select title from cartview where user_id=#{userId}
+	</select>
+	
 </mapper>
 
 

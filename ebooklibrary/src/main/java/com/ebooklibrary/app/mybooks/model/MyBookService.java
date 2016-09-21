@@ -14,4 +14,5 @@ public interface MyBookService {
 	public List<Map<String, Object>> selectMyBookListByUserId(BookSearchVO bookSearchVo);
 	public int myBookCount(BookSearchVO bookSearchVo);
 	public int deleteMybook(MyBooksVO myBooksVo);
+	public List<MyBookVO> selectCartByUserId(String userId);
 }

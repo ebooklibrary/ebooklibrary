@@ -75,5 +75,10 @@ public class MyBookServiceImpl implements MyBookService {
 	public int myBookCount(BookSearchVO bookSearchVo) {
 		return myBookDao.myBookCount(bookSearchVo);
 	}
+
+	@Override
+	public List<MyBookVO> selectCartByUserId(String userId) {
+		return myBookDao.selectCartByUserId(userId);
+	}
 	
 }

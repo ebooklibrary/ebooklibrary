@@ -21,11 +21,13 @@ body{
 }
 
 
-
+#m_search{
+	padding: 0;
+}
 /* 메인 책검색 섹션 */
 .mSearchDiv{
 	/* border: 1px solid black; */
-	padding: 30px;
+	padding: 0 30px;
 }
 /* 책 검색 디브 */
 .mSearchDiv input[type=text] {
@@ -44,6 +46,12 @@ body{
     
     margin: 10px;
 }
+input::-webkit-input-placeholder{
+	color: #acacac;
+}
+input::-ms-input-placeholder{
+	color: #acacac;
+}
 /* 
 .mSearchDiv input[type=text]:focus {
     width: 70%;
@@ -55,12 +63,15 @@ body{
 	padding: 2px 4px 2px 4px;
 }
 
-#mbSpan{
+#mbP{
+	padding-left: 50px;
+	text-align:left;
 	font-size: 1.5em;
 	/* font-family:monospace,monospace; */
 	font-family:Verdana,sans-serif;
 }
 #main_video{
-	width: 100%;
-	height: 100%;
+	margin-top: 10px;
+	width: 80%;
+	height: 80%;
 }
