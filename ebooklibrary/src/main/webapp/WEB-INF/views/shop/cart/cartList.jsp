@@ -8,10 +8,11 @@
 
 <script type="text/javascript">
 $(function() {	
-	var afterCash=0;
+	var afterCash=$("#oriCash").val();
 	var beforeCash=$("#beforeCash").val();
 	var firstPrice=$("#totPriceInput").val();
-	
+	$("#totalPrice").val($("#totPriceInput").val())
+	alert("afterCash="+afterCash);
 	$("#btnBuy").click(function() {
 		var radioChk=$('input:radio[name="payment"]').is(":checked");
 		if (radioChk==false) {
@@ -24,7 +25,7 @@ $(function() {
 			return false;
 		}
 		//북코인+카드
-		if($('input:radio[id="cash"]').is(":checked")){
+		if($('input:radio[id="cash"]').is(":checked")){			
 			if($("#totalPrice").val()==0){
 				$.ajax({
 					url:"<c:url value='/member/updateCash.do'/>",
