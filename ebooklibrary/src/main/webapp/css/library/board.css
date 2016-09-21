@@ -1,14 +1,12 @@
 @CHARSET "UTF-8";
-.table3{
-	border-top: 1px solid #919191;
-    border-bottom: 1px solid #919191;
-    table-layout: fixed;
-    width:90%;
+.table3 {
+    border-top: solid 3px #6f90e7;
+    border-bottom: solid 1px #DEDEDE;
+    width: 91%;
+    border-collapse: collapse;
 }
 .table3 td{
 	font-size:1.0em;
-	border-bottom: 1px solid #919191;
-	border-top:1px solid #919191;
 	padding: 5px;	
 }
 
