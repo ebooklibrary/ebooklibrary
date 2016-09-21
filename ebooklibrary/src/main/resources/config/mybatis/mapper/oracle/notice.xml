@@ -96,6 +96,16 @@
 		where rownum<=12
 		]]>
 	</select>
+	
+	<select id="selectServiceNotice" resultType="NoticeVO">
+		select *
+		from(
+			    select * from notice_board order by notice_No desc
+			)			
+		<![CDATA[
+		where rownum<=5
+		]]>
+	</select>
 
 </mapper>
 

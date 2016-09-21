@@ -75,5 +75,10 @@ public class NoticeServiceImp implements NoticeService{
 	public List<NoticeVO> selectMainNotice() {
 		return noticedao.selectMainNotice();
 	}
+
+	@Override
+	public List<NoticeVO> selectServiceCenterNotice() {
+		return noticedao.selectServiceCenterNotice();
+	}
 	
 }

@@ -1,5 +1,7 @@
 package com.ebooklibrary.app.library.question.model;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,12 @@ public class QuestionDaoMyBatis  extends SqlSessionDaoSupport implements Questio
 	public int insertQuestion(QuestionVO questionVo) {
 		return getSqlSession().insert(NAMESPACE+".insertQuestion",questionVo);
 	}
+
+	@Override
+	public List<QuestionVO> selectByMemberNo(int memberNo) {
+		return getSqlSession().selectList(NAMESPACE+".selectByMemberNo",memberNo);
+	}
+
 
 	
 }

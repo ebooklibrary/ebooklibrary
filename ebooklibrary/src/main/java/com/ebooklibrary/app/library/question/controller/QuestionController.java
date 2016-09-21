@@ -1,5 +1,9 @@
 package com.ebooklibrary.app.library.question.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +74,22 @@ public class QuestionController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
+	}
+	
+	@RequestMapping("/myQuestion.do")
+	public String AllQuestion(HttpSession session,
+			Model model){
+		
+		int memberNo = (Integer)session.getAttribute("memberNo");
+		logger.info("자기가 문의한글 보기");
+		logger.info("파라미터 조회 결과 memberNo = {}"+memberNo);
+		
+		List<QuestionVO> alist = questionservice.selectByMemberNo(memberNo);
+		
+		model.addAttribute("alist", alist);
+		
+		return "library/serviceCenter/myQuestion";
+		
 	}
 	
 }

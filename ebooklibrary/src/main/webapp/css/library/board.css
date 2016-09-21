@@ -1,12 +1,20 @@
 @CHARSET "UTF-8";
 .table3{
-	border-top: solid 3px #6f90e7;
-	border-bottom: solid 1px #DEDEDE;
-	width: 91%;
-	border-collapse: collapse;
+	border-top: 1px solid #919191;
+    border-bottom: 1px solid #919191;
+    table-layout: fixed;
+    width:90%;
 }
 .table3 td{
-	font-size:1.3em;
+	font-size:1.0em;
+	border-bottom: 1px solid #919191;
+	border-top:1px solid #919191;
+	padding: 5px;	
+}
+
+.table tr th{
+	padding: 5px;	
+	background: #f6f6f6;
 }
 .add_notice{
 	margin-top: 20px;
@@ -400,6 +408,9 @@
    width:74px;
    height:30px;
    white-space: nowrap;
+}
+#notice_table{
+	display: table-row-group;
 }
 /* 공지사항 쓰기 CSS  */
 .notice_list a img {

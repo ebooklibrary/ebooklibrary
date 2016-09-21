@@ -50,6 +50,8 @@
 			<mapping path="/member/myInfo.do"/>
 			<mapping path="/member/myPage.do"/>
 			<mapping path="/mybooks/*"/>
+			<mapping path="/library/serviceCenter/myQuestion.do"/>
+			<mapping path="/library/serviceCenter/questionWrite.do"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		

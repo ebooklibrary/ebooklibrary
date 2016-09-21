@@ -24,7 +24,7 @@ public class NoticeController {
 	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 	
 	@Autowired
-	NoticeService noticeService;
+	private NoticeService noticeService;
 	
 	
 	@RequestMapping(value ="/noticewrite.do", method = RequestMethod.GET)

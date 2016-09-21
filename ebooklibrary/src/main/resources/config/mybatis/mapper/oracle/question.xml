@@ -7,7 +7,13 @@
 		<selectKey order="BEFORE" keyProperty="questNo" resultType="int">
 			select complain_seq.nextval from dual
 		</selectKey>
-		insert into complain_board(quest_no,member_no,title,user_name,q_content)
+		insert into
+		complain_board(quest_no,member_no,title,user_name,q_content)
 		values(#{questNo},#{memberNo},#{title},#{userName},#{qContent})
 	</insert>
+
+	<select id="selectByMemberNo" parameterType="int" resultType="QuestionVO">
+		select * from complain_board
+		where member_no =#{member_no}
+	</select>
 </mapper>

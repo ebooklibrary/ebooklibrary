@@ -105,4 +105,11 @@ public class NoticeDaoMybatis extends SqlSessionDaoSupport implements NoticeDAO{
 	public List<NoticeVO> selectMainNotice() {
 		return getSqlSession().selectList(NAMESPACE+".selectMainNotice");
 	}
+
+
+
+	@Override
+	public List<NoticeVO> selectServiceCenterNotice() {
+		return getSqlSession().selectList(NAMESPACE+".selectServiceNotice");
+	}
 }

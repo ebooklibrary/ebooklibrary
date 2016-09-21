@@ -6,22 +6,45 @@
 #ServiceCenter_body{
 	float: right;
 	text-align: center;
-	margin-right:330px;
+	margin-right: 150px;
 }
 #ServiceCenter_body h1{
 	margin-right: 177px;
 }
-#ServiceCenter_bodyP1{
-	font-size: 2.0em;
-	font-weight: bold;
-	color: skyblue;
-}
-#ServiceCenter_bodyP2{
-	font-size: 2.0em;
-	font-weight: bold;
-	color:skyblue;
-}
+
 #ServiceCenter_bodyP1 h1{
 	font-size: 2.5em;
 	font-weight: bold;
 }
+.add_notice2{
+	clear:both;
+	width:800px;
+	height:300px;
+	float: right;
+	margin-top: 200px;
+	font-size: 1.0em;
+}
+.hide{
+	display: none;
+
+}
+.service_Tr{ 
+	font-size: 1.2em;
+	font-weight: bold;
+	background: #f6f6f6;
+}
+#serivceCenter_1{
+	width:250px;
+	float: left;
+}
+
+#serviceCenter_2{
+	clear:both;
+	float:right;
+	width:320px;
+	margin-right: 480px;
+	margin-top: 200px;
+}
+
+
+
