@@ -20,13 +20,16 @@
 
 <div class="myQuestion_head">
 	<div class="myQuestion_main">
+		<img alt="" src="${pageContext.request.contextPath }/images/library/ServiceCenter/myQuestion.png"
+				style="width: 125px; margin-bottom: 15px ; padding-right: 10px;">
+		
 		<table class="myQuestion_table">
 			<colgroup>
 				<col width="90">
 				<col width="80">
-				<col width= "250">
-				<col width =" 150">
-				<col width =" 100">
+				<col width="250">
+				<col width="150">
+				<col width="100">
 			</colgroup>
 			<thead>
 				<tr>

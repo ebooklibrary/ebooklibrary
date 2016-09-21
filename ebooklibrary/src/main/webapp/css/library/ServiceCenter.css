@@ -16,7 +16,7 @@
 	font-size: 2.5em;
 	font-weight: bold;
 }
-.add_notice2{
+.add_notice3{
 	clear:both;
 	width:800px;
 	height:300px;
@@ -46,5 +46,17 @@
 	margin-top: 200px;
 }
 
-
+.myQuestion_table{
+	width :700px;
+	hegith : 500px;
+	float : right;
+	margin-right: 90px;
+}
+.myQuestion_table th{
+	border-bottom: 1px solid #333333;
+}
+.myQuestion_table td{
+	padding: 8px;
+	border:  1px solid #333333;
+}
 

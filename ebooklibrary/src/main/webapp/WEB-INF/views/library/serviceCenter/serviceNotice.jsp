@@ -17,7 +17,7 @@
 		});
 	});
 </script>
-<div class="add_notice2">
+<div class="add_notice3">
 	<div id="serviceNotice_head">
 		<h2>
 			<img alt="공지사항"
