@@ -64,7 +64,7 @@ $().ready(function(){
 </div>
 <%@include file="../libraryAd.jsp"%>
 	<div id="detail_body">
-	<table class="detail_table" id="qnaDetail">
+	<table class="qnadetail_table" id="qnaDetail">
 		<tr>
 			<td class="td_1">제목</td>
 			<td class="td_5" colspan="5" >&nbsp;&nbsp;&nbsp;${qnaBoardVo.title }</td>
@@ -87,26 +87,26 @@ $().ready(function(){
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
-		<tr>
-			<td class="td_9">이전글</td>
+		<tr class="qnaDetail_tr">
+			<td class="td_9" >이전글</td>
 				<c:if test="${preQnaVO==null || preQnaVO.qnaNo==param.qnaNo}">
-					<td class="td_7">이전글이 없습니다.</td>
+					<td class="td_7" colspan="5">이전글이 없습니다.</td>
 				</c:if>
 				<c:if test="${preQnaVO.qnaNo!=param.qnaNo}">
-					<td class="td_7"><a
+					<td class="td_7" colspan="5"><a
 						href="<c:url value='/library/qna/qnaPrePage.do?qnaNo=${param.qnaNo}'/>">${preQnaVO.title}</a></td>
 				</c:if>
 		</tr>
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
-		<tr>
-			<td class=" td_9">다음글</td>
+		<tr class="qnaDetail_tr">
+			<td class=" td_9" >다음글</td>
 			<c:if test="${postQnaVo==null ||postQnaVo.qnaNo==param.qnaNo}">
-				<td class="td_8">마지막 글입니다.</td>
+				<td class="qnatd_8" colspan="5">마지막 글입니다.</td>
 			</c:if>
 			<c:if test="${postQnaVo.qnaNo!=param.qnaNo }">
-				<td class="td_8"><a
+				<td class="qnatd_8" colspan="5" ><a
 					href="<c:url value='/library/qna/qnaNextPage.do?qnaNo=${param.qnaNo}'/>">${postQnaVo.title}</a></td>
 			</c:if>
 		</tr>

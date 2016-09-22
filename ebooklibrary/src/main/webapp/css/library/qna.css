@@ -128,13 +128,27 @@
 
 
 .searchbox3{
+	font-size:1.3em;
 	both:clear;
 	width:660px;
 	text-align:right;
 	margin-top:20px;
 	margin-right:100px;
 	
-} 
+}
+.qnadetail_table {
+	width: 100%;
+	font-size: 1.2em;
+}
+.qnatd_8{
+	border-bottom: 1px solid #CCCCCC;
+	
+}
+.qnaDetail_tr{
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	
+}
 
 /* 검색아이콘 */
 #searchInfo2{
@@ -155,7 +169,10 @@
 	padding: 20px;
 	text-align:center;
 }
-
+.qna_Edtable{
+	border:1px solid #000;
+	margin-bottom:20px;
+}
 
 /* qnaComment */
 
@@ -267,7 +284,7 @@
   color: #ffffff;
   font-size: 15px;
   background: #9e9ea3;
-  padding: 4px 8px 5px 8px;
+  padding: 4px 6px 4px 6px;
   text-decoration: none;
 }
 
