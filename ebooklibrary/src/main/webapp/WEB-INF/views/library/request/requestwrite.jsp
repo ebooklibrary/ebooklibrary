@@ -15,11 +15,11 @@ $().ready(function(){
 			return false;
 		}else if($("#writer").val().length<1){
 			alert("저자를 입력하세요");				
-			$("#title").focus();
+			$("#writer").focus();
 			return false;
 		}else if($("#publisher").val().length<1){
 			alert("출판사를 입력하세요");				
-			$("#title").focus();
+			$("#publisher").focus();
 			return false;
 		}	
 	});

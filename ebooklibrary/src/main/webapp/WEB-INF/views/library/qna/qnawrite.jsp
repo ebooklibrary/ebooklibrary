@@ -70,7 +70,7 @@
 		
 	});
 
-function submitContents(elClickedObj) {
+	function submitContents(elClickedObj) {
 	// 에디터의 내용이 textarea에 적용된다.
 	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 	

@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+#faqheader{
+	float:left;
+}
+.inputfaqText {
+    width: 500px;
+    padding: 12px 20px;
+    margin: 8px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.inputfaqselect {
+	font-size:16px;
+	claer:both;
+    width: 100px;
+    padding: 12px 20px;
+    margin: 8px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.faqWrite_body{
+	float:center;
+}
+
+.w3-input{
+	width:600px;
+}

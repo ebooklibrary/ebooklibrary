@@ -111,11 +111,12 @@
 			<col style="width: 6%;" />
 			<col style="width: 15%;" />
 			<col style="width: 23%;" />
-			<col style="width: 18%;" />
+			<col style="width: 14%;" />
 			<col style="width: 12%;" />
 			<col style="width: 10%;" />
 			<col style="width: 10%;" />
-			<col style="width: 6%;" />
+			<col style="width: 8%;" />
+			
 			
 			
 			
@@ -146,14 +147,14 @@
 						<td>
 							<c:if test="${vo.stocked=='Y' }">
 								[입고완료]	
-								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+								<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 									<%-- <form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
 										<input type="submit" id="notstock" value="취소" class="btreqList">
 									</form> --%>
 								</c:if>
 							</c:if>
 							<c:if test="${vo.stocked=='N' }">
-								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+								<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 									<form id="request_stock" method="post" action="<c:url value='/library/request/requestStock.do?requestNo=${vo.requestNo }'/>" >
 										<input type="submit" id="stock" value="입고하기" class="btreqList">
 									</form>
@@ -171,34 +172,46 @@
 						<td>${vo.publisher }</td>
 						<td>${vo.userName }</td>
 						<td style="text-align: center;"><fmt:formatDate	value="${vo.regdate }" pattern="MM/dd" /></td>
-						<td style="text-align:center"> 
-							<c:if test="${vo.stocked=='Y' }">
-								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+						<c:if test="${vo.stocked=='Y' }">
+							<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
+								<td colspan="2">
 									<form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
 										<input type="submit" id="notstock" value="입고취소" class="btreqList">
 									</form>
-								</c:if>
+								</td>
 							</c:if>
-							<c:if test="${vo.stocked=='N' }">
-								<c:if test="${sessionScope.memberNo==vo.memberNo }">
+							<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">
+								<td colspan="2">
+								</td>
+							</c:if>
+							
+						</c:if>
+						<c:if test="${vo.stocked=='N' }">
+							<c:if test="${sessionScope.memberNo!=vo.memberNo }">
+								<td colspan="2">
+								</td>
+							</c:if>
+							<c:if test="${sessionScope.memberNo==vo.memberNo }">
+								<td style="text-align:center"> 
 									<form name="frmEdit" method="GET"
 											action="<c:url value='/library/request/requestEdit.do' />">
 											<input type="hidden" value="${vo.requestNo }" name="requestNo"/>
 										<input type="submit"   value="수정" class="btreqList"/>
 									</form>
-								</c:if>
+								</td>
 							</c:if>
-						</td>
-						<td>
-							<c:if test="${vo.stocked=='N' }">
-								<c:if test="${sessionScope.memberNo==vo.memberNo }">
+						</c:if>
+						<c:if test="${vo.stocked=='N' }">
+							<c:if test="${sessionScope.memberNo==vo.memberNo }">
+								<td>
 									<form name="frmDelete" method="post"
 											action="<c:url value='/library/request/requestDelete.do?requestNo=${vo.requestNo }' />">
 										<input type="submit" id="deleteRequest" value="삭제" class="btreqList"/>
 									</form>
-								</c:if>
+								</td>
 							</c:if>
-						</td>		
+						</c:if>
+								
 					</tr>
 
 				</c:forEach>
@@ -211,6 +224,7 @@
 	<div class="requebticons">
 		<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
 			<input type="button" id="listGo" value="전체목록" class="reqbt"/>
+			
 			<input type="button" id="writeGo" value="글쓰기" class="reqbt"/>
 			<c:if test="${!empty sessionScope.memberNo }">
 				<input type="submit" id="myWriting" value="내글 보기" class="reqbt"/>
