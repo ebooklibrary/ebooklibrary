@@ -59,7 +59,7 @@
 	   	<form name="frmSearch" id="searchbox2" method="post" 
 	   		action="<c:url value='/library/qna/qnaList.do' />" >
 	   		
-	        <div class="searchbox3">
+	        <div class="search_box">
 	        <select name="searchCondition"  class="searchCondition">
 	            <option value="title"
 	           	   <c:if test="${param.searchCondition=='title'}">

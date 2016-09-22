@@ -9,7 +9,7 @@ public class MyBookVO {
 	private String publisher; //출판사
 	private String writer; //작가
 	private String publication; //출판일
-	private Timestamp reg_date; //등록일
+	private Timestamp regDate; //등록일
 	private String genre; //장르
 	private int price; //가격
 	private String summary; //요약
@@ -19,30 +19,6 @@ public class MyBookVO {
 	private long bookFileSize; //책파일사이즈
 	
 	private String userId; //뷰용 유저아이디
-	
-	public MyBookVO() {
-		super();
-	}
-
-	public MyBookVO(int bookNo, String title, String publisher, String writer, String publication, Timestamp reg_date,
-			String genre, int price, String summary, int sales, String bookFileName, String coverFileName,
-			long bookFileSize, String userId) {
-		super();
-		this.bookNo = bookNo;
-		this.title = title;
-		this.publisher = publisher;
-		this.writer = writer;
-		this.publication = publication;
-		this.reg_date = reg_date;
-		this.genre = genre;
-		this.price = price;
-		this.summary = summary;
-		this.sales = sales;
-		this.bookFileName = bookFileName;
-		this.coverFileName = coverFileName;
-		this.bookFileSize = bookFileSize;
-		this.userId = userId;
-	}
 
 	public int getBookNo() {
 		return bookNo;
@@ -84,12 +60,12 @@ public class MyBookVO {
 		this.publication = publication;
 	}
 
-	public Timestamp getReg_date() {
-		return reg_date;
+	public Timestamp getRegDate() {
+		return regDate;
 	}
 
-	public void setReg_date(Timestamp reg_date) {
-		this.reg_date = reg_date;
+	public void setRegDate(Timestamp regDate) {
+		this.regDate = regDate;
 	}
 
 	public String getGenre() {
@@ -159,9 +135,9 @@ public class MyBookVO {
 	@Override
 	public String toString() {
 		return "MyBookVO [bookNo=" + bookNo + ", title=" + title + ", publisher=" + publisher + ", writer=" + writer
-				+ ", publication=" + publication + ", reg_date=" + reg_date + ", genre=" + genre + ", price=" + price
+				+ ", publication=" + publication + ", regDate=" + regDate + ", genre=" + genre + ", price=" + price
 				+ ", summary=" + summary + ", sales=" + sales + ", bookFileName=" + bookFileName + ", coverFileName="
 				+ coverFileName + ", bookFileSize=" + bookFileSize + ", userId=" + userId + "]";
 	}
-
+	
 }

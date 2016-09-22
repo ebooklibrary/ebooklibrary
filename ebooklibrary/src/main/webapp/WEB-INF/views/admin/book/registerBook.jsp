@@ -32,15 +32,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		//background-color: rgba(255, 255, 200, 0.5);
 		$("#bookRegiDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
-		
-		/* 
-		$( "#publication" ).datepicker({
-			changeMonth: true, changeYear: true
-		});
-		$( "#publication" ).datepicker( "option", "dateFormat", "yy/mm/dd" );
-		 */
 		 
 		 $("#publication").datepicker({
 				dateFormat:"yy/mm/dd",
@@ -60,30 +52,27 @@
 	    var obj = [];               
 	    //스마트에디터 프레임생성
 	    nhn.husky.EZCreator.createInIFrame({
-	        oAppRef: obj,
+	    	oAppRef: obj,
 	        elPlaceHolder: "summary",
 	        sSkinURI: "<c:url value='/smarteditor/SmartEditor2Skin.html'/>", 
 	        htParams : {
 	            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-	            bUseToolbar : true,             
+	            bUseToolbar : true,
 	            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-	            bUseVerticalResizer : true,     
+	            bUseVerticalResizer : false,
 	            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-	            bUseModeChanger : true, 
+	            bUseModeChanger : true,
 	        }
 	    });
-	    
 	    /* 
-	    //전송버튼
 	    $("#btBookUp").click(function(){
 	        //id가 smarteditor인 textarea에 에디터에서 대입
 	        obj.getById["summary"].exec("UPDATE_CONTENTS_FIELD", []);
 	        //폼 submit
 	        $("#bookfrm1").submit();
 	    });
-		 */
-		
-		
+	     */
+	    
 		/* 
 		var oEditors = [];
 		nhn.husky.EZCreator.createInIFrame({
@@ -165,13 +154,28 @@
 		$("#genre").html(l);
 		
 		/////////////////////////////
+		/* 
 	    $( "#genre" )
 	      .selectmenu()
 	      .selectmenu( "menuWidget" )
 	        .addClass( "overflow" );
+		 */
 		/* 
 	    $( "#genre" ).selectmenu();
 		 */
+		 
+	    $("#btBookReset").click(function(){
+
+	    	$("#genre").val("0");
+	    	$("input").not("input[class=btRegiBook]").val("");
+	    	$("#summary").val("");
+	    	//아이프레임 안의 태그 접근
+	    	$('iframe[src="/ebooklibrary/smarteditor/SmartEditor2Skin.html"]').contents().find('iframe[name=se2_iframe]').contents().find("body").text("");
+	    	obj.getById["summary"].exec("UPDATE_CONTENTS_FIELD", []);
+	    	/* 
+	    	alert($('iframe[src="/ebooklibrary/smarteditor/SmartEditor2Skin.html"]').contents().find('iframe[name=se2_iframe]').contents().find("body").text());
+	         */  
+	    });
 		
 	});
 
@@ -190,43 +194,39 @@
  */
 
 </script>
-
+	<span id="regiBookTitle">책 등록</span>
 	<form action="<c:url value='/admin/book/uploadBook.do'/>" class="w3-container" id="bookfrm1" name="bookfrm1" enctype="multipart/form-data" method="post">
 		<div id="formWrapper1">
+		<!-- 
 			<div class="w3-container w3">
-				<h2>책을 올려 봅시다!</h2>
+				<h2>책 등록</h2>
 			</div>
+			 -->
 			<p>
-				<label>책제목</label>
+				<label>책제목 :</label>
 				<input type="text" class="w3-input" id="title" name="title">
 			</p>
 			<p>
-				<label>작가명</label>
+				<label>작가명 :</label>
 				<input type="text" class="w3-input" id="writer" name="writer">
 			</p>
 			<p>
-				<label>출판사</label>
+				<label>출판사 :</label>
 				<input type="text" class="w3-input" id="publisher" name="publisher">
 			</p>
 			<p>
-				<label>출판일</label>
+				<label>출판일 :</label>
 				<input type="text" class="w3-input" id="publication" name="publication" readonly>
 			</p>
 			<p>
-				<label>가격</label>
+				<label>가격 :</label>
 				<input type="text" class="w3-input" id="price" name="price">
 			</p>
 			<p>
-				<label>장르</label>
+				<label>장르 :</label>
 				<!-- <input type="text" class="w3-input" id="genre" name="genre"> -->
 				<select name="genre" id="genre"></select>
 			</p>
-		</div>
-		
-		<div id="formWrapper2">
-			<div class="w3-container w3">
-				<h2>책을 올려 봅시다!</h2>
-			</div>
 			<p>
 				<label>책파일</label>
 				<input type="file" class="w3-input" id="bookFileName" name="bName">
@@ -236,24 +236,23 @@
 				<label>책커버</label>
 				<input type="file" class="w3-input" id="coverFileName" name="cName">
 			</p>
-			
+		</div>
+		
+		<div id="formWrapper2">
 			<!-- 
 			<p>
 				<label>요약</label>
 				<input type="textfield" class="w3-input" id="summary" name="summary">
 			</p>
 			-->
-			
-			<br><br>
-			<p>
-				<label>요약</label>
+				<p>책 요약</p>
 				<!-- <textarea class="w3-input" name="summary" id="summary"></textarea> -->
 				<textarea name="summary" id="summary" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
-			</p>
 			
 		</div>
 	
 	
-			<input type="submit" id="btBookUp" name="btBookUp" value="책올리기">
+			<input type="button" class="btRegiBook" id="btBookReset" value="입력 초기화">
+			<input type="submit" class="btRegiBook" id="btBookUp" name="btBookUp" value="책올리기">
 	</form>
 <%@ include file="../libraryAdminBottom.jsp" %>
