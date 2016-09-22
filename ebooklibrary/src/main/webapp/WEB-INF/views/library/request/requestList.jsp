@@ -4,7 +4,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/qna.css" />
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/request.css" />
-<%@include file="../libraryTop.jsp" %>
+<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
+	<%@include file="../../admin/libraryAdminTop.jsp"%>
+</c:if>
+<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">
+	<%@include file="../libraryTop.jsp" %>
+</c:if>
+
 <script type="text/javascript">
 	$().ready(function(){
 		$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
@@ -146,14 +152,14 @@
 						<td>
 							<c:if test="${vo.stocked=='Y' }">
 								[입고완료]	
-								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+								<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 									<%-- <form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
 										<input type="submit" id="notstock" value="취소" class="btreqList">
 									</form> --%>
 								</c:if>
 							</c:if>
 							<c:if test="${vo.stocked=='N' }">
-								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+								<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 									<form id="request_stock" method="post" action="<c:url value='/library/request/requestStock.do?requestNo=${vo.requestNo }'/>" >
 										<input type="submit" id="stock" value="입고하기" class="btreqList">
 									</form>
@@ -173,7 +179,7 @@
 						<td style="text-align: center;"><fmt:formatDate	value="${vo.regdate }" pattern="MM/dd" /></td>
 						<td style="text-align:center"> 
 							<c:if test="${vo.stocked=='Y' }">
-								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+								<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 									<form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
 										<input type="submit" id="notstock" value="입고취소" class="btreqList">
 									</form>

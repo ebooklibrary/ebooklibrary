@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:if test="${sessionScope.auchCode=='ADMIN' }">
+<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 	<%@include file="../../admin/libraryAdminTop.jsp"%>
 </c:if>
-<c:if test="${sessionScope.auchCode!='ADMIN' }">
+<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">
 	<%@include file="../libraryTop.jsp"%>
 </c:if>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
@@ -167,7 +167,9 @@
 		 */
 		
 		 $("#bookTitleP, #bookListDiv img").click(function() {
+			 
 			 var bookNo=$(this).parent().parent().find("input[name=bookNo]").val();
+			 alert(bookNo);
 			 $(location).attr('href', "<c:url value='/admin/book/bookDetail.do?bookNo="+bookNo+"'/>");
 		});
 		 
@@ -256,14 +258,14 @@
 			<div id="bookListDiv">
 				<img alt="책 커버 이미지" src="<c:url value='/book_upload/${vo.coverFileName }'/>">
 				<p id="bookTitleP">[${vo.genre}] ${vo.title }</p>
-				<c:if test="${sessionScope.auchCode=='ADMIN' }">
+				<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 					<div class="choice">
 						<input type="submit" id="bookEdit" name="bookEdit" value="수정" class="bookEdit">
 						<input type="button" class="bookDelete" id="bookDelete" name="bookDelete" value="삭제">
 					</div>
 				</c:if>
 				
-				<c:if test="${sessionScope.auchCode!='ADMIN' }">				
+				<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">				
 					<div class="choice">				
 						<c:if test="${!empty vo.userId}">
 							이미 가지고 있지롱
@@ -321,7 +323,7 @@
 	</div>
 	
 	<!-- 사이드 장바구니 -->
-	<c:if test="${sessionScope.auchCode!='ADMIN' }">	
+	<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">	
 		<div id="cartDiv">
 			<nav>
 				<ul>

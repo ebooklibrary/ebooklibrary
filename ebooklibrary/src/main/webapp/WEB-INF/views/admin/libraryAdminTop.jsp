@@ -94,13 +94,13 @@
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
             관리자 페이지
             </a></li>			
-			<c:if test="${!empty sessionScope.userId }">
+			<c:if test="${!empty sessionScope.adminUserId }">
 				<li>
-				<a href="<c:url value='/member/logout.do'/>">
+				<a href="<c:url value='/admin/logout.do'/>">
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 				로그아웃
 				</a></li>				
-	            <c:if test="${sessionScope.auchCode=='ADMIN' }">
+	            <c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 	            <li>
 	            <a href="<c:url value='/library/librarymain.do'/>">
 	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
@@ -108,12 +108,7 @@
 	            </a>
 	            </li>
 	            </c:if>         
-			</c:if>			 
-            <li class="last">
-            <a href="/html/06_sitemap/sitemap.asp">
-            <!-- <img src="/images/gmi/inc/gnb_sitemap.gif" alt="사이트맵" /> -->
-            사이트맵
-            </a></li>
+			</c:if>	
 		</ul>
     </div>
 	<!--//#gnb_menu-->
@@ -121,7 +116,7 @@
 	<!--logo Start-->   
 	<h2 class="skip">로고</h2>
 	<div id="logo">
-		<a href="<c:url value='/library/librarymain.do'/>">
+		<a href="<c:url value='/admin/adminMain.do'/>">
 			<img alt="로고 이미지" src="<c:url value='/images/library/main/logo.JPG'/>">
 		</a>
 	</div>

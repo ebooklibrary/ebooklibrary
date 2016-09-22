@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:if test="${sessionScope.auchCode=='ADMIN' }">
+<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 	<%@include file="../../admin/libraryAdminTop.jsp"%>
 </c:if>
-<c:if test="${sessionScope.auchCode!='ADMIN' }">
+<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">
 	<%@include file="../libraryTop.jsp"%>
 </c:if>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
@@ -55,7 +55,7 @@
 				<span>판매 가격 - ${bookVo.price }원</span><span>대여 가격 - 일당 100원</span>
 			</div>
 			
-			<c:if test="${sessionScope.auchCode!='ADMIN' }">				
+			<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">				
 				<div class="choice">				
 					<c:if test="${!empty vo.userId}">
 						이미 가지고 있지롱
