@@ -59,7 +59,7 @@
 	   	<form name="frmSearch" id="searchbox2" method="post" 
 	   		action="<c:url value='/library/qna/qnaList.do' />" >
 	   		
-	        <div class="searchbox3">
+	        <div class="search_box">
 	        <select name="searchCondition"  class="searchCondition">
 	            <option value="title"
 	           	   <c:if test="${param.searchCondition=='title'}">
@@ -144,8 +144,7 @@
 						
 						</a></td>
 					<td>${vo.userName }</td>
-					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="MM/dd 
-						 "/> </td>
+					<td style="text-align:center;"><fmt:formatDate value="${vo.regDate }" pattern="YYYY-MM-dd"/> </td>
 					<td>${vo.readCount }</td>
 					
 				</tr>

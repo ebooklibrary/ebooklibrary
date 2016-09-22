@@ -1,2 +1,143 @@
 @CHARSET "UTF-8";
 
+/* 책정보 전체 디브 */
+#DetailBookDiv{
+	/* border: 1px solid black; */
+	margin: 0 auto;
+	margin-top: 80px;
+	width: 800px;
+	height: 850px;
+	padding: 30px;
+}
+#DetailBookDiv div{
+	float: left;
+}
+/* 책커버 */
+#DetailbookCover{
+	/* border: 1px solid black; */
+	width: 30%;
+	height: 300px;
+}
+#DetailbookCover img{
+	width: 100%;
+	height: 100%;
+}
+/* 책정보들 */
+#DetailBookInfo{
+	/* border: 1px solid black; */
+	width: 60%;
+	margin-left: 5%;
+	padding: 5px;
+	padding-top: 0;
+}
+.DetailBookInfo{
+	/* border: 1px solid black; */
+	width: 100%;
+	margin-bottom: 30px;
+}
+/* 책 제목 */
+#DetailBooktitle{
+	font-size: 1.8em;
+	font-weight: bold;
+	margin-bottom: 80px;
+}
+#DetailBookwriter, #DetailBookgenre{
+	vertical-align: middle;
+	padding-right: 10px;
+	padding-left: 5px;
+	border-right: 1.5px solid gray;
+}
+#DetailBookpublication{
+	vertical-align: middle;
+	padding-left: 5px;
+}
+#DetailBookprice{
+	margin-top: 30px;
+}
+#DetailBookprice span:first-child{
+	vertical-align: middle;
+	padding-right: 10px;
+	padding-left: 5px;
+	border-right: 1.5px solid gray;
+}
+#DetailBookprice span:last-child{
+	vertical-align: middle;
+	padding-left: 7px;
+}
+
+#DetailBooksales{
+	padding-left: 5px;
+}
+
+/* 장바구니 구매 버튼 */
+.choice{
+	/* border: 1px solid black; */
+	width: 100%;
+	margin-top: 10px;
+	padding-left: 70px;
+}
+.cart{
+	position: relative;
+}
+.popuptext {
+	display:none;
+	font-size:0.8em;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -80px;
+}
+.choice input{
+	
+	border: 1px solid #adadad;
+	outline: 0;
+	margin-right: 30px;
+	padding: 3px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: #000000;
+	
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	width: 150px;
+	height: 60px;
+	border-radius: 2px;
+	
+	/* font-family:monospace,monospace; */
+	font-family:Verdana,sans-serif;
+}
+#cart{
+	background-color: rgba(180, 220, 250, 0.5);
+}
+#buy{
+	background-color: rgba(0, 0, 0, 0);
+}
+
+
+/* 책소개 */
+#DetailBooksummary{
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	width: 100%;
+	margin-top: 50px;
+	padding: 10px;
+	padding-top: 50px;
+	padding-bottom: 30px;
+}
+#DetailBooksummary p:first-child{
+	font-size: 1.2em;
+	font-weight: bold;
+	border-bottom: 1px solid #6060ff;
+	padding-bottom: 10px;
+	margin-bottom: 35px;
+}
+

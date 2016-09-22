@@ -7,7 +7,7 @@ public class OrderVO {
 	private int ordersNo;				
 	private String userId;				
 	private int price;					
-	private Timestamp ordersDate;	
+	private Timestamp ordersDate;
 	private int bookNo;
 	private String buyClass;
 	private String impUid;

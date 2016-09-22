@@ -80,5 +80,36 @@ public class MyBookServiceImpl implements MyBookService {
 	public List<MyBookVO> selectCartByUserId(String userId) {
 		return myBookDao.selectCartByUserId(userId);
 	}
+
+	@Override
+	public MyBookVO selectBookDetail(int bookNo) {
+		/*return myBookDao.selectBookDetail(bookNo);*/
+		
+		MyBookVO bookVo=myBookDao.selectBookDetail(bookNo);
+		
+		BookUtility bu=new BookUtility();
+		
+		String genre= bu.getGenre(Integer.parseInt(bookVo.getGenre()));
+		bookVo.setGenre(genre);
+		
+		return bookVo;
+		
+	}
+
+	@Override
+	public int deleteBooks(int bookNo) {
+		
+		int flag=myBookDao.flagDeleteBooks(bookNo);
+		int cnt=0;
+		if (flag<1) {
+			cnt=myBookDao.deleteBooks(bookNo);
+		}
+		return cnt;
+	}
+
+	@Override
+	public int flagDeleteBooks(int bookNo) {
+		return myBookDao.flagDeleteBooks(bookNo);
+	}
 	
 }

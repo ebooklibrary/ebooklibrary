@@ -110,13 +110,13 @@
 		<colgroup>
 			<col style="width: 6%;" />
 			<col style="width: 15%;" />
-			<col style="width: 22%;" />
-			<col style="width: 8%;" />
+			<col style="width: 23%;" />
+			<col style="width: 18%;" />
 			<col style="width: 12%;" />
 			<col style="width: 10%;" />
-			<col style="width: 15%;" />
+			<col style="width: 10%;" />
 			<col style="width: 6%;" />
-			<col style="width: 6%;" />
+			
 			
 			
 		</colgroup>
@@ -146,6 +146,11 @@
 						<td>
 							<c:if test="${vo.stocked=='Y' }">
 								[입고완료]	
+								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+									<%-- <form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
+										<input type="submit" id="notstock" value="취소" class="btreqList">
+									</form> --%>
+								</c:if>
 							</c:if>
 							<c:if test="${vo.stocked=='N' }">
 								<c:if test="${sessionScope.auchCode=='ADMIN' }">
@@ -166,7 +171,14 @@
 						<td>${vo.publisher }</td>
 						<td>${vo.userName }</td>
 						<td style="text-align: center;"><fmt:formatDate	value="${vo.regdate }" pattern="MM/dd" /></td>
-						<td > 
+						<td style="text-align:center"> 
+							<c:if test="${vo.stocked=='Y' }">
+								<c:if test="${sessionScope.auchCode=='ADMIN' }">
+									<form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
+										<input type="submit" id="notstock" value="입고취소" class="btreqList">
+									</form>
+								</c:if>
+							</c:if>
 							<c:if test="${vo.stocked=='N' }">
 								<c:if test="${sessionScope.memberNo==vo.memberNo }">
 									<form name="frmEdit" method="GET"
@@ -176,7 +188,6 @@
 									</form>
 								</c:if>
 							</c:if>
-							
 						</td>
 						<td>
 							<c:if test="${vo.stocked=='N' }">
@@ -187,15 +198,7 @@
 									</form>
 								</c:if>
 							</c:if>
-						</td>
-						<c:if test="${vo.stocked=='Y' }">
-							
-								<c:if test="${sessionScope.auchCode=='ADMIN' }">
-									<form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
-										<input type="submit" id="notstock" value="입고취소" class="btreqList">
-									</form>
-								</c:if>
-							</c:if>		
+						</td>		
 					</tr>
 
 				</c:forEach>

@@ -1,6 +1,8 @@
 package com.ebooklibrary.app.shop.order.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ebooklibrary.app.common.DateSearchVO;
+import com.ebooklibrary.app.common.PaginationInfo;
+import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
 import com.ebooklibrary.app.shop.cart.model.CartService;
+import com.ebooklibrary.app.shop.cart.model.CartVO;
 import com.ebooklibrary.app.shop.order.model.OrderService;
 import com.ebooklibrary.app.shop.order.model.OrderVO;
 
@@ -68,6 +74,53 @@ public class OrderController {
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("memberVo", memberVo);
 		return "shop/order/orderComplete";
+	}
+	
+	@RequestMapping("/orderList.do")
+	public String orderList(
+		@ModelAttribute DateSearchVO searchVo,
+		HttpSession session, Model model){
+		//1.
+		String userid=(String)session.getAttribute("userId");
+		searchVo.setCustomerId(userid);
+		
+		logger.info("주문 내역 화면, 파라미터 searchVo={}",
+			searchVo);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		
+		if(searchVo.getStartDay()==null 
+				|| searchVo.getStartDay().isEmpty()){				
+			Date d = new Date();
+			SimpleDateFormat sdf 
+				= new SimpleDateFormat("yyyy/MM/dd");
+			String today = sdf.format(d);
+			
+			searchVo.setStartDay(today);
+			searchVo.setEndDay(today);
+		}
+		logger.info("날짜 셋팅 후 searchVo={}", searchVo);
+		
+		//2.
+		//페이징 처리를 위한 셋팅
+		//[1]
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
+		
+		//[2]
+		searchVo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<OrderVO> orderList=orderService.selectOrderAll(searchVo);
+		int totalRecord=orderService.selectOrderCount(searchVo);
+		
+		pagingInfo.setTotalRecord(totalRecord);
+		//3.
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		return "member/orderList";
 	}
 	
 }

@@ -1,5 +1,10 @@
 package com.ebooklibrary.app.mybooks.controller;
 
+import java.io.File;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ebooklibrary.app.common.BookUtility;
 import com.ebooklibrary.app.common.FileUploadWebUtil;
@@ -137,11 +143,62 @@ public class AdminMyBooksController {
 	
 
 	@RequestMapping("/book/bookDetail.do")
-	public String bookDetail(){
+	public String bookDetail(@RequestParam int bookNo, Model model){
+		
+		logger.info("책 상세 파라미터 bookNo={}",bookNo);
+		
+		MyBookVO bookVo=myBookService.selectBookDetail(bookNo);
+		
+		logger.info("책 상세 셀렉트 bookVo={}",bookVo);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsedDate = null;
+		try {
+			parsedDate = sdf.parse(bookVo.getPublication());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Timestamp pubDate = new Timestamp(parsedDate.getTime());;
+		
+		model.addAttribute("bookVo", bookVo);
+		model.addAttribute("pubDate", pubDate);
+		
 		return "library/book/bookDetail";
 	}
 	
-	
+	@RequestMapping("/book/bookDelete.do")
+	public String bookDelete(HttpServletRequest request, @RequestParam int bookNo, Model model){
+		logger.info("책 삭제 파라미터 bookNo={}",bookNo);
+		
+		int cnt=myBookService.deleteBooks(bookNo);
+		
+		logger.info("책 삭제 처리 cnt={}",cnt);
+		String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
+		MyBookVO vo=myBookService.selectBookDetail(bookNo);
+		
+		String oldBookFile=vo.getBookFileName();
+		String oldImage=vo.getCoverFileName();
+		
+		if (cnt>0) {
+			//기존 파일이 존재하면, 기존 파일 삭제
+			File oldImg=new File(upPath ,oldImage);
+			if (oldImg.exists()) {
+				boolean bool=oldImg.delete();
+				logger.info("기존 파일 삭제 여부={}", bool);
+			}
+			File oldBook=new File(upPath ,oldBookFile);
+			if (oldBook.exists()) {
+				boolean bool=oldBook.delete();
+				logger.info("기존 파일 삭제 여부={}", bool);
+			}
+		}else{
+			logger.info("처리 안됐어 다시 해봐");
+		}
+		
+		
+		return "redirect:/admin/book/bookList.do";
+		
+	}
 	
 	
 	

@@ -5,17 +5,19 @@ import java.sql.Timestamp;
 public class MemoVO {
 	private int memoNo;
 	private String toId;//받는사람
-	private String fromId;//보낸사람
+	private String fromId;//보낸사람	
+	private String checked;//확인여부
+	private Timestamp sendDate;//보낸시간
+	private String title;//제목
+	private String content;//내용	
+
 	public int getMemoNo() {
 		return memoNo;
 	}
 	public void setMemoNo(int memoNo) {
 		this.memoNo = memoNo;
 	}
-	private String checked;//확인여부
-	private Timestamp sendDate;//보낸시간
-	private String title;//제목
-	private String content;//내용
+	
 	public String getToId() {
 		return toId;
 	}

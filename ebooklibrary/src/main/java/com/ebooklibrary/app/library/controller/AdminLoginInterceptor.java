@@ -33,9 +33,9 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter{
 			return true;//에러처리하지 않는다
 		}
 		HttpSession session=request.getSession();
-		String adminUserid=(String)session.getAttribute("adminUserid");
+		String adminUserId=(String)session.getAttribute("adminUserId");
 		//관리자 로그인되지 않은 경우 에러 처리
-		if(adminUserid==null || adminUserid.isEmpty()){
+		if(adminUserId==null || adminUserId.isEmpty()){
 			request.setAttribute("msg", "먼저 관리자 로그인 하세요");
 			request.setAttribute("url", "/admin/login/adminLogin.do");
 			RequestDispatcher dispatcher
@@ -50,13 +50,11 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		logger.info("컨트롤러 수행 후 호출 - postHandle()");
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		logger.info("뷰 생성후 호출 - afterCompletion()");
 	}
 	
 	

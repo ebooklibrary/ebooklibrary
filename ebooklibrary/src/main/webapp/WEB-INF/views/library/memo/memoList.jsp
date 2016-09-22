@@ -134,7 +134,7 @@
 							<!-- 이전 블럭으로 이동 -->
 							<c:if test="${fromPagingInfo.firstPage>1}">				
 								<a href="#" 
-							onclick="pageFunc(${fromPagingInfo.firstPage-1},'T')">
+							onclick="pageFunc(${fromPagingInfo.firstPage-1},'F')">
 									<img src="<c:url value='/images/first.JPG'/>" 
 											alt="이전블럭으로">
 								</a>				
@@ -150,7 +150,7 @@
 										${i}</span>
 								</c:if>		
 								<c:if test="${i!=fromPagingInfo.currentPage }">
-									<a href="#" onclick="pageFunc(${i},'T')">
+									<a href="#" onclick="pageFunc(${i},'F')">
 										[${i}]</a>
 								</c:if>		
 							</c:forEach>				
@@ -160,7 +160,7 @@
 							<c:if test
 							="${fromPagingInfo.lastPage<fromPagingInfo.totalPage}">				
 								<a href="#" 
-							onclick="pageFunc(${fromPagingInfo.lastPage+1},'T')">
+							onclick="pageFunc(${fromPagingInfo.lastPage+1},'F')">
 									<img src="<c:url value='/images/last.JPG'/>" 
 											alt="다음블럭으로">
 								</a>

@@ -1,28 +1,59 @@
 @CHARSET "UTF-8";
 
+/* 페이지 타이틀 */
+#regiBookTitle{
+	font-size: 2em;
+	font-weight: bold;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	margin: 50px 0 0 50px;
+	border-bottom: 2px solid gray;
+}
+
 /* 책제목 출판사 등등 폼 */
 #formWrapper1{
-	width: 400px;
-	margin: 150px 0 0 30px;
+	/* border: 1px solid black; */
+	width: 450px;
+	margin: 100px 0 0 50px;
 	float: left;
-	padding: 2px;
+	padding: 15px;
 }
-/* 업로드 및 요약 폼 */
+#formWrapper2 p{
+	padding-bottom: 20px;
+}
+
+#formWrapper1 p{
+	margin-bottom: 50px;
+}
+#formWrapper1 label{
+	display: inline;
+	margin-right: 30px;
+}
+#formWrapper1 input, select{
+	float: right;
+	display: inline;
+	width: 70%;
+}
+#genre{
+	float: right;
+	display: inline;
+	width: 70%;
+}
+/* 업로드 요약 폼 */
 #formWrapper2{
+	/* border: 1px solid black; */
 	float: right;
 	width: 600px;
-	margin: 150px 37px 0 0;
+	margin: 100px 37px 0 0;
+	padding-top: 210px;
 }
-/* 전체 컨테이너 디브 */
-#container{
-	position: relative;
-}
+
 /* 버튼 */
-#btBookUp{
-	position: absolute;
-	left: 50px;
-	bottom: 50px;
-	
+.btRegiBook{
+	margin: 0auto;
+	float: right;
+	margin-top: 100px;
+	margin-right: 70px;
 	border: 1px solid #cccccc;
 	display: inline-block;
 	outline: 0;
@@ -44,19 +75,23 @@
 	font-size:1.2em;
 	font-weight: bold;
 }
-#btBookUp:hover{
+.btRegiBook:hover{
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
 		rgba(0, 0, 0, 0.19);
 }
-
+#btBookUp{
+	margin-right: 10px;
+}
 /* 장르 셀렉트 */
 fieldset {
 	border: 0;
 }
+/* 
 label {
 	display: block;
 	margin: 30px 0 0 0;
 }
+ */
 .overflow {
 	height: 200px;
 }

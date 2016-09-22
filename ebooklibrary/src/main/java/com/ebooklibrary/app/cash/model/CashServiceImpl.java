@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.shop.order.model.OrderVO;
 
 @Service
 public class CashServiceImpl implements CashService{
@@ -22,7 +23,7 @@ public class CashServiceImpl implements CashService{
 	}
 
 	@Override
-	public int insertCashCharge(CashVO vo) {
+	public int insertCashCharge(OrderVO vo) {		
 		return cashDao.insertCashCharge(vo);
 	}
 }

@@ -121,10 +121,10 @@
 		</if>
 	</select>
 	
-	<select id="schFromMain" parameterType="BookSearchVO" resultType="MyBookVO">
-		SELECT * FROM bookListView
- 		 WHERE title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
+	<select id="selectBookDetail" parameterType="int" resultType="MyBookVO">
+		select * from book where book_no=#{bookNo}
 	</select>
+	
 	
 	<delete id="deleteMybook" parameterType="MyBooksVO">
 		delete MY_BOOKS where USER_ID=#{userId} and book_no=#{bookNo}
@@ -134,6 +134,19 @@
 		select title from cartview where user_id=#{userId}
 	</select>
 	
+	<select id="flagDeleteBooks" parameterType="int" resultType="int">
+		select count(*) from MY_BOOKS where book_no=#{bookNo}
+	</select>
+	<delete id="deleteBooks" parameterType="int">
+		delete book where book_no=#{bookNo}
+	</delete>
+
+
+	
+	<select id="schFromMain" parameterType="BookSearchVO" resultType="MyBookVO">
+		SELECT * FROM bookListView
+ 		 WHERE title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
+	</select>
 </mapper>
 
 

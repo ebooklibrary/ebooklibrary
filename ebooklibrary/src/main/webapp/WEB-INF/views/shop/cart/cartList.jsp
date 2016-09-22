@@ -12,7 +12,6 @@ $(function() {
 	var beforeCash=$("#beforeCash").val();
 	var firstPrice=$("#totPriceInput").val();
 	$("#totalPrice").val($("#totPriceInput").val())
-	alert("afterCash="+afterCash);
 	$("#btnBuy").click(function() {
 		var radioChk=$('input:radio[name="payment"]').is(":checked");
 		if (radioChk==false) {

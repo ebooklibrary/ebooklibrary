@@ -15,6 +15,7 @@ import com.ebooklibrary.app.cash.model.CashService;
 import com.ebooklibrary.app.cash.model.CashVO;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.shop.order.model.OrderVO;
 
 @Controller
 @RequestMapping("/cash")
@@ -55,9 +56,13 @@ public class CashController {
 	
 	@RequestMapping("/cashCharge.do")
 	@ResponseBody
-	public int cashCharge(@ModelAttribute CashVO cashVo){		
-		logger.info("캐시충전 정보 저장하기 파라미터 cashVo={}",cashVo);
-		int cnt=cashService.insertCashCharge(cashVo);
+	public int cashCharge(HttpSession session,@ModelAttribute OrderVO orderVo){		
+		String userId=(String)session.getAttribute("userId");
+		orderVo.setUserId(userId);
+		orderVo.setBuyClass("C");
+		logger.info("캐시충전 정보 저장하기 파라미터 orderVo={}",orderVo);
+		
+		int cnt=cashService.insertCashCharge(orderVo);
 		return cnt;
 	}
 }

@@ -8,6 +8,7 @@
 <title>북코인 충전</title>
 
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/member.css" />
 <!-- alert -->
 <!-- ideally at the bottom of the page -->
 <!-- also works in the <head> -->
@@ -53,7 +54,7 @@
 						    	$.ajax({
 									url:"<c:url value='/cash/cashCharge.do'/>",
 									data:"impUid="+imp_uid+"&merchantUid="+merchant_uid
-									+"&userid=${sessionScope.userId}&paidAmount="+paid_amount
+									+"&userid=${sessionScope.userId}&price="+paid_amount
 									+"&applyNum="+apply_num,
 									type:"POST",
 									success:function(res){
@@ -105,31 +106,35 @@
 	}
 	
 </script>
+
 </head>
 <body>
-	<!-- 
-	<input type="radio" name="cash" value="3000" id="3000" checked="checked">
-	<label for="3000">3000코인 </label>
-	
-	<input type="radio" name="cash" value="5000" id="5000">
-	<label for="5000">5000코인 </label>
-	
-	<input type="radio" name="cash" value="10000" id="10000">
-	<label for="10000">10000코인 </label>
-	
-	<input type="radio" name="cash" value="20000" id="20000">
-	<label for="20000">20000코인 </label>
-	
-	<input type="radio" name="cash" value="30000" id="30000">
-	<label for="30000">30000코인 </label>	
-	
-	<input type="radio" name="cash" value="1" id="self">
-	<label for="self">직접입력 </label> -->
-	<input type="text" id="cashwrite">
-	<br>
-	<button id="cashadd">북코인 충전</button>
-	
-	<input type="hidden" id="userId" name="userId" value="${vo.userId }">
-	<input type="hidden" id="userName" name=userName value="${vo.userName }">
+	<div id="cashContainer">
+	<h1>북코인 충전하기</h1>
+		<div id="cashAdd">			
+			<div class="cashInfo">고객정보</div>		
+			<div class="cashMenu">회원아이디</div>
+			<div class="cashval">${vo.userId }</div>
+			<div class="cashMenu">회원이름</div>
+			<div class="cashval">${vo.userName }</div>
+			<div class="cashMiddle">
+				<span class="cashHave" style="background-color: #EBFBFF">현재 보유한 북코인</span>
+				<span class="cashBook">${vo.cash } 코인</span>
+			</div>		  	
+		</div>
+		<div id="cashCharge">
+			<div>북코인 충전하기</div>
+			<div>
+				<span>북코인충전은 신용/체크카드로 충전이 가능합니다</span>
+				<div class="cashch">
+					충전할 금액 <input type="text" id="cashwrite" size="7">					
+				</div>
+			</div>
+		</div><br>
+		<div><button id="cashButton">북코인 충전</button></div>
+			
+		<input type="hidden" id="userId" name="userId" value="${vo.userId }">
+		<input type="hidden" id="userName" name=userName value="${vo.userName }">
+	</div>
 </body>
 </html>

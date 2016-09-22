@@ -16,13 +16,14 @@
 		where user_id=#{userId}
 	</update>
 	
-	<insert id="insertCashCharge" parameterType="CashVO">
-		<selectKey order="BEFORE" resultType="int" keyProperty="cashChargNo">
-			select BOOK_CASH_SEQ.nextval from dual
+	<insert id="insertCashCharge" parameterType="OrderVO">
+		<selectKey keyProperty="ordersNo" resultType="int" order="BEFORE">
+			select	order_seq.nextval from dual
 		</selectKey>
-		insert into CASH_CHARGE(CASH_CHARG_NO,IMP_UID,MERCHANT_UID,USERID,PAID_AMOUNT,APPLY_NUM)
-		values(#{cashChargNo},#{impUid},#{merchantUid},#{userid},#{paidAmount},#{applyNum})
+		insert into orders(orders_no, user_id, price,ORDERS_DATE,BOOK_NO,BUY_CLASS,IMP_UID,MERCHANT_UID,APPLY_NUM) 
+		values(#{ordersNo},#{userId}, #{price},sysdate,#{bookNo},#{buyClass}, #{impUid},#{merchantUid}, #{applyNum})	
 	</insert>
+	
 </mapper>
 
 
