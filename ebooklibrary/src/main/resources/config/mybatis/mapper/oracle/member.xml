@@ -24,15 +24,23 @@
 	</insert>
 	
 	<select id="selectMemberByMemberVo" 
-	parameterType="string" resultType="string">
-		select pwd from member where USER_ID=#{userId} and out_Date is null
+	parameterType="MemberVO" resultType="string">
+		select pwd from member where USER_ID=#{userId} 
+		<if test="authCode=='USER'">
+			and AUTH_CODE='USER' 
+		</if>
+		<if test="authCode=='ADMIN'">
+			and AUTH_CODE='ADMIN'
+		</if>
+		and out_Date is null
 	</select>
 	
 	<select id="selectMemberByUserName" 
 	parameterType="string" resultType="MemberVO">
-		select * from member where USER_ID=#{userId} and out_Date is null
+		select * from member where USER_ID=#{userId}		
+		and out_Date is null
 	</select>
-	
+		
 	<select id="selectMemberAll" resultType="MemberVO">
 		select *from
 		(

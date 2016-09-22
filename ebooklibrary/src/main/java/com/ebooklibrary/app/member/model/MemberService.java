@@ -18,7 +18,7 @@ public interface MemberService {
 	public static final String DEFAULTIMAGE="defaultimage.jpg";
 	
 	public int register(MemberVO vo);
-	public int logincheck(String userName,String pwd);
+	public int logincheck(MemberVO vo);
 	public MemberVO selectByUserName(String userName);
 	public List<MemberVO> selectMemberAll(SearchVO vo);
 	public int selectMemberCount(SearchVO vo);

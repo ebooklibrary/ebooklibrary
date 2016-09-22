@@ -61,21 +61,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.GET)
-	public String login_get(){
+	public String login_get(@RequestParam(defaultValue="0") int pwdChange){
 		
 		return "member/login";
 	}
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
-	public String login_post(@RequestParam String userId 
-			, @RequestParam String pwd,
+	public String login_post(@ModelAttribute MemberVO vo,
 			HttpServletRequest request,HttpServletResponse response
 			,Model model){
-		
-		int result=memberService.logincheck(userId, pwd);
+		logger.info("일반회원 로그인 memberVo={}",vo);
+		int result=memberService.logincheck(vo);
 		String msg="",url="/member/login.do";
 		if(result==MemberService.LOGIN_OK){
-			MemberVO memberVo=memberService.selectByUserName(userId);
+			MemberVO memberVo=memberService.selectByUserName(vo.getUserId());
 			HttpSession session=request.getSession();
 			session.setAttribute("userId", memberVo.getUserId());
 			session.setAttribute("auchCode", memberVo.getAuthCode());
@@ -98,7 +97,10 @@ public class MemberController {
 	
 	@RequestMapping("/logout.do")
 	public String memberLogout(HttpSession session,Model model){
-		session.invalidate();
+		session.removeAttribute("userId");
+		session.removeAttribute("userName");
+		session.removeAttribute("auchCode");
+		session.removeAttribute("memberNo");
 		model.addAttribute("msg", "로그아웃 되었습니다");
 		model.addAttribute("url", "/member/login.do");
 		return "common/message";
@@ -115,11 +117,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/myInfoChk.do",method=RequestMethod.POST)
-	public String myInfoChk(HttpSession session,@RequestParam String pwd,
+	public String myInfoChk(HttpSession session,MemberVO vo,
 			@RequestParam(defaultValue="0") int pwdChange,Model model){
 		String userId=(String)session.getAttribute("userId");
-		int result=memberService.logincheck(userId, pwd);
+		int result=memberService.logincheck(vo);
 		String msg="",url="/member/login.do";
+		if(pwdChange!=1){
+			url+="?pwdChange=0";
+		}else{
+			url+="?pwdChange=1";
+		}		
 		if(result==MemberService.LOGIN_OK){
 			if(pwdChange!=1){
 				return "redirect:/member/myInfo.do";
@@ -144,12 +151,16 @@ public class MemberController {
 		return "member/pwdChange";
 	}
 	@RequestMapping(value="/pwdChange.do",method=RequestMethod.POST)
-	public String pwdChange_post(@ModelAttribute MemberVO vo,Model model){
-		logger.info("비밀번호 변경처리");
+	public String pwdChange_post(@ModelAttribute MemberVO vo,HttpSession session
+			,Model model){
+		String userId=(String)session.getAttribute("userId");
+		vo.setUserId(userId);
+		
+		logger.info("비밀번호 변경처리 memberVo={}",vo);		
 		int cnt=memberService.updateTempPwd(vo);
 		model.addAttribute("msg", "비밀번호 변경 완료");
 		model.addAttribute("url", "/member/myPage.do");
-		return "member/pwdChange";
+		return "common/message";
 	}
 	
 	@RequestMapping(value="/myInfo.do",method=RequestMethod.GET)

@@ -29,6 +29,7 @@ $(function() {
 		<form action="" method="post">
 			아이디 : <input type="text" name="userId">
 			비밀번호 : <input type="password" name="pwd">
+			<input type="hidden" name="authCode" value='USER'>
 			<input type="submit" id="loginSubmitBt" value="로그인">
 		</form><br>
 		<%-- <a href="<c:url value='/member/register.do'/>">회원가입</a><br> --%>
@@ -49,7 +50,8 @@ $(function() {
 			아이디 : <input type="text" name="userId" 
 			value="${sessionScope.userId }" readonly="readonly">
 			비밀번호 : <input type="password" name="pwd">
-			<input type="hidden" name="pwdChange" value="${param.pwdChange }">
+			<input type="hidden" name="authCode" value='USER'>
+			<input type="hidden" name="pwdChange" value="${param.pwdChange }">			
 			<input type="submit" value="로그인">			
 		</form>
 	</c:if>

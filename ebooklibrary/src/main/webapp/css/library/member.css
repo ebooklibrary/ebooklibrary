@@ -107,3 +107,50 @@
 .menuform{
 	padding: 0;
 }
+
+/* 북코인 충전 화면 css */
+#cashContainer{
+}
+
+#cashAdd{
+	
+}
+#cashAdd .cashInfo{
+	width:98%;
+	text-align: left;
+}
+#cashAdd .cashMenu{
+	width: 23%;
+	float:left;
+	background-color: #EBFBFF;
+	text-align: left;
+}
+
+#cashAdd .cashval{
+	width: 23%;
+	float:left;
+	text-align: right;
+}
+#cashAdd .cashMiddle{
+	clear: both;
+	width: 95%;	
+}
+#cashAdd .cashMiddle .cashHave{
+	float: left;
+	text-align:center;
+	width: 49%;
+}
+#cashAdd .cashMiddle .cashBook{
+	float :right;
+}
+
+#cashCharge{
+	clear:both;
+}
+#cashCharge .cashch{	
+	float: left;
+}
+
+#cashButton{
+	clear: both;
+}

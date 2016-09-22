@@ -2,6 +2,10 @@ package com.ebooklibrary.app.library.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ebooklibrary.app.common.MemberSearchVO;
@@ -32,6 +37,49 @@ public class AdminController {
 	@RequestMapping("/adminMain.do")
 	public String adminMain(){
 		return "admin/adminMain";
+	}
+	
+	@RequestMapping(value="/login/adminLogin.do",method=RequestMethod.GET)
+	public void login_get(){
+		logger.info("관리자 로그인화면 보여주기");		
+	}
+	
+	@RequestMapping(value="/login/adminLogin.do",method=RequestMethod.POST)
+	public String login_post(@ModelAttribute MemberVO vo,
+			HttpServletRequest request,HttpServletResponse response
+			,Model model){
+		logger.info("관리자 로그인 memberVo={}",vo);
+		int result=memberService.logincheck(vo);
+		String msg="",url="/admin/login/adminLogin.do";
+		if(result==MemberService.LOGIN_OK){
+			MemberVO memberVo=memberService.selectByUserName(vo.getUserId());
+			HttpSession session=request.getSession();
+			session.setAttribute("adminUserId", memberVo.getUserId());
+			session.setAttribute("adminAuchCode", memberVo.getAuthCode());
+			session.setAttribute("adminMemberNo", memberVo.getMemberNo());
+			msg=memberVo.getUserName()+"관리자님 로그인하였습니다";
+			url="/admin/adminMain.do";
+			
+		}else if(result==memberService.PWD_DISAGREE){
+			msg="비밀번호가 다릅니다";
+		}else if(result==memberService.ID_NONE){
+			msg="아이디가 없습니다";
+		}else{
+			msg="로그인 실패";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "common/message";
+	}
+	
+	@RequestMapping("/logout.do")
+	public String memberLogout(HttpSession session,Model model){
+		session.removeAttribute("adminUserId");
+		session.removeAttribute("adminAuchCode");
+		session.removeAttribute("adminMemberNo");
+		model.addAttribute("msg", "로그아웃 되었습니다");
+		model.addAttribute("url", "/admin/login/adminLogin.do");
+		return "common/message";
 	}
 	
 	@RequestMapping("/member/memberList.do")

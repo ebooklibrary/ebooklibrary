@@ -13,6 +13,7 @@ public interface OrderDAO {
 	public int insertMyBooks(Map<String, Object> map);
 	public List<OrderVO> selectOrderAll(DateSearchVO searchVo);
 	public int selectOrderCount(DateSearchVO searchVo);
+	public int updateBookSales(int bookNo);
 	
 	
 }

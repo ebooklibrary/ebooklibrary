@@ -9,7 +9,7 @@
 		$("#btnCharge").click(function() {
 			window.open("<c:url value='/cash/cashAdd.do'/>",
 					"cashAdd",
-			"width=800,height=700,left=50,top=50,resizable=yes,location=yes");
+			"width=500,height=400,left=50,top=50,resizable=yes,location=yes");
 			});
 		});	
 </script>

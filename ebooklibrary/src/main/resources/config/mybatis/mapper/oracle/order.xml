@@ -63,6 +63,12 @@
 	<select id="selectOrderCount2" parameterType="DateSearchVO" resultType="int">
 		select count(*) from orders 
 		<include refid="orderListWhere"></include>
+	</select>	
+	
+	<select id="updateBookSales" parameterType="int">
+		update book
+		set SALES=SALES+1
+		where book_no=#{bookNo}
 	</select>
 </mapper>
 

@@ -56,8 +56,9 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path=""/>
-			<beans:ref bean="adminLoginInterceptor"/>
+	        <mapping path="/admin/*" />
+	        <mapping path="/admin/*/*" />
+	        <beans:ref bean ="adminLoginInterceptor" />
 		</interceptor>
 	</interceptors>
 	

@@ -39,69 +39,13 @@ public class MemoController {
 		return cnt;
 	}
 	
-	@RequestMapping("/memo.do")
-	public String memo(HttpSession session,@ModelAttribute MemoSearchVO searchVo,Model model){
-		String userId=(String)session.getAttribute("userId");
-		logger.info("메모 페이지 들어가기 userId={},searchVo={}",userId,searchVo);
-		if(searchVo.getToFrom()==null){
-			searchVo.setToFrom("");
-		}
-		searchVo.setUserId(userId);
-		//toPagingInfo
-		PaginationInfo toPagingInfo= new PaginationInfo();
-		toPagingInfo.setBlockSize(Utility.BLOCK_SIZE);
-		toPagingInfo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
-		
-		//fromPagingInfo
-		PaginationInfo fromPagingInfo= new PaginationInfo();
-		fromPagingInfo.setBlockSize(Utility.BLOCK_SIZE);
-		fromPagingInfo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
-		
-		
-		if(searchVo.getToFrom().equals("T")){
-			toPagingInfo.setCurrentPage(searchVo.getCurrentPage());
-		}else{
-			toPagingInfo.setCurrentPage(1);
-		}
-		if(searchVo.getToFrom().equals("F")){
-			fromPagingInfo.setCurrentPage(searchVo.getCurrentPage());
-		}else{
-			fromPagingInfo.setCurrentPage(1);
-		}
-		
-		
-		//searchVo
-		searchVo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
-		if(searchVo.getToFrom().equals("T")){
-			searchVo.setFirstRecordIndex(toPagingInfo.getFirstRecordIndex());
-		}else if(searchVo.getToFrom().equals("F")){
-			searchVo.setFirstRecordIndex(fromPagingInfo.getFirstRecordIndex());
-		}
-		
-		List<MemoVO> toList=memoService.selectToId(searchVo);
-		logger.info("받은 메세지 tolist={}",toList.size());
-		int toTotalRecord=memoService.selectToIdCount(searchVo);
-		toPagingInfo.setTotalRecord(toTotalRecord);
-		
-		List<MemoVO> fromList=memoService.selectFromId(searchVo);
-		logger.info("보낸 메세지 fromlist={}",fromList.size());
-		int fromTotalRecord=memoService.selectFromIdCount(searchVo);
-		fromPagingInfo.setTotalRecord(fromTotalRecord);
-		
-		model.addAttribute("toList", toList);		
-		model.addAttribute("fromList", fromList);
-		model.addAttribute("toPagingInfo", toPagingInfo);
-		model.addAttribute("fromPagingInfo", fromPagingInfo);
-		return "library/memo/memoList";
-	}
-	
 	@RequestMapping("/memoWrite.do")
 	public String memoWrite(@ModelAttribute MemoVO memoVo,Model model){
 		logger.info("쪽지쓰기 파라미터 memoVo={}",memoVo);
 		int cnt=memoService.insertMemo(memoVo);
 		logger.info("쪽지쓰기 결과 cnt={}",cnt);
 		model.addAttribute("msg", "쪽지를 보냈습니다");
-		model.addAttribute("url", "/library/memo/memo.do");
+		model.addAttribute("url", "/library/memo/fromMemo.do");
 		
 		return "common/message";
 	}
@@ -118,6 +62,69 @@ public class MemoController {
 	public void memoDelete(@RequestParam int memoNo){
 		logger.info("쪽지 확인체크 파라미터 memoNo={}",memoNo);
 		int cnt = memoService.deleteMemo(memoNo);		
+	}
+			
+	@RequestMapping("/toMemo.do")
+	public String toMemo(@ModelAttribute MemoSearchVO searchVo
+			,HttpSession session,Model model){
+		
+		String userId=(String)session.getAttribute("userId");
+		searchVo.setUserId(userId);
+		logger.info("받은 쪽지함 searchVo={}",searchVo);
+		//PagingInfo
+		PaginationInfo pagingInfo= new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//searchVo
+		searchVo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		logger.info("FirstRecordIndex()={}"+pagingInfo.getFirstRecordIndex());
+		
+		List<MemoVO> toList=memoService.selectToId(searchVo);
+		logger.info("받은쪽지 toList={}",toList.size());
+		int totalRecord=memoService.selectToIdCount(searchVo);
+		logger.info("totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		logger.info("getFirstPage={}",pagingInfo.getFirstPage());
+		logger.info("getLastPage={}",pagingInfo.getLastPage());
+				
+		model.addAttribute("ToFrom", "T");				
+		model.addAttribute("toList", toList);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		return "library/memo/memoList2";
+	}
+	
+	@RequestMapping("/fromMemo.do")
+	public String fromMemo(@ModelAttribute MemoSearchVO searchVo
+			,HttpSession session,Model model){
+		
+		String userId=(String)session.getAttribute("userId");
+		searchVo.setUserId(userId);
+		logger.info("보낸 쪽지함 searchVo={}",searchVo);
+		//PagingInfo
+		PaginationInfo pagingInfo= new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//searchVo
+		searchVo.setRecordCountPerPage(Utility.MEMO_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<MemoVO> fromList=memoService.selectFromId(searchVo);
+		logger.info("보낸 쪽지 fromList={}",fromList.size());
+		int totalRecord=memoService.selectFromIdCount(searchVo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		model.addAttribute("ToFrom", "F");
+		model.addAttribute("fromList", fromList);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		return "library/memo/memoList2";
 	}
 	
 }

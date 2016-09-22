@@ -19,8 +19,7 @@ public class MemoServiceImpl implements MemoService{
 
 	@Override
 	public List<MemoVO> selectToId(MemoSearchVO searchVo) {
-		return memoDao.selectToId(searchVo);
-		
+		return memoDao.selectToId(searchVo);		
 	}
 
 	@Override

@@ -20,10 +20,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.register(vo);
 	}
 	
-	public int logincheck(String userName,String pwd){
-		String dbPwd=memberDao.logincheck(userName);
+	public int logincheck(MemberVO vo){
+		String dbPwd=memberDao.logincheck(vo);
 		int result=0;
-		if(pwd.equals(dbPwd)){
+		if(vo.getPwd().equals(dbPwd)){
 			result=LOGIN_OK;
 		}else if(dbPwd==null || dbPwd.isEmpty()){
 			result=ID_NONE;

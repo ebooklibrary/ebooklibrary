@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="config.mybatis.mapper.oracle.memo">
-	<select id="selectToId" parameterType="MemoSearchVO" resultType="MemoVO">
-		
+	<select id="selectToId" parameterType="MemoSearchVO" resultType="MemoVO">		
 		select *
 		from
 		(
@@ -11,7 +10,7 @@
 		    from
 		        (select *
 		        from memo 
-		         where to_Id=#{userId}
+		         where to_Id=#{userId} and MEMODEL='N'
 		        order by memo_no desc) memo_ALL    
 		) 
 		<![CDATA[
@@ -19,11 +18,9 @@
 			and RNUM<= #{firstRecordIndex}
 			+ #{recordCountPerPage}
 		]]>
-		
 	</select>
 	
-	<select id="selectFromId" parameterType="MemoSearchVO" resultType="MemoVO">
-		
+	<select id="selectFromId" parameterType="MemoSearchVO" resultType="MemoVO">		
 		select *
 		from
 		(
@@ -42,7 +39,7 @@
 	</select>
 	
 	<select id="selectToIdCount" parameterType="MemoSearchVO" resultType="int">
-		select count(*) from memo where to_Id=#{userId} order by memo_no desc
+		select count(*) from memo where to_Id=#{userId} and MEMODEL='N' order by memo_no desc
 	</select>
 	
 	<select id="selectFromIdCount" parameterType="MemoSearchVO" resultType="int">
@@ -66,7 +63,7 @@
 	</update>
 	
 	<delete id="deleteMemo" parameterType="int">
-		delete memo where memo_no=#{memoNo}
+		update memo set MEMODEL='Y' where MEMO_NO=#{memoNo}
 	</delete>
 	
 </mapper>

@@ -7,7 +7,7 @@ import com.ebooklibrary.app.common.SearchVO;
 
 public interface MemberDAO {
 	public int register(MemberVO vo);
-	public String logincheck(String userName);
+	public String logincheck(MemberVO vo);
 	public MemberVO selectByUserName(String userName);
 	public List<MemberVO> selectMemberAll(SearchVO vo);
 	public int selectMemberCount(SearchVO vo);

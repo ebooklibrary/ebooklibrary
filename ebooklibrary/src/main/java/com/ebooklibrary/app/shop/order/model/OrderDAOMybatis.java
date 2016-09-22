@@ -47,6 +47,11 @@ public class OrderDAOMybatis extends SqlSessionDaoSupport
 		return getSqlSession().selectOne(namespace+".selectOrderCount2", searchVo);
 	}
 
+	@Override
+	public int updateBookSales(int bookNo) {
+		return getSqlSession().update(namespace+".updateBookSales", bookNo);
+	}
+
 
 	
 }
