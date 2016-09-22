@@ -8,6 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>포도서관</title>
+
+<!-- alert -->
+<!-- ideally at the bottom of the page -->
+<!-- also works in the <head> -->
+<%-- <c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/> --%>
+<script src="<c:url value='/alertify.js-0.3.11/lib/alertify.min.js'/>"></script>
+<!-- include the core styles -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/>" />
+<%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
+<!-- include a theme, can be included into the core instead of 2 separate files -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
+
 <!-- W3 폼태그 -->
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />

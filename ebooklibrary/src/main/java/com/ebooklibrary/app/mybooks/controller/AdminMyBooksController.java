@@ -138,6 +138,7 @@ public class AdminMyBooksController {
 		List<Map<String, Object>> cartList=cartService.selectCartView(userId);			
 		model.addAttribute("cartList", cartList);
 		
+		
 		return "library/book/bookList";
 	}
 	
@@ -200,6 +201,17 @@ public class AdminMyBooksController {
 		
 	}
 	
+	@RequestMapping("/book/bookEdit.do")
+	public String bookEdit_get(HttpServletRequest request, @RequestParam int bookNo, Model model){
+		logger.info("책 수정 파라미터 bookNo={}",bookNo);
+		
+		MyBookVO bookVo=myBookService.selectBookByBookNo(bookNo);
+		
+		logger.info("책 수정 파라미터 bookVo={}",bookVo);
+		
+		
+		return "admin/book/bookEdit";
+	}
 	
 	
 	

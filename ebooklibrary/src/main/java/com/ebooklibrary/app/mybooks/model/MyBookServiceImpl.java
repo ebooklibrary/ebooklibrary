@@ -111,5 +111,10 @@ public class MyBookServiceImpl implements MyBookService {
 	public int flagDeleteBooks(int bookNo) {
 		return myBookDao.flagDeleteBooks(bookNo);
 	}
+
+	@Override
+	public int bookEdit(MyBookVO myBookVo) {
+		return myBookDao.bookEdit(myBookVo);
+	}
 	
 }

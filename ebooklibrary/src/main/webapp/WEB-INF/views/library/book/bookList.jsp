@@ -25,6 +25,16 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		//$( "#sortDiv input" ).checkboxradio();
+		
+		/* alert 커스텀 */
+		alertify.set({ labels: {
+			    ok     : "예",
+			    cancel : "아니오"
+			} }); 
+
+		/* 버튼 리버스 (좌우 위치이동) */
+		alertify.set({ buttonReverse: true });
+		
 		$("#schDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 		$("#genre").html(l);
 		
@@ -174,9 +184,24 @@
 		});
 		 
 		 $(".bookDelete").click(function() {
-			 var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
-			 alert(bookNo);
-			 $(location).attr('href', "<c:url value='/admin/book/bookDelete.do?bookNo="+bookNo+"'/>");
+			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
+			alert(bookNo);
+			
+			alertify.confirm("정말로 책을 삭제하시겠습니까?", function (e) {
+				if (e) {
+					$(location).attr('href', "<c:url value='/admin/book/bookDelete.do?bookNo="+bookNo+"'/>");
+			    } else {
+			    	return false;
+			    }
+			});
+			
+		});
+		 
+		 $(".bookEdit").click(function() {
+			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
+			alert(bookNo);
+			$(location).attr('href', "<c:url value='/admin/book/bookEdit.do?bookNo="+bookNo+"'/>");
+			
 		});
 		 
 		
@@ -253,15 +278,17 @@
 		<c:if test="${!empty sessionScope.userId }">
 			<input type="hidden" id="userId" name="userId" value="${sessionScope.userId }">
 			<input type="hidden" id="price" name="price" value="${vo.price }">
-			<input type="hidden" id="bookNo" name="bookNo" value="${vo.bookNo }">
 		</c:if>
+			<input type="hidden" id="bookNo" name="bookNo" value="${vo.bookNo }">
 			<div id="bookListDiv">
 				<img alt="책 커버 이미지" src="<c:url value='/book_upload/${vo.coverFileName }'/>">
 				<p id="bookTitleP">[${vo.genre}] ${vo.title }</p>
 				<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 					<div class="choice">
 						<input type="submit" id="bookEdit" name="bookEdit" value="수정" class="bookEdit">
-						<input type="button" class="bookDelete" id="bookDelete" name="bookDelete" value="삭제">
+						<c:if test="${vo.sales == 0 }">
+							<input type="button" class="bookDelete" id="bookDelete" name="bookDelete" value="삭제">
+						</c:if>
 					</div>
 				</c:if>
 				
