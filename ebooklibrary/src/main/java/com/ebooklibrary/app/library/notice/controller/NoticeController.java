@@ -1,6 +1,10 @@
 package com.ebooklibrary.app.library.notice.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ebooklibrary.app.common.FileUploadWebUtil;
 import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
@@ -26,6 +31,8 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@Autowired
+	private FileUploadWebUtil fileUtil;
 	
 	@RequestMapping(value ="/noticewrite.do", method = RequestMethod.GET)
 	public String noticeWrite_get(){
@@ -35,8 +42,23 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value ="/noticewrite.do", method = RequestMethod.POST)
-	public String noticeWrite_post(@ModelAttribute NoticeVO noticeVo , Model model){
+	public String noticeWrite_post(HttpServletRequest request,@ModelAttribute NoticeVO noticeVo , Model model){
 		logger.info("공지사항 입력 처리");
+		
+		int uploadType = FileUploadWebUtil.NOTICE_UPLOAD;
+		
+		List<Map<String, Object>> fileList = fileUtil.fileUpload(request, uploadType);
+		String fileName= "";
+		String upPath="";
+		long fileSize=0;
+		for(Map<String, Object> mvMap :fileList){
+			fileName=(String)mvMap.get("fileName");
+			upPath=(String)mvMap.get("upPath");
+			fileSize=(Long)mvMap.get("fileSize");
+			logger.info("업로드파일 fileName={}, upPath={}",fileName,upPath);
+		}
+		noticeVo.setFileName(fileName);
+		noticeVo.setFileSize(fileSize);
 		
 		int cnt = noticeService.insertNotice(noticeVo);
 		String msg = "" , url ="";
@@ -103,12 +125,37 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value ="/noticeEdit.do" , method=RequestMethod.POST)
-	public String editNotice_post(@ModelAttribute NoticeVO noticeVo, Model model){ 
+	public String editNotice_post(@ModelAttribute NoticeVO noticeVo,@RequestParam String oldFileName, @RequestParam long oldFileSize, HttpServletRequest request,  Model model){ 
 		logger.info("관리자용 공지사항 수정처리");
-		
 		logger.info("noticeVo={}",noticeVo);
-		int cnt = noticeService.editNotice(noticeVo);
+		int uploadType = FileUploadWebUtil.NOTICE_UPLOAD;
+		String fileName="";
+		long fileSize =0;
 		
+		List<Map<String, Object>> fileList = fileUtil.fileUpload(request, uploadType);
+		if(fileList!=null && !fileList.isEmpty()){
+			for(Map<String, Object> fileMap : fileList){
+				fileName=(String)fileMap.get("fileName");
+				fileSize =(Long)fileMap.get("fileSize");
+			}
+			noticeVo.setFileName(fileName);
+			noticeVo.setFileSize(fileSize);
+			
+			//기존파일이 존재하면 지곤파일 삭제
+			
+			String upPath = fileUtil.getUploadPath(request, uploadType);
+			File oldFile = new File(upPath,oldFileName);
+			if(oldFile.exists()){
+				boolean bool = oldFile.delete();
+				logger.info("기존파일 삭제여부 ={} ",bool);
+			}
+		}else{
+			//업로드 하지않는 경우
+			noticeVo.setFileName(fileName);
+			noticeVo.setFileSize(fileSize);
+		}//if
+		
+		int cnt = noticeService.editNotice(noticeVo);
 		logger.info("수정 후 파라미터 cnt = {}",cnt);
 		String msg ="" , url ="/library/notice/noticeEdit.do?notice_No="+noticeVo.getNoticeNo();
 		if(cnt>0){

@@ -64,7 +64,7 @@ public class QuestionController {
 		
 		if(cnt>0){
 			msg="1:1 문의 작성 성공";
-			url ="/library/serviceCenter/question.do";
+			url ="/library/serviceCenter/myQuestion.do";
 		}
 		else{
 			msg="1:1문의 작성 실패";
@@ -89,7 +89,34 @@ public class QuestionController {
 		model.addAttribute("alist", alist);
 		
 		return "library/serviceCenter/myQuestion";
+	}
+	
+	@RequestMapping(value="/updateQuestion.do" , method=RequestMethod.GET)
+	public String GetUpdateAdmin(){
+		logger.info("관리자용 답변 업데이트 화면 보여주기");
 		
+		return "library/serviceCenter/updateQuestion";
+	}
+	
+	@RequestMapping(value ="/updateQuestion.do" , method=RequestMethod.POST)
+	public String PostUpdateAdmin(@ModelAttribute QuestionVO questionVo , Model model){
+		logger.info("관리자용 답변 업데이트 처리하기");
+		
+		logger.info("파라미터 questionVo ={}"+questionVo);
+		int cnt = questionservice.updateQuestion(questionVo);
+		
+		String msg = "" , url = "/library/serviceCenter/updateQuestion";
+		if(cnt>0){
+			msg="1:1문의 답변달기 성공";
+			url="/library/serviceCenter/libraryServiceCenter";
+		}
+		else{
+			msg="1:1 문의 답변달기 실패";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "library/serviceCenter/updateQuestion";
 	}
 	
 }

@@ -9,6 +9,10 @@ public class NoticeVO {
 	private Timestamp regdate; // 공지사항 작성일
 	private String content; //공지사항 내용
 	private int readCount; //조회수
+	private String originalFileName; ///원래 파일이름 
+	private String fileName; //파일이름
+	private long fileSize;//파일 크기
+	private int downCount; //다운로드수
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -45,12 +49,37 @@ public class NoticeVO {
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
 	}
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public long getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+	public int getDownCount() {
+		return downCount;
+	}
+	public void setDownCount(int downCount) {
+		this.downCount = downCount;
+	}
 	@Override
 	public String toString() {
 		return "NoticeVO [noticeNo=" + noticeNo + ", title=" + title + ", userName=" + userName + ", regdate=" + regdate
-				+ ", content=" + content + ", readCount=" + readCount + "]";
+				+ ", content=" + content + ", readCount=" + readCount + ", originalFileName=" + originalFileName
+				+ ", fileName=" + fileName + ", fileSize=" + fileSize + ", downCount=" + downCount + "]";
 	}
 
-
+	
 	
 }	

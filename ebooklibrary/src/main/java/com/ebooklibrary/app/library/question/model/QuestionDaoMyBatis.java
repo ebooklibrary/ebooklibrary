@@ -20,6 +20,11 @@ public class QuestionDaoMyBatis  extends SqlSessionDaoSupport implements Questio
 		return getSqlSession().selectList(NAMESPACE+".selectByMemberNo",memberNo);
 	}
 
+	@Override
+	public int updateQuestion(QuestionVO questionVo) {
+		return getSqlSession().update(NAMESPACE+".updateAdmin",questionVo);
+	}
+
 
 	
 }

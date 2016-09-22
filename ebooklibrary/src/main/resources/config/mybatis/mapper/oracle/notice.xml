@@ -16,8 +16,9 @@
 		<selectKey order="BEFORE" keyProperty="noticeNo" resultType="int">
 			select notice_seq.nextval from dual
 		</selectKey>
-		insert into notice_board(notice_no, title,user_Name ,content)
-		values (#{noticeNo},#{title},#{userName},#{content})
+		insert into notice_board(notice_no, title,user_Name ,content,file_Name,file_Size)
+		values
+		(#{noticeNo},#{title},#{userName},#{content},#{fileName},#{fileSize})
 	</insert>
 
 	<select id="seletctByNoNotice" parameterType="int" resultType="NoticeVO">
@@ -27,7 +28,7 @@
 	<update id="editNotice" parameterType="NoticeVO">
 		update notice_board
 		set
-		title=#{title} ,content=#{content}
+		title=#{title} ,content=#{content},file_Name=#{fileName},file_Size=#{fileSize}
 		where notice_no =${noticeNo}
 	</update>
 
@@ -36,15 +37,16 @@
 		where notice_no =${noticeNo}
 	</delete>
 
-	<select id="selectAllNotice" parameterType="SearchVO" resultType="NoticeVO"> 
+	<select id="selectAllNotice" parameterType="SearchVO"
+		resultType="NoticeVO">
 		select *from
 		(
 		select rownum as RNUM, LIST_ALL.*
 		from
 		(
-			select * from notice_board
-			<include refid="searchWhere"></include>
-			order by Notice_No desc
+		select * from notice_board
+		<include refid="searchWhere"></include>
+		order by Notice_No desc
 		) LIST_ALL
 		)
 	<![CDATA[
@@ -53,60 +55,67 @@
 	+ #{recordCountPerPage}
 	]]>
 	</select>
-	
+
 	<select id="selectCount" resultType="int" parameterType="SearchVO">
 		select count(*) from notice_board
 		<include refid="searchWhere"></include>
 		order by Notice_No desc
 	</select>
-	
+
 	<update id="readCountAdd" parameterType="int">
 		update notice_board
-		set read_count=read_count+1
+		set
+		read_count=read_count+1
 		where notice_no=#{noticeNo}
 	</update>
-	
+
 	<select id="prePage" parameterType="int" resultType="int">
 		select Max(Notice_no) from notice_board
 		<![CDATA[
 		where notice_No <#{noticeNo}
 		]]>
 	</select>
-	
+
 	<select id="nextPage" parameterType="int" resultType="int">
 		select MIN(notice_no) from notice_board
 		<![CDATA[
 		where notice_no> #{noticeNo}
 		]]>
 	</select>
-	
+
 	<select id="maxPage" parameterType="int" resultType="int">
-		select MAX(Notice_No) from notice_board
+		select
+		MAX(Notice_No) from notice_board
 	</select>
 	<select id="minPage" parameterType="int" resultType="int">
-		select MIN(Notice_No) from notice_board
+		select
+		MIN(Notice_No) from notice_board
 	</select>
-	
+
 	<select id="selectMainNotice" resultType="NoticeVO">
 		select *
 		from(
-			    select * from notice_board order by notice_No desc
-			)			
+		select * from notice_board order by notice_No desc
+		)			
 		<![CDATA[
 		where rownum<=12
 		]]>
 	</select>
-	
+
 	<select id="selectServiceNotice" resultType="NoticeVO">
 		select *
 		from(
-			    select * from notice_board order by notice_No desc
-			)			
+		select * from notice_board order by notice_No desc
+		)			
 		<![CDATA[
 		where rownum<=5
 		]]>
 	</select>
-
+	<update id="updateDowncount" parameterType="int">
+		update notice_board
+		set down_count= down_count+1
+		where notice_No=#{notice_No}
+	</update>
 </mapper>
 
 

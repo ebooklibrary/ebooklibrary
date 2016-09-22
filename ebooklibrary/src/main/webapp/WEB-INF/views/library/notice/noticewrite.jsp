@@ -78,6 +78,7 @@
 		width="200px" height="50px"></a>
 </div>
 <form name="frm1" id="frm1" method="post"
+	enctype="multipart/form-data"
 	action="<c:url value ='/library/notice/noticewrite.do'/>">
 	<div class="notice_Write">
 		<p>공지사항 입력 페이지</p>
@@ -92,6 +93,9 @@
 		<p>
 			<textarea class="w3-input" name="content" id="summary" style="width:630px; height:530px;  "></textarea>
 		</p>
+	</div>
+	<div>
+		<input type ="file" id="upfile" name="upfile">
 	</div>
 	<div class="notice_submit">
 		<input type="submit" id="btsubmit" value="글쓰기">

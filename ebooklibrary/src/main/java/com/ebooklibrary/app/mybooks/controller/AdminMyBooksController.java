@@ -31,7 +31,7 @@ public class AdminMyBooksController {
 	private static final Logger logger=LoggerFactory.getLogger(AdminMyBooksController.class);
 	
 	@Autowired
-	FileUploadWebUtil fileUtil;
+	private FileUploadWebUtil fileUtil;
 	
 	@Autowired
 	private MyBookService myBookService;

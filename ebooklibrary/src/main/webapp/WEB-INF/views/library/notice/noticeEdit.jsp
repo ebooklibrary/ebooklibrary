@@ -86,10 +86,12 @@
 		width="200px" height="50px"></a>
 </div>
 <div id="Write_body">
-	<form name="frm1" id="frm1" method="post"
+	<form name="frm1" id="frm1" method="post" enctype="multipart/form-data"
 		action="<c:url value ='/library/notice/noticeEdit.do'/>">
 		<input type="hidden" name="noticeNo" id="noticeNo"
-			value="${noticeVo.noticeNo }">
+			value="${noticeVo.noticeNo }"> <input type="hidden"
+			name="oldFileName" value="${noticeVo.fileName }"> <input
+			type="hidden" name="oldFileSize" value="${noticeVo.fileSize }">
 		<div class="notice_Write">
 			<p id="edit_head">공지사항 수정 페이지</p>
 		</div>
@@ -107,6 +109,14 @@
 						readonly="readonly"></td>
 				</tr>
 			</table>
+			<div>
+				<label>파일첨부</label> <input type="file" id="upfile" name="upfile">
+				<c:if test="${!empty noticeVo.fileName }">
+					<br>
+					<p style="color: green; padding: 5px 0 5px 135px;">※첨부파일을 새로
+						지정할 경우 기존파일 ${reBoardVo.fileName } 은 삭제됩니다.</p>
+				</c:if>
+			</div>
 			<textarea class="w3-input" name="content" id="summary"
 				style="width: 630px; height: 530px;"></textarea>
 

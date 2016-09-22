@@ -1,6 +1,9 @@
 package com.ebooklibrary.app.library.notice.model;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.ebooklibrary.app.common.SearchVO;
 
@@ -18,4 +21,10 @@ public interface NoticeService {
 	public int nextPage();
 	public List<NoticeVO> selectMainNotice();
 	public List<NoticeVO> selectServiceCenterNotice();
+	/*public List<Map<String, Object>> fileupload(HttpServletRequest request);*/
+	public int updateDownCount(int no);
+/*	public String getUniqueFileName(String ofileName);
+	public String getUploadPath(HttpServletRequest request);
+	public String getCurrentTime();
+	*/
 }

@@ -16,4 +16,10 @@
 		select * from complain_board
 		where member_no =#{member_no}
 	</select>
+
+	<update id="updateAdmin" parameterType="QuestionVO">
+		update complain_board
+		set c_content=#{cContent} , select_cmt="Y"
+		where quest_no=${questNo}
+	</update>
 </mapper>

@@ -20,4 +20,9 @@ public class QuestionServiceImpl implements QuestionService {
 	public List<QuestionVO> selectByMemberNo(int memberNo) {
 		return questionDao.selectByMemberNo(memberNo);
 	}
+
+	@Override
+	public int updateQuestion(QuestionVO questionVo) {
+		return questionDao.updateQuestion(questionVo);
+	}
 }

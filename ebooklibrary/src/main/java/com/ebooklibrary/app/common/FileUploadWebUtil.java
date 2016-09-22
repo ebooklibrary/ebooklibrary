@@ -29,6 +29,7 @@ public class FileUploadWebUtil {
 	public static final int PDS_UPLOAD=1; //자료실 파일 업로드
 	public static final int IMAGE_UPLOAD=2; //배경이미지 업로드
 	public static final int EVENTIMAGE_UPLOAD=3; //이벤트이미지 업로드
+	public static final int NOTICE_UPLOAD=4; //공지사항 파일 업로드
 	
 	@Resource(name="fileUploadProperties")
 	private Properties fileUploadProps;
@@ -132,10 +133,13 @@ public class FileUploadWebUtil {
 			}else if(uploadType==IMAGE_UPLOAD){
 				//상품 등록시 파일 이미지 업로드
 				realPath=fileUploadProps.getProperty("imageFile.upload.path.test");
-			}else{
+			}else if(uploadType==EVENTIMAGE_UPLOAD){
 				//책 이벤트등록
 				realPath=fileUploadProps.getProperty("eventimageFile.upload.path.test");
-			}
+			}else{
+	    		//공지사항 파일 업로드
+	    		realPath=fileUploadProps.getProperty("noticeFile.upload.path.test");
+	    	}
 	         logger.info("테스트 경로={}", realPath);
 	      }else{
 	         //실제 배포하는 경우 => 실제 경로를 구한다
@@ -147,10 +151,14 @@ public class FileUploadWebUtil {
 				//상품 등록시 파일 이미지 업로드
 				realPath=fileUploadProps.getProperty("imageFile.upload.path");
 				logger.info("IMAGE_UPLOAD={}", IMAGE_UPLOAD);
-			}else{
+			}else if(uploadType==EVENTIMAGE_UPLOAD){
 				//책이벤트 이미지 등록
 				realPath=fileUploadProps.getProperty("eventimageFile.upload.path");
 				logger.info("IMAGE_UPLOAD={}", EVENTIMAGE_UPLOAD);
+			}else{
+	    		//공지사항 파일 등록
+				realPath=fileUploadProps.getProperty("noticeFile.upload.path");
+				logger.info("NOTICE_UPLOAD={}"+NOTICE_UPLOAD);
 			}
 	    	  
 	         //realPath=fileUploadProps.getProperty("file.upload.path");

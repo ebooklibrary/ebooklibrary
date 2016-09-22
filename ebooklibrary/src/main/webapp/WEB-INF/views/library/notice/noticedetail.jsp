@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:if test="${sessionScope.auchCode=='ADMIN' }">
 	<%@include file="../../admin/libraryAdminTop.jsp"%>
 </c:if>
 <c:if test="${sessionScope.auchCode!='ADMIN' }">
-<%@include file="../libraryTop.jsp"%>
+	<%@include file="../libraryTop.jsp"%>
 </c:if>
 
 
@@ -31,7 +31,8 @@
 <div id="notice_head">
 	<h2>
 		<img alt="공지사항"
-			src="${pageContext.request.contextPath }/images/library/notice/notice.png" style="width: 150px;">
+			src="${pageContext.request.contextPath }/images/library/notice/notice.png"
+			style="width: 150px;">
 	</h2>
 </div>
 <div id="notice_banner">
@@ -59,20 +60,25 @@
 			<td class="td_5" colspan="5">${noticeVo.title }
 		</tr>
 		<tr style="margin-top: 10px">
-			<td class="td_6" colspan="6" valign="top">${noticeVo.content }</td>
+			<c:if test="${noticeVo.fileName!=null }">
+				<td class="td_6" colspan="6" valign="top"><img src ="${pageContext.request.contextPath }/noticeUpload/${noticeVo.fileName}" alt="" style="max-width: 100%; height: auto;"/>${noticeVo.content }</td>
+			</c:if>
+			<c:if test="${noticeVo.fileName==null }">
+				<td class="td_6" colspan="6" valign="top">${noticeVo.content }</td>
+			</c:if>
 		</tr>
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
 		<tr>
 			<td class="td_9">이전글</td>
-				<c:if test="${preVo==null || preVo==''}">
-					<td class="td_7">이전글이 없습니다.</td>
-				</c:if>
-				<c:if test="${preVo.noticeNo!=0}">
-					<td class="td_7"><a
-						href="<c:url value ='/library/notice/prePage.do?notice_No=${param.notice_No }'/>">${preVo.title}</a></td>
-				</c:if>
+			<c:if test="${preVo==null || preVo==''}">
+				<td class="td_7">이전글이 없습니다.</td>
+			</c:if>
+			<c:if test="${preVo.noticeNo!=0}">
+				<td class="td_7"><a
+					href="<c:url value ='/library/notice/prePage.do?notice_No=${param.notice_No }'/>">${preVo.title}</a></td>
+			</c:if>
 		</tr>
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
@@ -88,22 +94,26 @@
 			</c:if>
 		</tr>
 		<tr>
+			<td>첨부파일</td>
+			<td>${noticeVo.fileName }</td>
+		</tr>
+		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
 	</table>
-		<div class="notice_list">
-			<a href="<c:url value ='/library/notice/noticelist.do'/>"><img
-				class="img1" alt="리스트" 
-				src="${pageContext.request.contextPath }/images/library/notice/List.jpg" ></a>
-		</div>	
-	<c:if test="${sessionScope.auchCode=='ADMIN' }">	
-		<div class ="notice_delete">
-			<input type ="button" value="글수정" onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'">
-			<input type ="button" id="btnDelete"  value="글삭제" >
+	<div class="notice_list">
+		<a href="<c:url value ='/library/notice/noticelist.do'/>"><img
+			class="img1" alt="리스트"
+			src="${pageContext.request.contextPath }/images/library/notice/List.jpg"></a>
+	</div>
+	<c:if test="${sessionScope.auchCode=='ADMIN' }">
+		<div class="notice_delete">
+			<input type="button" value="글수정"
+				onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'">
+			<input type="button" id="btnDelete" value="글삭제">
 		</div>
 	</c:if>
 </div>
-<div>
-</div>
+<div></div>
 
 <%@include file="../libraryBottom.jsp"%>
