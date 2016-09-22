@@ -143,6 +143,10 @@
 #buy{
 	background-color: rgba(0, 0, 0, 0);
 }
+/* 관리자 페이지 수정삭제버튼 */
+#bookEdit, #bookDelete{
+	background-color: rgba(230, 230, 230, 0.3);
+}
 
 
 /* 책 설명 */

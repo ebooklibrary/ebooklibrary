@@ -84,11 +84,13 @@ $(function() {
 	$("#menuController a").hide();
 	//열기
 	$("#menuController span").click(function() {
+		$("#rightmenu").css("width", "180px");
 		$("#menuController span").hide();
 		$("#menuController a").show();
 	});
 	//닫기
 	$("#menuController a").click(function() {
+		$("#rightmenu").css("width", "0");
 		$("#menuController a").hide();
 		$("#menuController span").show();
 	});
@@ -121,7 +123,7 @@ $(function() {
 	
 });
 
-
+/* 
 function openNav() {
     document.getElementById("rightmenu").style.width = "180px";
 }
@@ -129,7 +131,7 @@ function openNav() {
 function closeNav() {
     document.getElementById("rightmenu").style.width = "0";
 }
-
+ */
 </script>
 </head>
 <body>

@@ -167,7 +167,14 @@
 		 */
 		
 		 $("#bookTitleP, #bookListDiv img").click(function() {
-			 $(location).attr('href', '<c:url value='/admin/book/bookDetail.do'/>');
+			 var bookNo=$(this).parent().parent().find("input[name=bookNo]").val();
+			 $(location).attr('href', "<c:url value='/admin/book/bookDetail.do?bookNo="+bookNo+"'/>");
+		});
+		 
+		 $(".bookDelete").click(function() {
+			 var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
+			 alert(bookNo);
+			 $(location).attr('href', "<c:url value='/admin/book/bookDelete.do?bookNo="+bookNo+"'/>");
 		});
 		 
 		
@@ -247,14 +254,12 @@
 			<input type="hidden" id="bookNo" name="bookNo" value="${vo.bookNo }">
 		</c:if>
 			<div id="bookListDiv">
-				<img alt="테스트" src="<c:url value='/book_upload/${vo.coverFileName }'/>">
+				<img alt="책 커버 이미지" src="<c:url value='/book_upload/${vo.coverFileName }'/>">
 				<p id="bookTitleP">[${vo.genre}] ${vo.title }</p>
 				<c:if test="${sessionScope.auchCode=='ADMIN' }">
 					<div class="choice">
-						<div class="cart">
-						<input type="submit" id="bookEdit" name="bookEdit" value="수정" class="cart">
-						</div>						
-						<input type="button" id="bookDelete" name="bookDelete" value="삭제">
+						<input type="submit" id="bookEdit" name="bookEdit" value="수정" class="bookEdit">
+						<input type="button" class="bookDelete" id="bookDelete" name="bookDelete" value="삭제">
 					</div>
 				</c:if>
 				

@@ -15,5 +15,8 @@ public interface MyBookDAO {
 	public List<Map<String, Object>> selectMyBookListByUserId(BookSearchVO bookSearchVo);
 	public int myBookCount(BookSearchVO bookSearchVo);
 	public int deleteMybook(MyBooksVO myBooksVo);
+	public MyBookVO selectBookDetail(int bookVo);
 	public List<MyBookVO> selectCartByUserId(String userId);
+	public int deleteBooks(int bookNo);
+	public int flagDeleteBooks(int bookNo);
 }
