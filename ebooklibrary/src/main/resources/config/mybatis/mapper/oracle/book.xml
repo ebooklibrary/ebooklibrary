@@ -56,8 +56,8 @@
 		<selectKey keyProperty="bookNo" order="BEFORE" resultType="int">
 			select BOOK_SEQ.nextval from dual
 	    </selectKey>
-		insert into book(BOOK_NO,title,publisher,writer,publication,genre,price,summary,BOOK_FILE_NAME,COVER_FILE_NAME,BOOK_FILE_SIZE)
-		values(#{bookNo},#{title},#{publisher},#{writer},#{publication},#{genre},#{price},#{summary},#{bookFileName},#{coverFileName},#{bookFileSize})
+		insert into book(BOOK_NO,title,publisher,writer,publication,genre,price,summary,BOOK_FILE_NAME,COVER_FILE_NAME,BOOK_FILE_SIZE,ORI_BOOK_FILE_NAME,ORI_COVER_FILE_NAME)
+		values(#{bookNo},#{title},#{publisher},#{writer},#{publication},#{genre},#{price},#{summary},#{bookFileName},#{coverFileName},#{bookFileSize},#{oriBookFileName},#{oriCoverFileName})
 	</insert>
 	
 	<select id="selectBookByUserId" parameterType="string" resultType="map">
@@ -124,7 +124,9 @@
 	<select id="selectBookDetail" parameterType="int" resultType="MyBookVO">
 		select * from book where book_no=#{bookNo}
 	</select>
-	
+	<select id="selectMyBooksByBookNo" parameterType="MyBooksVO" resultType="MyBooksVO">
+		select * from MY_BOOKS where book_no=#{bookNo} and user_id=#{userId}
+	</select>
 	
 	<delete id="deleteMybook" parameterType="MyBooksVO">
 		delete MY_BOOKS where USER_ID=#{userId} and book_no=#{bookNo}
@@ -143,7 +145,8 @@
 	
 	<update id="bookEdit" parameterType="MyBookVO">
 		update book
-		   set TITLE=#{title}, PUBLISHER=#{publisher},WRITER=#{writer}, PUBLICATION=#{publication},GENRE=#{genre}, PRICE, SALES=#{price},BOOK_FILE_NAME=#{bookFileName}, COVER_FILE_NAME=#{coverFileName}, BOOK_FILE_SIZE=#{bookFileSize},SUMMARY=#{summary}
+		   set TITLE=#{title}, PUBLISHER=#{publisher},WRITER=#{writer}, PUBLICATION=#{publication},GENRE=#{genre}, PRICE=#{price}, SALES=#{sales},BOOK_FILE_NAME=#{bookFileName}, COVER_FILE_NAME=#{coverFileName}, BOOK_FILE_SIZE=#{bookFileSize},SUMMARY=#{summary}
+		   		,ORI_BOOK_FILE_NAME=#{oriBookFileName}, ORI_COVER_FILE_NAME=#{oriCoverFileName}
 		   where book_no=#{bookNo}
 	</update>
 

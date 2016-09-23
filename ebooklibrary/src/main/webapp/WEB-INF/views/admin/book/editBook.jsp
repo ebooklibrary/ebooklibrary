@@ -32,6 +32,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		$("#bookRegiDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 		 
 		 $("#publication").datepicker({
@@ -119,18 +120,6 @@
 				return false;
 			}
 			
-			if($("#bookFileName").val().length < 1){
-				alertify.alert("등록하실 책을 업로드하여 주세요.");
-				$("#bookFileName").focus();
-				return false;
-			}
-			if($("#coverFileName").val().length < 1){
-				alertify.alert($("#bookFileName").val());
-				alertify.alert("등록하실 책의 커버를 업로드하여 주세요.");
-				$("#coverFileName").focus();
-				return false;
-			}
-			
 			
 			if($("#summary").val().length < 1 || $("#summary").val()=="<p>&nbsp;</p>"){
 				
@@ -152,6 +141,30 @@
 		}); //click
 		
 		$("#genre").html(l);
+		
+		var Fgenre=${bookVo.genre };
+		$("#genre").val(Fgenre);
+		
+		
+		/* 출판 날짜 설정 */
+		$.getDate=function(date){
+			var str=date.getFullYear()+"-"+$.findDate(date.getMonth()+1)+"-"+$.findDate(date.getDate());
+			return str;
+		}
+		$.findDate=function(d){
+			var res=d;
+			if (d<10) {
+				res="0"+d;
+			}
+			return res;
+		}
+		var Fpubdate="${bookVo.publication }";
+		var Zpubdate = new Date(Fpubdate);
+		var Apubdate=$.getDate(Zpubdate);
+		var Bpubdate=Apubdate.replace("-","/");
+		var Bpubdate=Bpubdate.replace("-","/");
+		$("#publication").val(Bpubdate);
+		
 		
 		/////////////////////////////
 		/* 
@@ -195,7 +208,8 @@
 
 </script>
 	<span id="regiBookTitle">책 등록</span>
-	<form action="<c:url value='/admin/book/uploadBook.do'/>" class="w3-container" id="bookfrm1" name="bookfrm1" enctype="multipart/form-data" method="post">
+	<form action="<c:url value='/admin/book/bookEdit.do'/>" class="w3-container" id="bookfrm1" name="bookfrm1" enctype="multipart/form-data" method="post">
+				<input type="hidden" class="w3-input" id="bookNo" name="bookNo" value="${bookVo.bookNo }">
 		<div id="formWrapper1">
 		<!-- 
 			<div class="w3-container w3">
@@ -204,15 +218,15 @@
 			 -->
 			<p>
 				<label>책제목 :</label>
-				<input type="text" class="w3-input" id="title" name="title">
+				<input type="text" class="w3-input" id="title" name="title" value="${bookVo.title }">
 			</p>
 			<p>
 				<label>작가명 :</label>
-				<input type="text" class="w3-input" id="writer" name="writer">
+				<input type="text" class="w3-input" id="writer" name="writer" value="${bookVo.writer }">
 			</p>
 			<p>
 				<label>출판사 :</label>
-				<input type="text" class="w3-input" id="publisher" name="publisher">
+				<input type="text" class="w3-input" id="publisher" name="publisher" value="${bookVo.publisher }">
 			</p>
 			<p>
 				<label>출판일 :</label>
@@ -220,7 +234,7 @@
 			</p>
 			<p>
 				<label>가격 :</label>
-				<input type="text" class="w3-input" id="price" name="price">
+				<input type="text" class="w3-input" id="price" name="price" value="${bookVo.price }">
 			</p>
 			<p>
 				<label>장르 :</label>
@@ -230,12 +244,19 @@
 			<p>
 				<label>책파일</label>
 				<input type="file" class="w3-input" id="bookFileName" name="bName">
+				<input type="hidden" class="w3-input" id="bookFileName" name="bookFileName" value="${bookVo.bookFileName }">
+				<input type="hidden" class="w3-input" id="oriBookFileName" name="oriBookFileName" value="${bookVo.oriBookFileName }">
 			</p>
-			
 			<p>
 				<label>책커버</label>
 				<input type="file" class="w3-input" id="coverFileName" name="cName">
+				<input type="hidden" class="w3-input" id="coverFileName" name="coverFileName" value="${bookVo.coverFileName }">
+				<input type="hidden" class="w3-input" id="oriCoverFileName" name="oriCoverFileName" value="${bookVo.oriCoverFileName }">
 			</p>
+				<label>기존 책</label>
+				<p style="border-bottom: 1px solid #808080; text-align: right; margin-bottom: 20px;">${bookVo.oriBookFileName }</p>
+				<label>기존 책커버</label>
+				<p style="border-bottom: 1px solid #808080; text-align: right;">${bookVo.oriCoverFileName }</p>
 		</div>
 		
 		<div id="formWrapper2">
@@ -247,12 +268,12 @@
 			-->
 				<p>책 요약</p>
 				<!-- <textarea class="w3-input" name="summary" id="summary"></textarea> -->
-				<textarea name="summary" id="summary" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
+				<textarea name="summary" id="summary" rows="10" cols="100" style="width:570px; height:230px;">${bookVo.summary }</textarea>
 			
 		</div>
 	
 	
 			<input type="button" class="btRegiBook" id="btBookReset" value="입력 초기화">
-			<input type="submit" class="btRegiBook" id="btBookUp" name="btBookUp" value="책올리기">
+			<input type="submit" class="btRegiBook" id="btBookUp" name="btBookUp" value="책 수정하기">
 	</form>
 <%@ include file="../libraryAdminBottom.jsp" %>

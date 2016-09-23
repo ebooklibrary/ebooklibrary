@@ -102,7 +102,23 @@ public class BookController {
 	}
 	
 	@RequestMapping("/bookDetail.do")
-	public String bookDetail(@RequestParam int bookNo, Model model){
+	public String bookDetail(HttpServletRequest request,@RequestParam int bookNo, Model model){
+		
+		HttpSession session=request.getSession();
+		String userId="";
+		if (session.getAttribute("userId")!=null) {
+			userId=(String)session.getAttribute("userId");
+		}
+		
+		MyBooksVO myBooksVo=new MyBooksVO();
+		
+		myBooksVo.setUserId(userId);
+		myBooksVo.setBookNo(bookNo);
+		
+		myBooksVo=myBookService.selectMyBooksByBookNo(myBooksVo);
+		logger.info("책 상세 마이북스 셀렉트 myBooksVo={}",myBooksVo);
+		model.addAttribute("myBooksVo", myBooksVo);
+		
 		
 		logger.info("책 상세 파라미터 bookNo={}",bookNo);
 		
@@ -121,6 +137,7 @@ public class BookController {
 		
 		model.addAttribute("bookVo", bookVo);
 		model.addAttribute("pubDate", pubDate);
+		
 		
 		return "library/book/bookDetail";
 	}

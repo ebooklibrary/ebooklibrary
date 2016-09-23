@@ -15,7 +15,9 @@ public class MyBookVO {
 	private String summary; //요약
 	private int sales; //판매부수
 	private String bookFileName; //책파일이름
+	private String oriBookFileName; //책 원본 이름
 	private String coverFileName; //책커버이름
+	private String oriCoverFileName; //책커버 원본 이름
 	private long bookFileSize; //책파일사이즈
 	
 	private String userId; //뷰용 유저아이디
@@ -108,12 +110,28 @@ public class MyBookVO {
 		this.bookFileName = bookFileName;
 	}
 
+	public String getOriBookFileName() {
+		return oriBookFileName;
+	}
+
+	public void setOriBookFileName(String oriBookFileName) {
+		this.oriBookFileName = oriBookFileName;
+	}
+
 	public String getCoverFileName() {
 		return coverFileName;
 	}
 
 	public void setCoverFileName(String coverFileName) {
 		this.coverFileName = coverFileName;
+	}
+
+	public String getOriCoverFileName() {
+		return oriCoverFileName;
+	}
+
+	public void setOriCoverFileName(String oriCoverFileName) {
+		this.oriCoverFileName = oriCoverFileName;
 	}
 
 	public long getBookFileSize() {
@@ -136,8 +154,9 @@ public class MyBookVO {
 	public String toString() {
 		return "MyBookVO [bookNo=" + bookNo + ", title=" + title + ", publisher=" + publisher + ", writer=" + writer
 				+ ", publication=" + publication + ", regDate=" + regDate + ", genre=" + genre + ", price=" + price
-				+ ", summary=" + summary + ", sales=" + sales + ", bookFileName=" + bookFileName + ", coverFileName="
-				+ coverFileName + ", bookFileSize=" + bookFileSize + ", userId=" + userId + "]";
+				+ ", summary=" + summary + ", sales=" + sales + ", bookFileName=" + bookFileName + ", oriBookFileName="
+				+ oriBookFileName + ", coverFileName=" + coverFileName + ", oriCoverFileName=" + oriCoverFileName
+				+ ", bookFileSize=" + bookFileSize + ", userId=" + userId + "]";
 	}
-	
+
 }

@@ -33,10 +33,66 @@
 				});
 			}
 		});
+		
+		$("#bookEdit").click(function() {
+			var bookNo=${bookVo.bookNo };
+			$(location).attr('href', "<c:url value='/admin/book/bookEdit.do?bookNo="+bookNo+"'/>");
+		});
+		
+		/* 장바구니 클릭시 메시지 */
+		$(".cart").click(function() {
+			if (${!empty sessionScope.userId }) {
+				$(this).find(".popuptext").show().delay(2000)
+				.queue(function (next) {
+					$(this).hide();
+					next();
+				});
+			}
+		});
+
+		$(".cartFrm").submit(function() {
+			if (${empty sessionScope.userId }) {
+				/* 
+				alertify.alert("로그인하여 주세요.");
+				$(location).attr('href', "<c:url value='/member/login.do'/>");
+				 */
+				
+				alertify.alert("로그인하여 주세요.", function (e) {
+				    if (e) {
+				    	$(location).attr('href', "<c:url value='/member/login.do'/>");
+				    }
+				});
+				
+				return false;
+			}
+			$.ajax({
+				url:"<c:url value='/shop/cart/cartInsert.do'/>",
+				type:"POST",
+				data: $(this).serializeArray(),
+				success:function(res){
+					if (res<0) {
+						alertify.alert("이미 장바구니 목록에 추가되었습니다.");
+					}
+				},
+				error:function(xhr, status, error){
+					alertify.alert(status+":"+error);
+				}
+			});
+		});
+		
+		$(".buy").click(function() {
+			$("#cartFrm").attr('action', "<c:url value='/shop/cart/extendBook.do'/>");
+			$("#cartFrm").submit();
+		});
+		
+		
 	});
 	
 </script>
-
+	<form method="post" id="cartFrm" class="cartFrm">
+	<input type="hidden" id="bookNo" name="bookNo" value="${bookVo.bookNo }">
+	<input type="hidden" id="price" name="price" value="${bookVo.price }">
+	<input type="hidden" id="userId" name="userId" value="${sessionScope.userId }">
 	<div id="DetailBookDiv">
 		<div id="DetailbookCover">
 			<img alt="책 커버 이미지" src="<c:url value='/book_upload/${bookVo.coverFileName }'/>">
@@ -55,22 +111,23 @@
 				<span>판매 가격 - ${bookVo.price }원</span><span>대여 가격 - 일당 100원</span>
 			</div>
 			
-			<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">				
 				<div class="choice">				
-					<c:if test="${!empty vo.userId}">
-						이미 가지고 있지롱
+				<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">				
+					<c:if test="${!empty myBooksVo.userId}">
+						구매하신 상품입니다.
 					</c:if>
-					<c:if test="${empty vo.userId}">
+					<c:if test="${empty myBooksVo.userId}">
 						<div class="cart">
 						<input type="submit" id="cart" name="cart" value="장바구니 추가" class="cart">
-						<span class="popuptext">${vo.title } 장바구니 추가</span>
+						<span class="popuptext">${bookVo.title } 장바구니 추가</span>
 						</div>
-						<input type="button" id="buy" name="buy" value="바로구매">
-						
+						<input type="button" id="buy" name="buy" value="바로구매" class="buy">
 					</c:if>						
+				</c:if>
+				<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
+					<input type="button" id="bookEdit" name="bookEdit" value="수정하기" class="bookEdit">
+				</c:if>
 				</div>
-			</c:if>
-			
 		</div>
 		
 		<div id="DetailBooksummary">
@@ -81,7 +138,7 @@
 	
 	
 	</div>
-
+	</form>
 
 
 
