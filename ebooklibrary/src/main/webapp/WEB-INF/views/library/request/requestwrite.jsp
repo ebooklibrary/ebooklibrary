@@ -61,7 +61,7 @@ $().ready(function(){
 	        	<br>
 	        	<div id="request_align_center">
 	        		<input type="submit" value="작성완료" class="reqbt"/>
-	        		<input type="Button" value="글 목록" class="reqbt"
+	        		<input type="Button" value="취소" class="reqbt"
 	        		onclick="location.href='<c:url value="/library/request/requestList.do"/>';" />
 	        	</div>
 		</fieldset>

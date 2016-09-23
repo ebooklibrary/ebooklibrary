@@ -241,16 +241,18 @@
 
 	</tbody>
 </table>
-</div>
 <div id="divCmw" style="visibility:visible;"/>	
+		<label id="lbcmt">${sessionScope.userName} </label> 
 	<form name="cmWrite" id="cmWrite" method="post"
 		action="<c:url value='/comments/commentWrite.do'/>" >
 		<input type="hidden" name="qnaNo" value="${param.qnaNo }"/>
 		<input type="hidden" name="userName" value="${sessionScope.userName}"/>
 		<input type="hidden" name="memberNo" value="${sessionScope.memberNo}"/>
-		<label>${sessionScope.userName} </label> 
 		<textarea name="content" id="content1" row="10" cols="30"></textarea>
 		
 		<input type="submit" id="btCmW" value="등록"  class="bt_cmtList" >
 	</form>	
 </div>
+</div>
+
+
