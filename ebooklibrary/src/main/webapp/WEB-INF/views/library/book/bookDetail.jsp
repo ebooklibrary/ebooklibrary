@@ -106,9 +106,9 @@
 				<span id="DetailBookwriter">${bookVo.writer } 지음</span>
 				<span id="DetailBookpublication"><fmt:formatDate value="${pubDate }" pattern="yyyy년 MM월 dd일"/> 출간</span>
 			</div>
-			<div id="DetailBooksales" class="DetailBookInfo"><span>누적판매량 - <fmt:formatNumber value="${bookVo.sales }" pattern="#,###"/>부</span></div>
+			<div id="DetailBooksales" class="DetailBookInfo"><span>누적판매량 : <fmt:formatNumber value="${bookVo.sales }" pattern="#,###"/>부</span></div>
 			<div id="DetailBookprice" class="DetailBookInfo">
-				<span>판매 가격 - ${bookVo.price }원</span><span>대여 가격 - 일당 100원</span>
+				<span>판매 가격 : ${bookVo.price }원</span><span>대여 가격 : 일당 100원</span>
 			</div>
 			
 				<div class="choice">				
@@ -135,7 +135,7 @@
 			${bookVo.summary }
 		</div>
 		
-	
+		<p id="goList"><a href="<c:url value='/book/bookList.do'/>">책목록으로</a></p>
 	
 	</div>
 	</form>

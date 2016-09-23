@@ -63,7 +63,7 @@
 	<select id="selectBookByUserId" parameterType="string" resultType="map">
 		SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, floor(M.RENT_END-SYSDATE) AS "RENTDATE", B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY
 		  FROM MY_BOOKS M, BOOK B
-		 WHERE M.BOOK_NO=B.BOOK_NO AND USER_ID=#{userId}
+		 WHERE M.BOOK_NO=B.BOOK_NO AND USER_ID=#{userId} and hide='N'
 	</select>
 	
 	<select id="selectMyBookListByUserId" parameterType="BookSearchVO" resultType="map">
@@ -72,7 +72,7 @@
 		select rownum as RNUM, LIST_ALL.*
 		from
 		(
-		SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, floor(M.RENT_END-SYSDATE) AS "RENTDATE", B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PRICE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY
+		SELECT M.BOOK_NO, M.RENT_START, M.RENT_END, M.HIDE, floor(M.RENT_END-SYSDATE) AS "RENTDATE", B.BOOK_FILE_NAME, B.COVER_FILE_NAME, B.TITLE, B.PRICE, B.PUBLISHER, B.WRITER, B.PUBLICATION, B.GENRE, B.SUMMARY
 		  FROM MY_BOOKS M, BOOK B
 		 WHERE M.BOOK_NO=B.BOOK_NO AND USER_ID=#{userId}
 		 <if test="searchKeyword!=null and searchKeyword!=''">
@@ -128,9 +128,19 @@
 		select * from MY_BOOKS where book_no=#{bookNo} and user_id=#{userId}
 	</select>
 	
+	<!-- 
 	<delete id="deleteMybook" parameterType="MyBooksVO">
 		delete MY_BOOKS where USER_ID=#{userId} and book_no=#{bookNo}
 	</delete>
+	 -->
+	
+	<update id="hideMyBook" parameterType="MyBooksVO">
+		update MY_BOOKS set hide='Y' where USER_ID=#{userId} and book_no=#{bookNo}
+	</update>
+	<update id="showMyBook" parameterType="MyBooksVO">
+		update MY_BOOKS set hide='N' where USER_ID=#{userId} and book_no=#{bookNo}
+	</update>
+	
 	
 	<select id="selectCartByUserId" parameterType="String" resultType="MyBookVO">
 		select title from cartview where user_id=#{userId}
@@ -153,9 +163,32 @@
 
 	
 	<select id="schFromMain" parameterType="BookSearchVO" resultType="MyBookVO">
+	select *from
+		(
+		select rownum as RNUM, LIST_ALL.*
+		from
+		(
 		SELECT * FROM bookListView
+		<if test="searchKeyword!=null and searchKeyword!=''">
  		 WHERE title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
+ 		</if>
+		 ) LIST_ALL
+		)
+		 <![CDATA[
+		where RNUM> #{firstRecordIndex} 
+		and RNUM<= #{firstRecordIndex}
+		+ #{recordCountPerPage}
+	]]>
 	</select>
+	
+	<select id="countschFromMain" parameterType="BookSearchVO" resultType="int">
+		SELECT * FROM bookListView
+		<if test="searchKeyword!=null and searchKeyword!=''">
+ 		 WHERE title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
+ 		</if>
+	</select>
+	
+	
 </mapper>
 
 

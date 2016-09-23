@@ -163,9 +163,6 @@ public class MybooksController {
 	@RequestMapping("/mybookList.do")
 	public String mybookList(HttpServletRequest request,@ModelAttribute BookSearchVO searchVo, Model model){
 		
-		
-		
-		
 		logger.info("책리스트 파라미터 searchVo={}", searchVo);
 		
 		BookUtility bu=new BookUtility();
@@ -217,21 +214,30 @@ public class MybooksController {
 	}
 	
 	@RequestMapping("/deleteMybook")
-	public String deleteMybook(HttpServletRequest request, @RequestParam int bookNo){
-		logger.info("삭제 파라미터 bookNo={}",bookNo);
+	public String deleteMybook(HttpServletRequest request, @RequestParam int bookNo, @RequestParam String hide){
+		logger.info("삭제 파라미터 bookNo={},hide={}",bookNo,hide);
 		HttpSession session=request.getSession();
 		String userId="";
 		MyBooksVO booksVo=new MyBooksVO();
 		
 		booksVo.setBookNo(bookNo);
+		booksVo.setHide(hide);
 		
+		if (session.getAttribute("userId")!=null) {
+			userId=(String)session.getAttribute("userId");
+			booksVo.setUserId(userId);
+			int cnt=myBookService.showHideMyBook(booksVo);
+			logger.info("감추기 처리 cnt={}",cnt);
+		}
+		
+		/*
 		if (session.getAttribute("userId")!=null) {
 			userId=(String)session.getAttribute("userId");
 			booksVo.setUserId(userId);
 			int cnt=myBookService.deleteMybook(booksVo);
 			logger.info("삭제 처리 cnt={}",cnt);
 		}
-		
+		*/
 		return "redirect:/mybooks/mybookList.do";
 	}
 	

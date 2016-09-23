@@ -121,4 +121,25 @@ public class MyBookServiceImpl implements MyBookService {
 	public MyBooksVO selectMyBooksByBookNo(MyBooksVO myBooksVo) {
 		return myBookDao.selectMyBooksByBookNo(myBooksVo);
 	}
+
+	@Override
+	public int showHideMyBook(MyBooksVO myBooksVo) {
+		int cnt=0;
+		String hide=myBooksVo.getHide();
+		if (hide.equals("N")) {
+			System.out.println("toHide");
+			cnt=myBookDao.hideMyBook(myBooksVo);
+		}else if (hide.equals("Y")) {
+			System.out.println("toShow");
+			cnt=myBookDao.showMyBook(myBooksVo);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int countschFromMain(BookSearchVO bookSearchVo) {
+		System.out.println(bookSearchVo);
+		return myBookDao.countschFromMain(bookSearchVo);
+	}
 }

@@ -21,4 +21,7 @@ public interface MyBookDAO {
 	public int flagDeleteBooks(int bookNo);
 	public int bookEdit(MyBookVO myBookVo);
 	public MyBooksVO selectMyBooksByBookNo(MyBooksVO myBooksVo);
+	public int hideMyBook(MyBooksVO myBooksVo);
+	public int showMyBook(MyBooksVO myBooksVo);
+	public int countschFromMain(BookSearchVO bookSearchVo);
 }

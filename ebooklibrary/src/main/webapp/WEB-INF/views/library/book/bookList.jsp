@@ -220,8 +220,12 @@
 </script>
 
 	<div id="bookListWrapper">
-	
-		<p><span id="countSpan">${alist.size()}</span> 건의  검색결과 
+		<c:if test="${pagingInfo.totalRecord > alist.size() }">
+		<p><span id="countSpan">${alist.size()}</span> 건의  검색결과
+		</c:if> 
+		<c:if test="${pagingInfo.totalRecord == alist.size() }">
+		<p><span id="countSpan">${pagingInfo.totalRecord}</span> 건의  검색결과
+		</c:if> 
 			<c:if test="${!empty bookSearchVo.title}">
 				"${bookSearchVo.title}" - 제목별 검색 결과
 			</c:if>
@@ -338,7 +342,7 @@
 				</c:if>
 				<c:if test="${i!=pagingInfo.currentPage }">
 					<li><a href="#" onclick="pageFunc(${i})">${i }</a>
-					</li>						
+					</li>
 				</c:if>
 			</c:forEach>
 				

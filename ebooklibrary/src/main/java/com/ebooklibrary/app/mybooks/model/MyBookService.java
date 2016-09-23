@@ -20,4 +20,6 @@ public interface MyBookService {
 	public int flagDeleteBooks(int bookNo);
 	public int bookEdit(MyBookVO myBookVo);
 	public MyBooksVO selectMyBooksByBookNo(MyBooksVO myBooksVo);
+	public int showHideMyBook(MyBooksVO myBooksVo);
+	public int countschFromMain(BookSearchVO bookSearchVo);
 }

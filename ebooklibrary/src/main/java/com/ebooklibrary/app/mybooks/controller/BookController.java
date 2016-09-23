@@ -72,7 +72,18 @@ public class BookController {
 		searchVo.setBlockSize(Utility.BLOCK_SIZE);
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		
+		/*
+		String title=searchVo.getTitle();
+		String publisher=searchVo.getPublisher();
+		String writer=searchVo.getWriter();
+		String genre=searchVo.getGenre();
+		logger.info("책검색 키워드 title={},publisher={}",title,publisher);
+		logger.info("책검색 키워드 writer={},genre={}",writer,genre);
+		if (title!=null || publisher!=null || writer!=null || genre!=null) {
+			searchVo.setFirstRecordIndex(0);
+			logger.info("책검색 키워드 searchVo.getFirstRecordIndex()={}",searchVo.getFirstRecordIndex());
+		}
+		*/
 		String keyword=searchVo.getSearchKeyword();
 		
 		logger.info("서치 쁘이오 키워드={}",keyword);

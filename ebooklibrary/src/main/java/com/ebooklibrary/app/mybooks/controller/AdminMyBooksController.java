@@ -32,6 +32,8 @@ import com.ebooklibrary.app.mybooks.model.MyBookVO;
 import com.ebooklibrary.app.mybooks.model.MyBooksVO;
 import com.ebooklibrary.app.shop.cart.model.CartService;
 
+import oracle.net.aso.i;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminMyBooksController {
@@ -129,12 +131,39 @@ public class AdminMyBooksController {
 		searchVo.setBlockSize(Utility.BLOCK_SIZE);
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		/*
+		String title="", publisher="", writer="", genre="";
+		int genreInt=0;
 		
+		publisher=searchVo.getPublisher();
+		writer=searchVo.getWriter();
+		genre=searchVo.getGenre();
+		if (genre!=null) {
+			genreInt = Integer.parseInt(genre);
+		}
+		
+		
+		logger.info("책검색 키워드 title={},publisher={}",title,publisher);
+		logger.info("책검색 키워드 writer={},genre={}",writer,genreInt);
+		if (title!=null || !title.equals("") || publisher!=null || !publisher.equals("") || writer!=null || !writer.equals("") || genreInt!=0) {
+			searchVo.setFirstRecordIndex(0);
+			logger.info("책검색 키워드 searchVo.getFirstRecordIndex()={}",searchVo.getFirstRecordIndex());
+		}
+		*/
 		String keyword=searchVo.getSearchKeyword();
 		
 		logger.info("서치 쁘이오 키워드={}",keyword);
 		
-		int cnt=myBookService.countAllBook(searchVo);
+		int cnt=0;
+		
+		if (keyword!=null && !keyword.isEmpty()) {
+			cnt=myBookService.countschFromMain(searchVo);
+			logger.info("메인에서 가는 토탈 레코드 cnt={}",cnt);
+		}else{
+			cnt=myBookService.countAllBook(searchVo);
+			logger.info("검색창에서 가는 토탈 레코드 cnt={}",cnt);
+		}
+		
 		logger.info("토탈 레코드 cnt={}",cnt);
 		pagingInfo.setTotalRecord(cnt);
 		

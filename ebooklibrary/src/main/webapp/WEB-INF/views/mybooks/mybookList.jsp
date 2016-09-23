@@ -46,15 +46,28 @@
 		
 		$(".bookDelete").click(function() {
 			
-					var bookNo=$(this).parent().find(".bookNo").val();
-			alertify.confirm("정말로 책을 삭제하시겠습니까?", function (e) {
-				if (e) {
-					$(location).attr('href', "<c:url value='/mybooks/deleteMybook.do?bookNo="+bookNo+"'/>");
-			    } else {
-			    	alertify.alert("잘 생각하셨습니다. 구입해주신 책을 소중히 간직하여주세요.");
-			    	return false;
-			    }
-			});
+			var hide=$(this).parent().find(".hide").val();
+			var bookNo=$(this).parent().find(".bookNo").val();
+			if (hide=='N') {
+				alertify.confirm("이 책은 내 서재의 목록에서 제외됩니다. (책이 지워지는 것은 아닙니다.)", function (e) {
+					if (e) {
+						$(location).attr('href', "<c:url value='/mybooks/deleteMybook.do?bookNo="+bookNo+"&hide="+hide+"'/>");
+				    } else {
+				    	alertify.alert("목록 제외를 취소하셨습니다.");
+				    	return false;
+				    }
+				});
+			}
+			if (hide=='Y') {
+				alertify.confirm("이 책을 내 서재의 목록으로 다시 불러옵니다.", function (e) {
+					if (e) {
+						$(location).attr('href', "<c:url value='/mybooks/deleteMybook.do?bookNo="+bookNo+"&hide="+hide+"'/>");
+				    } else {
+				    	alertify.alert("목록 불러오기를 취소하셨습니다.");
+				    	return false;
+				    }
+				});
+			}
 			
 			/* 
 			var bookNo=$(this).parent().find(".bookNo").val();
@@ -96,8 +109,14 @@ function pageFunc(curPage) {
 				<img alt="테스트" src="<c:url value='/book_upload/${map["COVER_FILE_NAME"] }'/>">
 				<p id="bookTitleP">${map["TITLE"] }</p><%-- [${map["GENRE"] }]  --%>
 					<div class="choice">
-						<input type="button" id="bookDelete" class="bookDelete" name="bookDelete" value="삭제">
+						<c:if test="${map['HIDE']=='N' }">
+							<input type="button" id="bookDelete" class="bookDelete" name="bookDelete" value="책 숨기기">
+						</c:if>
+						<c:if test="${map['HIDE']=='Y' }">
+							<input type="button" id="bookDelete" class="bookDelete" name="bookDelete" value="책 보이기">
+						</c:if>
 						<input type="hidden" id="bookNo" class="bookNo" name="bookNo" value="${map['BOOK_NO'] }">
+						<input type="hidden" id="hide" class="hide" name="hide" value="${map['HIDE'] }">
 					</div>
 				<div id="bookSummaryDiv">${map["SUMMARY"] }</div>
 				<div id="bookPriceDiv">

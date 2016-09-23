@@ -90,11 +90,12 @@ ul.topnav li a {
 	margin: 0 auto;
 }
 #upFileBox {
-    width: 100%;
+    width: 70%;
     padding: 20px 0;
+    float: right;
     text-align: center;
     /* background-color: rgba(200,255,200, 0.7); */
-    background-color: rgba(255,255,255, 0.5);
+    background-color: rgba(255,255,255, 0.8);
     /* border-radius: 5px; */
     /* border: 1px solid black; */
     display: none;

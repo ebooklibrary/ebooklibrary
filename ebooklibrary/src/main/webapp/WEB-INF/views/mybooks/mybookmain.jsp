@@ -351,7 +351,7 @@
 		<div id="recentBook">
 			<c:forEach var="map" items="${alist }">
 			<%-- <input class="RENTDATE" type="text" value="${map['RENTDATE'] }, ${map['TITLE'] }"> --%>
-				<c:if test="${map['RENTDATE'] >=-1 || empty map['RENTDATE'] }">
+				<c:if test="${map['RENTDATE'] >=0 || empty map['RENTDATE'] }">
 				<div class="recentMyBook">
 					<input class="mybook1" type="hidden" value="${map['BOOK_NO'] }">
 					<input class="mybookRentEnd" type="hidden" value="${map['RENT_END'] }">
@@ -412,7 +412,7 @@
 					<c:if test="${!empty map['RENT_END'] }">
 						<div class="mybookColor1"></div>
 					</c:if>
-					<c:if test="${map['RENTDATE'] < -1 }">
+					<c:if test="${map['RENTDATE'] < 0 }">
 						<div class="mybookColor2"></div>
 					</c:if>
 				</div>
