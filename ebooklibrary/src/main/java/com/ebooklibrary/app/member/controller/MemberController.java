@@ -122,17 +122,21 @@ public class MemberController {
 		String userId=(String)session.getAttribute("userId");
 		int result=memberService.logincheck(vo);
 		String msg="",url="/member/login.do";
-		if(pwdChange!=1){
+		if(pwdChange==0){
 			url+="?pwdChange=0";
-		}else{
+		}else if(pwdChange==1){
 			url+="?pwdChange=1";
-		}		
+		}else if(pwdChange==2){
+			url+="?pwdChange=2";
+		}
 		if(result==MemberService.LOGIN_OK){
-			if(pwdChange!=1){
+			if(pwdChange==0){
 				return "redirect:/member/myInfo.do";
-			}else{
+			}else if(pwdChange==1){
 				return "redirect:/member/pwdChange.do";
-			}			
+			}else if(pwdChange==2){
+				return "redirect:/member/outMember.do";
+			}
 		}else if(result==memberService.PWD_DISAGREE){
 			msg="비밀번호가 다릅니다";
 		}else if(result==memberService.ID_NONE){
@@ -250,5 +254,18 @@ public class MemberController {
  		return memberService.updateCash(map);		
 	}
 	
-	
+	@RequestMapping("/outMember.do")
+	public String outMember(Model model,HttpSession session){
+		logger.info("회원탈퇴");
+		String userId=(String)session.getAttribute("userId");
+		int cnt=memberService.outMember(userId);
+		session.removeAttribute("userId");
+		session.removeAttribute("userName");
+		session.removeAttribute("auchCode");
+		session.removeAttribute("memberNo");
+		model.addAttribute("msg", "회원탈퇴 되었습니다.");
+		model.addAttribute("url", "/library/librarymain.do");
+		
+		return "common/message";
+	}
 }

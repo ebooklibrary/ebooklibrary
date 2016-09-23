@@ -16,6 +16,8 @@
 	</div>
 	
 	<div class="warning">
-	  <p>회원탈퇴</p>
+	  <p>
+	  	<a href="<c:url value='/member/myInfoChk.do?pwdChange=2'/>">회원탈퇴</a>
+	  </p>
 	</div>
 </div>

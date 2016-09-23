@@ -70,6 +70,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.updateCash(map);
 	}
 
+	@Override
+	public int outMember(String userId) {
+		return memberDao.outMember(userId);
+	}
+
 	
 	
 	

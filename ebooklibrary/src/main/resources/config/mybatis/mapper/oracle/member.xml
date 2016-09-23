@@ -102,6 +102,11 @@
 		 where user_id=#{userId}
 	</update>
 	
+	<update id="outMember" parameterType="String">
+		update member
+		set out_date=sysdate
+		where user_id=#{userId}
+	</update>
 </mapper>
 
 

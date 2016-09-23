@@ -28,5 +28,6 @@ public interface MemberService {
 	public int updateTempPwd(MemberVO vo);
 	public int updateUserInfo(MemberVO vo);
 	public int updateCash(Map<String, Object> map);
+	public int outMember(String userId);
 	
 }
