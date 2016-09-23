@@ -4,9 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/qna.css" />
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/request.css" />
-<%@include file="../libraryTop.jsp" %>
-
-
+<%@include file="../libraryAdminTop.jsp"%>
 <script type="text/javascript">
 	$().ready(function(){
 		$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
@@ -83,7 +81,7 @@
 		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
-<%@include file="../libraryAd.jsp"%>
+<%@include file="../../library/libraryAd.jsp"%>
 <div id="req_body">
 <div id="reqList_body">
 	<div class="searchbox">
@@ -148,9 +146,19 @@
 						<td>${vo.requestNo }</td>
 						<td>
 							<c:if test="${vo.stocked=='Y' }">
-								[입고완료]									
+								[입고완료]	
+								<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
+									<%-- <form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
+										<input type="submit" id="notstock" value="취소" class="btreqList">
+									</form> --%>
+								</c:if>
 							</c:if>
-							<c:if test="${vo.stocked=='N' }">								
+							<c:if test="${vo.stocked=='N' }">
+								<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
+									<form id="request_stock" method="post" action="<c:url value='/library/request/requestStock.do?requestNo=${vo.requestNo }'/>" >
+										<input type="submit" id="stock" value="입고하기" class="btreqList">
+									</form>
+								</c:if>
 								<c:if test="${sessionScope.auchCode=='USER' }">
 									입고요청중
 									
@@ -164,7 +172,14 @@
 						<td>${vo.publisher }</td>
 						<td>${vo.userName }</td>
 						<td style="text-align: center;"><fmt:formatDate	value="${vo.regdate }" pattern="MM/dd" /></td>
-						<c:if test="${vo.stocked=='Y' }">							
+						<c:if test="${vo.stocked=='Y' }">
+							<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
+								<td colspan="2">
+									<form id="req_stockCencel" method="post" action="<c:url value='/library/request/requestNotStock.do?requestNo=${vo.requestNo }'/>" >
+										<input type="submit" id="notstock" value="입고취소" class="btreqList">
+									</form>
+								</td>
+							</c:if>
 							<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">
 								<td colspan="2">
 								</td>
@@ -209,7 +224,9 @@
 	<div class="requebticons">
 		<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
 			<input type="button" id="listGo" value="전체목록" class="reqbt"/>
-			<input type="button" id="writeGo" value="글쓰기" class="reqbt"/>
+			<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">
+				<input type="button" id="writeGo" value="글쓰기" class="reqbt"/>
+			</c:if>
 			<c:if test="${!empty sessionScope.memberNo }">
 				<input type="submit" id="myWriting" value="내글 보기" class="reqbt"/>
 			</c:if>
@@ -254,4 +271,4 @@
 </div>
 
 
-<%@include file="../libraryBottom.jsp" %>
+<%@include file="../libraryAdminBottom.jsp" %>

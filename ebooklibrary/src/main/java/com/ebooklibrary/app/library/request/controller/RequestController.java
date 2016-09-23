@@ -171,7 +171,7 @@ public class RequestController {
 		logger.info("입고처리 결과  cnt={}",cnt);
 		
 		//3.
-		String msg="",url="/library/request/requestList.do";
+		String msg="",url="/admin/requestList.do";
 		if(cnt>0){
 			msg="입고처리되었습니다.";
 		}else{
@@ -196,7 +196,7 @@ public class RequestController {
 		logger.info("입고처리 결과  cnt={}",cnt);
 		
 		//3.
-		String msg="",url="/library/request/requestList.do";
+		String msg="",url="/admin/requestList.do";
 		if(cnt>0){
 			msg="입고취소 처리되었습니다.";
 		}else{

@@ -49,7 +49,7 @@ html {
 	background-color: white;
 	position: absolute;
 	top: 10px;
-	right: 440px;
+	right: 300px;
 	z-index: 1;
 }
 ul.topnav {
@@ -79,10 +79,10 @@ ul.topnav li a {
 	
 	/* border: 1px solid black; */
 	float: right;
-	width: 350px;
+	/* width: 350px; */
 	cursor:default;
-	
-	background-color: rgba(200,255,200, 0.7);
+	padding: 0;
+	/* background-color: rgba(200,255,200, 0.7); */
 	
 }
 #changeBackground img{
@@ -93,7 +93,8 @@ ul.topnav li a {
     width: 100%;
     padding: 20px 0;
     text-align: center;
-    background-color: rgba(200,255,200, 0.7);
+    /* background-color: rgba(200,255,200, 0.7); */
+    background-color: rgba(255,255,255, 0.5);
     /* border-radius: 5px; */
     /* border: 1px solid black; */
     display: none;
@@ -105,6 +106,26 @@ ul.topnav li a {
 }
 #moreBookDiv{
 	position: relative;
+}
+#btImg{
+	border: 1px solid #adadad;
+	outline: 0;
+	padding: 2px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: #000000;
+	
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	width: 50px;
+	height: 30px;
+	border-radius: 2px;
+	background-color: white;
+	
+	/* font-family:monospace,monospace; */
+	font-family:Verdana,sans-serif;
 }
 
 

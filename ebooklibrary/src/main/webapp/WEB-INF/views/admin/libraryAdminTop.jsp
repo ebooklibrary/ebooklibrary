@@ -8,6 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>포도서관</title>
+
+<!-- alert -->
+<!-- ideally at the bottom of the page -->
+<!-- also works in the <head> -->
+<%-- <c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/> --%>
+<script src="<c:url value='/alertify.js-0.3.11/lib/alertify.min.js'/>"></script>
+<!-- include the core styles -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.core.css'/>" />
+<%-- <link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.bootstrap.css'/>" /> --%>
+<!-- include a theme, can be included into the core instead of 2 separate files -->
+<link rel="stylesheet" href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
+
 <!-- W3 폼태그 -->
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
@@ -55,7 +67,7 @@
 
 	
 	<div class="menuform">
-		<a style="margin: 2px 0 0 2px;" href="<c:url value='/library/notice/noticelist.do'/>">공지사항</a>
+		<a style="margin: 2px 0 0 2px;" href="<c:url value='/admin/noticelist.do'/>">공지사항</a>
 		<!-- <div class="menuFlagColor" id="qnaDivColor"></div> -->
 	</div>
 	<div class="menuform">
@@ -65,7 +77,10 @@
 		<a href="<c:url value='/admin/member/memberList.do'/>">회원 관리</a>
 	</div>
 	<div class="menuform">
-		<a href="<c:url value='/library/request/requestList.do'/>">요청게시판</a>
+		<a href="<c:url value='/admin/requestList.do'/>">요청게시판</a>
+	</div>
+	<div class="menuform">
+		<a href="<c:url value='/admin/qnaList.do'/>">qna게시판</a>
 	</div>
 	<div class="menuform" id="lastMenuForm">
 		<a style="margin: 2px 0 0 2px;" href="<c:url value='/admin/book/bookList.do'/>">책 목록</a>
@@ -94,13 +109,13 @@
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
             관리자 페이지
             </a></li>			
-			<c:if test="${!empty sessionScope.userId }">
+			<c:if test="${!empty sessionScope.adminUserId }">
 				<li>
-				<a href="<c:url value='/member/logout.do'/>">
+				<a href="<c:url value='/admin/logout.do'/>">
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 				로그아웃
 				</a></li>				
-	            <c:if test="${sessionScope.auchCode=='ADMIN' }">
+	            <c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 	            <li>
 	            <a href="<c:url value='/library/librarymain.do'/>">
 	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
@@ -108,12 +123,7 @@
 	            </a>
 	            </li>
 	            </c:if>         
-			</c:if>			 
-            <li class="last">
-            <a href="/html/06_sitemap/sitemap.asp">
-            <!-- <img src="/images/gmi/inc/gnb_sitemap.gif" alt="사이트맵" /> -->
-            사이트맵
-            </a></li>
+			</c:if>	
 		</ul>
     </div>
 	<!--//#gnb_menu-->
@@ -121,7 +131,7 @@
 	<!--logo Start-->   
 	<h2 class="skip">로고</h2>
 	<div id="logo">
-		<a href="<c:url value='/library/librarymain.do'/>">
+		<a href="<c:url value='/admin/adminMain.do'/>">
 			<img alt="로고 이미지" src="<c:url value='/images/library/main/logo.JPG'/>">
 		</a>
 	</div>

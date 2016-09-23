@@ -85,6 +85,11 @@ public class MyBookDAOMybatis extends SqlSessionDaoSupport implements MyBookDAO 
 		return getSqlSession().selectOne(namespace+".flagDeleteBooks", bookNo);
 	}
 
+	@Override
+	public int bookEdit(MyBookVO myBookVo) {
+		return getSqlSession().update(namespace+".bookEdit", myBookVo);
+	}
+
 	
 	
 }

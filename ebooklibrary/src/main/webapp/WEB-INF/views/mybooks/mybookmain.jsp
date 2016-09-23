@@ -368,11 +368,11 @@
 				<!-- 배경화면 바꾸기 -->
 				<div id="changeBackground">
 						<img id="changeback" alt="배경화면 바꾸기" src="<c:url value='/images/mybook/icon/background.png'/>">
-						여기를 눌러 배경화면을 바꿔 보세요!!
+						<!-- 여기를 눌러 배경화면을 바꿔 보세요!! -->
 				</div>
 				<div id="upFileBox">
 					<form id="bookfrm" name="bookfrm" enctype="multipart/form-data" method="post">
-						원하시는 배경이미지를 올려보세요!<br><br>
+						원하시는 이미지를 올려서 배경화면을 바꿔보세요.<br><br>
 						<input type="file" id="bgImage" name="bgImage">
 <!-- 						<input type="hidden" id="defalutImage" name="defalutImage" value="defalutImage.jpg"> -->
 						<input type="submit" id="btImg" name="btImg" value="확인">

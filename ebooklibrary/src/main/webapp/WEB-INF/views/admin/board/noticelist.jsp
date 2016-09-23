@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="../libraryTop.jsp"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@include file="../libraryAdminTop.jsp"%>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/silde_Notice/style.css" />
@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 </script>
 <form name="frmPage" method="post"
-	action="<c:url value='/library/notice/noticelist.do'/>">
+	action="<c:url value='/admin/noticelist.do'/>">
 	<input type="hidden" name="currentPage"> <input type="hidden"
 		name="searchCondition" value="${param.searchCondition }"> <input
 		type="hidden" name="searchKeyword" value="${param.searchKeyword }">
@@ -34,8 +34,7 @@ $(document).ready(function(){
 <div id="notice_head">
 	<h2>
 		<img alt="공지사항"
-			src="${pageContext.request.contextPath }/images/library/notice/notice.png"
-			style="width: 150px; margin-bottom: 50px; text-align: center; margin-top: 8px; margin-right: 55px;">
+			src="${pageContext.request.contextPath }/images/library/notice/notice.png" style="width: 150px;">
 	</h2>
 </div>
 <div id="notice_banner">
@@ -45,23 +44,22 @@ $(document).ready(function(){
 		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
-<%@include file="../libraryAd.jsp"%>
+<%@include file="../../library/libraryAd.jsp"%>
 <div id="notice_body">
-	<div class="list">
-
-		<form name="search" id="search"
-			action="<c:url value='/library/notice/noticelist.do'/>">
-			<div id="search2">
+	<div class="list">		
+			<form name="search" id="search"
+				action="<c:url value='/library/notice/noticelist.do'/>">
+				<div id="search2">
 				<select name="searchCondition" class="searchCondition">
 					<option value="title">제목</option>
-					<option value="user_Name">작성자</option>
+					<option value="writer">글쓴이</option>
 					<option value="content">내용</option>
-				</select> <input type="text" name="searchKeyword" class="searchCondition">
-				<input type="submit" value="검색" id="searchInfo1">
-			</div>
-		</form>
-
-
+				</select> <input type="text" name="searchKeyword"class="searchCondition"> <input
+					type="submit" value="검색" id="searchInfo1">
+				</div>
+			</form>
+		
+		
 		<div id="notice_table">
 			<table>
 				<colgroup>
@@ -91,7 +89,7 @@ $(document).ready(function(){
 							<tr>
 								<td>${vo.noticeNo }</td>
 								<td><a
-									href="<c:url value ='/library/notice/readCountAdd.do?notice_No=${vo.noticeNo}'/>">
+									href="<c:url value ='/admin/readCountAdd.do?notice_No=${vo.noticeNo}'/>">
 										${vo.title }</a></td>
 								<td>${vo.userName }</td>
 								<td><fmt:formatDate value="${vo.regdate }"
@@ -129,15 +127,14 @@ $(document).ready(function(){
 					src="<c:url value= '/images/last.JPG'/>" alt="다음블럭으로">
 				</a>
 			</c:if>
-
-		</div>
-
-
+		</div>		
 	</div>
-
+	<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
+         <div id="noticeWrite">
+            <input type = "submit" id ="noticeSubmit" value="글쓰기" onclick="location.href='<c:url value ="/library/notice/noticewrite.do"/>'"/>
+         </div>
+     </c:if>
 </div>
 
 
-
-
-<%@include file="../libraryBottom.jsp"%>
+<%@include file="../libraryAdminBottom.jsp"%>

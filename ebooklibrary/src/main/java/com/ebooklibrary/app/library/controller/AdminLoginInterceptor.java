@@ -32,6 +32,12 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter{
 		if(uri.indexOf("/admin/login/adminLogin.do")!=-1){
 			return true;//에러처리하지 않는다
 		}
+		if(uri.indexOf("/admin/book/bookList.do")!=-1){
+			return true;
+		}
+		if(uri.indexOf("/admin/book/bookDetail.do")!=-1){
+			return true;
+		}
 		HttpSession session=request.getSession();
 		String adminUserId=(String)session.getAttribute("adminUserId");
 		//관리자 로그인되지 않은 경우 에러 처리

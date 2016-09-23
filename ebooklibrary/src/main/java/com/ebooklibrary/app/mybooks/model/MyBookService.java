@@ -18,4 +18,5 @@ public interface MyBookService {
 	public List<MyBookVO> selectCartByUserId(String userId);
 	public int deleteBooks(int bookNo);
 	public int flagDeleteBooks(int bookNo);
+	public int bookEdit(MyBookVO myBookVo);
 }

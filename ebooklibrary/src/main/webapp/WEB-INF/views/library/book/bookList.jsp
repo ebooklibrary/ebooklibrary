@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:if test="${sessionScope.auchCode=='ADMIN' }">
+<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 	<%@include file="../../admin/libraryAdminTop.jsp"%>
 </c:if>
-<c:if test="${sessionScope.auchCode!='ADMIN' }">
+<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">
 	<%@include file="../libraryTop.jsp"%>
 </c:if>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
@@ -25,6 +25,16 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		//$( "#sortDiv input" ).checkboxradio();
+		
+		/* alert 커스텀 */
+		alertify.set({ labels: {
+			    ok     : "예",
+			    cancel : "아니오"
+			} }); 
+
+		/* 버튼 리버스 (좌우 위치이동) */
+		alertify.set({ buttonReverse: true });
+		
 		$("#schDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 		$("#genre").html(l);
 		
@@ -167,14 +177,36 @@
 		 */
 		
 		 $("#bookTitleP, #bookListDiv img").click(function() {
+			 
 			 var bookNo=$(this).parent().parent().find("input[name=bookNo]").val();
-			 $(location).attr('href', "<c:url value='/admin/book/bookDetail.do?bookNo="+bookNo+"'/>");
+			 alert($("#session").val());
+			 if($("#session").val()==null || $("#session").val()==""){
+				 $(location).attr('href', "<c:url value='/book/bookDetail.do?bookNo="+bookNo+"'/>");
+			 }else{
+				 $(location).attr('href', "<c:url value='/admin/book/bookDetail.do?bookNo="+bookNo+"'/>");
+			 }
+			 
 		});
 		 
 		 $(".bookDelete").click(function() {
-			 var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
-			 alert(bookNo);
-			 $(location).attr('href', "<c:url value='/admin/book/bookDelete.do?bookNo="+bookNo+"'/>");
+			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
+			alert(bookNo);
+			
+			alertify.confirm("정말로 책을 삭제하시겠습니까?", function (e) {
+				if (e) {
+					$(location).attr('href', "<c:url value='/admin/book/bookDelete.do?bookNo="+bookNo+"'/>");
+			    } else {
+			    	return false;
+			    }
+			});
+			
+		});
+		 
+		 $(".bookEdit").click(function() {
+			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
+			alert(bookNo);
+			$(location).attr('href', "<c:url value='/admin/book/bookEdit.do?bookNo="+bookNo+"'/>");
+			
 		});
 		 
 		
@@ -251,19 +283,21 @@
 		<c:if test="${!empty sessionScope.userId }">
 			<input type="hidden" id="userId" name="userId" value="${sessionScope.userId }">
 			<input type="hidden" id="price" name="price" value="${vo.price }">
-			<input type="hidden" id="bookNo" name="bookNo" value="${vo.bookNo }">
 		</c:if>
+			<input type="hidden" id="bookNo" name="bookNo" value="${vo.bookNo }">
 			<div id="bookListDiv">
 				<img alt="책 커버 이미지" src="<c:url value='/book_upload/${vo.coverFileName }'/>">
 				<p id="bookTitleP">[${vo.genre}] ${vo.title }</p>
-				<c:if test="${sessionScope.auchCode=='ADMIN' }">
+				<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 					<div class="choice">
 						<input type="submit" id="bookEdit" name="bookEdit" value="수정" class="bookEdit">
-						<input type="button" class="bookDelete" id="bookDelete" name="bookDelete" value="삭제">
+						<c:if test="${vo.sales == 0 }">
+							<input type="button" class="bookDelete" id="bookDelete" name="bookDelete" value="삭제">
+						</c:if>
 					</div>
 				</c:if>
 				
-				<c:if test="${sessionScope.auchCode!='ADMIN' }">				
+				<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">				
 					<div class="choice">				
 						<c:if test="${!empty vo.userId}">
 							이미 가지고 있지롱
@@ -319,9 +353,16 @@
 		</div>
 		
 	</div>
+	<c:if test="${!empty sessionScope.adminAuchCode }">
+		<input type="hidden" id="session" value="${sessionScope.adminAuchCode }">
+	</c:if>
+	<c:if test="${empty sessionScope.adminAuchCode }">
+		<input type="hidden" id="session">
+	</c:if>
+	
 	
 	<!-- 사이드 장바구니 -->
-	<c:if test="${sessionScope.auchCode!='ADMIN' }">	
+	<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">	
 		<div id="cartDiv">
 			<nav>
 				<ul>

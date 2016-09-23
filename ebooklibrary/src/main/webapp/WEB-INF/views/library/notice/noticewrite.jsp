@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
-<c:if test="${sessionScope.auchCode=='ADMIN' }">
-	<%@include file="../../admin/libraryAdminTop.jsp"%>
-</c:if>
-<c:if test="${sessionScope.auchCode!='ADMIN' }">
-<%@include file="../libraryTop.jsp"%>
-</c:if>
+<%@include file="../../admin/libraryAdminTop.jsp"%>
 <!-- 스마트에디터 -->
 <script type="text/javascript" src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>" charset="utf-8"></script>
 
@@ -87,7 +82,7 @@
 		제목 : <input type="text" name="title" id="title">
 	</div>
 	<div class="notice_UserName">
-		작성자 : <input type="text" name="userName" id="userName" value ="관리자" readonly="readonly">
+		작성자 : <input type="text" name="userName" id="userName" value ="${sessionScope.adminUserId }" readonly="readonly">
 	</div>
 	<div class="notice_Content">
 		<p>
@@ -99,7 +94,7 @@
 	</div>
 	<div class="notice_submit">
 		<input type="submit" id="btsubmit" value="글쓰기">
-		<input type="button" id="btn1" value="취소" onclick="location.href='<c:url value="/library/notice/noticelist.do"/>'" />
+		<input type="button" id="btn1" value="취소" onclick="location.href='<c:url value="/admin/noticelist.do"/>'" />
 	</div>
 	
 </form>

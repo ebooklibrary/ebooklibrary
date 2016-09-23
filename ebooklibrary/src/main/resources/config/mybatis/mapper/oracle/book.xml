@@ -140,6 +140,12 @@
 	<delete id="deleteBooks" parameterType="int">
 		delete book where book_no=#{bookNo}
 	</delete>
+	
+	<update id="bookEdit" parameterType="MyBookVO">
+		update book
+		   set TITLE=#{title}, PUBLISHER=#{publisher},WRITER=#{writer}, PUBLICATION=#{publication},GENRE=#{genre}, PRICE, SALES=#{price},BOOK_FILE_NAME=#{bookFileName}, COVER_FILE_NAME=#{coverFileName}, BOOK_FILE_SIZE=#{bookFileSize},SUMMARY=#{summary}
+		   where book_no=#{bookNo}
+	</update>
 
 
 	
