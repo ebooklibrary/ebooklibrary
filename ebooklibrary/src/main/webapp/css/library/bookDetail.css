@@ -121,7 +121,10 @@
 #buy{
 	background-color: rgba(0, 0, 0, 0);
 }
-
+/* 관리자 책수정 버튼 */
+#bookEdit{
+	background-color: rgba(0, 0, 0, 0);
+}
 
 /* 책소개 */
 #DetailBooksummary{

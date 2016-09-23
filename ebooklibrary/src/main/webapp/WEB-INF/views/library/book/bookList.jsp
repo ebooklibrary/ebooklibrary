@@ -179,7 +179,7 @@
 		 $("#bookTitleP, #bookListDiv img").click(function() {
 			 
 			 var bookNo=$(this).parent().parent().find("input[name=bookNo]").val();
-			 alert($("#session").val());
+			 /* alert($("#session").val()); */
 			 if($("#session").val()==null || $("#session").val()==""){
 				 $(location).attr('href', "<c:url value='/book/bookDetail.do?bookNo="+bookNo+"'/>");
 			 }else{
@@ -190,7 +190,7 @@
 		 
 		 $(".bookDelete").click(function() {
 			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
-			alert(bookNo);
+			/* alert(bookNo); */
 			
 			alertify.confirm("정말로 책을 삭제하시겠습니까?", function (e) {
 				if (e) {
@@ -204,7 +204,6 @@
 		 
 		 $(".bookEdit").click(function() {
 			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
-			alert(bookNo);
 			$(location).attr('href', "<c:url value='/admin/book/bookEdit.do?bookNo="+bookNo+"'/>");
 			
 		});
@@ -299,10 +298,10 @@
 				
 				<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">				
 					<div class="choice">				
-						<c:if test="${!empty vo.userId}">
-							이미 가지고 있지롱
+						<c:if test="${vo.userId == sessionScope.userId}">
+							구매하신 상품입니다.
 						</c:if>
-						<c:if test="${empty vo.userId}">
+						<c:if test="${vo.userId != sessionScope.userId}">
 							<div class="cart">
 							<input type="submit" id="cart" name="cart" value="장바구니 추가" class="cart">
 							<span class="popuptext">${vo.title } 장바구니 추가</span>

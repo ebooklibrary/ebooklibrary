@@ -116,5 +116,9 @@ public class MyBookServiceImpl implements MyBookService {
 	public int bookEdit(MyBookVO myBookVo) {
 		return myBookDao.bookEdit(myBookVo);
 	}
-	
+
+	@Override
+	public MyBooksVO selectMyBooksByBookNo(MyBooksVO myBooksVo) {
+		return myBookDao.selectMyBooksByBookNo(myBooksVo);
+	}
 }

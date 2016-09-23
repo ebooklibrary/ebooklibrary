@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ebooklibrary.app.common.BookUtility;
@@ -59,7 +60,7 @@ public class AdminMyBooksController {
 		//=>상품 등록시 이미지 업로드
 		List<Map<String, Object>> fileList=fileUtil.fileUpload(request, uploadType);
 		logger.info("업로드 파일 List.size={}", fileList.size());
-		
+
 		String fileName="";
 		String upPath="";
 		long fileSize=0;
@@ -76,6 +77,21 @@ public class AdminMyBooksController {
 				myBookVo.setBookFileSize(fileSize);
 			}else{
 				myBookVo.setCoverFileName(fileName);
+			}
+		}
+		
+		String oFileName="";
+		List<Map<String, Object>> oFileList=fileUtil.OriFileName(request);
+		for (Map<String, Object> mymap : oFileList) {
+			oFileName=(String)mymap.get("ofileName");
+			logger.info("업로드 오리지날 파일명 oFileName={}", oFileName);
+			int idx=oFileName.indexOf(".");
+			String sub=oFileName.substring(idx+1);
+			
+			if (sub.equalsIgnoreCase("txt")) {
+				myBookVo.setOriBookFileName(oFileName);
+			}else{
+				myBookVo.setOriCoverFileName(oFileName);
 			}
 		}
 		
@@ -144,7 +160,7 @@ public class AdminMyBooksController {
 	
 
 	@RequestMapping("/book/bookDetail.do")
-	public String bookDetail(@RequestParam int bookNo, Model model){
+	public String bookDetail(HttpServletRequest request,@RequestParam int bookNo, Model model){
 		
 		logger.info("책 상세 파라미터 bookNo={}",bookNo);
 		
@@ -159,7 +175,7 @@ public class AdminMyBooksController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		Timestamp pubDate = new Timestamp(parsedDate.getTime());;
+		Timestamp pubDate = new Timestamp(parsedDate.getTime());
 		
 		model.addAttribute("bookVo", bookVo);
 		model.addAttribute("pubDate", pubDate);
@@ -201,19 +217,101 @@ public class AdminMyBooksController {
 		
 	}
 	
-	@RequestMapping("/book/bookEdit.do")
+	@RequestMapping(value="/book/bookEdit.do", method=RequestMethod.GET)
 	public String bookEdit_get(HttpServletRequest request, @RequestParam int bookNo, Model model){
 		logger.info("책 수정 파라미터 bookNo={}",bookNo);
 		
 		MyBookVO bookVo=myBookService.selectBookByBookNo(bookNo);
 		
-		logger.info("책 수정 파라미터 bookVo={}",bookVo);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsedDate = null;
+		try {
+			parsedDate = sdf.parse(bookVo.getPublication());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Timestamp pubDate = new Timestamp(parsedDate.getTime());
 		
+		logger.info("책 수정 bookVo={}",bookVo);
 		
-		return "admin/book/bookEdit";
+		model.addAttribute("bookVo", bookVo);
+		
+		return "admin/book/editBook";
 	}
 	
-	
+	@RequestMapping(value="/book/bookEdit.do", method=RequestMethod.POST)
+	public String bookEdit_post(HttpServletRequest request,@ModelAttribute MyBookVO myBookVo, Model model){
+		
+		logger.info("책 수정 후 파라미터 bookNo={}",myBookVo.getBookNo());
+		
+		String oBookFile=myBookVo.getBookFileName();	//기존 책파일
+		String oCoverFile=myBookVo.getCoverFileName();	//기존 책커버파일
+		String oldOriBook=myBookVo.getOriBookFileName(); //기존 책파일 원본
+		String oldOriCover=myBookVo.getOriCoverFileName(); //기존 책파일 원본
+		logger.info("기존 파일 파라미터 oBookFile={},oldOriBook={}", oBookFile,oldOriBook);
+		myBookVo.setOriBookFileName(oBookFile);
+		myBookVo.setOriCoverFileName(oCoverFile);
+		
+		//파일 업로드 처리
+		int uploadType=FileUploadWebUtil.PDS_UPLOAD;
+		
+		//=>상품 등록시 이미지 업로드
+		List<Map<String, Object>> fileList=fileUtil.fileUpload(request, uploadType);
+		logger.info("업로드 파일 List.size={}", fileList.size());
+		
+		
+		if (fileList!=null && !fileList.isEmpty()) {
+
+			String fileName="";
+			String upPath="";
+			long fileSize=0;
+			
+			for (Map<String, Object> mymap : fileList) {
+				fileName=(String)mymap.get("fileName");
+				upPath=(String)mymap.get("upPath");
+				fileSize=(Long)mymap.get("fileSize");
+				logger.info("업로드 파일 fileName={},upPath={}", fileName,upPath);
+				int idx=fileName.indexOf(".");
+				String sub=fileName.substring(idx+1);
+				
+				if (sub.equalsIgnoreCase("txt")) {
+					myBookVo.setBookFileName(fileName);
+					myBookVo.setBookFileSize(fileSize);
+				}else{
+					myBookVo.setCoverFileName(fileName);
+				}
+			}
+			logger.info("기존 파일 삭제 upPath={},oBookFile={}", upPath,oBookFile);
+			//기존 파일이 존재하면, 기존 파일 삭제
+			File oldBookFile=new File(upPath ,oBookFile);
+			File oldCoverFile=new File(upPath ,oCoverFile);
+			if (oldBookFile.exists()) {
+				boolean bool=oldBookFile.delete();
+				logger.info("기존 파일 삭제 여부={}", bool);
+			}
+			if (oldCoverFile.exists()) {
+				boolean bool=oldCoverFile.delete();
+				logger.info("기존 파일 삭제 여부={}", bool);
+			}
+			logger.info("업로드 한 경우");
+		}else{
+			logger.info("업로드 하지 않은 경우");
+			//업로드하지 않는 경우
+			//=> 기존 파일 정보를 다시 셋팅해준다
+			myBookVo.setBookFileName(oBookFile);
+			myBookVo.setOriBookFileName(oldOriBook);
+			myBookVo.setCoverFileName(oCoverFile);
+			myBookVo.setOriCoverFileName(oldOriCover);
+
+		}
+		
+		logger.info("수정 처리 후 들어왔니 myBookVo={}",myBookVo);
+		
+		myBookService.bookEdit(myBookVo);
+		
+		
+		return "redirect:/admin/book/bookDetail.do?bookNo="+myBookVo.getBookNo();
+	}
 	
 	
 	

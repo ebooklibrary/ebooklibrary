@@ -171,4 +171,36 @@ public class FileUploadWebUtil {
 
 	      return realPath;      
 	   }
+	   
+	   public List<Map<String, Object>> OriFileName(HttpServletRequest request){
+			MultipartHttpServletRequest multipartRequest=(MultipartHttpServletRequest) request;
+			
+			Map<String, MultipartFile> fileMap=multipartRequest.getFileMap();
+			
+			//결과를 저장할 List컬렉션
+			//=> 파일명과 파일크기를 여러개 저장해야 함
+			List<Map<String, Object>> fileList=new ArrayList<Map<String,Object>>();
+			
+			Iterator<String> iter= fileMap.keySet().iterator();
+			
+			while(iter.hasNext()){
+				String key=iter.next();
+				MultipartFile tempFile=fileMap.get(key);
+				
+				//업로드파일이 있을 때만 파일명, 파일크기 구해오고, 업로드 처리하기
+				if (!tempFile.isEmpty()) {
+					String ofileName=tempFile.getOriginalFilename();
+					
+				      Map<String, Object> map=new HashMap<String, Object>();
+			    	  map.put("ofileName", ofileName);
+					
+					fileList.add(map);
+				}//if
+			}//while
+			
+			return fileList;
+		}
+	   
+	   
+	   
 }

@@ -40,7 +40,7 @@
 		});
 		$("#myAllBook").click(function() {
 			var bookNo=$(this).find(".mybook1").val();
-			window.open("<c:url value='/mybooks/mybookList.do'/>", "책보기", "top=20, left=60, width=850, height=950, resizable=0, location=0");
+			window.open("<c:url value='/mybooks/mybookList.do'/>", "책보기", "top=20, left=60, width=1200, height=950, resizable=0, location=0");
 		});
 		
 		$(".exBookDiv").click(function() {

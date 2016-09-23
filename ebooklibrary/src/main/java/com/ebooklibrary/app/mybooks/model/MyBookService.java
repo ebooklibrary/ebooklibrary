@@ -19,4 +19,5 @@ public interface MyBookService {
 	public int deleteBooks(int bookNo);
 	public int flagDeleteBooks(int bookNo);
 	public int bookEdit(MyBookVO myBookVo);
+	public MyBooksVO selectMyBooksByBookNo(MyBooksVO myBooksVo);
 }

@@ -1,9 +1,17 @@
 @CHARSET "UTF-8";
 #faqheader{
 	float:left;
+	
+}
+#faqcategory{
+	height:35px;
+}
+
+.lbfaq{
+	font-size:20px;
 }
 .inputfaqText {
-    width: 500px;
+    width: 640px;
     padding: 12px 20px;
     margin: 8px 10px;
     display: inline-block;
@@ -21,10 +29,33 @@
     box-sizing: border-box;
 }
 
-.faqWrite_body{
+#faqWrite_body{
+	clear:both;
 	float:center;
+	width:750px;
+}
+#request_align_center{
+	clear:both;
+	text-align:center;
+	
+}
+	
+
+.btfaqList{
+	font-weight:bold;
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 17px;
+  background: #4778cc;
+  padding: 5px 12px 5px 12px;
+  border: solid #1f628d 0px;
+  text-decoration: none;
 }
 
-.w3-input{
-	width:600px;
+.btfaqList:hover {
+  background: #5494f5;
+  text-decoration: none;
 }

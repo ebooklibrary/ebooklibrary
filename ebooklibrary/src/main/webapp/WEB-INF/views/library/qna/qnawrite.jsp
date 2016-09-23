@@ -119,7 +119,7 @@
 				<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:570px; height:230px;"></textarea>
 		        <div id="bt_Detailcenter">
 		        	<input type="submit" value="작성완료"  class="qnabt"/>
-		        	<input type="Button" value="글 목록"
+		        	<input type="Button" value="취소"
 		        	 	onclick="location.href='<c:url value="/library/qna/qnaList.do"/>';" class="qnabt" />
 		        </div>
 		       </div> 
