@@ -91,7 +91,7 @@
 	</h2>
 </div>
 <div id="notice_banner">
-	<a href="<c:url value='/library/qna/qnaList.do'/>"><img
+	<a href="<c:url value='/admin/qnaList.do'/>"><img
 		alt="qna 배너"
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
 		width="200px" height="50px" style="margin-bottom:80px;"></a>

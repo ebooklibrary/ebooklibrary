@@ -139,7 +139,7 @@ public class AdminMyBooksController {
 		model.addAttribute("cartList", cartList);
 		
 		
-		return "library/book/bookList";
+		return "admin/book/bookList";
 	}
 	
 
@@ -164,7 +164,7 @@ public class AdminMyBooksController {
 		model.addAttribute("bookVo", bookVo);
 		model.addAttribute("pubDate", pubDate);
 		
-		return "library/book/bookDetail";
+		return "admin/book/bookDetail";
 	}
 	
 	@RequestMapping("/book/bookDelete.do")
