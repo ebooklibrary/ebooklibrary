@@ -1,6 +1,9 @@
 package com.ebooklibrary.app.library.controller;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ebooklibrary.app.common.FileUploadWebUtil;
 import com.ebooklibrary.app.common.MemberSearchVO;
@@ -129,8 +133,8 @@ public class AdminController {
 		return "admin/member/memberList";
 	}
 	@RequestMapping("/member/memberSave.do")
-	@ResponseBody
-	public int memberExcelSave(){ 
+	/*@ResponseBody*/
+	public ModelAndView memberExcelSave(){ 
 		logger.info("회원정보 엑셀저장");
 		MemberSearchVO vo=new MemberSearchVO();
 		
@@ -141,8 +145,18 @@ public class AdminController {
 		
 		int result=poiExcelSave.excel(vo);
 		logger.info("엑셀 저장 결과 result={}",result);
+		Map<String, Object> map 
+		= new HashMap<String, Object>();
 		
-		return result;
+		File file = new File("D:\\download", "MemberList.xls");
+		//생성한 파일 객체를 map에 저장한 후 뷰에 넘긴다
+		map.put("myfile", file);
+		
+		ModelAndView mav 
+		= new ModelAndView("downloadView", map);
+		
+		return mav;
+	
 	}
 	//요청게시판
 	@RequestMapping("/requestList.do")

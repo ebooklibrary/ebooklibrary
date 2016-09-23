@@ -5,7 +5,7 @@
 	$(function() {
 		$("#memDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
 		$("#excelSave").click(function() {
-			$.ajax({
+			/* $.ajax({
 				url:"<c:url value='/admin/member/memberSave.do'/>",
 				type:"GET",
 				success:function(res){
@@ -19,7 +19,8 @@
 				error:function(xhr, status, error){
 					alert(status+":"+error);
 				}	
-			});//ajax
+			});//ajax */
+			location.href="<c:url value='/admin/member/memberSave.do'/>";
 		});
 	});
 </script>
