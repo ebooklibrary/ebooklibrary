@@ -67,7 +67,7 @@
 
 	
 	<div class="menuform">
-		<a style="margin: 2px 0 0 2px;" href="<c:url value='/library/notice/noticelist.do'/>">공지사항</a>
+		<a style="margin: 2px 0 0 2px;" href="<c:url value='/admin/noticelist.do'/>">공지사항</a>
 		<!-- <div class="menuFlagColor" id="qnaDivColor"></div> -->
 	</div>
 	<div class="menuform">
@@ -77,7 +77,7 @@
 		<a href="<c:url value='/admin/member/memberList.do'/>">회원 관리</a>
 	</div>
 	<div class="menuform">
-		<a href="<c:url value='/library/request/requestList.do'/>">요청게시판</a>
+		<a href="<c:url value='/admin/requestList.do'/>">요청게시판</a>
 	</div>
 	<div class="menuform" id="lastMenuForm">
 		<a style="margin: 2px 0 0 2px;" href="<c:url value='/admin/book/bookList.do'/>">책 목록</a>

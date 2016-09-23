@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:if test="${sessionScope.auchCode=='ADMIN' }">
-	<%@include file="../../admin/libraryAdminTop.jsp"%>
-</c:if>
-<c:if test="${sessionScope.auchCode!='ADMIN' }">
-	<%@include file="../libraryTop.jsp"%>
-</c:if>
+<%@include file="../../admin/libraryAdminTop.jsp"%>
 <!-- 스마트에디터 -->
 <script type="text/javascript"
 	src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>"
@@ -133,7 +128,7 @@
 			<div class="edit_submit">
 				<input type="submit" id="btsubmit" value="글수정"> <input
 					type="button" id="btn1" value="취소"
-					onclick="location.href='<c:url value="/library/notice/noticelist.do"/>'" />
+					onclick="location.href='<c:url value="/admin/noticelist.do"/>'" />
 			</div>
 		</div>
 	</form>

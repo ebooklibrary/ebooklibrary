@@ -14,13 +14,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ebooklibrary.app.common.FileUploadWebUtil;
 import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.PoiExcelSave;
 import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
+import com.ebooklibrary.app.library.notice.model.NoticeService;
+import com.ebooklibrary.app.library.notice.model.NoticeVO;
+import com.ebooklibrary.app.library.request.model.RequestService;
+import com.ebooklibrary.app.library.request.model.RequestVO;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
 
@@ -33,6 +39,12 @@ public class AdminController {
 	private MemberService memberService;
 	@Autowired
 	private PoiExcelSave poiExcelSave;
+	@Autowired
+	private RequestService requestService;
+	@Autowired
+	private NoticeService noticeService;	
+	@Autowired
+	private FileUploadWebUtil fileUtil;
 	
 	@RequestMapping("/adminMain.do")
 	public String adminMain(){
@@ -123,6 +135,140 @@ public class AdminController {
 		logger.info("엑셀 저장 결과 result={}",result);
 		
 		return result;
+	}
+	//요청게시판
+	@RequestMapping("/requestList.do")
+	public String listQnaBoard(
+			@ModelAttribute MemberSearchVO searchVo,
+			Model model){
+		//1.
+		logger.info("요청게시판 리스트 ");
+		
+		//paging
+		PaginationInfo pagingInfo= new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.REQUEST_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//searchVo
+		searchVo.setRecordCountPerPage(Utility.REQUEST_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		//2.
+		int totalRecord=requestService.requestCount(searchVo);
+		logger.info("요청게시판  searchVo={}",searchVo);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		List<RequestVO> alist=requestService.selectAllRequest(searchVo);
+		logger.info("결과처리값 alist.size()={}",alist.size());
+		
+		model.addAttribute("requestList",alist);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		return "admin/board/requestList";		
+	}
+	
+	//공지사항
+	@RequestMapping("/noticelist.do")
+	public String AllNotice(@ModelAttribute SearchVO searchVo,Model model){
+		logger.info("공지사항 전체보기");
+		logger.info("파라미터 조회 결과 SearchVo ={}",searchVo);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.NOTICE_BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.NOTICE_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(Utility.NOTICE_COUNT_PER_PAGE);
+		
+		List<NoticeVO> alist = noticeService.selectAllNotice(searchVo);
+		//토탈 레코드
+		int result = noticeService.noticeCount(searchVo);
+		pagingInfo.setTotalRecord(result);
+		
+		model.addAttribute("alist", alist);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		return "admin/board/noticelist";
+	}
+	
+	@RequestMapping("/noticedetail.do")
+	public String selectByNoNotice(@RequestParam (defaultValue="0")int notice_No,Model model){
+		logger.info("공지사항 상세보기 파라미터 notice_No={}",notice_No);
+		
+		if(notice_No==0){
+			model.addAttribute("msg", "잘못된 url입니다");
+			model.addAttribute("url", "/admin/noticelist.do");
+			return "common/message";
+		}
+		
+		NoticeVO noticeVo = noticeService.selectByNoNotice(notice_No);
+		int prePage=noticeService.prePageNotice(notice_No);
+
+		int nextPage=noticeService.nextPageNotice(notice_No);
+		NoticeVO preVo=noticeService.selectByNoNotice(prePage);
+		logger.info("preVo={}",preVo);
+		NoticeVO nextVo=noticeService.selectByNoNotice(nextPage);
+		logger.info("nextVo={}",nextVo);
+		logger.info("개별조회 noticeVo={}",noticeVo);
+		model.addAttribute("noticeVo", noticeVo);
+		model.addAttribute("preVo", preVo);
+		model.addAttribute("nextVo", nextVo);
+		
+		return "admin/board/noticedetail";
+		
+	}
+	
+	@RequestMapping("/readCountAdd.do")
+	public String readCountAdd(@RequestParam(defaultValue="0") int notice_No){
+		logger.info("조회수 증가");
+		
+		int result = noticeService.readCountAdd(notice_No);
+		
+		return "redirect:/admin/noticedetail.do?notice_No="+notice_No;
+	}
+	
+	@RequestMapping("/prePage.do")
+	public String prePage(@RequestParam(defaultValue="0")int notice_No , Model model){
+		logger.info("이전페이지 이동처리 , 파라미터값 notice_No={}",notice_No);
+		int minNotice_No =noticeService.minPage();
+		logger.info("최소값 minNotice_No = {}" , minNotice_No);
+		
+		if(notice_No==minNotice_No){
+			String msg= "첫번째 글입니다";
+			String url ="/admin/noticedetail.do?notice_No="+notice_No;
+			
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
+		}
+		
+		int preNotice_No=noticeService.prePageNotice(notice_No);
+		
+		return "redirect:/admin/noticedetail.do?notice_No="+preNotice_No;
+		
+	}
+	
+	@RequestMapping("/nextPage.do")
+	public String nextPage(@RequestParam(defaultValue="0") int notice_No,Model model){
+		
+		logger.info("다음페이지 이동처리 , 파라미터 값 notice_No={}",notice_No);
+		int maxNotice_No = noticeService.nextPage();
+		
+		if(notice_No==maxNotice_No){
+			String msg = "마지막 글입니다";
+			String url = "/admin/noticedetail.do?notice_No="+notice_No;
+			model.addAttribute("msg", msg);
+			model.addAttribute("url",url);
+				
+			return "common/message";
+		}
+		
+		int nextNotice_No = noticeService.nextPageNotice(notice_No);
+		
+		return "redirect:/admin/noticedetail.do?notice_No="+nextNotice_No;
 	}
 	
 	

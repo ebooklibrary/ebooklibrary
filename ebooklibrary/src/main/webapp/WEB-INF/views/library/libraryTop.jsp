@@ -152,7 +152,7 @@ function closeNav() {
 		<!-- <div class="menuFlagColor" id="noticeDivColor"></div> -->
 	</div>
 	<div class="menuform">
-		<a href="<c:url value='/admin/book/bookList.do'/>">책검색</a>
+		<a href="<c:url value='/book/bookList.do'/>">책검색</a>
 		<!-- <div class="menuFlagColor" id="schDivColor"></div> -->
 	</div>
 	<div class="menuform" id="lastMenuForm">

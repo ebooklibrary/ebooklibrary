@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
-<%@include file="../libraryTop.jsp"%>
+<%@include file="../libraryAdminTop.jsp"%>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/silde_Notice/style.css" />
@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 </script>
 <form name="frmPage" method="post"
-	action="<c:url value='/library/notice/noticelist.do'/>">
+	action="<c:url value='/admin/noticelist.do'/>">
 	<input type="hidden" name="currentPage"> <input type="hidden"
 		name="searchCondition" value="${param.searchCondition }"> <input
 		type="hidden" name="searchKeyword" value="${param.searchKeyword }">
@@ -44,10 +44,9 @@ $(document).ready(function(){
 		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
-<%@include file="../libraryAd.jsp"%>
+<%@include file="../../library/libraryAd.jsp"%>
 <div id="notice_body">
-	<div class="list">
-		
+	<div class="list">		
 			<form name="search" id="search"
 				action="<c:url value='/library/notice/noticelist.do'/>">
 				<div id="search2">
@@ -90,7 +89,7 @@ $(document).ready(function(){
 							<tr>
 								<td>${vo.noticeNo }</td>
 								<td><a
-									href="<c:url value ='/library/notice/readCountAdd.do?notice_No=${vo.noticeNo}'/>">
+									href="<c:url value ='/admin/readCountAdd.do?notice_No=${vo.noticeNo}'/>">
 										${vo.title }</a></td>
 								<td>${vo.userName }</td>
 								<td><fmt:formatDate value="${vo.regdate }"
@@ -130,8 +129,12 @@ $(document).ready(function(){
 			</c:if>
 		</div>		
 	</div>
-
+	<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
+         <div id="noticeWrite">
+            <input type = "submit" id ="noticeSubmit" value="글쓰기" onclick="location.href='<c:url value ="/library/notice/noticewrite.do"/>'"/>
+         </div>
+     </c:if>
 </div>
 
 
-<%@include file="../libraryBottom.jsp"%>
+<%@include file="../libraryAdminBottom.jsp"%>

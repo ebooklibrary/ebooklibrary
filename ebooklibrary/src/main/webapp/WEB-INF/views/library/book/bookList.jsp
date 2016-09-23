@@ -179,8 +179,13 @@
 		 $("#bookTitleP, #bookListDiv img").click(function() {
 			 
 			 var bookNo=$(this).parent().parent().find("input[name=bookNo]").val();
-			 alert(bookNo);
-			 $(location).attr('href', "<c:url value='/admin/book/bookDetail.do?bookNo="+bookNo+"'/>");
+			 alert($("#session").val());
+			 if($("#session").val()==null || $("#session").val()==""){
+				 $(location).attr('href', "<c:url value='/book/bookDetail.do?bookNo="+bookNo+"'/>");
+			 }else{
+				 $(location).attr('href', "<c:url value='/admin/book/bookDetail.do?bookNo="+bookNo+"'/>");
+			 }
+			 
 		});
 		 
 		 $(".bookDelete").click(function() {
@@ -348,6 +353,13 @@
 		</div>
 		
 	</div>
+	<c:if test="${!empty sessionScope.adminAuchCode }">
+		<input type="hidden" id="session" value="${sessionScope.adminAuchCode }">
+	</c:if>
+	<c:if test="${empty sessionScope.adminAuchCode }">
+		<input type="hidden" id="session">
+	</c:if>
+	
 	
 	<!-- 사이드 장바구니 -->
 	<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">	

@@ -64,10 +64,10 @@ public class NoticeController {
 		String msg = "" , url ="";
 		if(cnt>0){
 			msg="공지사항 입력 성공";
-			url="/library/notice/noticelist.do";
+			url="/admin/noticelist.do";
 		}else{
 			msg="공지사항 입력 실패";
-			url="/library/notice/noticewrite.do";
+			url="/admin/noticewrite.do";
 		}
 			
 		model.addAttribute("msg", msg);
@@ -157,10 +157,10 @@ public class NoticeController {
 		
 		int cnt = noticeService.editNotice(noticeVo);
 		logger.info("수정 후 파라미터 cnt = {}",cnt);
-		String msg ="" , url ="/library/notice/noticeEdit.do?notice_No="+noticeVo.getNoticeNo();
+		String msg ="" , url ="/admin/noticeEdit.do?notice_No="+noticeVo.getNoticeNo();
 		if(cnt>0){
 			msg="공지사항 수정 성공";
-			url="/library/notice/noticedetail.do?notice_No="+noticeVo.getNoticeNo();
+			url="/admin/noticedetail.do?notice_No="+noticeVo.getNoticeNo();
 		}else{
 			msg="공지사항 수정 실패";
 		}
@@ -179,10 +179,10 @@ public class NoticeController {
 		
 		logger.info("noticeVo={}",noticeVo);
 		int cnt = noticeService.deleteNotice(noticeVo);
-		String msg = "" , url = "library/notice/noticeDelete.do?notice_No="+noticeVo.getNoticeNo();
+		String msg = "" , url = "/admin/noticeDelete.do?notice_No="+noticeVo.getNoticeNo();
 		if(cnt>0){
 			msg="공지사항 삭제 성공";
-			url ="/library/notice/noticelist.do";
+			url ="/admin/noticelist.do";
 		}else{
 			msg="공지사항 삭제 실패";
 		}
