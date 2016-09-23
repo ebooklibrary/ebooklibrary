@@ -191,13 +191,6 @@
 	width:90%;
 	
 }
-#qnaCmt td{
-	height:25px;
-}
-#qnaCmt .cmtTr_1{
-	white-space: nowrap
-	
-}
 
 
 #content{
@@ -210,9 +203,8 @@
 }
 
 #divCmw{
-	width:500px;
-	/* padding:20px; */
-	margin-left:180px;
+	width:550px;
+	
 	/* text-align:center; */
 	margin-top:10px;
 }
@@ -222,32 +214,7 @@
 }
 
 
-.cmt_td1{
-	text-align:right;
-	white-space: nowrap;
-	
-	
-}
-.cmt_td2{
-	text-align:left;
-	border-top:1px solid black;
-	border-bottom:1px solid black;
-	white-space: nowrap
-}
-.cmt_td3{
-	text-align:center;
-	border-top:1px solid black;
-	white-space: nowrap
-}
-.cmt_td4{
-	text-align:center;
-	border-bottom:1px solid black;
-	white-space: nowrap
-}
-.cmt_td5{
-	width:300px;
-	padding:10px;
-}
+
 #reply_margin-left{
 	margin-left:30px;
 }

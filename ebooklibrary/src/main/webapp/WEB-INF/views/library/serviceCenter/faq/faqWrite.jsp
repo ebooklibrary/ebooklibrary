@@ -9,21 +9,6 @@
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/faq.css" />
 <script type="text/javascript">
 $().ready(function(){
-	$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
-	$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
-	
-	$("#frmWrite").submit(function(){
-		if($("#title").val().length<1){
-			alert("제목을 입력하세요");				
-			$("#title").focus();
-			return false;
-		}else if($("#category").val().length<1){
-			alert("분류을 지정하세요");				
-			$("#category").focus();
-			return false;
-		}	
-	});
-	
 	///전역변수
 	var obj = [];               
 	//스마트에디터 프레임생성
@@ -41,6 +26,39 @@ $().ready(function(){
 	    }
 	});
 	
+	
+	$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
+	
+	$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
+	
+	$("#frmWrite").submit(function() {
+		obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		if($("#title").val().length < 1 || $("#title").val()=="<p>&nbsp;</p>"){
+            
+            alert("제목을 입력하세요.");
+            $("#title").focus();
+            
+            return false;
+         }
+		if($("#content").val().length < 1 || $("#content").val()=="<p>&nbsp;</p>"){
+            
+            alert("내용을 입력하세요.");
+            $("#content").focus();
+            
+            return false;
+         }
+		
+	});
+	
+	$("#faqcategory").change(category);
+	
+	function category(){
+		$("#category").val($("#faqcategory").val());
+	}
+	
+	
+	
 });
 	function submitContents(elClickedObj) {
 		// 에디터의 내용이 textarea에 적용된다.
@@ -57,41 +75,42 @@ $().ready(function(){
 <!-- request 리스트 화면 -->
 <div id="notice_head">
 	<h2>
-		<img alt="qna"
-			src="${pageContext.request.contextPath }/images/library/request/request.png" style="width: 150px;">
+		<img alt="faq"
+			src="${pageContext.request.contextPath }/images/library/ServiceCenter/faq.png" style="width: 150px;">
 	</h2>
-</div>
-
-
-
-<div id="faqWrite_body" class="FormRequest">
-	<form name="frmWrite" id="frmWrite" method="post" 			
-		action="<c:url value='/library/request/requestWrite.do'/>" >
-		<fieldset>
-			<legend>FAQ 작성하기</legend>
-				<br>
-				<div id="faqheader">
-					<label for="title">제목</label>
-					<input type="text" class="inputfaqText" id="title" name="title" />
-				</div>
-					<label for="faqcategory">분 류</label>
-					<select>
-						<option>회원가입</option>
-						<option>주문/결제</option>
-						<option>취소</option>
-						<option>상품</option>
-					</select>
+	<div id="faqWrite_body" >
+		<form name="frmWrite" id="frmWrite" method="post" 			
+			action="<c:url value='/library/serviceCenter/faq/faqWrite.do'/>" >
+			<fieldset>
+				<legend>FAQ 작성하기</legend>
+					<input type="text" id="category" name="category" value="member">
+					<br>
 					
-				<br>
-	       		<br>
-				<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:705px; height:300px;"></textarea>
-	        	<br>
-	        	<div id="request_align_center">
-	        		<input type="submit" value="작성완료" class="reqbt"/>
-	        		<input type="Button" value="FAQ 목록" class="reqbt"
-	        		onclick="location.href='<c:url value="/library/request/requestList.do"/>';" />
-	        	</div>
-		</fieldset>
-	</form>
+					<div>
+						<div id="faqheader">
+							<label for="faqcategory" class="lbfaq">분 류</label> 
+							&nbsp;&nbsp;<select id="faqcategory">
+								<option value="member">회원가입</option>
+								<option value="order">주문/결제</option>
+								<option value="cancel">취소</option>
+								<option value="product">상품</option>
+							</select><br>
+							<label for="title" class="lbfaq">제 목</label>
+							<input type="text" class="inputfaqText" id="title" name="title" />
+						</div>	
+					</div>
+					<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:705px; height:300px;"></textarea>
+		        	<br>
+	        		<div id="request_align_center">
+		        		<input type="submit" value="작성완료" class="btfaqList"/>
+		        		<input type="Button" value="취소" class="btfaqList"
+		        		onclick="location.href='<c:url value="/library/serviceCenter/faq/faqList.do"/>';" />
+		        	</div>
+			</fieldset>
+		</form>
+	</div>
 </div>
+
+
+
 <%@include file="../../libraryBottom.jsp" %>
