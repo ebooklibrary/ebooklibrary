@@ -79,6 +79,9 @@
 	<div class="menuform">
 		<a href="<c:url value='/admin/requestList.do'/>">요청게시판</a>
 	</div>
+	<div class="menuform">
+		<a href="<c:url value='/admin/qnaList.do'/>">qna게시판</a>
+	</div>
 	<div class="menuform" id="lastMenuForm">
 		<a style="margin: 2px 0 0 2px;" href="<c:url value='/admin/book/bookList.do'/>">책 목록</a>
 	</div>
