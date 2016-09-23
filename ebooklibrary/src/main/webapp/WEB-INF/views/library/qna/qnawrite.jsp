@@ -83,20 +83,19 @@
 }
 	
 </script>
-<!-- qna 쓰기 화면 -->
 <div id="notice_head">
 	<h2>
 		<img alt="qna"
-			src="${pageContext.request.contextPath }/images/library/qna/qnaboard.png"width="200px" height="50px">
+			src="${pageContext.request.contextPath }/images/library/qna/qnaboard.png" style="width: 150px;">
 	</h2>
 </div>
 <div id="notice_banner">
-	<a href="<c:url value='/library/qna/qnaList.do'/>"><img
+	<a href="<c:url value='/library/qna/qnaList.do'/>">
+	<img
 		alt="qna 배너"
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
-		width="200px" height="50px" style="margin-bottom:80px;"></a>
+		width="200px" height="50px" ></a>
 </div>
-
 <%@include file="../libraryAd.jsp"%>
 <div id="qna_body">
 	<form name="frmWrite" id="frmWrite" method="post" 

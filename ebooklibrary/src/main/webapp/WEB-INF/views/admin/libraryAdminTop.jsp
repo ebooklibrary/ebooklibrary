@@ -105,7 +105,7 @@
 	<div id="gnb">      
 		<ul id="global">
             <li class="first">
-            <a href="<c:url value='/index.do'/>">
+            <a href="<c:url value='/admin/adminMain.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
             관리자 페이지
             </a></li>			
@@ -114,15 +114,7 @@
 				<a href="<c:url value='/admin/logout.do'/>">
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 				로그아웃
-				</a></li>				
-	            <c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
-	            <li>
-	            <a href="<c:url value='/library/librarymain.do'/>">
-	            <!-- <img src="/images/gmi/inc/gnb_join.gif" alt="회원가입" /> -->
-	            도서관 페이지
-	            </a>
-	            </li>
-	            </c:if>         
+				</a></li>	
 			</c:if>	
 		</ul>
     </div>

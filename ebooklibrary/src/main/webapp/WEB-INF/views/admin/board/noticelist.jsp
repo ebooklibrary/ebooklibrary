@@ -38,7 +38,7 @@ $(document).ready(function(){
 	</h2>
 </div>
 <div id="notice_banner">
-	<a href="<c:url value='/library/notice/noticelist.do'/>"><img
+	<a href="<c:url value='/admin/noticelist.do'/>"><img
 		alt="공지사항 배너"
 		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
 		width="200px" height="50px"></a>
@@ -48,7 +48,7 @@ $(document).ready(function(){
 <div id="notice_body">
 	<div class="list">		
 			<form name="search" id="search"
-				action="<c:url value='/library/notice/noticelist.do'/>">
+				action="<c:url value='/admin/noticelist.do'/>">
 				<div id="search2">
 				<select name="searchCondition" class="searchCondition">
 					<option value="title">제목</option>

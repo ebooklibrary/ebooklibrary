@@ -11,13 +11,8 @@
 		
 		$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
 
-		$("#writeGo").click(function(){
-			$(location).attr('href',"<c:url value='/library/request/requestWrite.do'/>");
-		});
-
-		
 		$("#listGo").click(function(){
-			$(location).attr('href',"<c:url value='/library/request/requestList.do'/>");
+			$(location).attr('href',"<c:url value='/admin/requestList.do'/>");
 		});
 		
 		$("#notstock").click(function(){
@@ -59,9 +54,9 @@
 
 
 <form name="frmPage" method="post" 
-	action="<c:url value='/library/request/requestList.do'/>">
+	action="<c:url value='/admin/requestList.do'/>">
 	<input type="hidden" name="currentPage">
-	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
+	<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.adminMemberNo }"/>
 	<input type="hidden" id="myWrite" name="myWrite" value="${param.myWrite }">
 	<input type="hidden" id="myWrite" name="searchCondition" value="${param.searchCondition }">
 	<input type="hidden" id="myWrite" name="searchKeyword" value="${param.searchKeyword }">
@@ -75,7 +70,7 @@
 	</h2>
 </div>
 <div id="notice_banner">
-	<a href="<c:url value='/library/request/requestList.do'/>"><img
+	<a href="<c:url value='/admin/requestList.do'/>"><img
 		alt="request 배너"
 		src="${pageContext.request.contextPath}/images/library/request/banner2.png"
 		width="200px" height="50px"></a>
@@ -86,7 +81,7 @@
 <div id="reqList_body">
 	<div class="searchbox">
 		<form name="frmSearch" method="post"
-			action="<c:url value='/library/request/requestList.do' />">
+			action="<c:url value='/admin/requestList.do' />">
 			<div class="search_box" >
 				<select name="searchCondition" class="searchCondition">
 					<option value="title"
@@ -190,28 +185,8 @@
 							<c:if test="${sessionScope.memberNo!=vo.memberNo }">
 								<td colspan="2">
 								</td>
-							</c:if>
-							<c:if test="${sessionScope.memberNo==vo.memberNo }">
-								<td style="text-align:center"> 
-									<form name="frmEdit" method="GET"
-											action="<c:url value='/library/request/requestEdit.do' />">
-											<input type="hidden" value="${vo.requestNo }" name="requestNo"/>
-										<input type="submit"   value="수정" class="btreqList"/>
-									</form>
-								</td>
-							</c:if>
-						</c:if>
-						<c:if test="${vo.stocked=='N' }">
-							<c:if test="${sessionScope.memberNo==vo.memberNo }">
-								<td>
-									<form name="frmDelete" method="post"
-											action="<c:url value='/library/request/requestDelete.do?requestNo=${vo.requestNo }' />">
-										<input type="submit" id="deleteRequest" value="삭제" class="btreqList"/>
-									</form>
-								</td>
-							</c:if>
-						</c:if>
-								
+							</c:if>							
+						</c:if>	
 					</tr>
 
 				</c:forEach>
@@ -222,18 +197,8 @@
 </div>
 </div>
 	<div class="requebticons">
-		<form id="myWrite" method="post" action="<c:url value='/library/request/requestList.do'/>">
-			<input type="button" id="listGo" value="전체목록" class="reqbt"/>
-			<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">
-				<input type="button" id="writeGo" value="글쓰기" class="reqbt"/>
-			</c:if>
-			<c:if test="${!empty sessionScope.memberNo }">
-				<input type="submit" id="myWriting" value="내글 보기" class="reqbt"/>
-			</c:if>
-			<c:if test="${!empty sessionScope.memberNo }">
-				<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.memberNo }"/>
-			</c:if>
-			<input type="hidden" id="myWrite" name="myWrite" value="Y">
+		<form id="myWrite" method="post" action="<c:url value='/admin/requestList.do'/>">
+			<input type="button" id="listGo" value="전체목록" class="reqbt"/>			
 		</form>			
 	</div>	
 

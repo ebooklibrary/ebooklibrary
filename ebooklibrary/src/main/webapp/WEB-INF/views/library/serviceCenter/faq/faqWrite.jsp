@@ -83,7 +83,7 @@ $().ready(function(){
 			action="<c:url value='/library/serviceCenter/faq/faqWrite.do'/>" >
 			<fieldset>
 				<legend>FAQ 작성하기</legend>
-					<input type="text" id="category" name="category" value="member">
+					<input type="hidden" id="category" name="category" value="member">
 					<br>
 					
 					<div>

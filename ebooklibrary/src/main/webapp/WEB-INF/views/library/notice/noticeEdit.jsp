@@ -75,7 +75,7 @@
 					});
 </script>
 <div id="notice_banner">
-	<a href="<c:url value='/library/notice/noticelist.do'/>"><img
+	<a href="<c:url value='/admin/noticelist.do'/>"><img
 		alt="공지사항 배너"
 		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
 		width="200px" height="50px"></a>
