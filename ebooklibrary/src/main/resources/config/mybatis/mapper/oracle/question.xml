@@ -8,8 +8,8 @@
 			select complain_seq.nextval from dual
 		</selectKey>
 		insert into
-		complain_board(quest_no,member_no,title,user_name,q_content)
-		values(#{questNo},#{memberNo},#{title},#{userName},#{qContent})
+		complain_board(quest_no,member_no,title,user_name,q_content,category)
+		values(#{questNo},#{memberNo},#{title},#{userName},#{qContent},#{category})
 	</insert>
 
 	<select id="selectByMemberNo" parameterType="int" resultType="QuestionVO">

@@ -12,6 +12,9 @@
 					});
 </script>
 <%@include file="../libraryAd.jsp"%>
+<div class="siteMap_head">
+	<img alt="사이트맵" src ="${pageContext.request.contextPath }/images/library/notice/siteMap2.png" width="250px" height="70px" style="margin-left: 50px;" />
+</div>
 <div class="siteMap">
 	<div class="siteMap_1">
 		<img alt=""

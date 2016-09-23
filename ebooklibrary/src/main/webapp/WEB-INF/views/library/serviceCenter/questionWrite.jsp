@@ -20,6 +20,7 @@
 <link rel="stylesheet"
 	href="<c:url value='/alertify.js-0.3.11/themes/alertify.default.css'/>" />
 <script type="text/javascript">
+
 	$(document)
 			.ready(
 					function() {
@@ -79,10 +80,9 @@
 										});
 						$("#container_out")
 								.css("background",
-										"url(../../images/library/notice/noticeBackground.png) no-repeat center");
-
+										"url(../../images/library/notice/noticeBackground.png) no-repeat center");						
 					});
-
+	document.getElementByName("category").selelctedIndex.text
 	function submitContents(elClickedObj) {
 		// 에디터의 내용이 textarea에 적용된다.
 		oEditors.getById["qContent"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -95,6 +95,8 @@
 		} catch (e) {
 		}
 	}
+
+	
 </script>
 
 <!-- 1:1 문의 글쓰기 화면 -->
@@ -102,11 +104,20 @@
 	action="<c:url value ='/library/serviceCenter/questionWrite.do'/>">
 	<input type="hidden" name="memberNo" id="memberNo"
 		value="${sessionScope.memberNo }">
+	
 	<div>
-		<p class ="question_p">1:1 문의 하기</p>
+		<p class="question_p">1:1 문의 하기</p>
 	</div>
-	<div class= "question">
+	<div class="question">
 		<div class="question_head">
+			<div class="question_select">
+				<select id="question_category" name ="category">
+					<option value="1">상품/재입고</option>
+					<option value="2">주문/결제</option>
+					<option value="3">회원관련</option>
+					<option value="4">기타문의</option>
+				</select>
+			</div>
 			<div class="question_Title">
 				제목 : <input type="text" name="title" id="title">
 			</div>

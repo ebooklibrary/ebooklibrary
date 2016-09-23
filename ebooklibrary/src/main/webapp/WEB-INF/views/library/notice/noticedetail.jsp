@@ -32,7 +32,7 @@
 	<h2>
 		<img alt="공지사항"
 			src="${pageContext.request.contextPath }/images/library/notice/notice.png"
-			style="width: 150px;">
+			style="width: 150px; margin-bottom: 50px; text-align: center; margin-top: 20px; margin-right: 90px;">
 	</h2>
 </div>
 <div id="notice_banner">
@@ -70,10 +70,10 @@
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
-		<tr>
+		<tr style="width: 200px;">
 			<td class="td_9">이전글</td>
 			<c:if test="${preVo==null || preVo==''}">
-				<td class="td_7">이전글이 없습니다.</td>
+				<td class="td_7" >이전글이 없습니다.</td>
 			</c:if>
 			<c:if test="${preVo.noticeNo!=0}">
 				<td class="td_7"><a
@@ -83,7 +83,7 @@
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
-		<tr>
+		<tr style="width: 200px;">
 			<td class=" td_9">다음글</td>
 			<c:if test="${nextVo==null || nextVo==''}">
 				<td class="td_8">마지막 글입니다.</td>
@@ -94,10 +94,6 @@
 			</c:if>
 		</tr>
 		<tr>
-			<td>첨부파일</td>
-			<td>${noticeVo.fileName }</td>
-		</tr>
-		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
 	</table>
@@ -106,7 +102,7 @@
 			class="img1" alt="리스트"
 			src="${pageContext.request.contextPath }/images/library/notice/List.jpg"></a>
 	</div>
-	<c:if test="${sessionScope.auchCode=='ADMIN' }">
+	<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 		<div class="notice_delete">
 			<input type="button" value="글수정"
 				onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'">

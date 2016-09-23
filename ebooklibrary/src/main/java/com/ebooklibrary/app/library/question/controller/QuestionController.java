@@ -56,7 +56,7 @@ public class QuestionController {
 	@RequestMapping(value="/questionWrite.do", method= RequestMethod.POST)
 	public String questionWrite_post(@ModelAttribute QuestionVO questionVo ,Model model ){
 		logger.info("1:1 문의 글쓰기 처리");
-		
+		logger.info("questionVo ={}",questionVo);
 		int cnt = questionservice.insertQuestion(questionVo);
 		
 		logger.info("글쓰기 결과 cnt ={}"+cnt);

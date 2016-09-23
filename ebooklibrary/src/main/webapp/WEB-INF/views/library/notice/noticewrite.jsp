@@ -87,7 +87,7 @@
 		제목 : <input type="text" name="title" id="title">
 	</div>
 	<div class="notice_UserName">
-		작성자 : <input type="text" name="userName" id="userName" value ="${sessionScope.userName }" readonly="readonly">
+		작성자 : <input type="text" name="userName" id="userName" value ="관리자" readonly="readonly">
 	</div>
 	<div class="notice_Content">
 		<p>

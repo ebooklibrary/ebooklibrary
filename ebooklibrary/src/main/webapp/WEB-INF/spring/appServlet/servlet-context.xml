@@ -1,66 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 		<beans:property name="order" value="1" />
 	</beans:bean>
-	
-	
+
+
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-	<beans:property name="order" value="0" />
+		<beans:property name="order" value="0" />
 	</beans:bean>
-	
-	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-	
-	<context:component-scan base-package="com.ebooklibrary.app" use-default-filters="false">
-		<context:include-filter expression="org.springframework.stereotype.Controller" 
-		type="annotation"/>
-		
+
+	<beans:bean id="jsonView"
+		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+
+	<context:component-scan base-package="com.ebooklibrary.app"
+		use-default-filters="false">
+		<context:include-filter expression="org.springframework.stereotype.Controller"
+			type="annotation" />
+
 	</context:component-scan>
 	<interceptors>
 		<interceptor>
-			<mapping path="/shop/*/*"/>
-			<mapping path="/shop/*"/>
-			<mapping path="/library/qna/qnaDelete.do"/>
-			<mapping path="/library/qna/qnaEdit.do"/>
-			<mapping path="/library/qna/qnaWrite.do"/>
-			<mapping path="/library/request/requestDelete.do"/>
-			<mapping path="/library/request/requestEdit.do"/>
-			<mapping path="/library/request/requestWrite.do"/>
-			<mapping path="/library/notice/noticeDelete.do"/>
-			<mapping path="/library/notice/noticewrite.do"/>
-			<mapping path="/library/notice/noticeEdit.do"/>
-			<mapping path="/member/myInfo.do"/>
-			<mapping path="/member/myPage.do"/>
-			<mapping path="/mybooks/*"/>
-			<mapping path="/library/serviceCenter/myQuestion.do"/>
-			<mapping path="/library/serviceCenter/questionWrite.do"/>
-			<beans:ref bean="loginInterceptor"/>
+			<mapping path="/shop/*/*" />
+			<mapping path="/shop/*" />
+			<mapping path="/library/qna/qnaDelete.do" />
+			<mapping path="/library/qna/qnaEdit.do" />
+			<mapping path="/library/qna/qnaWrite.do" />
+			<mapping path="/library/request/requestDelete.do" />
+			<mapping path="/library/request/requestEdit.do" />
+			<mapping path="/library/request/requestWrite.do" />
+			<mapping path="/member/myInfo.do" />
+			<mapping path="/member/myPage.do" />
+			<mapping path="/mybooks/*" />
+			<mapping path="/library/serviceCenter/myQuestion.do" />
+			<mapping path="/library/serviceCenter/questionWrite.do" />
+			<beans:ref bean="loginInterceptor" />
 		</interceptor>
-		
+
 		<interceptor>
-	        <mapping path="/admin/*" />
-	        <mapping path="/admin/*/*" />
-	        <beans:ref bean ="adminLoginInterceptor" />
+			<mapping path="/admin/*" />
+			<mapping path="/admin/*/*" />
+			<mapping path="/library/notice/noticeDelete.do" />
+			<mapping path="/library/notice/noticewrite.do" />
+			<mapping path="/library/notice/noticeEdit.do" />
+			<beans:ref bean="adminLoginInterceptor" />
 		</interceptor>
 	</interceptors>
-	
-	
+
+
 </beans:beans>

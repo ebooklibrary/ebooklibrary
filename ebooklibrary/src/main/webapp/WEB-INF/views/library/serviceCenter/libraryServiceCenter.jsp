@@ -23,9 +23,6 @@
 </div>
 <div id ="serivceCenter_1">
 	<div>
-		<p>고객센터 정보</p>
-	</div>
-	<div>
 		<a href="<c:url value ='/library/serviceCenter/questionWrite.do'/>">1:1
 			문의 하기</a>
 	</div>

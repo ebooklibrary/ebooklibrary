@@ -12,6 +12,9 @@ public class QuestionVO {
 	private Timestamp redDate;
 	private String selectCmt;
 	private int memberNo;
+	private String fileName;
+	private long fileSize;
+	private String category;
 	public int getQuestNo() {
 		return questNo;
 	}
@@ -60,11 +63,30 @@ public class QuestionVO {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public long getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	@Override
 	public String toString() {
 		return "QuestionVO [questNo=" + questNo + ", title=" + title + ", userName=" + userName + ", oContent="
 				+ oContent + ", qContent=" + qContent + ", redDate=" + redDate + ", selectCmt=" + selectCmt
-				+ ", memberNo=" + memberNo + "]";
+				+ ", memberNo=" + memberNo + ", fileName=" + fileName + ", fileSize=" + fileSize + ", category="
+				+ category + "]";
 	}
 	
 	

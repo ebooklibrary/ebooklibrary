@@ -39,7 +39,8 @@ $(document).ready(function(){
 <div id="notice_head">
 	<h2>
 		<img alt="공지사항"
-			src="${pageContext.request.contextPath }/images/library/notice/notice.png" style="width: 150px;">
+			src="${pageContext.request.contextPath }/images/library/notice/notice.png" style="width: 150px;
+			margin-bottom: 50px; text-align: center; margin-top: 8px; margin-right: 55px;">
 	</h2>
 </div>
 <div id="notice_banner">
@@ -58,7 +59,7 @@ $(document).ready(function(){
 				<div id="search2">
 				<select name="searchCondition" class="searchCondition">
 					<option value="title">제목</option>
-					<option value="writer">글쓴이</option>
+					<option value="user_Name">작성자</option>
 					<option value="content">내용</option>
 				</select> <input type="text" name="searchKeyword"class="searchCondition"> <input
 					type="submit" value="검색" id="searchInfo1">
@@ -134,7 +135,7 @@ $(document).ready(function(){
 				</a>
 			</c:if>
 		</div>
-		<c:if test="${sessionScope.auchCode=='ADMIN' }">
+		<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 			<div id="noticeWrite">
 				<input type = "submit" id ="noticeSubmit" value="글쓰기" onclick="location.href='<c:url value ="/library/notice/noticewrite.do"/>'"/>
 			</div>
