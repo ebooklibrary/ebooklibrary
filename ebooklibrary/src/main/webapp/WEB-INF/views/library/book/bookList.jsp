@@ -53,6 +53,15 @@
 				type:"POST",
 				data: $(this).serializeArray(),
 				success:function(res){
+					if (res>0) {
+						if (${!empty sessionScope.userId }) {
+							$(this).find(".popuptext").show().delay(2000)
+							.queue(function (next) {
+								$(this).hide();
+								next();
+							});
+						}
+					}
 					if (res<0) {
 						alertify.alert("이미 장바구니 목록에 추가되었습니다.");
 					}
@@ -145,16 +154,20 @@
 		var bookSort="${bookSearchVo.bookSort}";
 		if (bookSort=='sales') {
 			$("#sortDiv li:nth-of-type(4)").css("font-weight",'bold');
+			$("#sortDiv li:nth-of-type(4) span").css("color",'orange');
 		}else if (bookSort=='publication') {
 			$("#sortDiv li:nth-of-type(3)").css("font-weight",'bold');
+			$("#sortDiv li:nth-of-type(3) span").css("color",'orange');
 		}else if (bookSort=='lowPrice') {
 			$("#sortDiv li:nth-of-type(2)").css("font-weight",'bold');
+			$("#sortDiv li:nth-of-type(2) span").css("color",'orange');
 		}else if (bookSort=='highPrice') {
 			$("#sortDiv li:nth-of-type(1)").css("font-weight",'bold');
+			$("#sortDiv li:nth-of-type(1) span").css("color",'orange');
 		}
 		
 		/* 장바구니 클릭시 메시지 */
-		$(".cart").click(function() {
+		/* $(".cart").click(function() {
 			if (${!empty sessionScope.userId }) {
 				$(this).find(".popuptext").show().delay(2000)
 				.queue(function (next) {
@@ -162,7 +175,7 @@
 					next();
 				});
 			}
-		});
+		}); */
 		
 		
 		/* 
@@ -171,38 +184,26 @@
 		});
 		 */
 		
-		 $("#bookTitleP, #bookListDiv img").click(function() {
+		$("#bookTitleP, #bookListDiv img").click(function() {
 			 
 			 var bookNo=$(this).parent().parent().find("input[name=bookNo]").val();
-			 /* alert($("#session").val()); */
-			 if($("#session").val()==null || $("#session").val()==""){
-				 $(location).attr('href', "<c:url value='/book/bookDetail.do?bookNo="+bookNo+"'/>");
-			 }else{
-				 $(location).attr('href', "<c:url value='/admin/book/bookDetail.do?bookNo="+bookNo+"'/>");
-			 }
-			 
+			 $(location).attr('href', "<c:url value='/book/bookDetail.do?bookNo="+bookNo+"'/>");
 		});
 		 
-		 $(".bookDelete").click(function() {
+		$(".buy").click(function() {
 			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
-			/* alert(bookNo); */
-			
-			alertify.confirm("정말로 책을 삭제하시겠습니까?", function (e) {
-				if (e) {
-					$(location).attr('href', "<c:url value='/admin/book/bookDelete.do?bookNo="+bookNo+"'/>");
-			    } else {
-			    	return false;
-			    }
-			});
-			
+			var userId=$(this).parent().parent().parent().find("input[name=userId]").val();
+			if(${!empty sessionScope.userId}){
+				 $(location).attr('href', "<c:url value='/shop/cart/extendBook.do?bookNo="+bookNo+"&userId="+userId+"'/>");
+			}
+			if(${empty sessionScope.userId || userId==null }){
+				alertify.alert("로그인하여 주세요.", function (e) {
+				    if (e) {
+				    	$(location).attr('href', "<c:url value='/member/login.do'/>");
+				    }
+				});
+			}
 		});
-		 
-		 $(".bookEdit").click(function() {
-			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
-			$(location).attr('href', "<c:url value='/admin/book/bookEdit.do?bookNo="+bookNo+"'/>");
-			
-		});
-		 
 		
 	}); //ready
 	
@@ -238,7 +239,7 @@
 			</c:if>
 		</p>
 		
-		<form action="<c:url value='/admin/book/bookList.do'/>" name="searchFrm" method="post" id="searchFrm">
+		<form action="<c:url value='/book/bookList.do'/>" name="searchFrm" method="post" id="searchFrm">
 		<input type="hidden" name="currentPage" value="${bookSearchVo.currentPage }">
 			<p id="searchSpan">검색 키워드 : 
 				<span>제목</span>
@@ -256,10 +257,10 @@
 				<%-- ${bookSearchVo.bookSort=='sales'} --%>
 					<nav>
 						<ul>
-							<li>높은가격</li>
-							<li>낮은가격</li>
-							<li>신상품</li>
-							<li>판매량</li>
+							<li>높은가격 <span>&#8711;</span></li>
+							<li>낮은가격 <span>&#8711;</span></li>
+							<li>신상품 <span>&#8711;</span></li>
+							<li>판매량 <span>&#8711;</span></li>
 						</ul>
 					</nav>
 					<%-- 
@@ -283,34 +284,26 @@
 			<input type="hidden" id="price" name="price" value="${vo.price }">
 		</c:if>
 			<input type="hidden" id="bookNo" name="bookNo" value="${vo.bookNo }">
+			<%-- <input type="hidden" id="userId" name="userId" value="${vo.userId }"> --%>
 			<div id="bookListDiv">
 				<img alt="책 커버 이미지" src="<c:url value='/book_upload/${vo.coverFileName }'/>">
 				<p id="bookTitleP">[${vo.genre}] ${vo.title }</p>
-				<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
-					<div class="choice">
-						<input type="submit" id="bookEdit" name="bookEdit" value="수정" class="bookEdit">
-						<c:if test="${vo.sales == 0 }">
-							<input type="button" class="bookDelete" id="bookDelete" name="bookDelete" value="삭제">
-						</c:if>
-					</div>
-				</c:if>
 				
-				<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">				
 					<div class="choice">				
-						<c:if test="${vo.userId == sessionScope.userId}">
+						<c:if test="${vo.userId == sessionScope.userId && sessionScope.userId != null}">
 							구매하신 상품입니다.
 						</c:if>
-						<c:if test="${vo.userId != sessionScope.userId}">
+						<c:if test="${vo.userId != sessionScope.userId || sessionScope.userId == null}">
 							<div class="cart">
 							<input type="submit" id="cart" name="cart" value="장바구니 추가" class="cart">
 							<span class="popuptext">${vo.title } 장바구니 추가</span>
 							</div>
+							<input type="button" id="buy" name="buy" value="바로구매" class="buy">
 							
-							<input type="button" id="buy" name="buy" value="바로구매">
+							
 							
 						</c:if>						
 					</div>
-				</c:if>
 				<div id="bookSummaryDiv">${vo.summary }</div>
 				<div id="bookPriceDiv">
 					<p>구매가격 : <fmt:formatNumber value="${vo.price }" pattern="#,###,###" />원</p>
@@ -351,16 +344,9 @@
 		</div>
 		
 	</div>
-	<c:if test="${!empty sessionScope.adminAuchCode }">
-		<input type="hidden" id="session" value="${sessionScope.adminAuchCode }">
-	</c:if>
-	<c:if test="${empty sessionScope.adminAuchCode }">
-		<input type="hidden" id="session">
-	</c:if>
 	
 	
 	<!-- 사이드 장바구니 -->
-	<c:if test="${sessionScope.adminAuchCode!='ADMIN' }">	
 		<div id="cartDiv">
 			<nav>
 				<ul>
@@ -372,5 +358,4 @@
 				</ul>
 			</nav>
 		</div>
-	</c:if>
 <%@include file="../libraryBottom.jsp"%>

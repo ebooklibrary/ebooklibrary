@@ -1,5 +1,7 @@
 package com.ebooklibrary.app.mybooks.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -41,10 +43,8 @@ public class MyBookServiceImpl implements MyBookService {
 		String keyword=bookSearchVo.getSearchKeyword();
 		if (keyword!=null && !keyword.isEmpty()) {
 			alist=myBookDao.schFromMain(bookSearchVo);
-			System.out.println("메인 검색어"+keyword);
 		}else{
 			alist= myBookDao.selectBoolAll(bookSearchVo);
-			System.out.println("내부 검색어"+keyword);
 		}
 		
 		BookUtility bu=new BookUtility();
@@ -127,10 +127,8 @@ public class MyBookServiceImpl implements MyBookService {
 		int cnt=0;
 		String hide=myBooksVo.getHide();
 		if (hide.equals("N")) {
-			System.out.println("toHide");
 			cnt=myBookDao.hideMyBook(myBooksVo);
 		}else if (hide.equals("Y")) {
-			System.out.println("toShow");
 			cnt=myBookDao.showMyBook(myBooksVo);
 		}
 		
@@ -139,7 +137,41 @@ public class MyBookServiceImpl implements MyBookService {
 
 	@Override
 	public int countschFromMain(BookSearchVO bookSearchVo) {
-		System.out.println(bookSearchVo);
 		return myBookDao.countschFromMain(bookSearchVo);
+		
+	}
+
+	@Override
+	public List<MyBooksVO> selectAllMyBooks() {
+		return myBookDao.selectAllMyBooks();
+	}
+
+	@Override
+	public List<String> selectStatMyBooks(int year) {
+		List<Map<String, Object>> alistMap= myBookDao.selectStatMyBooks(year);
+		List<String> alist=new ArrayList<String>();
+		
+		for (Map<String, Object> map : alistMap) {
+			/*
+			Iterator<String> iter= map.keySet().iterator();
+			String key=iter.next();
+			alist.add(Integer.parseInt(String.valueOf(map.get(key))));
+			*/
+			
+			alist.add((String.valueOf(map.get("jan"))));
+			alist.add((String.valueOf(map.get("feb"))));
+			alist.add((String.valueOf(map.get("mar"))));
+			alist.add((String.valueOf(map.get("apl"))));
+			alist.add((String.valueOf(map.get("may"))));
+			alist.add((String.valueOf(map.get("jun"))));
+			alist.add((String.valueOf(map.get("jul"))));
+			alist.add((String.valueOf(map.get("aug"))));
+			alist.add((String.valueOf(map.get("sep"))));
+			alist.add((String.valueOf(map.get("oct"))));
+			alist.add((String.valueOf(map.get("nov"))));
+			alist.add((String.valueOf(map.get("dec"))));
+			
+		}
+		return alist; 
 	}
 }

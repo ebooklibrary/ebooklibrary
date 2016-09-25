@@ -3,6 +3,7 @@ package com.ebooklibrary.app.library.controller;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +38,8 @@ import com.ebooklibrary.app.library.request.model.RequestService;
 import com.ebooklibrary.app.library.request.model.RequestVO;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.MyBookService;
+import com.ebooklibrary.app.mybooks.model.MyBooksVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -45,6 +48,8 @@ public class AdminController {
 	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private MyBookService myBookService;
 	@Autowired
 	private PoiExcelSave poiExcelSave;
 	@Autowired
@@ -61,6 +66,28 @@ public class AdminController {
 	@RequestMapping("/adminMain.do")
 	public String adminMain(){
 		return "admin/adminMain";
+	}
+	
+	@RequestMapping("/statisticsAdmin.do")
+	public String statisticsAdmin(Locale locale, Model model){
+		/*
+		String sell[] = {"100","120" ,"1540", "1400", "1305", "110","1220", "120", "120", "1330", "160", "1505"};
+		String rent[] = {"1000","1200" ,"15000", "1400", "1350", "110","120", "1200", "120", "130", "160", "10005"};
+		model.addAttribute("sell",sell );
+		model.addAttribute("rent",rent );
+		List<MyBooksVO> alist=myBookService.selectAllMyBooks();
+		 */
+		
+		int year=2016;
+		List<String> alist=myBookService.selectStatMyBooks(year);
+		
+		String list[]=new String [12];
+		for (int i = 0; i < alist.size(); i++) {
+			list[i]=alist.get(i);
+		}
+		model.addAttribute("alist",list);
+		
+		return "admin/statisticsAdmin";
 	}
 	
 	@RequestMapping(value="/login/adminLogin.do",method=RequestMethod.GET)

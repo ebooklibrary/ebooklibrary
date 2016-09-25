@@ -13,7 +13,9 @@
 <!--도서검색-->
 <div id="m_search">
 	<div class="mSearchDiv">
-		<form action="<c:url value='/admin/book/bookList.do'/>" name="searchAllBook" id="searchAllBook" method="post">
+	
+		<span id="mschSpan">Ebooklibrary</span>
+		<form action="<c:url value='/book/bookList.do'/>" name="searchAllBook" id="searchAllBook" method="post">
 			<input type="text" id="searchMain" name="searchKeyword" placeholder="책제목, 작가, 출판사를 입력하세요..">
 		</form>
 	</div>

@@ -32,30 +32,9 @@
 			$(location).attr('href', href);
 		});
 	
-		/* 사이드메뉴 */
-		$("#menuController a").hide();
-		//열기
-		$("#menuController span").click(function() {
-			$("#rightmenu").css("width", "180px");
-			$("#menuController span").hide();
-			$("#menuController a").show();
-		});
-		//닫기
-		$("#menuController a").click(function() {
-			$("#rightmenu").css("width", "0");
-			$("#menuController a").hide();
-			$("#menuController span").show();
-		});
+		$("#rightmenu").css("width", "180px");
+		
 	});
-	/* 
-	function openNav() {
-	    document.getElementById("rightmenu").style.width = "180px";
-	}
-
-	function closeNav() {
-	    document.getElementById("rightmenu").style.width = "0";
-	}
-	 */
 </script>
 </head>
 <body>
@@ -71,19 +50,25 @@
 		<!-- <div class="menuFlagColor" id="qnaDivColor"></div> -->
 	</div>
 	<div class="menuform">
-		<a href="<c:url value='/admin/book/registerBook.do'/>">책 등록</a>
+		<a href="<c:url value='/admin/requestList.do'/>">요청게시판</a>
+	</div>
+	<div class="menuform">
+		<a href="<c:url value='/admin/qnaList.do'/>">Q&A게시판</a>
+	</div>
+	<div class="menuform">
+		<a href="<c:url value='/event/mainAdminEvent.do'/>">이벤트 등록</a>
+	</div>
+	<div class="menuform">
+		<a href="<c:url value='/admin/statisticsAdmin.do'/>">매출 요약</a>
 	</div>
 	<div class="menuform">
 		<a href="<c:url value='/admin/member/memberList.do'/>">회원 관리</a>
 	</div>
 	<div class="menuform">
-		<a href="<c:url value='/admin/requestList.do'/>">요청게시판</a>
-	</div>
-	<div class="menuform">
-		<a href="<c:url value='/admin/qnaList.do'/>">qna게시판</a>
+		<a href="<c:url value='/admin/book/registerBook.do'/>">책 등록</a>
 	</div>
 	<div class="menuform" id="lastMenuForm">
-		<a style="margin: 2px 0 0 2px;" href="<c:url value='/admin/book/bookList.do'/>">책 목록</a>
+		<a style="margin: 2px 0 0 2px;" href="<c:url value='/admin/book/bookList.do'/>">책 관리</a>
 	</div>
 	<%-- 
 	<c:if test="${!empty sessionScope.userId }">
@@ -107,7 +92,7 @@
             <li class="first">
             <a href="<c:url value='/admin/adminMain.do'/>">
             <!-- <img src="/images/gmi/inc/gnb_home.gif" alt="첫화면" /> -->
-            관리자 페이지
+            관리자 초기 페이지
             </a></li>			
 			<c:if test="${!empty sessionScope.adminUserId }">
 				<li>
@@ -131,11 +116,11 @@
 	
 </div>
 <!--header end-->
-
+<!-- 
 	<div id="menuController">
 		<span class="menuBut">&#9776; menu open</span>
 		<a href="javascript:void(0)" class="menuBut">&times; menu close</a>
 	</div>
-
+ -->
 <div id="container">
 <!-- include top -->

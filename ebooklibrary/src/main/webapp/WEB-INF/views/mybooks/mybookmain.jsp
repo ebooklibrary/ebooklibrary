@@ -164,7 +164,7 @@
 		 */
 		$("#searchAllBook").submit(function() {
 			var keyword=$("#search").val();
-			window.open("<c:url value='/admin/book/bookList.do?searchKeyword="+keyword+"'/>", "책보기", "top=50, left=50, width=1650, height=900, resizable=0, location=0");
+			window.open("<c:url value='/book/bookList.do?searchKeyword="+keyword+"'/>", "책보기", "top=50, left=50, width=1650, height=900, resizable=0, location=0");
 			$("#search").val("");
 			event.preventDefault();
 		});
@@ -385,7 +385,7 @@
 			<div id="moreBookDiv">
 				<form name="searchAllBook" id="searchAllBook" method="post">
 				<input type="text" id="search" name="searchKeyword" placeholder="책제목, 작가, 출판사를 입력하세요..">
-				<span id="searchInfo">더 보고 싶은 책이 있으시다면 여기에서!</span>
+				<span id="searchInfo">더 보고 싶은 책을 북스토어에 검색하세요.</span>
 				<!-- <span id="moreBook">상점으로 고고</span> -->
 				</form>
 			</div>

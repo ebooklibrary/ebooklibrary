@@ -62,8 +62,10 @@ public class BookController {
 			logger.info("책검색 myBooksList={}",myBooksList);
 			model.addAttribute("myBooksList", myBooksList);
 		}
+		String keyword=searchVo.getSearchKeyword();
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
+		
 		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
 		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
@@ -84,11 +86,18 @@ public class BookController {
 			logger.info("책검색 키워드 searchVo.getFirstRecordIndex()={}",searchVo.getFirstRecordIndex());
 		}
 		*/
-		String keyword=searchVo.getSearchKeyword();
+		
+		
 		
 		logger.info("서치 쁘이오 키워드={}",keyword);
-		
-		int cnt=myBookService.countAllBook(searchVo);
+		int cnt=0;
+		if (keyword!=null && !keyword.isEmpty()) {
+			cnt=myBookService.countschFromMain(searchVo);
+			logger.info("메인에서 가는 토탈 레코드 cnt={}",cnt);
+		}else{
+			cnt=myBookService.countAllBook(searchVo);
+			logger.info("검색창에서 가는 토탈 레코드 cnt={}",cnt);
+		}
 		logger.info("토탈 레코드 cnt={}",cnt);
 		pagingInfo.setTotalRecord(cnt);
 		

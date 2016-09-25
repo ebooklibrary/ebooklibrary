@@ -107,6 +107,13 @@ ul.topnav li a {
 }
 #moreBookDiv{
 	position: relative;
+	padding-right: 110px;
+}
+#searchAllBook{
+	border: 1px solid #f5f5f5;
+	background-color: rgba(245,245,245, 0.5);
+	color: #7d7d7d;
+	
 }
 #btImg{
 	border: 1px solid #adadad;
@@ -132,7 +139,7 @@ ul.topnav li a {
 
 /* 책 검색 */
 #menuDiv input[type=text] {
-    width: 130px;
+    width: 160px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -147,12 +154,15 @@ ul.topnav li a {
     
 }
 #menuDiv input[type=text]:focus {
-    width: 70%;
+    width: 100%;
 }
 #searchInfo{
-	background-color: rgba(200,255,200, 0.7);
-	border-radius: 5px;
+	/* background-color: rgba(200,255,200, 0.7); */
+	/* border-radius: 5px; */
 	padding: 2px 4px 2px 4px;
+	vertical-align: middle;
+	/* font-family:monospace,monospace; */
+	font-family:Verdana,sans-serif;
 }
 /* 책검색 버튼 */
 #moreBook{
