@@ -6,6 +6,7 @@
 <script type="text/javascript"
 	src="<c:url value='/smarteditor/js/HuskyEZCreator.js'/>"
 	charset="utf-8"></script>
+
 <!-- alert -->
 <!-- ideally at the bottom of the page -->
 <!-- also works in the <head> -->
@@ -22,14 +23,12 @@
 	$(document)
 			.ready(
 					function() {
-						var a = $("#summary").val(); //변수 a에 값("텍스트에어리어 테스트")을 지정.
-
-						$("#summary").val("${noticeVo.content}"); //텍스트 에어리어에 새로 값을 지정.
-
 						$("#container_out")
 								.css("background",
 										"url(../../images/library/notice/noticeBackground.png) no-repeat center");
 
+						/* alertify.alert("책제목을 입력하세요"); */
+						//전역변수
 						var obj = [];
 						//스마트에디터 프레임생성
 						nhn.husky.EZCreator
@@ -63,9 +62,10 @@
 											if ($("#title").val() == "") {
 												alertify.alert("제목을 입력하세요");
 												$("#title").focus();
-												event.preventDefault();
+												return false;
 											} else if ($("#summary").val().length < 1
 													|| $("#summary").val() == "<p>&nbsp;</p>") {
+
 												alertify.alert("내용을 입력해주세요.");
 												$("#summary").focus();
 
@@ -75,8 +75,7 @@
 					});
 </script>
 <div id="notice_banner">
-	<a href="<c:url value='/admin/noticelist.do'/>"><img
-		alt="공지사항 배너"
+	<a href="<c:url value='/admin/noticelist.do'/>"><img alt="공지사항 배너"
 		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
 		width="200px" height="50px"></a>
 </div>
@@ -95,17 +94,17 @@
 				<tr>
 					<td class="qnaTitle"><label for="title">제목</label></td>
 					<td colspan="5"><input type="text" id="title" name="title"
-						value="${noticeVo.title }" size="35" style="border: none; margin-left: 10px;" />
-					</td>
+						value="${noticeVo.title }" size="35"
+						style="border: none; margin-left: 10px;" /></td>
 				<tr>
 					<td class="qnaTitle"><label for="userName">작성자</label></td>
-					<td style=><input type="text"
-						name="userName" id="userName" value="${noticeVo.userName }"
-						readonly="readonly" style="border: none; margin-left: 10px;" ></td>
+					<td style=><input type="text" name="userName" id="userName"
+						value="${noticeVo.userName }" readonly="readonly"
+						style="border: none; margin-left: 10px;"></td>
 				</tr>
 			</table>
 			<textarea class="w3-input" name="content" id="summary"
-				style="width: 650px; height: 400px;"></textarea>
+				style="width: 650px; height: 400px;">${noticeVo.content }</textarea>
 
 			<%-- <div class="notice_Title">
 		제목 : <input type="text" name="title" id="title" value="${noticeVo.title }">
@@ -122,13 +121,8 @@
 					type="button" id="btn1" value="취소"
 					onclick="location.href='<c:url value="/admin/noticelist.do"/>'" />
 			</div>
-			<div>
-				<label>파일첨부</label> <input type="file" id="upfile" name="upfile">
-				<c:if test="${!empty noticeVo.fileName }">
-					<br>
-					<p style="color: green; padding: 5px 0 5px 135px;">※첨부파일을 새로
-						지정할 경우 기존파일 ${reBoardVo.fileName } 은 삭제됩니다.</p>
-				</c:if>
+			<div class="notice_file">
+				<input type="file" id="upfile" name="upfile">
 			</div>
 		</div>
 	</form>
