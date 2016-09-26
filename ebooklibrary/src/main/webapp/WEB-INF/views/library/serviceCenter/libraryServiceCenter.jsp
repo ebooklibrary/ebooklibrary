@@ -16,7 +16,21 @@
 						$("#container_out")
 								.css("background",
 										"url(../../images/library/notice/noticeBackground.png) no-repeat center");
-					});
+						$("#id").click(function() {				
+							window.open("<c:url value='/member/idsearch.do'/>",
+									"idsearch",
+							"width=450,height=450,left=50,top=50,resizable=yes,location=yes");
+						});
+						
+						$("#pwd").click(function() {				
+							window.open("<c:url value='/member/pwdsearch.do'/>",
+									"pwdsearch",
+							"width=450,height=250,left=50,top=50,resizable=yes,location=yes");
+						});			
+					
+	});
+	
+	
 </script>
 <div id="ServiceCenter_body">
 	<img
@@ -38,8 +52,8 @@
 		<li><a
 			href="<c:url value ='/library/serviceCenter/questionWrite.do'/>">1:1
 				문의 하기</a></li>
-		<li><a href="#">아이디 찾기</a></li>
-		<li><a href="#">비밀번호 찾기</a></li>
+		<li><a href="#" id="id">아이디 찾기</a></li>
+		<li><a href="#" id="pwd">비밀번호 찾기</a></li>
 		<il> <a
 			href="<c:url value='/library/serviceCenter/myQuestion.do?memberNo=${alist.memberNo }'/>">문의
 			내역확인</a> </il>
