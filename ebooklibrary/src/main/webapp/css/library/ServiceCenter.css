@@ -26,7 +26,6 @@
 	width: 800px;
 	height: 300px;
 	float: right;
-	margin-top: 200px;
 	font-size: 1.0em;
 }
 
@@ -83,7 +82,6 @@
 .Sercive_Nav {
 	clear: both;
 	width: 130px;
-	margin-top: 150px;
 	float: left;
 	width: 130px;
 	color: #666;
@@ -92,6 +90,7 @@
 	font-family: Helvetica Neue, 'Apple SD Gothic Neo', arial, '나눔고딕',
 		'Nanum Gothic', '돋움', Dotum, Tahoma, Geneva, sans-serif;
 	letter-spacing: -.03em;
+	margin-left: 200px;
 
 }
 

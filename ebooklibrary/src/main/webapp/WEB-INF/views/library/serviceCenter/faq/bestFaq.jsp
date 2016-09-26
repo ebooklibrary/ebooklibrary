@@ -59,7 +59,7 @@
 	
 </form>
 <!-- qna 리스트 화면 -->
-<div id="notice_head">
+<div id="faq_head">
 	<h2>
 		<img alt="faq"
 			src="${pageContext.request.contextPath }/images/library/ServiceCenter/faq.png" style="width: 150px;">
@@ -79,8 +79,7 @@
 				</div><!-- //searchbox3 -->
 		    </form>
 		    
-		<div >
-			<input type="button" id="moreFaq" value="더보기" style="float:right;" />
+		<div>
 			<ul class="ulList">
 				<c:set var="i" value="1"/>
 				<c:if test="${empty bestFAQ}">
@@ -108,5 +107,8 @@
 				</c:if>
 			</ul>
 		</div><!-- //list -->
+		<div class= "faq_button">
+			<input type="button" id="moreFaq" value="더보기" style="clear: both; float: right; margin-top: 20px; margin-right: 75px;"/>
+		</div>
 	</div>	
 </div>
