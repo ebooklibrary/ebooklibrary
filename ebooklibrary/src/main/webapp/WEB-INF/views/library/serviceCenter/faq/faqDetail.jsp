@@ -10,21 +10,7 @@
 <script type="text/javascript">
 $().ready(function(){
 	///전역변수
-	var obj = [];               
-	//스마트에디터 프레임생성
-	nhn.husky.EZCreator.createInIFrame({
-	    oAppRef: obj,
-	    elPlaceHolder: "content",
-	    sSkinURI: "<c:url value='/smarteditor/SmartEditor2Skin.html'/>", 
-	    htParams : {
-	        // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-	        bUseToolbar : true,             
-	        // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-	        bUseVerticalResizer : true,     
-	        // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-	        bUseModeChanger : true, 
-	    }
-	});
+
 	
 	
 	$("#requestDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
@@ -72,7 +58,7 @@ $().ready(function(){
 		} catch(e) {}
 	}	
 </script>
-<!-- faq detail 화면 -->
+<!-- faq edit 화면 -->
 <div id="notice_head">
 	<h2>
 		<img alt="faq"
@@ -80,29 +66,47 @@ $().ready(function(){
 	</h2>
 	<div id="faqWrite_body" >
 		<form name="frmWrite" id="frmWrite" method="post" 			
-			action="<c:url value='/library/serviceCenter/faq/faqWrite.do'/>" >
+			action="<c:url value='/library/serviceCenter/faq/faqEdit.do'/>" >
 			<fieldset>
-				<legend>FAQ 작성하기</legend>
 					<input type="hidden" id="category" name="category" value="member">
+				<legend>FAQ 작성하기</legend>
 					<br>
 					
 					<div>
 						<div id="faqheader">
+						<input type="hidden" name="faqNo" value="${faqDetail.faqNo}">
 							<label for="faqcategory" class="lbfaq">분 류</label> 
-							&nbsp;&nbsp;<select id="faqcategory">
-								<option value="member">회원가입</option>
-								<option value="order">주문/결제</option>
-								<option value="cancel">취소</option>
-								<option value="product">책</option>
+							&nbsp;&nbsp;<select id="faqcategory" >
+								<option value="member"
+									<c:if test="${faqDetail.category=='member'}">
+					            		selected
+					            	</c:if>
+									>회원가입</option>
+								<option value="order"
+									<c:if test="${faqDetail.category=='order'}">
+					            		selected
+					            	</c:if>
+								
+									>주문/결제</option>
+								<option value="cancel"
+									<c:if test="${faqDetail.category=='cancel'}">
+					            		selected
+					            	</c:if>
+									>취소</option>
+								<option value="product"
+									<c:if test="${faqDetail.category=='product'}">
+					            		selected
+					            	</c:if>
+									>책</option>
 							</select><br>
 							<label for="title" class="lbfaq">제 목</label>
-							<input type="text" class="inputfaqText" id="title" name="title" />
+							<input type="text" class="inputfaqText" id="title" name="title" value="${faqDetail.title }" readonly="readonly" />
 						</div>	
 					</div>
-					<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:705px; height:300px;"></textarea>
+					<textarea class="w3-input" name="content" id="content" rows="10" cols="100" style="width:705px; height:300px;" readonly="readonly">${faqDetail.content }</textarea>
 		        	<br>
 	        		<div id="request_align_center">
-		        		<input type="submit" value="작성완료" class="btfaqList"/>
+		        		<input type="submit" value="수정하기" class="btfaqList"/>
 		        		<input type="Button" value="취소" class="btfaqList"
 		        		onclick="location.href='<c:url value="/library/serviceCenter/faq/faqList.do"/>';" />
 		        	</div>

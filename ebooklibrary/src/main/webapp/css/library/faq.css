@@ -33,6 +33,7 @@
 	clear:both;
 	float:center;
 	width:750px;
+	magin-left:300px;
 }
 #request_align_center{
 	clear:both;
@@ -59,3 +60,55 @@
   background: #5494f5;
   text-decoration: none;
 }
+
+
+#faq_body{
+	clear:both;
+	width: 730px;
+	height: 700px;
+	overflow: hidden;
+	margin-right:20px;
+	float:center;
+}
+#faqList_body {
+	
+	height:560px;
+}
+
+
+.faqdt{
+	
+	float: left; 
+}
+
+.faqdd{
+	margin-left: 30px;
+	width:200px;
+}
+.callContent{
+	width:100px;
+}
+
+
+.ulList{
+	border-top: solid 3px #6f90e7;
+	border-bottom: solid 1px #DEDEDE;
+	margin-top: 25px;
+	width: 657px;
+	float: center;
+	
+}
+
+.faqDl{
+	
+}
+.off{
+	border-bottom: solid 1px #DEDEDE;
+}
+.on{
+	border-bottom: solid 1px #DEDEDE;
+}
+	
+	
+
+
