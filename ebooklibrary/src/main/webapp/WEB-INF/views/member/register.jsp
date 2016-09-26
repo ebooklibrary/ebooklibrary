@@ -28,27 +28,27 @@
 		
 		$("#regForm").submit(function() {
 			if($("#userName").val().length<1){
-				alert("이름을 입력하세요");				
+				alertify.alert("이름을 입력하세요");				
 				$("#userName").focus();
 				return false;
 			}else if($("#pwd").val().length<1){
-				alert("비밀번호를 입력하세요");				
+				alertify.alert("비밀번호를 입력하세요");				
 				$("#pwd").focus();
 				return false;
 			}else if($("#pwd").val()!=$("#pwd2").val()){
-				alert("두 비밀번호가 다릅니다");				
+				alertify.alert("두 비밀번호가 다릅니다");				
 				$("#pwd2").focus();
 				return false;
 			}else if(!validate_birth($("#birth").val())){
-				alert("생일을 입력해주세요");				
+				alertify.alert("생일을 입력해주세요");				
 				$("#birth").focus();
 				return false;
 			}else if($("#chkId").val()!='Y'){
-				alert("아이디를 다시확인해주세요");				
+				alertify.alert("아이디를 다시확인해주세요");				
 				$("#userId").focus();
 				return false;
 			}else if($("#emailStatus").val()!='Y'){
-				alert("이메일 인증을 해주세요");
+				alertify.alert("이메일 인증을 해주세요");
 				return false;
 			}
 		});//submit
@@ -70,7 +70,7 @@
 						$("#message").html(result);
 					},
 					error:function(xhr,status,error){
-						alert(status+":"+error);
+						alertify.alert(status+":"+error);
 					}
 				});
 			}else{
@@ -87,7 +87,7 @@
 					data:"receiver="+$("#userId").val(),
 					type:"POST",
 					success:function(res){
-						alert(res);
+						alertify.alert("인증번호가 발송되었습니다.");
 						$("#btnEmailOk").click(function() {
 							if(res==$("#confirm").val()){
 								$("#emailconfirm").css("visibility","hidden");
@@ -101,11 +101,11 @@
 						})
 					},
 					error:function(xhr,status,error){
-						alert(status+":"+error);
+						alertify.alert(status+":"+error);
 					}			
 				})
 			}else{
-				alert("아이디를 확인해 주세요");
+				alertify.alert("아이디를 확인해 주세요");
 				$("#userId").focus();
 			}//if
 		})//btnEmail
@@ -139,7 +139,7 @@
 		</span>
 		<span id="emailOk" style="visibility: hidden;"> 인증되었습니다</span>
 		<input type="hidden" id="emailStatus" value="N">
-		<span id="emailNo" style="visibility: hidden;"> 인증번호를 다시 확인해주세요</span><br>
+		<br><span id="emailNo" style="visibility: hidden;"> 인증번호를 다시 확인해주세요</span><br>
 		
 		<label for="userName">이름</label>
 		<input type="text" name="userName" id="userName"><br>

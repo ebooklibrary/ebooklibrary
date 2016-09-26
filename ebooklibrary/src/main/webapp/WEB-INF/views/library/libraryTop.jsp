@@ -155,13 +155,13 @@ function closeNav() {
 		<a href="<c:url value='/book/bookList.do'/>">책검색</a>
 		<!-- <div class="menuFlagColor" id="schDivColor"></div> -->
 	</div>
-	<div class="menuform">
+	<div class="menuform" id="lastMenuForm">
 		<a href="<c:url value='/library/request/requestList.do'/>">요청게시판</a>
 		<!-- <div class="menuFlagColor" id="requestDivColor"></div> -->
 	</div>
-	<div class="menuform" id="lastMenuForm">
+	<%-- <div class="menuform" id="lastMenuForm">
 		<a href ="<c:url value='/library/serviceCenter/libraryServiceCenter.do'/>">고객센터</a>
-	</div>
+	</div> --%>
 	
 	<c:if test="${!empty sessionScope.userId }">
 	<!-- 사이드 메뉴 장바구니 -->

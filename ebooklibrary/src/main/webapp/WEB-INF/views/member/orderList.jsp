@@ -82,7 +82,7 @@
 					<c:if test="${vo.buyClass!='C' }">
 						<td class="align_left">
 							<img src
-			="<c:url value='/pd_images/${vo.coverFileName }'/>" 
+			="<c:url value='/book_upload/${vo.coverFileName }'/>" 
 								alt="${vo.title }" 
 								width="50" align="absmiddle">
 							${vo.title}
