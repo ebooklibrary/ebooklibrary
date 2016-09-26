@@ -38,7 +38,6 @@ $().ready(function(){
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
 		width="200px" height="50px" style="margin-bottom:80px;"></a>
 </div>
-<%@include file="../../library/libraryAd.jsp"%>
 	<div id="detail_body">
 	<table class="qnadetail_table" id="qnaDetail">
 		<tr>

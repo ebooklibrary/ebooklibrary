@@ -107,7 +107,7 @@ public class EventController {
 		String path=fileUti.getUploadPath(request, FileUploadWebUtil.EVENTIMAGE_UPLOAD);
 		
 		model.addAttribute("recommandList", recommandList);
-		model.addAttribute("alist3", bestList);
+		model.addAttribute("bestList", bestList);
 		model.addAttribute("path", path);
 		return "library/libraryAd";
 	}

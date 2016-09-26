@@ -44,7 +44,6 @@ $(document).ready(function(){
 		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
-<%@include file="../../library/libraryAd.jsp"%>
 <div id="notice_body">
 	<div class="list">		
 			<form name="search" id="search"
