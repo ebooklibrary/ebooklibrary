@@ -8,6 +8,14 @@ public class FaqVO {
 	private int yes;
 	private int no;
 	private int dontKnow;
+	private String fixed;
+	
+	public String getFixed() {
+		return fixed;
+	}
+	public void setFixed(String fixed) {
+		this.fixed = fixed;
+	}
 	public int getFaqNo() {
 		return faqNo;
 	}
@@ -53,7 +61,7 @@ public class FaqVO {
 	@Override
 	public String toString() {
 		return "FaqVO [faqNo=" + faqNo + ", category=" + category + ", title=" + title + ", content=" + content
-				+ ", yes=" + yes + ", no=" + no + ", dontKnow=" + dontKnow + "]";
+				+ ", yes=" + yes + ", no=" + no + ", dontKnow=" + dontKnow + ", fixed=" + fixed + "]";
 	}
 	
 	

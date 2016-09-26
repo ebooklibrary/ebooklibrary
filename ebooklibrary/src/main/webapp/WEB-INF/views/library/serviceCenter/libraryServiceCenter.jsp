@@ -23,6 +23,8 @@
 		src="${pageContext.request.contextPath }/images/library/ServiceCenter/service.png"
 		alt="고객센터" style="width: 250px; height: 60px; margin-right: 430px;">
 </div>
+<c:import url="/library/serviceCenter/faq/bestFaq.do"></c:import>
+
 <div id="serviceCenter_2">
 	<p id="ServiceCenter_bodyP1">
 		<img

@@ -42,7 +42,6 @@ public class OrderServiceImpl implements OrderService{
 			cnt=orderDao.insertMyBooks(map);
 			cnt=cartDao.deleteCart(map);
 			int bookNo=((Number)map.get("BOOK_NO")).intValue();
-			System.out.println("MyBooksInsert 책번호 : "+bookNo);
 			cnt=orderDao.updateBookSales(bookNo);
 			OrderVO orderVo=orderList.get(i);
 			cnt=orderDao.insertOrders(orderVo);			

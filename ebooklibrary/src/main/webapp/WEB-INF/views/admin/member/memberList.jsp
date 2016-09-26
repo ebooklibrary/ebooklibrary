@@ -24,6 +24,7 @@
 		});
 	});
 </script>
+<h1>회원관리</h1>
 <p id="adminTitleP"><img alt="아이콘" src="<c:url value='/images/mybook/icon/process.png'/>"> 회원관리 페이지</p>
 <!-- <h1>회원관리</h1> -->
 <div id="AdminMemDiv">

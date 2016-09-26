@@ -51,7 +51,7 @@
 </p>
 <br><br>
 <p class="titleP">
-	<img src='<c:url value="/images/dot7.JPG"/>' align="absmiddle" />
+	<img src='<c:url value="/images/library/order/dot7.JPG"/>' align="absmiddle" />
 	<span style="font-size:12pt;font-weight:bold">주문하신 상품</span>
 </p>
 
@@ -85,7 +85,7 @@ summary="주문 상품 목록에 관한 표로써, 상품명,가격, 수량, 금
 			<tr class="align_right">
 				<td class="align_left">
 					<img src
-	="<c:url value='/pd_images/${map["COVER_FILE_NAME"] }'/>" 
+	="<c:url value='${pageContext.request.contextPath }/book_upload/${map["COVER_FILE_NAME"] }'/>" 
 						alt="${map['TITLE'] }" 
 						width="50" align="absmiddle">
 					${map["TITLE"]}
@@ -111,7 +111,7 @@ summary="주문 상품 목록에 관한 표로써, 상품명,가격, 수량, 금
 <div class="divForm">  
 	<br>
 	<p class="titleP">
-		<img src='<c:url value="/images/dot7.JPG"/>' align="absmiddle" />
+		<img src='<c:url value="/images/library/order/dot7.JPG"/>' align="absmiddle" />
 		<span class="title">결제 정보</span>
 	</p>	
     <p>

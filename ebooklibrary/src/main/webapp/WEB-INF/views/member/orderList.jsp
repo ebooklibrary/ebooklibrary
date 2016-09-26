@@ -39,7 +39,7 @@
 	<form name="frm1" method="post" id="frmOrderList"
 		action="<c:url value='/shop/order/orderList.do'/>" >
 		<!-- 조회기간 include -->
-		<%@include file="../common/dateTerm.jsp" %>
+		<%@include file="../common/dateTerm2.jsp" %>
 		
 		<input type="submit" id="findOrder" value="조회" >
 	</form>
@@ -79,13 +79,20 @@
 				<c:forEach var="vo" items="${orderList }">					
 				<tr class="align_right">
 					<td>${vo.ordersNo }</td>
-					<td class="align_left">
-						<img src
-		="<c:url value='/pd_images/${map["COVER_FILE_NAME"] }'/>" 
-							alt="${vo.bookNo }" 
-							width="50" align="absmiddle">
-						${vo.bookNo}
-					</td>
+					<c:if test="${vo.buyClass!='C' }">
+						<td class="align_left">
+							<img src
+			="<c:url value='/pd_images/${vo.coverFileName }'/>" 
+								alt="${vo.title }" 
+								width="50" align="absmiddle">
+							${vo.title}
+						</td>
+					</c:if>
+					<c:if test="${vo.buyClass=='C' }">
+						<td>
+							북코인 충전
+						</td>
+					</c:if>
 					<td>
 						<fmt:formatNumber pattern="#,###" 
 							value='${vo.price}'/>원</td>

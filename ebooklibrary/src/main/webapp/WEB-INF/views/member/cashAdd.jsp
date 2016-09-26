@@ -17,7 +17,7 @@
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.1.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#cashadd").click(function() {
+		$("#cashButton").click(function() {
 			$.ajax({
 				url:"<c:url value='/cash/cashAddOk.do'/>",
 				data:"userId=${sessionScope.userId}&cash="+$('#cashwrite').val(),

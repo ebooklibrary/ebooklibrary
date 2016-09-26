@@ -76,7 +76,6 @@
 		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
-<%@include file="../../library/libraryAd.jsp"%>
 <div id="req_body">
 <div id="reqList_body">
 	<div class="searchbox">

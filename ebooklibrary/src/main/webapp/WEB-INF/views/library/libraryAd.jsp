@@ -1,93 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/css/silde_Notice/style.css" />
-
-<script type="text/javascript"
-	src="<c:url value ='/jquery/silde_Notice/jquery.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/jquery/rolling/jq.rolling.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/jquery/rolling/jquery-ui.min.js'/>"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jquery/rolling/jq.rolling2.css" />
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#rolling").rolling(450,270,{autoscroll:1, delay:2200});
+		$("#rolling2").rolling(450,270,{autoscroll:1, delay:2200});
+		//alert($(".a").val());	
+	});
+</script>
 <div class="notice_Ad">
 	<p class="notice_p">추천 도서</p>
-	<!-- Start WOWSlider.com BODY section -->
-	<!-- add to the <body> of your page -->
-	<div id="wowslider-container1">
-		<div class="ws_images">
-			<ul>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide1.jpg"
-					alt="example-slide-1" title="example-slide-1" id="wows1_0" /></li>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide2.jpg"
-					alt="example-slide-2" title="example-slide-2" id="" /></li>
-				<li><a href="http://wowslider.com"><img
-						src="${pageContext.request.contextPath }/images/library/notice/exampleslide3.jpg" alt="wowslider"
-						title="example-slide-3" id="wows1_2" /></a></li>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide4.jpg"
-					alt="example-slide-4" title="example-slide-4" id="wows1_3" /></li>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide4.jpg"
-					alt="example-slide-4" title="example-slide-4" id="wows1_3" /></li>
-			</ul>
-		</div>
-		<div class="ws_bullets">
-			<div>
-				<a href="#" title="example-slide-1"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/eexampleslide1.jpg" alt="example-slide-1" />1</span></a> <a
-					href="#" title="example-slide-2"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/eexampleslide2.jpg" alt="example-slide-2" />2</span></a> <a
-					href="#" title="example-slide-3"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/eexampleslide3.jpg" alt="example-slide-3" />3</span></a> <a
-					href="#" title="example-slide-4"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/eexampleslide4.jpg" alt="example-slide-4" />4</span></a>
+		<div id="rolling">
+				<ul>
+				<c:if test="${!empty recommandList}">
+				<c:set var="n" value="1" />
+					<c:forEach var="vo" items="${recommandList }">					
+						<li class="sp0${n }">
+						<a href="${vo.eventUrl }">
+							<img alt="테스트" 
+							src="${pageContext.request.contextPath }/bookevent/${vo.eventImageUrl}" ></a>
+						</li>
+						<c:set var="n" value="${n+1 }" />
+					</c:forEach>
 					
+				</c:if>
+						         
+					<!-- <li class="sp02">SAMPLE 02</li>
+					<li class="sp03">SAMPLE 03</li>
+					<li class="sp04">SAMPLE 04</li>
+					<li class="sp05">SAMPLE 05</li> -->
+				</ul>
 			</div>
-		</div>
-		<div class="ws_script" style="position: absolute; left: -99%">
-			<a href="http://wowslider.com">jquery slider</a> by WOWSlider.com
-			v8.7
-		</div>
-		<div class="ws_shadow"></div>
-	</div>
-	<script type="text/javascript" src="engine1/wowslider.js"></script>
-	<script type="text/javascript" src="engine1/script.js"></script>
-	<!-- End WOWSlider.com BODY section -->
 
 	<p class="notice_p2">베스트 셀러</p>
-
-
-	<!-- Start WOWSlider.com BODY section -->
-	<!-- add to the <body> of your page -->
-	<div id="wowslider-container1">
-		<div class="ws_images">
-			<ul>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide1.jpg"
-					alt="example-slide-1" title="example-slide-1" id="wows1_0" /></li>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide2.jpg"
-					alt="example-slide-2" title="example-slide-2" id="wows1_1" /></li>
-				<li><a href="http://wowslider.com"><img
-						src="${pageContext.request.contextPath }/images/library/notice/exampleslide3.jpg" alt="wowslider"
-						title="example-slide-3" id="wows1_2" /></a></li>
-				<li><img src="${pageContext.request.contextPath }/images/library/notice/exampleslide4.jpg"
-					alt="example-slide-4" title="example-slide-4" id="wows1_3" /></li>
-			</ul>
-		</div>
-		<div class="ws_bullets">
-			<div>
-				<a href="#" title="example-slide-1"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/eexampleslide1.jpg" alt="example-slide-1" />1</span></a> <a
-					href="#" title="example-slide-2"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/eexampleslide2.jpg" alt="example-slide-2" />2</span></a> <a
-					href="#" title="example-slide-3"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/eexampleslide3.jpg" alt="example-slide-3" />3</span></a> <a
-					href="#" title="example-slide-4"><span><img
-						src="${pageContext.request.contextPath }/images/library/notice/eexampleslide4.jpg" alt="example-slide-4" />4</span></a>
+		<div id="rolling2">
+				<ul>
+				<c:if test="${!empty bestList}">
+				<c:set var="n" value="1" />
+					<c:forEach var="vo" items="${bestList }">					
+						<li class="sp0${n }">
+						<a href="${vo.eventUrl }">
+							<img alt="테스트" 
+							src="${pageContext.request.contextPath }/bookevent/${vo.eventImageUrl}" ></a>
+						</li>
+						<c:set var="n" value="${n+1 }" />
+					</c:forEach>
+					
+				</c:if>
+						         
+					<!-- <li class="sp02">SAMPLE 02</li>
+					<li class="sp03">SAMPLE 03</li>
+					<li class="sp04">SAMPLE 04</li>
+					<li class="sp05">SAMPLE 05</li> -->
+				</ul>
 			</div>
-		</div>
-		<div class="ws_script" style="position: absolute; left: -99%">
-			<a href="http://wowslider.com">jquery slider</a> by WOWSlider.com
-			v8.7
-		</div>
-		<div class="ws_shadow"></div>
-	</div>
-	<script type="text/javascript" src="engine1/wowslider.js"></script>
-	<script type="text/javascript" src="engine1/script.js"></script>
-	<!-- End WOWSlider.com BODY section -->
-
-
 </div>

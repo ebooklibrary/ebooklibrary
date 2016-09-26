@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ebooklibrary.app.common.MemberSearchVO;
 import com.ebooklibrary.app.common.PaginationInfo;
@@ -29,25 +30,130 @@ public class FaqController {
 	private FaqService faqService;
 	
 	
-	@RequestMapping(value="/faqWrite.do",method=RequestMethod.GET)
-	public String faqWrite(){
-		logger.info("faq 글쓰기 화면 페이지");
+	@RequestMapping("/bestFaq.do")
+	public String bestFaqList(@ModelAttribute SearchVO searchVo,
+			Model model){
+		//1.
+		logger.info("Faq 리스트 ");
+		logger.info("searchVO={}",searchVo);
 		
-		return "library/serviceCenter/faq/faqWrite";
+				
+		//2.
+		logger.info("키워드 전 키워드값 ");
+			
+		List<FaqVO> alist=faqService.fixedList();
+		logger.info("결과처리값 alist.size()={}",alist.size());
+		
+		model.addAttribute("bestFAQ",alist);
+		
+		
+		
+		return "library/serviceCenter/faq/bestFaq";
 	}
 	
-	@RequestMapping(value="/faqWrite.do",method=RequestMethod.POST)
-	public String faqWrite(@ModelAttribute FaqVO faqVo){
-		logger.info("faq 글쓰기 처리 페이지 입력 파라미터값 faqVo={}",faqVo);
+	
+	
+	@RequestMapping("/faqDetail.do") 
+	public String faqDetail(@RequestParam(defaultValue="0") int faqNo,Model model){
+		//1.
+		logger.info("디테일 페이지 접속 입력값  faqaNo={}", faqNo);
+		//2.
+		FaqVO faqVo = faqService.selectByNo(faqNo);
+		logger.info("결과값은 faqVo={}",faqVo);
 		
-		int cnt= faqService.insertFaqBoard(faqVo);
+		//3.
+		model.addAttribute("faqDetail",faqVo);
 		
+		return "library/serviceCenter/faq/faqDetail";
 		
-		
-		return "";
 	}
 	
-	/*@RequestMapping("/faqList.do")
+	@RequestMapping(value="/faqEdit.do",method=RequestMethod.GET)
+	public String faqEdit(@RequestParam(defaultValue="0")int faqNo, Model model){
+		//1.
+		logger.info("faq수정페이지 접속 파라미터 faqNo={}",faqNo);
+		//2.
+		FaqVO faqVo= faqService.selectByNo(faqNo);
+		//3.
+		model.addAttribute("faqDetail",faqVo);
+		
+		
+		return "library/serviceCenter/faq/faqEdit";
+	}
+	
+	@RequestMapping(value="/faqEdit.do",method=RequestMethod.POST)
+	public String faqEdit(@ModelAttribute FaqVO faqVo,
+			Model model){
+		
+		//1.
+		logger.info("faq수정처리페이지 파라미터값 faqVo={} ",faqVo);
+
+		//2.
+		int cnt = faqService.faqEdit(faqVo);
+		logger.info("결과값 cnt={}",cnt);
+		
+		//3.
+		String msg="",url="/library/serviceCenter/faq/faqEdit.do?qnaNo="+faqVo.getFaqNo();
+		if(cnt>0){
+			msg="글 수정 성공";
+			url="/library/serviceCenter/faq/faqDetail.do?faqNo="+faqVo.getFaqNo();
+		}else{
+			msg="글 수정 실패";
+		}
+		
+		//3.
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+		
+	}	
+	
+	@RequestMapping("/faqDelete.do")
+	public String faqDelet(@RequestParam(defaultValue="0") int faqNo,Model model){
+		//1.
+		logger.info("삭제 처리 페이지 파라미터값 faqNo={}",faqNo);
+		
+		//2.
+		int cnt= faqService.faqDelete(faqNo);
+		logger.info("삭제처리 결과값 cnt={}",cnt);
+		
+		//3.
+		String msg="",url="/library/serviceCenter/faq/faqDetail.do?faqNo="+faqNo;
+		if(cnt>0){
+			msg="삭제 되었습니다.";
+			url="/library/serviceCenter/faq/faqList.do";
+		}else{
+			msg="삭제에 실패했습니다.";
+		}
+		
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("faqfixed.do")
+	public String faqFixed(@RequestParam(defaultValue="0")int faqNo){
+		//1.
+		logger.info("고정처리 페이지 파라미터값 faqNo={}",faqNo);
+		
+		//2.
+		int cnt = faqService.fixedByNo(faqNo);
+		logger.info("고정글 처리 결과값 cnt={}",cnt);
+
+		//3.
+		String msg="",url="/library/serviceCenter/faq/faqDetail.do?faqNo="+faqNo;
+		if(cnt>0){
+			msg="처리 되었습니다.";
+			url="/library/serviceCenter/faq/faqList.do";
+		}else{
+			msg="처리에 실패했습니다.";
+		}
+		
+		return "common/message";
+		
+	}
+	
+	@RequestMapping("/faqList.do")
 	public String faqList(@ModelAttribute SearchVO searchVo,
 			Model model){
 		//1.
@@ -70,16 +176,14 @@ public class FaqController {
 		logger.info("키워드 후 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
-		List<QnaBoardVO> alist=faqService.selectQnaAll(searchVo);
+		List<FaqVO> alist=faqService.selectFaqAll(searchVo);
 		logger.info("결과처리값 alist.size()={}",alist.size());
 		
 		model.addAttribute("faqList",alist);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		
-		return "library/faq/faqlist";
+		return "library/serviceCenter/faq/faqList";
 	}
-	*/
-	
 	
 }

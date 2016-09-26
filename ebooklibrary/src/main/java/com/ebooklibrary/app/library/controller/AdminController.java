@@ -28,6 +28,8 @@ import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.PoiExcelSave;
 import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
+import com.ebooklibrary.app.library.ServiceCenter.Faq.model.FaqService;
+import com.ebooklibrary.app.library.ServiceCenter.Faq.model.FaqVO;
 import com.ebooklibrary.app.library.notice.model.NoticeService;
 import com.ebooklibrary.app.library.notice.model.NoticeVO;
 import com.ebooklibrary.app.library.qna.comments.model.QnaCommentService;
@@ -62,6 +64,8 @@ public class AdminController {
 	private QnaBoardService qnaBoardService;
 	@Autowired
 	private QnaCommentService qnaCommentsService;
+	@Autowired
+	private FaqService faqService;
 	
 	@RequestMapping("/adminMain.do")
 	public String adminMain(){
@@ -516,5 +520,60 @@ public class AdminController {
 		
 		return "redirect:/admin/qnaDetail.do?qnaNo="+qnaCommentVo.getQnaNo();
 	}
+	
+	//faq
+	
+	@RequestMapping(value="/faqWrite.do",method=RequestMethod.GET)
+	public String faqWrite(){
+		logger.info("faq 글쓰기 화면 페이지");
+		
+		return "library/serviceCenter/faq/faqWrite";
+	}
+	
+	@RequestMapping(value="/faqWrite.do",method=RequestMethod.POST)
+	public String faqWrite(@ModelAttribute FaqVO faqVo){
+		logger.info("faq 글쓰기 처리 페이지 입력 파라미터값 faqVo={}",faqVo);
+		
+		int cnt= faqService.insertFaqBoard(faqVo);
+		
+		
+		
+		return "redirect:/library/serviceCenter/faq/faqList2.do";
+	}
+	
+	@RequestMapping("/faqList2.do")
+	public String faqList(@ModelAttribute SearchVO searchVo,
+			Model model){
+		//1.
+		logger.info("Faq 리스트 ");
+		logger.info("searchVO={}",searchVo);
+		
+		//paging
+		PaginationInfo pagingInfo= new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.FAQ_BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.FAQ_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//searchVo
+		searchVo.setRecordCountPerPage(Utility.FAQ_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		//2.
+		logger.info("키워드 전 키워드값 ");
+		int totalRecord=faqService.selectListCount(searchVo);
+		logger.info("키워드 후 totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		List<FaqVO> alist=faqService.selectFaqAll(searchVo);
+		logger.info("결과처리값 alist.size()={}",alist.size());
+		
+		model.addAttribute("faqList",alist);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		
+		return "library/serviceCenter/faq/faqList2";
+	}
+	
+	
 	
 }

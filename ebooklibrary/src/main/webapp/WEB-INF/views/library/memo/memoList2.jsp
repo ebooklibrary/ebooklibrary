@@ -97,10 +97,10 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col">보낸 사람</th>
-						<th scope="col">제목</th>
-						<th scope="col">보낸시간</th>
-						<th scope="col">삭제</th>
+						<th scope="col" class="head">보낸 사람</th>
+						<th scope="col" class="head">제목</th>
+						<th scope="col" class="head">보낸시간</th>
+						<th scope="col" class="head">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -124,7 +124,7 @@
 							<tr class="hide">
 								<td
 									style="text-align: left; font-size: 1.3em; padding: 10px; background: #f5f5f5; border-top: 1px solid #e0e0e0;"
-									colspan="3">${vo.content }</td>
+									colspan="3">본문 : ${vo.content }</td>
 							</tr>
 						</c:forEach>
 
@@ -173,9 +173,9 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th scope="col">받는 사람</th>
-							<th scope="col">제목</th>
-							<th scope="col">보낸시간</th>
+							<th scope="col" class="head">받는 사람</th>
+							<th scope="col" class="head">제목</th>
+							<th scope="col" class="head">보낸시간</th>
 						</tr>
 					</thead>
 					<tbody>

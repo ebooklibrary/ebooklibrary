@@ -34,7 +34,6 @@
 		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
 		width="200px" height="50px"></a>
 </div>
-<%@include file="../../library/libraryAd.jsp"%>
 <div id="detail_body">
 	<table class="detail_table">
 		<tr>

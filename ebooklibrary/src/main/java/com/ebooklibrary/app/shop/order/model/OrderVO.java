@@ -13,8 +13,23 @@ public class OrderVO {
 	private String impUid;
 	private String merchantUid;
 	private String applyNum;
+	private String title;
+	private String coverFileName;
 	
 	
+
+	public String getCoverFileName() {
+		return coverFileName;
+	}
+	public void setCoverFileName(String coverFileName) {
+		this.coverFileName = coverFileName;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getOrdersNo() {
 		return ordersNo;
 	}
@@ -74,7 +89,8 @@ public class OrderVO {
 	public String toString() {
 		return "OrderVO [ordersNo=" + ordersNo + ", userId=" + userId + ", price=" + price + ", ordersDate="
 				+ ordersDate + ", bookNo=" + bookNo + ", buyClass=" + buyClass + ", impUid=" + impUid + ", merchantUid="
-				+ merchantUid + ", applyNum=" + applyNum + "]";
+				+ merchantUid + ", applyNum=" + applyNum + ", title=" + title + ", coverFileName=" + coverFileName
+				+ "]";
 	}
 	
 	
