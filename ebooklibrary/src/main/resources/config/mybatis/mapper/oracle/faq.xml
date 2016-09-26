@@ -3,6 +3,44 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.faq">
+	<sql id="searchWhere">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+					title  
+					like '%' || #{searchKeyword} || '%'
+					or
+					content
+					like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+	</sql>
+	
+	
+		
+	<select id="selectQnaAll" resultType="FaqVO" 
+		parameterType="SearchVO">
+		select *
+		from
+		(
+		    select rownum as RNUM, FaqLIST_ALL.*
+		    from
+		        (select FAQ_NO, TITLE,category,	CONTENT,READ_COUNT,fixed
+		        from FAQ_BOARD 
+		        <include refid="searchWhere"></include>
+		        order by read_count desc) FaqLIST_ALL    
+		) 
+		<![CDATA[
+		where  RNUM> #{firstRecordIndex} 
+			and RNUM<= #{firstRecordIndex}
+			+ #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectTotalCount" parameterType="SearchVO" resultType="int">
+		select count(*) from FAQ_BOARD
+		<include refid="searchWhere"></include>
+	</select>
+	
 	<insert id="faqinsert" parameterType="faqVO">
 		 <selectKey keyProperty="faqNo"   order="BEFORE" resultType="int">
 		        select FAQ_SEQ.nextval from dual
@@ -12,6 +50,47 @@
 			
 	</insert>
 	
+	<update id="readCountAdd" parameterType="int">
+		update FAQ_BOARD
+		set READ_COUNT=READ_COUNT+1
+		where FAQ_NO=#{faqNo}
+	</update>
+	<select id="selectByNo" parameterType="int"
+ 	     resultType="FaqVO">
+ 	     select * from FAQ_BOARD where FAQ_NO= #{faqNo}
+	</select>
+	
+	
+	<update id="update_no" parameterType="FaqVO">
+		update FAQ_BOARD
+		set title=#{title}, content=#{content}
+		
+		where FAQ_NO=#{faqNo}
+	</update>	
+	
+	<delete id="deletebyFaqNo" parameterType="int"> 
+		delete from FAQ_BOARD where FAQ_NO=#{faqNo}
+	</delete>
+	
+	<select id="fixedFAQ" resultType="FaqVO">
+		select * from FAQ_BOARD where FIXED='Y'
+		
+		
+		
+		
+	</select>	
+	<update id="fixByNo" parameterType="int">
+		<![CDATA[
+		update FAQ_BOARD
+        set FIXED =  case fixed when 'Y' then 'N'
+        when    'N' then 'Y'
+        end
+        where FAQ_NO=#{faqNo}
+        ]]>
+	</update>
+
+	
+
 </mapper>
 
 

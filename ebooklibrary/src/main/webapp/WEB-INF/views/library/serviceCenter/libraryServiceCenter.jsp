@@ -35,6 +35,7 @@
 	 alt="고객센터" style="width:250px; height :60px; margin-right:440px;" >
 </div>
 
+
 <c:import url="/library/serviceCenter/serviceNotice.do"></c:import>
 
 <div id="serviceCenter_2">
