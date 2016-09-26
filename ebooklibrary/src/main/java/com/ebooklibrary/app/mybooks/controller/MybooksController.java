@@ -69,6 +69,13 @@ public class MybooksController {
 		return "index";
 	}
 	
+	@RequestMapping("/mybookTest.do")
+	public String bookletTestOpen(Model model){
+		BookUtility bu=new BookUtility();
+		List<String> alist=bu.getBookByLine("1", "1");
+		model.addAttribute("alist", alist);
+		return "mybooks/mybook";
+	}
 	@RequestMapping("/mybook.do")
 	public void bookletTest(HttpServletRequest request, HttpSession session,@RequestParam int bookNo , Model model){
 		
@@ -91,7 +98,7 @@ public class MybooksController {
 		List<String> alist=bu.getBook(bookFileName, upPath);
         
         model.addAttribute("alist", alist);
-		
+        
 		//return "mybooks/mybook";
 	}
 	

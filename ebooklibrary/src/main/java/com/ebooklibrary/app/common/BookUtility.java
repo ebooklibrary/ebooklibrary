@@ -67,36 +67,36 @@ public class BookUtility {
 		Map<Integer, String> hmap=new HashMap<Integer, String>();
 		
 		hmap.put(101, "판타지");
-		hmap.put(102, "공상과학소설");
+		hmap.put(102, "공상과학");
 		hmap.put(103, "호러");
 		hmap.put(104, "드라마");
 		hmap.put(105, "액션및어드벤처");
 		hmap.put(106, "로맨스");
 		hmap.put(107, "미스터리(추리)");
 		hmap.put(108, "시리즈");
-		hmap.put(109, "트릴로지(3부작책)");
+		hmap.put(109, "트릴로지(3부작)");
 		hmap.put(110, "만화");
 		hmap.put(111, "풍자");
 		hmap.put(112, "전기");
 		hmap.put(113, "자서전");
 		hmap.put(114, "아동도서");
-		hmap.put(115, "일기형식책");
+		hmap.put(115, "일기형식");
 		hmap.put(116, "자기계발서");
 		
 		hmap.put(201, "가이드");
 		hmap.put(202, "여행");
-		hmap.put(203, "종교책");
-		hmap.put(204, "기도하는책");
-		hmap.put(205, "역사책");
-		hmap.put(206, "수학책");
+		hmap.put(203, "종교");
+		hmap.put(204, "기도");
+		hmap.put(205, "역사");
+		hmap.put(206, "수학");
 		hmap.put(207, "시(선집),문집");
 		hmap.put(208, "시집");
 		hmap.put(209, "저널,학술지");
 		hmap.put(210, "백과사전");
 		hmap.put(211, "사전");
-		hmap.put(212, "과학책");
-		hmap.put(213, "예술책");
-		hmap.put(214, "요리책");
+		hmap.put(212, "과학");
+		hmap.put(213, "예술");
+		hmap.put(214, "요리");
 		hmap.put(215, "헬스");
 		hmap.put(216, "문화");
 		hmap.put(217, "경제");
@@ -178,7 +178,8 @@ public class BookUtility {
 			int data =0;
 			int count=0;
 			
-			double scount=550;
+			/*double scount=550;*/
+			double scount=620;
 
 			while((data=reader.read())!=-1){
 				
@@ -205,7 +206,7 @@ public class BookUtility {
 					}else if (data==13) {
 						str+="<br>";
 					}
-					str=str.replaceAll("<br><br>", "<br>");
+					/*str=str.replaceAll("<br><br>", "<br>");*/
 				}//if
 				
 				if (count==scount) {
@@ -239,6 +240,108 @@ public class BookUtility {
 				
 		return alist;
 	}//getbook
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	public List<String> getBookByLine(String bookFileName, String upPath){
+		//책 txt에서 읽어오기
+		
+		List<String> alist=new ArrayList<String>();
+		String str = "";
+		
+		BufferedReader reader = null;
+		//File file=new File(upPath+"\\"+bookFileName);
+		File file=new File("D:\\lecture\\workspace_list\\ebook_ws\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\ebooklibrary\\book_upload\\살아남은 아이.txt");
+		FileInputStream fis=null;
+		BufferedInputStream bis=null;
+		InputStreamReader isr=null;
+		
+		int totalCount=0;
+		try {
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));
+			while ((str=reader.readLine())!=null) {
+				totalCount++;
+			}
+			//logger.info("텍스트 테스트 totalCount={}",totalCount);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			try 
+			{
+				if(reader!=null)reader.close();     //<---- 파일을 닫는다.
+				if(isr!=null)isr.close();
+				if(fis!=null)fis.close();
+			}catch(Exception e){
+				
+			}
+		}
+		
+		
+		
+		
+		try
+		{
+			
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));
+			
+			int count=0;
+			
+			int scount=19;
+			
+			String str1="";
+			System.out.println("토탈 카운트 : "+totalCount);
+			while ((str1=reader.readLine())!=null) {
+				
+				/* 
+					enter => \r\n
+					\r 코드값 => 13
+					\n 코드값 => 10
+					(data=reader.read())!=-1
+				 */
+				
+				count++;
+				totalCount--;
+				str+=str1+"<br>";
+				System.out.println("카운트 str : "+count+str1);
+				if (count==scount) {
+					alist.add(str1);
+					count=0;
+					str1="";
+				}
+				if (totalCount<1) {
+					
+					alist.add(str1);
+					  
+					break;
+				}//if
+				
+			}//while
+			
+		}catch(FileNotFoundException fnfe){
+			fnfe.printStackTrace();
+		}catch(IOException ioe){
+			ioe.printStackTrace();
+		}finally{
+			try 
+			{
+				if(reader!=null)reader.close();     //<---- 파일을 닫는다.
+				if(isr!=null)isr.close();
+				if(fis!=null)fis.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		return alist;
+	}//getbook
+	
+	
+	
+	
+	
+	
 	
 	public String toUtf(String str) { 
 		String utf = ""; 

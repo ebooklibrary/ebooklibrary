@@ -119,7 +119,12 @@
 			}
 			return res;
 		}
-		 
+		/*  
+		$("#testBookWorking").click(function() {
+			window.open("<c:url value='/mybooks/mybookTest.do'/>", "책보기", "top=20, left=60, width=1550, height=950, resizable=0, location=0");
+		});
+		 */	
+			
 		 /* 
 		 var Ca = /\+/g;
 			decodeURIComponent( bimg.replace(Ca, " ") );
@@ -324,7 +329,7 @@
 </script>
 </head>
 <body>
-
+<!-- <div id="testBookWorking">책 테스트</div> -->
 		<%-- 
 			<c:forEach var="map" items="${cartList }">
 				<c:set var="sum" value='${map["SELLPRICE"]*map["QUANTITY"] }'/>

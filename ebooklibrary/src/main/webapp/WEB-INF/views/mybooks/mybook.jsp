@@ -39,6 +39,19 @@ ${pageContext.request.contextPath}
 		</script>
  -->
 <script type="text/javascript">
+
+	function loaded(){  
+	   var element = document.getElementById('loading'); // 로딩 요소 
+	   element.parentNode.removeChild(element); // 요소 제거 
+	} 
+	// 로딩 이벤트에 등록 
+	if(window.addEventListener){  
+	      window.addEventListener('load', loaded, false);      
+	    }else{
+	      window.attachEvent('onload', loaded); 
+	} 
+
+
 	$(function() {
 		
 		
@@ -147,6 +160,8 @@ ${pageContext.request.contextPath}
 	     */
 	});
 
+	
+	
 </script>
 
 
@@ -161,25 +176,10 @@ ${pageContext.request.contextPath}
 
 
 
-<title>Insert title here</title>
+<title>책보기</title>
 </head>
 <body>
-	<div id="custom-goto"></div>
-	<div id="display"></div>
-	
-	<!-- 
-	<div id="custom-menu"></div>
-	 -->
-	 
-	 
-	 <p id="titleP"><span>${title }</span><span>페이지 이동 안될 시 책 모양 아이콘을 클릭하여 주십시오.</span></p>
-	<div id="wrapper">
-		<div id="pageSelDiv">
-			 <span>페이지 입력 : </span><input type="text" name="pageSel" id="pageSel">
-			 <!-- <input type="button" name="pageSelBt" id="pageSelBt" value="페이지 가기"> -->
-			 <img alt="페이지선택" name="pageSelBt" id="pageSelBt" src="<c:url value='/images/mybook/icon/openbook32.png'/>">
-		 </div>
-		 
+	<%-- 	 
 	<div id="mybook">
     	<c:forEach var="al" items="${alist }">
 		    <div class="test1">
@@ -187,7 +187,40 @@ ${pageContext.request.contextPath}
 		    </div>
     	</c:forEach>
 	</div>
-</div>
+	 --%>
+	 
+	 
+	 <!-- 로딩전 보여지는 요소 --> 
+	<div id="loading"> 
+		<div class="loader"></div>
+	</div> 
+	<!-- 
+	테스트를 위한 큰 그림 
+	<img src="http://desktopwallpaper-s.com/wallpapers/23/Butterfly_abstract_wallpaper.jpg"> 
+	  -->
+	 	 <div id="custom-goto"></div>
+	<div id="display"></div>
+	<!-- 
+	<div id="custom-menu"></div>
+	 -->
+	 <p id="titleP"><span>${title }</span><span>페이지 이동 안될 시 책 모양 아이콘을 클릭하여 주십시오.</span></p>
+	 
+	<div id="wrapper">
+		<div id="pageSelDiv">
+			 <span>페이지 입력 : </span><input type="text" name="pageSel" id="pageSel">
+			 <!-- <input type="button" name="pageSelBt" id="pageSelBt" value="페이지 가기"> -->
+			 <img alt="페이지선택" name="pageSelBt" id="pageSelBt" src="<c:url value='/images/mybook/icon/openbook32.png'/>">
+		 </div>
+		 
+		<div id="mybook">
+	    	<c:forEach var="al" items="${alist }">
+			    <div class="test1">
+					<div>${al }</div>
+			    </div>
+	    	</c:forEach>
+		</div>
+	
+	</div>
 
 </body>
 </html>

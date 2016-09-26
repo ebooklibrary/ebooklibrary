@@ -193,8 +193,9 @@
 		$(".buy").click(function() {
 			var bookNo=$(this).parent().parent().parent().find("input[name=bookNo]").val();
 			var userId=$(this).parent().parent().parent().find("input[name=userId]").val();
+			var price=$(this).parent().parent().parent().find("input[name=price]").val();
 			if(${!empty sessionScope.userId}){
-				 $(location).attr('href', "<c:url value='/shop/cart/extendBook.do?bookNo="+bookNo+"&userId="+userId+"'/>");
+				 $(location).attr('href', "<c:url value='/shop/cart/extendBook.do?bookNo="+bookNo+"&userId="+userId+"&price="+price+"'/>");
 			}
 			if(${empty sessionScope.userId || userId==null }){
 				alertify.alert("로그인하여 주세요.", function (e) {
