@@ -34,6 +34,7 @@
 			<th>가입일</th>
 			<th>탈퇴일</th>
 			<th>북코인</th>
+			<th>수정</th>
 		</tr>		
 	</thead>
 	<tbody>		
@@ -51,6 +52,7 @@
 					<td><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/></td>
 					<td><fmt:formatDate value="${vo.outDate }" pattern="yyyy-MM-dd"/></td>
 					<td><fmt:formatNumber value="${vo.cash }" pattern="#,###"/>원</td>
+					<td><button>수정</button></td>
 				</tr>
 			</c:forEach>
 		</c:if>		

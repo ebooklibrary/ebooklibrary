@@ -115,7 +115,7 @@
 				<!-- <img src="/images/gmi/inc/gnb_login.gif" alt="로그인" /> -->
 				로그아웃
 				</a></li>	
-			</c:if>	
+			</c:if>
 		</ul>
     </div>
 	<!--//#gnb_menu-->
