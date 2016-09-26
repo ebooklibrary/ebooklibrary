@@ -96,7 +96,7 @@
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
 		width="200px" height="50px" ></a>
 </div>
-<%@include file="../libraryAd.jsp"%>
+<c:import url="/event/sideEvent.do"></c:import>
 <div id="qna_body">
 	<form name="frmWrite" id="frmWrite" method="post" 
 		action="<c:url value='/library/qna/qnaWrite.do'/>" >

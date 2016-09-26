@@ -39,7 +39,7 @@ $().ready(function(){
 		width="200px" height="50px"></a>
 </div>
 <!-- 광고 -->
-<%@include file="../libraryAd.jsp"%>
+<c:import url="/event/sideEvent.do"></c:import>
 <div id="ReqWrite_body" class="FormRequest">
 	<form name="frmEdit" id="frmEdit" method="post" 
 		action="<c:url value='/library/request/requestEdit.do'/>" >

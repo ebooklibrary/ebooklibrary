@@ -98,7 +98,7 @@ function submitContents(elClickedObj) {
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
 		width="200px" height="50px" ></a>
 </div>
-<%@include file="../libraryAd.jsp"%>
+<c:import url="/event/sideEvent.do"></c:import>
 <div id="Write_body">
 	<form name="frmEdit" id="frmEdit" method="post" 
 		action="<c:url value='/library/qna/qnaEdit.do'/>" >
