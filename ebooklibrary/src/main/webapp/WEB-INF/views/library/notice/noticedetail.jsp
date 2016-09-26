@@ -41,7 +41,7 @@
 		src="${pageContext.request.contextPath}/images/library/notice/banner.png"
 		width="200px" height="50px"></a>
 </div>
-<%@include file="../libraryAd.jsp"%>
+<c:import url="/event/sideEvent.do"></c:import>
 <div id="detail_body">
 	<table class="detail_table">
 		<tr>

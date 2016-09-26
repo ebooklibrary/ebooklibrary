@@ -53,7 +53,7 @@
 		width="200px" height="50px" ></a>
 </div>
 <!-- 광고 -->
-<%@include file="../libraryAd.jsp"%>
+<c:import url="/event/sideEvent.do"></c:import>
 <div id=qna_body>
 <div id="qnaList_body">	
 	   	<form name="frmSearch" id="searchbox2" method="post" 

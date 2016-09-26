@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/jquery/rolling/jq.rolling.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/jquery/rolling/jquery-ui.min.js'/>"></script>
@@ -15,6 +16,9 @@
 	<p class="notice_p">추천 도서</p>
 		<div id="rolling">
 				<ul>
+				<c:if test="${empty recommandList}">
+				이벤트가 없습니다
+				</c:if>
 				<c:if test="${!empty recommandList}">
 				<c:set var="n" value="1" />
 					<c:forEach var="vo" items="${recommandList }">					
@@ -24,8 +28,7 @@
 							src="${pageContext.request.contextPath }/bookevent/${vo.eventImageUrl}" ></a>
 						</li>
 						<c:set var="n" value="${n+1 }" />
-					</c:forEach>
-					
+					</c:forEach>					
 				</c:if>
 						         
 					<!-- <li class="sp02">SAMPLE 02</li>

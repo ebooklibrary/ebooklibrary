@@ -15,7 +15,6 @@ $().ready(function(){
 		$(location).attr('href',"<c:url value='/library/qna/qnaNextPage.do?qnaNo=${param.qnaNo}'/>");
 	});
 	
-	$("#container_out").css("background","url(../../images/library/notice/noticeBackground.png) no-repeat center");
 	
 	$("#Btn_qnaEdit").click(function(){
 		$(location).attr('href', "<c:url value='/library/qna/qnaEdit.do?qnaNo=${param.qnaNo}'/>");
@@ -46,8 +45,6 @@ $().ready(function(){
 	
 	
 });
-
-
 </script>
 <!-- qna 상세보기 화면 -->
 <div id="notice_head">
@@ -63,7 +60,7 @@ $().ready(function(){
 		src="${pageContext.request.contextPath}/images/library/qna/qnabanner.png"
 		width="200px" height="50px" ></a>
 </div>
-<%@include file="../libraryAd.jsp"%>
+<%-- <c:import url="/event/sideEvent.do"></c:import> --%>
 	<div id="detail_body">
 	<table class="qnadetail_table" id="qnaDetail">
 		<tr>
