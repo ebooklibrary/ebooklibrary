@@ -99,13 +99,7 @@
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
 	</table>
-	<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
-		<div class="notice_delete">
-			<input type="button" value="글수정"
-				onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'">
-			<input type="button" id="btnDelete" value="글삭제">
-		</div>
-	</c:if>
+	
 	<div class= "detail_Botton">
 		<input type="button" value="목록" id="listBotton" onclick="location.href= '<c:url value = '/library/notice/noticelist.do'/>'">
 	</div>
