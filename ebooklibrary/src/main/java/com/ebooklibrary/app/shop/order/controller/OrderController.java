@@ -23,6 +23,8 @@ import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.Utility;
 import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.member.model.MemberVO;
+import com.ebooklibrary.app.mybooks.model.MyBookService;
+import com.ebooklibrary.app.mybooks.model.MyBookVO;
 import com.ebooklibrary.app.shop.cart.model.CartService;
 import com.ebooklibrary.app.shop.cart.model.CartVO;
 import com.ebooklibrary.app.shop.order.model.OrderService;
@@ -42,6 +44,9 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private MyBookService myBookService;
 	
 	@RequestMapping("/myBooksInsert.do")	
 	public String myBooksInsert(@ModelAttribute OrderVO orderVo,HttpSession session,Model model){
@@ -66,6 +71,8 @@ public class OrderController {
 				orderVo.setMerchantUid("");
 				orderVo.setApplyNum("");
 			}
+			orderVo.setTitle((String)map.get("TITLE"));
+			orderVo.setCoverFileName((String)map.get("COVER_FILE_NAME"));
 			orderList.add(orderVo);
 		}
 		int cnt=orderService.MyBooksInsert(cartList,orderList);
@@ -113,11 +120,18 @@ public class OrderController {
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		List<OrderVO> orderList=orderService.selectOrderAll(searchVo);
+		List<MyBookVO> bookList=new ArrayList<MyBookVO>();
+		for(int i=0;i<orderList.size();i++){
+			OrderVO vo=orderList.get(i);
+			MyBookVO mybook=myBookService.selectBookByBookNo(vo.getBookNo());
+			bookList.add(mybook);
+		}
 		int totalRecord=orderService.selectOrderCount(searchVo);
 		
 		pagingInfo.setTotalRecord(totalRecord);
 		//3.
 		model.addAttribute("orderList", orderList);
+		model.addAttribute("bookList", bookList);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "member/orderList";

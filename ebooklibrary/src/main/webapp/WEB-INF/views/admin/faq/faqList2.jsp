@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="../../libraryTop.jsp" %>
+<%@include file="../libraryAdminTop.jsp" %>
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/faq.css" />
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
 <script type="text/javascript">
@@ -169,4 +169,4 @@
 		</c:if>
 	</div>
 </div>
-<%@include file="../../libraryBottom.jsp" %>
+<%@include file="../libraryAdminBottom.jsp" %>

@@ -30,56 +30,6 @@ public class FaqController {
 	private FaqService faqService;
 	
 	
-	@RequestMapping(value="/faqWrite.do",method=RequestMethod.GET)
-	public String faqWrite(){
-		logger.info("faq 글쓰기 화면 페이지");
-		
-		return "library/serviceCenter/faq/faqWrite";
-	}
-	
-	@RequestMapping(value="/faqWrite.do",method=RequestMethod.POST)
-	public String faqWrite(@ModelAttribute FaqVO faqVo){
-		logger.info("faq 글쓰기 처리 페이지 입력 파라미터값 faqVo={}",faqVo);
-		
-		int cnt= faqService.insertFaqBoard(faqVo);
-		
-		
-		
-		return "redirect:/library/serviceCenter/faq/faqList2.do";
-	}
-	
-	@RequestMapping("/faqList2.do")
-	public String faqList(@ModelAttribute SearchVO searchVo,
-			Model model){
-		//1.
-		logger.info("Faq 리스트 ");
-		logger.info("searchVO={}",searchVo);
-		
-		//paging
-		PaginationInfo pagingInfo= new PaginationInfo();
-		pagingInfo.setBlockSize(Utility.FAQ_BLOCK_SIZE);
-		pagingInfo.setRecordCountPerPage(Utility.FAQ_COUNT_PER_PAGE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-		
-		//searchVo
-		searchVo.setRecordCountPerPage(Utility.FAQ_COUNT_PER_PAGE);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		
-		//2.
-		logger.info("키워드 전 키워드값 ");
-		int totalRecord=faqService.selectListCount(searchVo);
-		logger.info("키워드 후 totalRecord={}",totalRecord);
-		pagingInfo.setTotalRecord(totalRecord);
-		
-		List<FaqVO> alist=faqService.selectFaqAll(searchVo);
-		logger.info("결과처리값 alist.size()={}",alist.size());
-		
-		model.addAttribute("faqList",alist);
-		model.addAttribute("pagingInfo", pagingInfo);
-		
-		
-		return "library/serviceCenter/faq/faqList2";
-	}
 	@RequestMapping("/bestFaq.do")
 	public String bestFaqList(@ModelAttribute SearchVO searchVo,
 			Model model){
@@ -99,6 +49,23 @@ public class FaqController {
 		
 		
 		return "library/serviceCenter/faq/bestFaq";
+	}
+	
+	
+	
+	@RequestMapping("/faqDetail.do") 
+	public String faqDetail(@RequestParam(defaultValue="0") int faqNo,Model model){
+		//1.
+		logger.info("디테일 페이지 접속 입력값  faqaNo={}", faqNo);
+		//2.
+		FaqVO faqVo = faqService.selectByNo(faqNo);
+		logger.info("결과값은 faqVo={}",faqVo);
+		
+		//3.
+		model.addAttribute("faqDetail",faqVo);
+		
+		return "library/serviceCenter/faq/faqDetail";
+		
 	}
 	
 	@RequestMapping(value="/faqEdit.do",method=RequestMethod.GET)
@@ -140,22 +107,7 @@ public class FaqController {
 		
 		return "common/message";
 		
-	}
-	
-	@RequestMapping("/faqDetail.do") 
-	public String faqDetail(@RequestParam(defaultValue="0") int faqNo,Model model){
-		//1.
-		logger.info("디테일 페이지 접속 입력값  faqaNo={}", faqNo);
-		//2.
-		FaqVO faqVo = faqService.selectByNo(faqNo);
-		logger.info("결과값은 faqVo={}",faqVo);
-		
-		//3.
-		model.addAttribute("faqDetail",faqVo);
-		
-		return "library/serviceCenter/faq/faqDetail";
-		
-	}
+	}	
 	
 	@RequestMapping("/faqDelete.do")
 	public String faqDelet(@RequestParam(defaultValue="0") int faqNo,Model model){
@@ -201,5 +153,37 @@ public class FaqController {
 		
 	}
 	
+	@RequestMapping("/faqList.do")
+	public String faqList(@ModelAttribute SearchVO searchVo,
+			Model model){
+		//1.
+		logger.info("Faq 리스트 ");
+		logger.info("searchVO={}",searchVo);
+		
+		//paging
+		PaginationInfo pagingInfo= new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.FAQ_BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.FAQ_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//searchVo
+		searchVo.setRecordCountPerPage(Utility.FAQ_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		//2.
+		logger.info("키워드 전 키워드값 ");
+		int totalRecord=faqService.selectListCount(searchVo);
+		logger.info("키워드 후 totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		List<FaqVO> alist=faqService.selectFaqAll(searchVo);
+		logger.info("결과처리값 alist.size()={}",alist.size());
+		
+		model.addAttribute("faqList",alist);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		
+		return "library/serviceCenter/faq/faqList";
+	}
 	
 }

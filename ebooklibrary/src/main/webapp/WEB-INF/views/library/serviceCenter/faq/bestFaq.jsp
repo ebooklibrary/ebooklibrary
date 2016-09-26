@@ -13,7 +13,7 @@
 		
 				
 		$("#moreFaq").click(function(){
-			$(location).attr('href',"<c:url value='/library/serviceCenter/faq/faqList2.do'/>");
+			$(location).attr('href',"<c:url value='/library/serviceCenter/faq/faqList.do'/>");
 		});
 		
 
@@ -69,7 +69,7 @@
 <div id=faq_body>
 	<div id="faqList_body">	
 		   	<form name="frmSearch" id="searchbox2" method="post" 
-		   		action="<c:url value='/library/serviceCenter/faq/faqList2.do'/>" >
+		   		action="<c:url value='/library/serviceCenter/faq/faqList.do'/>" >
 		   		
 		        <div class="search_box">
   				<label > FAQ검색</label>
@@ -98,7 +98,6 @@
 						<li id="FAQ_List_${i }" name="TrFAQ_Content" class="off">
 							<dl class="faqDl">
 								<dt class="faqdt">${vo.faqNo}</dt><dd class="faqdd">${vo.category }</dd><dd class="callContent"><a href='javascript:void(0);' onclick='viewContent(${i });'><span>${vo.title }</span></a></dd>
-								<dd><a href="<c:url value='/library/serviceCenter/faq/faqEdit.do?faqNo=${vo.faqNo}'/>" onclick="" >수정하기</a> </dd>
 							</dl>
 							<div id="DivFAQ_Content_${i }" class="divContent" style="display:none;">
 								${vo.content }
