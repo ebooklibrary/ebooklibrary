@@ -60,6 +60,27 @@
 			}//if			
 		});//delete
 		
+		$("#toId").keyup(function() {
+			$.ajax({
+				url:"<c:url value='/library/memo/memoMemberCheck.do'/>",
+				data:"userId="+$("#toId").val(),			
+				type:"GET",
+				success:function(res){
+					if(res>0){
+						$("#userCheck").val('Y');
+					}
+				}
+			});//ajax
+		});
+		
+		
+		$("#WriteForm").submit(function(event) {			
+			if($("#userCheck").val()!='Y'){
+				alert("아이디가 없습니다");
+				return false;
+			}
+		});//submit
+		
 	});//jquery
 	
 	function pagetoMemo(curPage){
@@ -188,7 +209,7 @@
 							<c:forEach var="vo" items="${fromList }">
 								<tr class="title">
 									<p style="display: none;">${vo.memoNo }</p>
-									<td style="text-align: center">${vo.fromId }</td>
+									<td style="text-align: center">${vo.toId }</td>
 									<td style="text-align: center">${vo.title }</td>
 									<td><fmt:formatDate value="${vo.sendDate }"
 											pattern="yyyy-MM-dd HH:mm:ss" /></td>
@@ -237,11 +258,13 @@
 	</div>
 	<div id="memoWrite" style="width: 700px; height: 800px; display: none;">
 		<h1>쪽지 보내기</h1>
-		<form action="<c:url value='/library/memo/memoWrite.do'/>" method="post" id="memoWrite">
+		<form action="<c:url value='/library/memo/memoWrite.do'/>" 
+		method="post" id="WriteForm">
 			<input type="hidden" value="${sessionScope.userId }" name="fromId">
-			받는아이디 : <input type="text" name="toId"><br>
+			받는아이디 : <input type="text" name="toId" id="toId"><br>
 			제목 : <input type="text" name="title"><br>
 			내용<br>
+			<input type="hidden" id="userCheck">
 			<textarea rows="10" cols="70" name="content"></textarea>
 			<input type="submit" value="보내기">				
 		</form>

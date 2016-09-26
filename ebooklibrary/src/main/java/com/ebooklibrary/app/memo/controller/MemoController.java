@@ -18,6 +18,7 @@ import com.ebooklibrary.app.common.MemoSearchVO;
 import com.ebooklibrary.app.common.PaginationInfo;
 import com.ebooklibrary.app.common.SearchVO;
 import com.ebooklibrary.app.common.Utility;
+import com.ebooklibrary.app.member.model.MemberService;
 import com.ebooklibrary.app.memo.model.MemoService;
 import com.ebooklibrary.app.memo.model.MemoVO;
 
@@ -29,6 +30,8 @@ public class MemoController {
 	
 	@Autowired
 	private MemoService memoService;
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping("/NewMemoCount.do")
 	@ResponseBody
@@ -127,4 +130,12 @@ public class MemoController {
 		return "library/memo/memoList2";
 	}
 	
+	@RequestMapping("/memoMemberCheck.do")
+	@ResponseBody
+	public int memoMemberCheck(@RequestParam String userId){
+		logger.info("쪽지보내기 유저확인 userId={}",userId);
+		int cnt=memberService.selectMemberCheckId(userId);
+		logger.info("유저확인 결과 cnt={}",cnt);
+		return cnt;
+	}
 }
