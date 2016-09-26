@@ -11,9 +11,16 @@
 	type="text/javascript"></script>
 <script src="<c:url value='/jquery/jquery-ui.js'/>"
 	type="text/javascript"></script>
+<!-- 달력 from jquery ui -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/loginForm.css" />
 <title>이벤트 등록</title>
 <script type="text/javascript">
 	$(document).ready(function(){
+		/* 
 		$("#endDay").datepicker({
 			dateFormat:"yy-mm-dd",
 			changeYear:true,
@@ -21,6 +28,26 @@
 			monthNames:['1월','2월','3월','4월','5월','6월',
 			            '7월','8월','9월','10월','11월','12월']
 		});
+		 */
+		 
+		$("#endDay").datepicker({
+			dateFormat:"yymmdd",
+			changeMonth: true,
+			changeYear:true,
+			dayNamesMin:['일','월','화','수','목','금','토'],
+			monthNames:['1월','2월','3월','4월','5월','6월',
+			            '7월','8월','9월','10월','11월','12월'],
+	 		yearRange: '1900:2100'
+		});
+	 
+	 
+	// Getter
+	var monthNamesShort = $( "#endDay" ).datepicker( "option", "monthNamesShort" );
+	// Setter
+	$( "#endDay" ).datepicker( "option", "monthNamesShort", ['1월','2월','3월','4월','5월','6월',
+	                                   			            '7월','8월','9월','10월','11월','12월'] );
+		
+		
 	});
 </script>		
 </head>
