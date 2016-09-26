@@ -34,7 +34,8 @@ $(document).ready(function(){
 <div id="notice_head">
 	<h2>
 		<img alt="공지사항"
-			src="${pageContext.request.contextPath }/images/library/notice/notice.png" style="width: 150px;">
+			src="${pageContext.request.contextPath }/images/library/notice/notice.png"
+			style="width: 150px; margin-bottom: 50px; text-align: center; margin-top: 20px; margin-right: 260px;">
 	</h2>
 </div>
 <div id="notice_banner">

@@ -110,6 +110,7 @@
 	</div>
 	<div class="question">
 		<div class="question_head">
+		<p class ="question_P">문의 종류 선택</p> 
 			<div class="question_select">
 				<select id="question_category" name ="category">
 					<option value="1">상품/재입고</option>
@@ -121,16 +122,12 @@
 			<div class="question_Title">
 				제목 : <input type="text" name="title" id="title">
 			</div>
-			<div>
-				작성자 : <input type="text" name="userName" id="userName"
-					value="${sessionScope.userName }" readonly="readonly">
-			</div>
 		</div>
 		<div class="question_body">
 			<div class="question_Content">
 				<p>
 					<textarea class="w3-input" name="qContent" id="qContent"
-						style="width: 630px; height: 530px;"></textarea>
+						style="width: 750px; height: 330px;"></textarea>
 				</p>
 			</div>
 		</div>

@@ -62,9 +62,9 @@
 									pattern="yyyy-MM-dd" /></td>
 						</tr>
 						<tr class="hide">
-							<td style="text-align: left; font-size: 1.3em; padding: 10px;
+							<td style="text-align: left; font-size: 1.0em;font-family: Arial; padding: 10px;
 							background:  #f5f5f5; border-top: 1px solid #e0e0e0; display: n" 
-								colspan="3">${vo.content }</td>
+								colspan="3"   >${vo.content }</td>
 						</tr>
 						<%-- <tr class ="hide">
 							<td>${vo.content }</td>

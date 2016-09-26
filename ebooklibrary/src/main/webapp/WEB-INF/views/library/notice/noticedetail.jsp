@@ -49,7 +49,7 @@
 			<td class="td_2">${noticeVo.userName }</td>
 			<td class="td_1">작성일</td>
 			<td class="td_3"><fmt:formatDate value="${noticeVo.regdate }"
-					pattern="yyyy-MM-dd a hh:mm:ss" /></td>
+					pattern="yyyy-MM-dd" /></td>
 			<td class="td_1">조회수</td>
 			<td class="td_4">${noticeVo.readCount }</td>
 		<tr>
@@ -61,7 +61,9 @@
 		</tr>
 		<tr style="margin-top: 10px">
 			<c:if test="${noticeVo.fileName!=null }">
-				<td class="td_6" colspan="6" valign="top"><img src ="${pageContext.request.contextPath }/noticeUpload/${noticeVo.fileName}" alt="" style="max-width: 100%; height: auto;"/>${noticeVo.content }</td>
+				<td class="td_6" colspan="6" valign="top"><img
+					src="${pageContext.request.contextPath }/noticeUpload/${noticeVo.fileName}"
+					alt="" style="max-width: 100%; height: auto;" />${noticeVo.content }</td>
 			</c:if>
 			<c:if test="${noticeVo.fileName==null }">
 				<td class="td_6" colspan="6" valign="top">${noticeVo.content }</td>
@@ -73,7 +75,7 @@
 		<tr style="width: 200px;">
 			<td class="td_9">이전글</td>
 			<c:if test="${preVo==null || preVo==''}">
-				<td class="td_7" >이전글이 없습니다.</td>
+				<td class="td_7">이전글이 없습니다.</td>
 			</c:if>
 			<c:if test="${preVo.noticeNo!=0}">
 				<td class="td_7"><a
@@ -97,11 +99,6 @@
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
 	</table>
-	<div class="notice_list">
-		<a href="<c:url value ='/library/notice/noticelist.do'/>"><img
-			class="img1" alt="리스트"
-			src="${pageContext.request.contextPath }/images/library/notice/List.jpg"></a>
-	</div>
 	<c:if test="${sessionScope.adminAuchCode=='ADMIN' }">
 		<div class="notice_delete">
 			<input type="button" value="글수정"
@@ -109,7 +106,10 @@
 			<input type="button" id="btnDelete" value="글삭제">
 		</div>
 	</c:if>
+	<div class= "detail_Botton">
+		<input type="button" value="목록" id="listBotton" onclick="location.href= '<c:url value = '/library/notice/noticelist.do'/>'">
+	</div>
 </div>
-<div></div>
+
 
 <%@include file="../libraryBottom.jsp"%>

@@ -1,64 +1,116 @@
 @CHARSET "UTF-8";
 
-#ServiceCenter_head{
-	
+#ServiceCenter_head {
+	clear: both;
+	float: left;
 }
-#ServiceCenter_body{
-	float: right;
+
+#ServiceCenter_body {
+	clear: both;
+	float: left;
 	text-align: center;
-	margin-right: 150px;
+	margin-left: 430px;
 }
-#ServiceCenter_body h1{
+
+#ServiceCenter_body h1 {
+	clear: both;
 	margin-right: 177px;
 }
 
-#ServiceCenter_bodyP1 h1{
+#ServiceCenter_bodyP1 h1 {
 	font-size: 2.5em;
 	font-weight: bold;
 }
-.add_notice3{
-	clear:both;
-	width:800px;
-	height:300px;
+
+.add_notice3 {
+	width: 800px;
+	height: 300px;
 	float: right;
 	margin-top: 200px;
 	font-size: 1.0em;
 }
-.hide{
-	display: none;
 
+.hide {
+	display: none;
 }
-.service_Tr{ 
+
+.service_Tr {
 	font-size: 1.2em;
 	font-weight: bold;
 	background: #f6f6f6;
 }
-#serivceCenter_1{
-	width:250px;
+
+#serivceCenter_1 {
+	width: 250px;
 	float: left;
 }
 
-#serviceCenter_2{
-	clear:both;
-	float:right;
-	width:320px;
-	margin-right: 480px;
-	margin-top: 200px;
+#serviceCenter_2 {
+	clear: both;
+	float: right;
+	width: 500px;
+	margin-right: 320px;
+	position: relative;
+	padding: 10px;
 }
 
-.myQuestion_table{
-	width :800px;
-	hegith : 500px;
-	float : right;
+.service_Notice {
+	position: relative;
+}
+
+.myQuestion_table {
+	clear: both;
+	width: 800px;
+	float: right;
 	font-size: 0.9em;
-	margin-top: 100px;
-	margin-left: 100px;
-}
-.myQuestion_table th{
-	border-bottom: 1px solid #333333;
-}
-.myQuestion_table td{
-	padding: 8px;
-	border:  1px solid #333333;
 }
 
+.myQuestion_table th {
+	border-top: 1px solid #3366FF;
+	border-left: 1px solid #DDDDDD;
+	border-right: 1px solid #DDDDDD;
+	background: #EEEEEE;
+	padding: 10px;
+}
+
+.myQuestion_table td {
+	padding: 8px;
+	border-bottom: 1px solid #DDDDDD;
+	border-top: 1px solid #DDDDDD;
+	padding: 10px;
+}
+
+.Sercive_Nav {
+	clear: both;
+	width: 130px;
+	margin-top: 150px;
+	float: left;
+	width: 130px;
+	color: #666;
+	font-size: 14px;
+	line-height: 4em;
+	font-family: Helvetica Neue, 'Apple SD Gothic Neo', arial, '나눔고딕',
+		'Nanum Gothic', '돋움', Dotum, Tahoma, Geneva, sans-serif;
+	letter-spacing: -.03em;
+
+}
+
+.Sercive_Nae ul li {
+	
+}
+/* 1:1 문의 글쓰기 css */
+.question_P {
+	float: left;
+}
+
+.question_select {
+	float: left;
+	margin-left: 20px;
+	margin-bottom: 15px;
+}
+
+.question_Title {
+	clear: both;
+	float: left;
+	margin-bottom: 15px;
+}

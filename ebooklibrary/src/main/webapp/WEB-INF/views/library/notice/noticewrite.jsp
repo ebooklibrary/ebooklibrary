@@ -96,10 +96,10 @@
 		<div class="notice_Content">
 			<p>
 				<textarea class="w3-input" name="content" id="summary"
-					style="width: 630px; height: 530px;"></textarea>
+					style="width: 630px; height: 330px;"></textarea>
 			</p>
 		</div>
-		<div>
+		<div class ="notice_file">
 			<input type="file" id="upfile" name="upfile">
 		</div>
 		<div class="notice_submit">

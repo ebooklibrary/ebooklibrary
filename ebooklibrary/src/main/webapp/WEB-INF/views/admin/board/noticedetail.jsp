@@ -22,7 +22,7 @@
 </script>
 
 <!-- 공지사항 상세보기 화면 -->
-<div id="notice_head">
+<div id="detail_head">
 	<h2>
 		<img alt="공지사항"
 			src="${pageContext.request.contextPath }/images/library/notice/notice.png"
@@ -88,23 +88,16 @@
 					href="<c:url value ='/admin/nextPage.do?notice_No=${param.notice_No }'/>">${nextVo.title}</a></td>
 			</c:if>
 		</tr>
-		<tr>
-			<td>첨부파일</td>
-			<td>${noticeVo.fileName }</td>
-		</tr>
+
 		<tr>
 			<td colspan="6" height="1px" bgcolor="#B3B4BD"></td>
 		</tr>
 	</table>
-	<div class="notice_list">
-		<a href="<c:url value ='/admin/noticelist.do'/>"><img class="img1"
-			alt="리스트"
-			src="${pageContext.request.contextPath }/images/library/notice/List.jpg"></a>
-	</div>
 	<div class="notice_delete">
 		<input type="button" value="글수정"
-			onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'">
+			onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'" id="editBotton">
 		<input type="button" id="btnDelete" value="글삭제">
+		<input type= "button" value="목록" id="listBotton" onclick="location.href= '<c:url value = '/library/notice/noticelist.do'/>'">
 	</div>
 </div>
 <div></div>

@@ -95,25 +95,17 @@
 				<tr>
 					<td class="qnaTitle"><label for="title">제목</label></td>
 					<td colspan="5"><input type="text" id="title" name="title"
-						value="${noticeVo.title }" size="35" style="padding-left: 10px;" />
+						value="${noticeVo.title }" size="35" style="border: none; margin-left: 10px;" />
 					</td>
 				<tr>
 					<td class="qnaTitle"><label for="userName">작성자</label></td>
-					<td style="padding-left: 10px;"><input type="text"
+					<td style=><input type="text"
 						name="userName" id="userName" value="${noticeVo.userName }"
-						readonly="readonly"></td>
+						readonly="readonly" style="border: none; margin-left: 10px;" ></td>
 				</tr>
 			</table>
-			<div>
-				<label>파일첨부</label> <input type="file" id="upfile" name="upfile">
-				<c:if test="${!empty noticeVo.fileName }">
-					<br>
-					<p style="color: green; padding: 5px 0 5px 135px;">※첨부파일을 새로
-						지정할 경우 기존파일 ${reBoardVo.fileName } 은 삭제됩니다.</p>
-				</c:if>
-			</div>
 			<textarea class="w3-input" name="content" id="summary"
-				style="width: 630px; height: 530px;"></textarea>
+				style="width: 650px; height: 400px;"></textarea>
 
 			<%-- <div class="notice_Title">
 		제목 : <input type="text" name="title" id="title" value="${noticeVo.title }">
@@ -129,6 +121,14 @@
 				<input type="submit" id="btsubmit" value="글수정"> <input
 					type="button" id="btn1" value="취소"
 					onclick="location.href='<c:url value="/admin/noticelist.do"/>'" />
+			</div>
+			<div>
+				<label>파일첨부</label> <input type="file" id="upfile" name="upfile">
+				<c:if test="${!empty noticeVo.fileName }">
+					<br>
+					<p style="color: green; padding: 5px 0 5px 135px;">※첨부파일을 새로
+						지정할 경우 기존파일 ${reBoardVo.fileName } 은 삭제됩니다.</p>
+				</c:if>
 			</div>
 		</div>
 	</form>
