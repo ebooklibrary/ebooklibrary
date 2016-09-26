@@ -85,6 +85,18 @@ public class EventController {
 		return "library/mainInclude/month_book";
 	}
 	
+	@RequestMapping("/mainAdminEvent.do")
+	public String selectEvent_admin(HttpServletRequest request,Model model){
+		logger.info("메인이벤트 페이지 보여주기");
+		List<EventVO> alist=eventService.selectEvent(eventService.MAIN_EVENT);
+		logger.info("메인이벤트 페이지 alist={}",alist.size());
+		String path=fileUti.getUploadPath(request, FileUploadWebUtil.EVENTIMAGE_UPLOAD);
+		
+		model.addAttribute("alist", alist);
+		model.addAttribute("path", path);
+		return "admin/event/month_book";
+	}
+	
 	@RequestMapping("/sideEvent.do")
 	public String selectSideEvent(HttpServletRequest request,Model model){
 		logger.info("사이드이벤트 페이지 보여주기");

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	<%@include file="../libraryTop.jsp"%>
+<%@include file="../../admin/libraryAdminTop.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/clear.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/library/bookDetail.css" />
 
@@ -18,60 +18,17 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		/* 장바구니 클릭시 메시지 */
-		$(".cart").click(function() {
-			if (${!empty sessionScope.userId }) {
-				$(this).find(".popuptext").show().delay(2000)
-				.queue(function (next) {
-					$(this).hide();
-					next();
-				});
-			}
-		});
-
-		$(".cartFrm").submit(function() {
-			if (${empty sessionScope.userId }) {
-				/* 
-				alertify.alert("로그인하여 주세요.");
-				$(location).attr('href', "<c:url value='/member/login.do'/>");
-				 */
-				
-				alertify.alert("로그인하여 주세요.", function (e) {
-				    if (e) {
-				    	$(location).attr('href', "<c:url value='/member/login.do'/>");
-				    }
-				});
-				
-				return false;
-			}
-			$.ajax({
-				url:"<c:url value='/shop/cart/cartInsert.do'/>",
-				type:"POST",
-				data: $(this).serializeArray(),
-				success:function(res){
-					if (res<0) {
-						alertify.alert("이미 장바구니 목록에 추가되었습니다.");
-					}
-				},
-				error:function(xhr, status, error){
-					alertify.alert(status+":"+error);
-				}
-			});
-		});
 		
-		$(".buy").click(function() {
-			$("#cartFrm").attr('action', "<c:url value='/shop/cart/extendBook.do'/>");
-			$("#cartFrm").submit();
+		$("#bookEdit").click(function() {
+			var bookNo=${bookVo.bookNo };
+			$(location).attr('href', "<c:url value='/admin/book/bookEdit.do?bookNo="+bookNo+"'/>");
 		});
-		
 		
 	});
 	
 </script>
 	<form method="post" id="cartFrm" class="cartFrm">
 	<input type="hidden" id="bookNo" name="bookNo" value="${bookVo.bookNo }">
-	<input type="hidden" id="price" name="price" value="${bookVo.price }">
-	<input type="hidden" id="userId" name="userId" value="${sessionScope.userId }">
 	<div id="DetailBookDiv">
 		<div id="DetailbookCover">
 			<img alt="책 커버 이미지" src="<c:url value='/book_upload/${bookVo.coverFileName }'/>">
@@ -91,16 +48,7 @@
 			</div>
 			
 				<div class="choice">				
-					<c:if test="${!empty myBooksVo.userId}">
-						구매하신 상품입니다.
-					</c:if>
-					<c:if test="${empty myBooksVo.userId}">
-						<div class="cart">
-						<input type="submit" id="cart" name="cart" value="장바구니 추가" class="cart">
-						<span class="popuptext">${bookVo.title } 장바구니 추가</span>
-						</div>
-						<input type="button" id="buy" name="buy" value="바로구매" class="buy">
-					</c:if>
+					<input type="button" id="bookEdit" name="bookEdit" value="수정하기" class="bookEdit">
 				</div>
 		</div>
 		
@@ -109,19 +57,9 @@
 			${bookVo.summary }
 		</div>
 		
-		<p id="goList"><a href="<c:url value='/book/bookList.do'/>">책목록으로</a></p>
+		<p id="goList"><a href="<c:url value='/admin/book/bookList.do'/>">책목록으로</a></p>
 	
 	</div>
 	</form>
 
-
-
-
-
-
-
-
-
-
-
-<%@include file="../libraryBottom.jsp"%>
+<%@include file="../libraryAdminBottom.jsp"%>

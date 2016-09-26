@@ -96,6 +96,28 @@
 		 </if>
 	</select>
 	
+	<select id="selectAllMyBooks" resultType="MyBooksVO">
+		select * from MY_BOOKS
+	</select>
+	
+	<select id="selectStatMyBooks" resultType="map" parameterType="int">
+		select sum(decode(extract(month from rent_start),1,price,0))"jan",
+			sum(decode(extract(month from rent_start),2,price,0))"feb",
+			sum(decode(extract(month from rent_start),3,price,0))"mar",
+			sum(decode(extract(month from rent_start),4,price,0))"apl",
+			sum(decode(extract(month from rent_start),5,price,0))"may",
+			sum(decode(extract(month from rent_start),6,price,0))"jun",
+			sum(decode(extract(month from rent_start),7,price,0))"jul",
+			sum(decode(extract(month from rent_start),8,price,0))"aug",
+			sum(decode(extract(month from rent_start),9,price,0))"sep",
+			sum(decode(extract(month from rent_start),10,price,0))"oct",
+			sum(decode(extract(month from rent_start),11,price,0))"nov",
+			nvl(sum(decode(extract(month from rent_start),12,price,0)),0)"dec"
+		from MY_BOOKS
+		where extract(year from rent_start)=#{year}
+		order by extract(month from rent_start)
+	</select>
+	
 	<select id="selectMyBooksByUserId" parameterType="string" resultType="MyBooksVO">
 		select * from MY_BOOKS where USER_ID=#{userId}
 	</select>
@@ -182,7 +204,7 @@
 	</select>
 	
 	<select id="countschFromMain" parameterType="BookSearchVO" resultType="int">
-		SELECT * FROM bookListView
+		SELECT count(*) FROM bookListView
 		<if test="searchKeyword!=null and searchKeyword!=''">
  		 WHERE title like '%' || #{searchKeyword} || '%' or writer like '%' || #{searchKeyword} || '%' or publisher like '%' || #{searchKeyword} || '%'
  		</if>

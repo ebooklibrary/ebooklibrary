@@ -21,9 +21,9 @@ body {margin:0px; padding:0px;  }
 /* 버튼들 */
 #menuController{
 	float: right;
-	padding-top: 10px;
+	padding-top: 40px;
 	padding-right: 230px;
-	margin-bottom: 40px;
+	/* margin-bottom: 40px; */
 }
 #menuController a{
 	display: none;
@@ -180,9 +180,59 @@ body {margin:0px; padding:0px;  }
 	bottom: 1px;
 	right: 1px;
 }
+/* 
 .list2{
 	border-top: 
 }
+ */
 .add_notice a{
 	color: gray;
+}
+
+/* 관리자 페이지 */
+/* 페이지 타이틀 */
+#adminTitleP{
+	padding: 30px 0 30px 30px;
+	font-size: 1.8em;
+	font-weight: bold;
+	font-family:Verdana,sans-serif;
+}
+#adminMainContentP{
+	font-size: 1.5em;
+	font-family:Verdana,sans-serif;
+	text-align: center;
+	margin-top: 200px;
+}
+
+/* 회원관리 페이지 */
+#AdminMemDiv{
+}
+#AdminMemDiv table{
+	margin: 0 auto;
+	margin-top:50px;
+	width: 1000px;
+}
+#AdminMemDiv table th{
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid gray;
+}
+#AdminMemDiv table tr{
+	text-align: center;
+	border-bottom: 1px solid #dbdbdb;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+#AdminMemDiv table tr:last-child{
+	text-align: center;
+	border-bottom: 1px solid #000000;
+}
+#excelSave, #event1, #btnapi{
+	display:inline-block;
+	margin: 50px 130px 0 0;
+	float: right;
+	font-size: 1.1em;
+	font-family:Verdana,sans-serif;
+	border: 1px solid black;
+	border-radius: 2px;
+	padding: 5px;
 }

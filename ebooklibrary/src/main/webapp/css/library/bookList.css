@@ -196,9 +196,9 @@
 	
 }
 #sortDiv li{
-	border-bottom: 1px solid #acffc2;
+	/* border-bottom: 1px solid #acffc2; */
 	float: right;
-	margin-left: 10px;
+	margin-left: 15px;
 }
 #sortDiv li:hover{
 	cursor: pointer;

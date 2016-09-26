@@ -15,17 +15,17 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+		/* 
 		$('#mybook, #library').hover(
                 function () {
-                    /* $(this).css("background", "rgba(181,210,210,0.6)"); */
                     $(this).css("background", "rgba(181,210,210,0.6)");
                 },
                 function () {
-                    /* $(this).css("background", "rgba(181,225,225,0.6)"); */
                     $(this).css("background", "");
                 }
 		);
-		
+		 */
+		 
 		$.ajax({
 			url:"<c:url value='/visitor.do'/>",
 			type:"GET",
@@ -44,7 +44,23 @@
 		<img src="${pageContext.request.contextPath }/video/ocean.jpg" alt="동영상 커버">
 		<source src="${pageContext.request.contextPath }/video/testvideo7.mp4" type="video/mp4">
 	</video>
- 
+ 	
+ 	<div id="IndexHeader">
+ 		<span id="indexTitle">ebooklibrary</span>
+ 		
+ 		<ul id="global">
+			<c:if test="${empty sessionScope.userId }">
+	            <li><a href="<c:url value='/member/register.do'/>" style="color:#A8E8FF;">회원가입</a></li>
+				<li><a href="<c:url value='/member/login.do'/>" style="color:#BFFFCC;">로그인</a></li>
+			</c:if>
+			<c:if test="${!empty sessionScope.userId }">
+				<li><a href="<c:url value='/member/logout.do'/>">로그아웃</a></li>
+			</c:if>			 
+		</ul>
+ 		
+ 		
+ 	</div>
+ 	
 	<div id="wrapper">
 	
 		<p><span id="typing">Are you ready to read Book?</span></p>

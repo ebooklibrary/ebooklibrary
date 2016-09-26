@@ -195,7 +195,8 @@
  */
 
 </script>
-	<span id="regiBookTitle">책 등록</span>
+	<p id="adminTitleP"><img alt="아이콘" src="<c:url value='/images/mybook/icon/process.png'/>"> 책 등록 페이지</p>
+	<!-- <span id="regiBookTitle">책 등록</span> -->
 	<form action="<c:url value='/admin/book/uploadBook.do'/>" class="w3-container" id="bookfrm1" name="bookfrm1" enctype="multipart/form-data" method="post">
 		<div id="formWrapper1">
 		<!-- 

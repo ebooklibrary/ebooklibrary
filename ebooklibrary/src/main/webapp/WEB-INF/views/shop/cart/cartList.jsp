@@ -410,17 +410,17 @@ function numberWithCommas(x) {
 					</c:if>
 				</c:forEach>
 				
-				
+			</c:if>	
 				<tr>
 					<td colspan="4" style="border-right: none; text-align: right;">
-						<a href="<c:url value='/admin/book/bookList.do'/>" id="goToShop">[계속 쇼핑하기]</a>
+						<a href="<c:url value='/book/bookList.do'/>" id="goToShop">[계속 쇼핑하기]</a>
 						총 구매금액 : <br>
 					</td>
 					<td style="border-left: none;">
 						<fmt:formatNumber value="${totalPrice }" pattern="#,###"/>원<br>
 					</td>
 				</tr>		
-			</c:if>
+			
 	</tbody>  
 </table>
 
