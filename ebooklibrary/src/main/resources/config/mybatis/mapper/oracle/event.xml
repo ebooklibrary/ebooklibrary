@@ -7,8 +7,8 @@
 		<selectKey order="BEFORE" keyProperty="eventNo" resultType="int">
 			select event_seq.nextval from dual
 		</selectKey>
-		insert into event(EVENT_NO,EVENT_NAME,EVENT_IMAGE_URL,EVENT_URL,EVENT_KIND)
-		values(#{eventNo},#{eventName},#{eventImageUrl},#{eventUrl},#{eventKind})
+		insert into event(EVENT_NO,EVENT_NAME,EVENT_IMAGE_URL,EVENT_URL,EVENT_KIND,end_day)
+		values(#{eventNo},#{eventName},#{eventImageUrl},#{eventUrl},#{eventKind},#{endDay})
 	</insert>
 	
 	<select id="selectEvent" resultType="EventVO" parameterType="int">

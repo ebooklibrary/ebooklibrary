@@ -21,10 +21,9 @@
 			<c:set var="n" value="1" />
 				<c:forEach var="vo" items="${alist }">					
 					<li class="sp0${n }">
-					<a href="${vo.eventUrl }">
+					<a href="<c:url value='${vo.eventUrl }'/>">
 						<img alt="테스트" 
 						src="${pageContext.request.contextPath }/bookevent/${vo.eventImageUrl}" ></a>
-						<input type="text" value="${pageContext.request.contextPath }/bookevent/${vo.eventImageUrl}">
 					</li>
 					<c:set var="n" value="${n+1 }" />
 				</c:forEach>

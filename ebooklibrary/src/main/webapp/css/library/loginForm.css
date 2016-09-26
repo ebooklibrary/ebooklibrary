@@ -218,6 +218,16 @@ span.psw {
 #btPeriod,#findOrder{
 	margin-bottom: 50px;
 }
+
+#btWeek,#btMonth1,#btMonth3{
+	background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+}
 .box2{
 	width: 100%;
 	border-top: 1px solid black;

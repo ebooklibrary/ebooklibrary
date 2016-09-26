@@ -1,13 +1,23 @@
 package com.ebooklibrary.app.event.model;
 
+import java.sql.Date;
+
 public class EventVO {
 	private int eventNo;
 	private String eventName;
 	private String eventUrl;
 	private String eventImageUrl;
 	private int eventKind;
+	private Date endDay;
 	
 	
+	
+	public Date getEndDay() {
+		return endDay;
+	}
+	public void setEndDay(Date endDay) {
+		this.endDay = endDay;
+	}
 	public int getEventNo() {
 		return eventNo;
 	}
@@ -41,7 +51,7 @@ public class EventVO {
 	@Override
 	public String toString() {
 		return "EventVO [eventNo=" + eventNo + ", eventName=" + eventName + ", eventUrl=" + eventUrl
-				+ ", eventImageUrl=" + eventImageUrl + ", eventKind=" + eventKind + "]";
+				+ ", eventImageUrl=" + eventImageUrl + ", eventKind=" + eventKind + ", endDay=" + endDay + "]";
 	}
 	
 	
