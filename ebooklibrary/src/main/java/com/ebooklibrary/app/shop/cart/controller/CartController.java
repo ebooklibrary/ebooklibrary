@@ -59,6 +59,7 @@ public class CartController {
 	public int cartInsert(@ModelAttribute CartVO cartVo,Model model){
 		
 		logger.info("카트담기 cartVo={}",cartVo);
+		logger.info("카트담기 cartVo price={}",cartVo.getPrice());
 		int cnt=cartService.insertCartPd(cartVo);
 		
 		if (cnt<0) {

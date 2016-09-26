@@ -31,7 +31,7 @@
 </form>
 <!-- 페이징 처리 form 끝 -->
 <div id="OrderListWrapper" class="FormWrapperDiv">
-	<p id="titlePtag">주문 내역/ 배송현황</p>
+	<p id="titlePtag">주문 내역</p>
 	<p>
 		${sessionScope.userName }님의 주문내역입니다.
 	</p>
@@ -97,7 +97,7 @@
 						<fmt:formatNumber pattern="#,###" 
 							value='${vo.price}'/>원</td>
 					<td>
-						${vo.ordersDate}
+						<fmt:formatDate value="${vo.ordersDate}" pattern="yyyy/MM/dd HH:mm:ss"/> 
 					</td>													
 				</tr>			
 			</c:forEach>

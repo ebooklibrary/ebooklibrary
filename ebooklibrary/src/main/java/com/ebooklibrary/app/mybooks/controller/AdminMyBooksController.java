@@ -214,11 +214,11 @@ public class AdminMyBooksController {
 	public String bookDelete(HttpServletRequest request, @RequestParam int bookNo, Model model){
 		logger.info("책 삭제 파라미터 bookNo={}",bookNo);
 		
+		MyBookVO vo=myBookService.selectBookDetail(bookNo);
 		int cnt=myBookService.deleteBooks(bookNo);
 		
 		logger.info("책 삭제 처리 cnt={}",cnt);
 		String upPath=fileUtil.getUploadPath(request, fileUtil.PDS_UPLOAD);
-		MyBookVO vo=myBookService.selectBookDetail(bookNo);
 		
 		String oldBookFile=vo.getBookFileName();
 		String oldImage=vo.getCoverFileName();
