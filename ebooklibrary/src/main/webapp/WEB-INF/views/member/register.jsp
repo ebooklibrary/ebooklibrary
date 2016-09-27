@@ -87,8 +87,8 @@
 					data:"receiver="+$("#userId").val(),
 					type:"POST",
 					success:function(res){
-						alert(res);
-						$("#btnEmailOk").click(function() {
+						alert("인증번호가 발송되었습니다.")
+						$("#btnEmailOk").click(function() {							
 							if(res==$("#confirm").val()){
 								$("#emailconfirm").css("visibility","hidden");
 								$("#emailOk").css("visibility","visible");
@@ -138,7 +138,7 @@
 		<input type="button" value="확인" id="btnEmailOk">
 		</span>
 		<span id="emailOk" style="visibility: hidden;"> 인증되었습니다</span>
-		<input type="hidden" id="emailStatus" value="N">
+		<input type="hidden" id="emailStatus" value="N"><br>
 		<span id="emailNo" style="visibility: hidden;"> 인증번호를 다시 확인해주세요</span><br>
 		
 		<label for="userName">이름</label>

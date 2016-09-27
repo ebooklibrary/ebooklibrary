@@ -1,6 +1,7 @@
 package com.ebooklibrary.app.event.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class EventVO {
 	private int eventNo;
@@ -10,8 +11,7 @@ public class EventVO {
 	private int eventKind;
 	private Date endDay;
 	
-	
-	
+		
 	public Date getEndDay() {
 		return endDay;
 	}

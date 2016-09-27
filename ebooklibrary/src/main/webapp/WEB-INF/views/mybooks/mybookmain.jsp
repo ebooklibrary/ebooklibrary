@@ -277,7 +277,7 @@
 		},3000);
 		
 		$("#memoList").click(function() {
-			window.open("<c:url value='/library/memo/memo.do'/>",
+			window.open("<c:url value='/library/memo/toMemo.do'/>",
 					"memoList",
 			"width=725,height=800,left=50,top=50,resizable=yes,location=yes");		
 		});
