@@ -12,7 +12,7 @@
 			window.open("<c:url value='http://admin.iamport.kr/payments'/>",
 					"iamport",
 			"width=1500,height=800,left=50,top=50,resizable=yes,location=yes");
-		})//button
+		});//button
 		/* 
 		$("#event1").click(function() {
 			window.open("<c:url value='/event/eventWrite.do'/>",
