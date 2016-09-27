@@ -287,6 +287,7 @@ function numberWithCommas(x) {
 }
 
 </script>
+<div id="cartFakeDiv"></div>
 <p id="cartP">장바구니 목록
 	<c:if test="${empty cartList }">
 		<span>0</span>
@@ -377,13 +378,11 @@ function numberWithCommas(x) {
 						</td>
 						
 						<td class="choiceSpan">
-							<p class="deleteP">삭제</p>
-							<p class="buyNowP">바로구매</p>
 							<p>
 							<!-- 구매 -->
 							<c:if test="${empty map['RENT_DATE'] || map['RENT_DATE']==0 }">
 								<span class="buySpan"
-									style="font-weight: bold;font-size:1.2em;border:1px solid pink;"
+									style="font-weight: bold;font-size:1.2em;"
 								>구매
 								<input type="hidden" name="bookNo" class='bookNo' value='${map["BOOK_NO"] }'>
 								</span> / <span class="rentSpan">대여</span> 
@@ -395,9 +394,11 @@ function numberWithCommas(x) {
 								</span> / 
 								<span class="rentSpan"
 								style="font-weight: bold;font-size:1.2em;border:1px solid pink;"
-								>대여</span>								
+								>대여</span>
 							</c:if>
 							</p>
+							<p class="buyNowP">바로구매</p>
+							<p class="deleteP">삭제</p>
 						</td>						
 					
 					</tr>
@@ -411,9 +412,9 @@ function numberWithCommas(x) {
 				</c:forEach>
 				
 			</c:if>	
-				<tr>
+				<tr id="lastTd">
 					<td colspan="4" style="border-right: none; text-align: right;">
-						<a href="<c:url value='/book/bookList.do'/>" id="goToShop">[계속 쇼핑하기]</a>
+						<a href="<c:url value='/book/bookList.do'/>" id="goToShop">계속 쇼핑하기</a>
 						총 구매금액 : <br>
 					</td>
 					<td style="border-left: none;">

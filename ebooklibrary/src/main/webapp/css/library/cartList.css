@@ -1,4 +1,12 @@
 @CHARSET "UTF-8";
+
+#cartFakeDiv{
+	position: absolute;
+	right: 810px;
+	height: 900px;
+	border-left: 1px solid #e8e8e8;
+}
+
 #cartTable{
 	margin:0 auto;
 	boder: 0px;
@@ -6,10 +14,9 @@
 	float: left;
 }
 #cartTable th{
-	border-bottom: 1px solid #e3e3e3;
+	border-top: 1px solid #e3e3e3;
 	background-color: rgba(245,245,245, 0.5);
 	height: 20px;
-	
 }
 #cartTable td{
 	text-align: center;
@@ -23,9 +30,16 @@
 }
 /* 테이블 마지막 줄 */
 #cartTable tr:last-of-type td{
-	border-bottom: 1px solid #ff8000;
-	background-color: #fff9f2;
+	/* border-bottom: 1px solid #ff8000; */
+	/* background-color: #fff9f2; */
+	border: 0;
+	
 	height: 30px;
+	padding-top: 20px;
+}
+#lastTd td{
+	border-top: 2px solid #e3e3e3;
+	border-bottom: 5px solid #e3e3e3;
 }
 
 /* 책 이미지 및 제목 */
@@ -73,7 +87,7 @@
 }
 
 #cartP{
-	padding: 50px 0 20px 10px;
+	padding: 100px 0 50px 10px;
 	font-size: 1.5em;
 	
 	/* font-family:monospace,monospace; */
@@ -96,7 +110,7 @@
 #purDiv{
 	/* border: 1px solid black; */
 	float:right;
-	margin-right: 100px;
+	margin-right: 50px;
 	width: 40%;
 	padding: 0 10px 10px 10px;
 	

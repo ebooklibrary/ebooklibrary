@@ -131,36 +131,68 @@ body {margin:0px; padding:0px;  }
 /*main_visual_text*/
 #main_visual_text { margin:0; padding:0; position:absolute; top:204px; left:81px; clear: both;}
 
-/* month_book */
-	#month_book{
-		margin:0; 
-		width:95%; 
-		height:300px;
-		/* border: 1px solid black; */
-		text-align: center;
-		overflow: hidden;
-	}
-	#btnleft{
-		border: 1px solid white;
-		width: 50px;
-		height: 50px;
-	}
-	
-  
 /* search */
-	#m_search #seek{
-	  	 margin:45px 0 0 0; 
-	  	 width:100%; 
-	  	 height:150px;
-		 border: 1px solid black;
-  }
+#m_search #seek{
+	margin:45px 0 0 0; 
+	width:100%; 
+	height:150px;
+	border: 1px solid black;
+}
+
+/* month_book */
+#month_book{
+	margin:0; 
+	width:100%; 
+	height:300px;
+	/* border: 1px solid black; */
+	text-align: center;
+	overflow: hidden;
+}
+#btnleft{
+	border: 1px solid white;
+	width: 50px;
+	height: 50px;
+}
+
+/* bestsellerbook */
+#mainBook{
+	border-bottom: 1px solid #dbdbdb;
+	margin:0 auto;
+	width: 1050px;
+	height: 250px;
+	margin-bottom: 15px;
+}
+#mainBook p:first-child{
+	border-bottom: 1px solid #dbdbdb;
+	font-weight: bold;
+	padding-bottom: 5px;
+	font-family:Verdana,sans-serif;
+}
+/* 메인책 이미지 div */
+.mainbooks{
+	float: left;
+	width: 125px;
+	height: 200px;
+	margin: 15px 40px 0 40px;
+}
+/* 메인책 이미지 img */
+.mainbooks img{
+	width: 100%;
+	height: 75%;
+}
+.mainbooks p{
+	margin:0;
+	font-size:0.9em;
+	text-align: center;
+	font-family:Verdana,sans-serif;
+}
 
 /* mybook */
 #mybook{
 	float:left;
-	width: 500px;
-	height:300px;
-	margin:140px 15px; 
+	width: 480px;
+	height:280px;
+	margin:15px 0 0 70px;
 	/* border: 1px solid black; */
 	text-align: center;
 }
@@ -168,11 +200,11 @@ body {margin:0px; padding:0px;  }
 	border: 1px solid gray;
 }
  /* 공지사항 */
- #tab1 { 
+#tab1 {
 	float:right;
-	width: 500px;
-	height:300px;
-	margin:145px 15px;
+	width: 480px;
+	height:280px;
+	margin:15px 70px 0 0;
 	/* border: 1px solid black; */
 }
 #tab1 #tab1c1 .tabmore{

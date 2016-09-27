@@ -5,7 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!--공지사항-->
 <div id="tab1">
-	<div class="add_notice2">공지사항</div>
+	<div class="add_notice2"><a href="<c:url value='/library/notice/noticelist.do'/>">공지사항</a></div>
 	<div class="list2">
 		<table summary="최근 공지사항 6건을 보여주는 표입니다" class="table3">
 			<tbody>
@@ -15,7 +15,7 @@
 					</tr>
 				</c:if>
 				<c:if test="${!empty noticeVo }">
-					<c:forEach begin="0" end="7" var="vo" items="${noticeVo }">
+					<c:forEach begin="0" end="6" var="vo" items="${noticeVo }">
 						<tr>
 						<c:if test="${fn:length(vo.title)>20}">
                            <td>
@@ -34,9 +34,6 @@
 				</c:if>
 			</tbody>
 		</table>
-	</div>
-	<div class="add_notice">
-		<a href="<c:url value='/library/notice/noticelist.do'/>">공지사항 더보기</a>
 	</div>
 </div>
 <!--알립니다-->

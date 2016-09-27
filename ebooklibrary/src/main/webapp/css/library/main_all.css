@@ -20,16 +20,17 @@ body{
 #body { margin: 0; padding: 0; background: #fff;}
 }
 
-
 #m_search{
 	padding: 0;
 }
 /* 메인 책검색 섹션 */
 .mSearchDiv{
 	/* border: 1px solid black; */
+	margin:0 auto;
 	padding: 10px 30px;
 	padding-left: 45px;
 	background-color: #ffecd9;
+	width: 1250px;
 	/* margin-top: 100px; */
 }
 #mschSpan{
@@ -76,12 +77,13 @@ input::-ms-input-placeholder{
 	padding: 2px 4px 2px 4px;
 }
 
+/* 내서재 오세요 div */
 #mbP{
 	padding-left: 50px;
 	text-align:left;
-	font-size: 1.5em;
 	/* font-family:monospace,monospace; */
 	font-family:Verdana,sans-serif;
+	font-weight: bold;
 }
 #main_video{
 	margin-top: 10px;

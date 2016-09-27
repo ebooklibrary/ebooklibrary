@@ -95,6 +95,7 @@ $(function() {
 		$("#menuController span").show();
 	});
 	
+	//우측 메뉴 장바구니
 	if(${!empty sessionScope.userId}){
 		$.ajax({
 			url:"<c:url value='/library/mainCart.do'/>",
@@ -118,7 +119,6 @@ $(function() {
 			}
 		});//ajax
 	}//if
-	
 	
 	
 });

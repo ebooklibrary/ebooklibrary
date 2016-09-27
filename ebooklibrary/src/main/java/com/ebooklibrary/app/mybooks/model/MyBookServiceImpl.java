@@ -174,4 +174,9 @@ public class MyBookServiceImpl implements MyBookService {
 		}
 		return alist; 
 	}
+
+	@Override
+	public List<MyBookVO> mainBook() {
+		return myBookDao.mainBook();
+	}
 }

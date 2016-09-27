@@ -26,4 +26,6 @@ public interface MyBookDAO {
 	public int countschFromMain(BookSearchVO bookSearchVo);
 	public List<MyBooksVO> selectAllMyBooks();
 	public List<Map<String, Object>> selectStatMyBooks(int year);
+	public List<MyBookVO> mainBook();
+	
 }

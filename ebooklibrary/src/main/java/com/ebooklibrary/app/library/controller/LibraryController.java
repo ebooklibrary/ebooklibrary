@@ -45,4 +45,15 @@ public class LibraryController {
 		return alist;
 	}
 	
+	@RequestMapping("/mainBook")
+	@ResponseBody
+	public List<MyBookVO> mainBook(){
+		
+		//2.
+		List<MyBookVO> alist=myBookService.mainBook();
+		
+		logger.info("베스트셀러 파라미터 alist.size()={}",alist.size());
+		return alist;
+	}
+	
 }

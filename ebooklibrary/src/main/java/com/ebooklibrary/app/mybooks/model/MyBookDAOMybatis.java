@@ -120,6 +120,11 @@ public class MyBookDAOMybatis extends SqlSessionDaoSupport implements MyBookDAO 
 		return getSqlSession().selectList(namespace+".selectStatMyBooks", year);
 	}
 
+	@Override
+	public List<MyBookVO> mainBook() {
+		return getSqlSession().selectList(namespace+".mainBook");
+	}
+
 	
 	
 }

@@ -24,4 +24,5 @@ public interface MyBookService {
 	public int countschFromMain(BookSearchVO bookSearchVo);
 	public List<MyBooksVO> selectAllMyBooks();
 	public List<String> selectStatMyBooks(int year);
+	public List<MyBookVO> mainBook();
 }
