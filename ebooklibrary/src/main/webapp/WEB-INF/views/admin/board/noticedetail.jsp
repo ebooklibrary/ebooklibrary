@@ -96,7 +96,7 @@
 		<input type="button" value="글수정"
 			onclick="location.href = '<c:url value ='/library/notice/noticeEdit.do?notice_No=${noticeVo.noticeNo }'/>'" id="editBotton">
 		<input type="button" id="btnDelete" value="글삭제">
-		<input type= "button" value="목록" id="listBotton" onclick="location.href= '<c:url value = '/library/notice/noticelist.do'/>'">
+		<input type= "button" value="목록" id="listBotton" onclick="location.href= '<c:url value = '/admin/noticelist.do'/>'">
 	</div>
 </div>
 <div></div>
