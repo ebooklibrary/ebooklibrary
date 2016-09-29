@@ -91,8 +91,8 @@
 						
 						<li id="FAQ_List_${i }" name="TrFAQ_Content" class="off">
 							<dl class="faqDl">
-								<dt class="faqdt">${vo.faqNo}</dt><dd class="faqdd">${vo.category }</dd><dd class="callContent"><a href='javascript:void(0);' onclick='viewContent(${i });'><span>${vo.title }</span></a></dd></dl>
-							
+								<dt class="faqdt">${vo.faqNo}</dt><dd class="faqdd">${vo.category } <span><a class="callContent" href='javascript:void(0);' onclick='viewContent(${i });'>${vo.title }</a></dd></span>
+							</dl>
 							<div id="DivFAQ_Content_${i }" class="divContent" style="display:none;">
 								${vo.content }
 							</div>
@@ -104,15 +104,15 @@
 		</div><!-- //list -->
 	</div>	
 	
-	<div class="bticons">
+	<div class="faqicons">
 		<form id="myWrite" method="post" action="<c:url value='/library/qna/qnaList.do'/>">
-			<input type="button" id="listGo" value="전체목록" class="qnabt"/>
+			<input type="button" id="listGo" value="전체목록" class="faqbt"/>
 			<!-- <input type="button" id="writeGo" value="글쓰기" class="qnabt"/> -->
 		</form>			
 	</div>
 	   
 	<!-- 페이징 처리를 위한 div -->
-	<div class="qnadivPage">
+	<div class="faqdivPage">
 		<!-- 이전 블럭으로 이동 -->
 		<c:if test="${pagingInfo.firstPage>1}">				
 			<a href="#" 

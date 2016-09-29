@@ -53,7 +53,7 @@
 		width="200px" height="50px" ></a>
 </div>
 <!-- 광고 -->
-<div id=qna_body>
+<div id="qna_body">
 <div id="qnaList_body">	
 	   	<form name="frmSearch" id="searchbox2" method="post" 
 	   		action="<c:url value='/admin/qnaList.do' />" >
