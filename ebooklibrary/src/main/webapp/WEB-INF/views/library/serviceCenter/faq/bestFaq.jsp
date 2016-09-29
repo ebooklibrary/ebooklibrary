@@ -96,7 +96,7 @@
 						
 						<li id="FAQ_List_${i }" name="TrFAQ_Content" class="off">
 							<dl class="faqDl">
-								<dt class="faqdt">${vo.faqNo}</dt><dd class="faqdd">${vo.category }</dd><dd class="callContent"><a href='javascript:void(0);' onclick='viewContent(${i });'><span>${vo.title }</span></a></dd>
+								<dt class="faqdt">${vo.faqNo}</dt><dd class="faqdd">${vo.category } <a  href='javascript:void(0);' onclick='viewContent(${i });'>${vo.title }</a></dd><dd ></dd>
 							</dl>
 							<div id="DivFAQ_Content_${i }" class="divContent" style="display:none;">
 								${vo.content }

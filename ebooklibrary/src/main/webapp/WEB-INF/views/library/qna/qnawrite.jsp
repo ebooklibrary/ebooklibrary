@@ -52,14 +52,14 @@
 			
 			if($("#title").val().length < 1 || $("#title").val()=="<p>&nbsp;</p>"){
 	            
-	            alert("제목을 입력하세요.");
+	            alertify.alert("제목을 입력하세요.");
 	            $("#title").focus();
 	            
 	            return false;
 	         }
 			if($("#content").val().length < 1 || $("#content").val()=="<p>&nbsp;</p>"){
 	            
-	            alert("내용을 입력하세요.");
+				alertify.alert("내용을 입력하세요.");
 	            $("#content").focus();
 	            
 	            return false;
