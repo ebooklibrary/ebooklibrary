@@ -217,10 +217,10 @@
 </script>
 
 	<div id="bookListWrapper">
-		<c:if test="${pagingInfo.totalRecord > alist.size() }">
+		<c:if test="${pagingInfo.totalRecord < alist.size() || pagingInfo.totalRecord == alist.size() }">
 		<p><span id="countSpan">${alist.size()}</span> 건의  검색결과
 		</c:if> 
-		<c:if test="${pagingInfo.totalRecord == alist.size() }">
+		<c:if test="${pagingInfo.totalRecord > alist.size() }">
 		<p><span id="countSpan">${pagingInfo.totalRecord}</span> 건의  검색결과
 		</c:if> 
 			<c:if test="${!empty bookSearchVo.title}">
