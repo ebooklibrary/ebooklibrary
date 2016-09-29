@@ -151,10 +151,10 @@
 								[입고완료]									
 							</c:if>
 							<c:if test="${vo.stocked=='N' }">								
-								<c:if test="${sessionScope.auchCode=='USER' }">
+								
 									입고요청중
-									
-								</c:if>
+								
+								
 							</c:if>
 						</td>
 						<td>
