@@ -20,7 +20,7 @@
 						}
 						
 						var result="";
-						result="<div class='mainbooks'>";
+						result="<div class='mainbooks' onclick='goToDetail("+item.bookNo+")'>";
 						result+="<input class='mybook1' name='bookNo' type='hidden' value='"+item.bookNo+"'>";
 						result+="<img title='"+item.title+"' alt='베스트셀러 책이미지' src='${pageContext.request.contextPath }/book_upload/"+item.coverFileName+"'>";
 						result+="<p>"+title+"</p><p>"+item.writer+"</p>";
@@ -39,13 +39,21 @@
 				}
 		});//ajax
 		
+		/* 
 		$(".mainbooks").click(function() {
 			var bookNo=$(this).find("input[name=bookNo]").val();
 			alert(bookNo);
 			 $(location).attr('href', "<c:url value='/book/bookDetail.do?bookNo="+bookNo+"'/>");
 		});
+		 */
+		 
 		
 	});
+	
+	function goToDetail(bookNo) {
+		location.href="<c:url value='/book/bookDetail.do?bookNo="+bookNo+"'/>";
+	}
+	
 </script>
 
 
