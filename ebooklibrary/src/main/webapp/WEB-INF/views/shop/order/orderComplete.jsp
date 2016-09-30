@@ -85,7 +85,7 @@ summary="주문 상품 목록에 관한 표로써, 상품명,가격, 수량, 금
 			<tr class="align_right">
 				<td class="align_left">
 					<img src
-	="<c:url value='${pageContext.request.contextPath }/book_upload/${map["COVER_FILE_NAME"] }'/>" 
+	="<c:url value='/book_upload/${map["COVER_FILE_NAME"] }'/>" 
 						alt="${map['TITLE'] }" 
 						width="50" align="absmiddle">
 					${map["TITLE"]}

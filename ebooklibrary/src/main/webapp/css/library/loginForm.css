@@ -215,18 +215,21 @@ span.psw {
 #startDay, #endDay{
 	width: 40%;
 }
-#btPeriod,#findOrder{
+#btPeriod, #periodPP{
 	margin-bottom: 50px;
 }
-
+#findOrder{
+	width: 100px;
+	vertical-align: middle;
+}
 #btWeek,#btMonth1,#btMonth3{
 	background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
+    padding: 5px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 25%;
+    width: 10%;
 }
 .box2{
 	width: 100%;

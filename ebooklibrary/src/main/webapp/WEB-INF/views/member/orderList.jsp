@@ -33,7 +33,7 @@
 <div id="OrderListWrapper" class="FormWrapperDiv">
 	<p id="titlePtag">주문 내역</p>
 	<p>
-		${sessionScope.userName }님의 주문내역입니다.
+		${sessionScope.userName } 님의 주문내역입니다.
 	</p>
 	
 	<form name="frm1" method="post" id="frmOrderList"
@@ -41,7 +41,7 @@
 		<!-- 조회기간 include -->
 		<%@include file="../common/dateTerm2.jsp" %>
 		
-		<input type="submit" id="findOrder" value="조회" >
+		
 	</form>
 	
 	<c:if test="${pagingInfo.totalRecord>0 }">

@@ -1,13 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<link rel="stylesheet" href="<c:url value='/jquery/jquery-ui.css'/>"
-	type="text/css">
-	
-<script src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"
-	type="text/javascript"></script>
-<script src="<c:url value='/jquery/jquery-ui.js'/>"
-	type="text/javascript"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="<c:url value='/jquery/jquery-ui.css'/>" type="text/css">
+<script src="<c:url value='/jquery/jquery-3.1.0.min.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/jquery/jquery-ui.js'/>"	type="text/javascript"></script>
 	    
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -96,10 +90,10 @@
 	<input type="button" id="btWeek" value="1주일" >
 	<input type="button" id="btMonth1" value="1개월" >
 	<input type="button" id="btMonth3" value="3개월" >
-		
-	<input type="text" name="startDay" id="startDay" 
-		value="${param.startDay}"> 
+	<p id="periodPP">
+	<input type="text" name="startDay" id="startDay" value="${param.startDay}"> 
 	~ 
-	<input type="text" name="endDay" id="endDay"
-		value="${dateSearchVO.endDay }">
+	<input type="text" name="endDay" id="endDay" value="${dateSearchVO.endDay }">
+	<input type="submit" id="findOrder" value="조회" >
+	</p>
 		

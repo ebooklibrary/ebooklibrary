@@ -74,10 +74,10 @@ public class OrderController {
 			orderVo.setTitle((String)map.get("TITLE"));
 			orderVo.setCoverFileName((String)map.get("COVER_FILE_NAME"));
 			orderList.add(orderVo);
+			logger.info("책커버={}",(String)map.get("COVER_FILE_NAME"));
 		}
 		int cnt=orderService.MyBooksInsert(cartList,orderList);
 		MemberVO memberVo=memberService.selectByUserName(userId);
-		
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("memberVo", memberVo);
 		return "shop/order/orderComplete";
