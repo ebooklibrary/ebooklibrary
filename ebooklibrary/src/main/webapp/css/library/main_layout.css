@@ -175,6 +175,9 @@ body {margin:0px; padding:0px;  }
 	height: 200px;
 	margin: 15px 40px 0 40px;
 }
+.mainbooks{
+	cursor: pointer;
+}
 /* 메인책 이미지 img */
 .mainbooks img{
 	width: 100%;
