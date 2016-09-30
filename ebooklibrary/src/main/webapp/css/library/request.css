@@ -11,6 +11,18 @@
 	
 	height:560px;
 }
+#adminreq_body{
+	/* 	clear: both;  */
+ 	width: 800px;
+	height: 300px;
+	/* 	overflow: hidden; */
+	float: right;
+}
+#adminreqList_body{
+	clear: both;
+	text-align: center;
+	height:700px;
+}
 
 .reqbt {
 	font-weight:bold;

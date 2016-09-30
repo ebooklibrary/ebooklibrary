@@ -69,15 +69,10 @@
 			src="${pageContext.request.contextPath }/images/library/request/request.png" style="width: 150px;">
 	</h2>
 </div>
-<div id="notice_banner">
-	<a href="<c:url value='/admin/requestList.do'/>"><img
-		alt="request 배너"
-		src="${pageContext.request.contextPath}/images/library/request/banner2.png"
-		width="200px" height="50px"></a>
-</div>
+
 <!-- 광고 -->
-<div id="req_body">
-<div id="reqList_body">
+<div id="adminreq_body">
+<div id="adminreqList_body">
 	<div class="searchbox">
 		<form name="frmSearch" method="post"
 			action="<c:url value='/admin/requestList.do' />">

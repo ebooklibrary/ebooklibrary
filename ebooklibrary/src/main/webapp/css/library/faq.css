@@ -80,11 +80,14 @@
  */
 .faqdt {
 	float: left;
+	margin-left: 30px;
+	font-size: 17px;
 }
 
 .faqdd {
-	margin-left: 30px;
+	margin-left: 70px;
 	width: 800px;
+	font-size: 17px;
 }
 /* .faq_button{
 	clear: both;
@@ -92,9 +95,14 @@
 	margin-top: 20px;
 } */
 .callContent {
-	width: 60px;
-	height:20px;
+	margin-left:60px;
+	font-size: 17px;
 }
+.divContent{
+	margin-top:20px;
+	margin-left:50px;
+}
+
 
 .ulList {
 	clear: both; border-top : solid 3px #6f90e7;
@@ -112,6 +120,7 @@
 .off {
 	border-bottom: solid 1px #DEDEDE;
 	width:727px;
+	height:35px;
 }
 
 .on {
@@ -124,4 +133,50 @@
     margin-top: 20px;
     margin-bottom: 15px;
 
+
+}
+.faqbt {
+	font-weight:bold;
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 17px;
+  background: #4778cc;
+  padding: 5px 12px 5px 12px;
+  border: solid #1f628d 0px;
+  text-decoration: none;
+}
+
+.faqbt:hover {
+  background: #5494f5;
+  text-decoration: none;
+}
+
+
+.faqicons{
+	height:50px;
+	text-align:right;
+	
+	margin-right:80px;
+
+}
+
+.faqdivPage {
+	clear: both;
+	/* float: center; */
+	text-align:center;
+	
+	font-size:1.3em;
+}
+
+.search_box{
+	text-align:left;
+	height:40px;
+	margin-top:20px;
+	margin-right:70px;
+}
+.searchCondition{
+	height:30px;
 }
