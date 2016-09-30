@@ -4,6 +4,7 @@
 <%@include file="../../libraryTop.jsp" %>
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/library/faq.css" />
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.0.min.js'/>"></script>
+
 <script type="text/javascript">
 	$().ready(function(){
 		$("#qnaDivColor").css("background-color","rgba(0, 250, 250, 0.5)");
